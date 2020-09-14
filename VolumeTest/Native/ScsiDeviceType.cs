@@ -2,6 +2,7 @@
 {
     public enum ScsiDeviceType
     {
+        Unknown = -1,
         DirectAccessDevice = 0,
         SequentialAccessDevice = 1,
         PrinterDevice = 2,
@@ -33,6 +34,7 @@
         public static string ToDescription(this ScsiDeviceType deviceType)
         {
             switch (deviceType) {
+            case ScsiDeviceType.Unknown: return "Unknown";
             case ScsiDeviceType.DirectAccessDevice: return "Direct Access Device";
             case ScsiDeviceType.SequentialAccessDevice: return "Sequential Access Device";
             case ScsiDeviceType.PrinterDevice: return "Printer Device";

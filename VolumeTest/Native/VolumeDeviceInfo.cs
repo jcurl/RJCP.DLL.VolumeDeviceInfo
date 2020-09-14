@@ -14,6 +14,10 @@
         /// </summary>
         /// <param name="pathName">Path to the volume that should be queried.</param>
         /// <exception cref="PlatformNotSupportedException">This software only supports Windows NT.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// The parameter <paramref name="pathName"/> is <see langword="null"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">The parameter <paramref name="pathName"/> is empty.</exception>
         /// <remarks>
         /// This is a Windows only implementation that calls the Operating System direct to get information about the
         /// drive, including IOCTLs, from the path given.
@@ -22,18 +26,19 @@
         /// <item>A DOS drive letter, like <c>C:</c> or <c>C:\</c>.</item>
         /// <item>A Win32 device path, like <c>\\?\Bootpartition</c>.</item>
         /// </list>
-        /// Note, that if you give an NT-path style, liek <c>\Device\HarddiskVolume1</c>, it will be interpreted as a
+        /// Note, that if you give an NT-path style, like <c>\Device\HarddiskVolume1</c>, it will be interpreted as a
         /// normal Win32 path, and the boot partition will be given.
         /// </remarks>
         public VolumeDeviceInfo(string pathName)
         {
             if (pathName == null) throw new ArgumentNullException(nameof(pathName));
+            if (string.IsNullOrEmpty(pathName)) throw new ArgumentException("Path is empty", nameof(pathName));
 
             if (!Platform.IsWinNT())
                 throw new PlatformNotSupportedException();
 
             string devicePathName = ResolveDevicePathNames(pathName);
-            GetDeviceInformation(devicePathName);
+            if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
         }
 
         /// <summary>
@@ -110,13 +115,13 @@
         /// Gets the type of the bus the device is attached to.
         /// </summary>
         /// <value>The type of the bus the device is attached to.</value>
-        public BusType BusType { get; private set; }
+        public BusType BusType { get; private set; } = BusType.Unknown;
 
         /// <summary>
         /// Gets the SCSI device type for the device.
         /// </summary>
         /// <value>The SCSI device type for the device.</value>
-        public ScsiDeviceType ScsiDeviceType { get; private set; }
+        public ScsiDeviceType ScsiDeviceType { get; private set; } = ScsiDeviceType.Unknown;
 
         /// <summary>
         /// Gets the SCSI device modifier for the SCSI device type.
@@ -232,7 +237,8 @@
                     }
                     VolumeDevicePath = volumeDevicePath.ToString();
                 } else {
-                    VolumeDevicePath = VolumePath;
+                    // This isn't a volume or isn't mounted.
+                    return string.Empty;
                 }
 
                 StringBuilder dosDevicePath = new StringBuilder(1024);
@@ -242,9 +248,62 @@
                 }
                 return VolumeDevicePath;
             } else {
+                StringBuilder dosDevicePath = new StringBuilder(1024);
+                uint tlength = QueryDosDevice(pathName, dosDevicePath, dosDevicePath.Capacity);
+                if (tlength > 0) {
+                    VolumeDosDevicePath = dosDevicePath.ToString();
+                }
+
                 // This could be a valid path (we don't know until it's opened later), but just not mounted as a volume.
                 return pathName;
             }
         }
+
+#if DEBUG
+        public static void DebugOutput(string pathName)
+        {
+            Console.WriteLine("  Debug: {0}", pathName);
+            int e;
+
+            var attr = GetFileAttributes(pathName);
+            Console.WriteLine("    GetFileAttributes() = {0}", attr);
+
+            StringBuilder dosDevicePath = new StringBuilder(1024);
+            uint tlength = QueryDosDevice(pathName, dosDevicePath, dosDevicePath.Capacity);
+            if (tlength > 0) {
+                Console.WriteLine("    QueryDosDevice() = {0}", dosDevicePath);
+            } else {
+                e = Marshal.GetLastWin32Error();
+                Console.WriteLine("    QueryDosDevice() error: {0:X8}", e);
+            }
+
+            StringBuilder volumePath = new StringBuilder(1024);
+            if (GetVolumePathName(pathName, volumePath, volumePath.Capacity)) {
+                Console.WriteLine("    GetVolumePathName() = {0}", volumePath);
+            } else {
+                e = Marshal.GetLastWin32Error();
+                Console.WriteLine("    GetVolumePathName() error: {0:X8}", e);
+            }
+
+            StringBuilder volumeDevicePath = new StringBuilder(1024);
+            if (GetVolumeNameForVolumeMountPoint(pathName, volumeDevicePath, volumeDevicePath.Capacity)) {
+                Console.WriteLine("    GetVolumeNameForVolumeMountPoint() = {0}", volumeDevicePath);
+            } else {
+                e = Marshal.GetLastWin32Error();
+                Console.WriteLine("    GetVolumeNameForVolumeMountPoint() error: {0:X8}", e);
+            }
+
+            SafeObjectHandle hDevice = CreateFile(pathName, 0,
+                FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING,
+                0, SafeObjectHandle.Null);
+            if (hDevice == null || hDevice.IsInvalid) {
+                e = Marshal.GetLastWin32Error();
+                Console.WriteLine("    CreateFile() error: {0:X8}", e);
+            } else {
+                Console.WriteLine("    CreateFile(): OK");
+                hDevice.Close();
+            }
+        }
+#endif
     }
 }

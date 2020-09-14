@@ -12,6 +12,9 @@
 
                 VolumeDeviceInfo info;
                 try {
+#if DEBUG
+                    VolumeDeviceInfo.DebugOutput(device);
+#endif
                     info = new VolumeDeviceInfo(device);
                     Console.WriteLine("  Volume");
                     Console.WriteLine("    Volume Path     : {0}", info.VolumePath);
