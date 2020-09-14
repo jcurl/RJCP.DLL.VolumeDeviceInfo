@@ -41,5 +41,14 @@ namespace VolumeTest.Native.Win32
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern uint QueryDosDevice(string deviceName, StringBuilder targetPath, int bufferLength);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern FileAttributes GetFileAttributes(string fileName);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool GetVolumePathName(string fileName, StringBuilder volumePathName, int bufferLength);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool GetVolumeNameForVolumeMountPoint(string volumeMountPoint, StringBuilder volumeName, int bufferLength);
     }
 }

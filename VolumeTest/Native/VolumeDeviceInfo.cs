@@ -12,26 +12,61 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
         /// </summary>
-        /// <param name="devicePathName">
-        /// Name of the device path. Under Windows, this is the NT path, such as \\.\PhysicalDrive0.
-        /// </param>
+        /// <param name="pathName">Path to the volume that should be queried.</param>
         /// <exception cref="PlatformNotSupportedException">This software only supports Windows NT.</exception>
-        public VolumeDeviceInfo(string devicePathName)
+        /// <remarks>
+        /// This is a Windows only implementation that calls the Operating System direct to get information about the
+        /// drive, including IOCTLs, from the path given.
+        /// <para>The <paramref name="pathName"/> can be any of the following formats:</para>
+        /// <list type="bullet">
+        /// <item>A DOS drive letter, like <c>C:</c> or <c>C:\</c>.</item>
+        /// <item>A Win32 device path, like <c>\\?\Bootpartition</c>.</item>
+        /// </list>
+        /// Note, that if you give an NT-path style, liek <c>\Device\HarddiskVolume1</c>, it will be interpreted as a
+        /// normal Win32 path, and the boot partition will be given.
+        /// </remarks>
+        public VolumeDeviceInfo(string pathName)
         {
-            if (devicePathName == null) throw new ArgumentNullException(nameof(devicePathName));
+            if (pathName == null) throw new ArgumentNullException(nameof(pathName));
 
             if (!Platform.IsWinNT())
                 throw new PlatformNotSupportedException();
 
+            string devicePathName = ResolveDevicePathNames(pathName);
             GetDeviceInformation(devicePathName);
-            DevicePath = devicePathName;
         }
 
         /// <summary>
-        /// Gets the path of the device in the system;
+        /// Gets the path as given to the constructor of this class <see cref="VolumeDeviceInfo"/>.
         /// </summary>
-        /// <value>The path of the device.</value>
-        public string DevicePath { get; private set; }
+        /// <value>
+        /// The path to check.
+        /// </value>
+        public string Path { get; private set; }
+
+        /// <summary>
+        /// Gets the volume mount point where the specified path is mounted.
+        /// </summary>
+        /// <value>
+        /// The volume mount point.
+        /// </value>
+        public string VolumePath { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// Gets the Win32 device path for the volume.
+        /// </summary>
+        /// <value>
+        /// The Win32 device path for the volume.
+        /// </value>
+        public string VolumeDevicePath { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// Gets the NT path, volume DOS device path.
+        /// </summary>
+        /// <value>
+        /// The NT path, volume dos device path.
+        /// </value>
+        public string VolumeDosDevicePath { get; private set; } = string.Empty;
 
         /// <summary>
         /// Gets the vendor identifier for the device.
@@ -93,7 +128,9 @@
 
         private void GetDeviceInformation(string devicePathName)
         {
-            SafeObjectHandle hDevice = CreateFile(devicePathName, 0, FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING, 0, SafeObjectHandle.Null);
+            SafeObjectHandle hDevice = CreateFile(devicePathName, 0,
+                FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING,
+                0, SafeObjectHandle.Null);
             if (hDevice == null || hDevice.IsInvalid) {
                 int e = Marshal.GetHRForLastWin32Error();
                 Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
@@ -172,16 +209,42 @@
             }
         }
 
-        private static string GetDevicePathFromWindowsPath(string drivePath)
+        private string ResolveDevicePathNames(string pathName)
         {
-            StringBuilder devicePath = new StringBuilder(1024);
-            uint cchars = QueryDosDevice(drivePath, devicePath, devicePath.Capacity);
-            if (cchars == 0) {
-                int e = Marshal.GetHRForLastWin32Error();
-                Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
-                throw new System.IO.IOException("Couldn't get device path", e);
+            Path = pathName;
+
+            // GetVolumePathName behaves as following
+            // * c: => C:\
+            // * C:\ => C:\
+            // * \\.\HarddiskVolume3 => \\.\HarddiskVolume3\
+            // * \ => C:\ (the boot partition)
+            StringBuilder volumePath = new StringBuilder(1024);
+            if (GetVolumePathName(pathName, volumePath, volumePath.Capacity)) {
+                VolumePath = volumePath.ToString();
+
+                // Converts the volume path. to the Win32 device path, that we can query it with an IOCTL later. The
+                // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
+                // some API, like the IOCTL.
+                StringBuilder volumeDevicePath = new StringBuilder(1024);
+                if (GetVolumeNameForVolumeMountPoint(VolumePath, volumeDevicePath, volumeDevicePath.Capacity)) {
+                    if (volumeDevicePath[volumeDevicePath.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
+                        volumeDevicePath.Remove(volumeDevicePath.Length - 1, 1);
+                    }
+                    VolumeDevicePath = volumeDevicePath.ToString();
+                } else {
+                    VolumeDevicePath = VolumePath;
+                }
+
+                StringBuilder dosDevicePath = new StringBuilder(1024);
+                uint tlength = QueryDosDevice(VolumePath.Substring(0, 2), dosDevicePath, dosDevicePath.Capacity);
+                if (tlength > 0) {
+                    VolumeDosDevicePath = dosDevicePath.ToString();
+                }
+                return VolumeDevicePath;
+            } else {
+                // This could be a valid path (we don't know until it's opened later), but just not mounted as a volume.
+                return pathName;
             }
-            return devicePath.ToString();
         }
     }
 }

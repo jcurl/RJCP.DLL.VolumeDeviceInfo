@@ -45,6 +45,7 @@
     <Compile Include="Native\ScsiDeviceType.cs" />
     <Compile Include="Native\VolumeDeviceInfo.cs" />
     <Compile Include="Native\BusType.cs" />
+    <Compile Include="Native\Win32\Kernel32+FileAttributes.cs" />
     <Compile Include="Native\Win32\Kernel32+ACCESS_MASK.cs" />
     <Compile Include="Native\Win32\Kernel32+CreateFileFlags.cs" />
     <Compile Include="Native\Win32\Kernel32+CreationDisposition.cs" />
@@ -55,6 +56,9 @@
     <Compile Include="Native\Win32\Kernel32.cs" />
     <Compile Include="Native\Win32\SafeAllocHandle.cs" />
     <Compile Include="Native\Win32\Win32ErrorCode.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceType.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_PROPERTY_ID.cs" />
