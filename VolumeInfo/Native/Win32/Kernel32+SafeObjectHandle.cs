@@ -49,7 +49,10 @@
             }
 
             /// <inheritdoc />
-            protected override bool ReleaseHandle() => CloseHandle(handle);
+            protected override bool ReleaseHandle()
+            {
+                return CloseHandle(handle);
+            }
         }
     }
 }

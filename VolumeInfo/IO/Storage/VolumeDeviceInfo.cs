@@ -55,6 +55,7 @@
                 throw new PlatformNotSupportedException();
 
             m_OS = os;
+            Path = pathName;
             string devicePathName = ResolveDevicePathNames(pathName);
             if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
         }
