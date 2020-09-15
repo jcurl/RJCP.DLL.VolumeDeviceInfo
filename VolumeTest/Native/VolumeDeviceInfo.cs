@@ -53,9 +53,18 @@
         /// Gets the volume mount point where the specified path is mounted.
         /// </summary>
         /// <value>
-        /// The volume mount point.
+        /// The volume mount point. This can be a drive letter, or a Win32 device path, of the actual volume which is
+        /// related to the <see cref="Path"/>. This is calculated after all reparse points.
         /// </value>
         public string VolumePath { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// Gets the drive letter for the drive in question.
+        /// </summary>
+        /// <value>
+        /// The drive letter for the <see cref="Path"/>.
+        /// </value>
+        public string VolumeDrive { get; private set; } = string.Empty;
 
         /// <summary>
         /// Gets the Win32 device path for the volume.
@@ -130,6 +139,112 @@
         /// The SCSI device modifier for the SCSI device type.
         /// </value>
         public int ScsiDeviceModifier { get; private set; }
+
+        private string ResolveDevicePathNames(string pathName)
+        {
+            StringBuilder volumePath = new StringBuilder(1024);
+            StringBuilder volumeDevicePath = new StringBuilder(1024);
+            string volumeDrive = null;
+            string volumeDosDevice = null;
+
+            while (true) {
+                if (pathName.StartsWith(@"\??\")) pathName = pathName.Substring(4);
+                if (string.IsNullOrEmpty(pathName)) return null;
+
+                if (!GetVolumePathName(pathName, volumePath, volumePath.Capacity)) {
+                    if (IsDriveLetter(pathName)) {
+                        string dosDevice = GetDosDevicePath(pathName);
+                        if (volumeDosDevice == null) {
+                            volumeDrive = pathName.Substring(0, 2);
+                            volumeDosDevice = dosDevice;
+                        }
+                        if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
+                            pathName = dosDevice;
+                            continue;
+                        }
+
+                        // This not drive which has been SUBST'd.
+                        VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+                        VolumeDrive = volumeDrive ?? string.Empty;
+                        return null;
+                    }
+                    VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+                    VolumeDrive = volumeDrive ?? string.Empty;
+                    return null;
+                }
+
+                string volumePathRes = volumePath.ToString();
+                if (IsDriveLetter(volumePathRes)) {
+                    string dosDevice = GetDosDevicePath(volumePathRes);
+                    if (volumeDosDevice == null) {
+                        volumeDrive = volumePathRes.Substring(0, 2);
+                        volumeDosDevice = dosDevice;
+                    }
+                    if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
+                        pathName = dosDevice;
+                        continue;
+                    }
+                }
+
+                // Converts the volume path. to the Win32 device path, that we can query it with an IOCTL later. The
+                // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
+                // some API, like the IOCTL.
+                if (!GetVolumeNameForVolumeMountPoint(volumePathRes, volumeDevicePath, volumeDevicePath.Capacity)) {
+                    if (IsDriveLetter(volumePathRes.Substring(0, 3))) {
+                        string dosDevice = GetDosDevicePath(volumePathRes);
+                        if (volumeDosDevice == null) {
+                            volumeDrive = volumePathRes.Substring(0, 2);
+                            volumeDosDevice = dosDevice;
+                        }
+                        if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
+                            pathName = dosDevice;
+                            continue;
+                        }
+
+                        // This not drive which has been SUBST'd.
+                        VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+                        VolumeDrive = volumeDrive ?? string.Empty;
+                        return null;
+                    }
+                    VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+                    VolumeDrive = volumeDrive ?? string.Empty;
+                    return null;
+                }
+
+                if (volumeDevicePath[volumeDevicePath.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
+                    volumeDevicePath.Remove(volumeDevicePath.Length - 1, 1);
+                }
+
+                VolumePath = volumePathRes;
+                VolumeDevicePath = volumeDevicePath.ToString();
+                if (volumeDosDevice == null) {
+                    if (IsDriveLetter(volumePathRes)) {
+                        volumeDrive = volumePathRes.Substring(0, 2);
+                        volumeDosDevice = GetDosDevicePath(volumePathRes);
+                    }
+                }
+                VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+                VolumeDrive = volumeDrive ?? string.Empty;
+                return VolumeDevicePath;
+            }
+        }
+
+        private static bool IsDriveLetter(string path)
+        {
+            int pathLen = path.Length;
+            if (pathLen < 2 || pathLen > 3) return false;
+            if (pathLen == 3 && path[2] != System.IO.Path.DirectorySeparatorChar) return false;
+
+            return ((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':';
+        }
+
+        private static string GetDosDevicePath(string path)
+        {
+            StringBuilder dosDevicePath = new StringBuilder(1024);
+            uint tlength = QueryDosDevice(path.Substring(0, 2), dosDevicePath, dosDevicePath.Capacity);
+            if (tlength > 0) return dosDevicePath.ToString();
+            return null;
+        }
 
         private void GetDeviceInformation(string devicePathName)
         {
@@ -211,51 +326,6 @@
                 if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
                 if (storageDescriptorHeaderPtr != null) storageDescriptorHeaderPtr.Close();
                 if (storageDeviceDescriptorPtr != null) storageDescriptorHeaderPtr.Close();
-            }
-        }
-
-        private string ResolveDevicePathNames(string pathName)
-        {
-            Path = pathName;
-
-            // GetVolumePathName behaves as following
-            // * c: => C:\
-            // * C:\ => C:\
-            // * \\.\HarddiskVolume3 => \\.\HarddiskVolume3\
-            // * \ => C:\ (the boot partition)
-            StringBuilder volumePath = new StringBuilder(1024);
-            if (GetVolumePathName(pathName, volumePath, volumePath.Capacity)) {
-                VolumePath = volumePath.ToString();
-
-                // Converts the volume path. to the Win32 device path, that we can query it with an IOCTL later. The
-                // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
-                // some API, like the IOCTL.
-                StringBuilder volumeDevicePath = new StringBuilder(1024);
-                if (GetVolumeNameForVolumeMountPoint(VolumePath, volumeDevicePath, volumeDevicePath.Capacity)) {
-                    if (volumeDevicePath[volumeDevicePath.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
-                        volumeDevicePath.Remove(volumeDevicePath.Length - 1, 1);
-                    }
-                    VolumeDevicePath = volumeDevicePath.ToString();
-                } else {
-                    // This isn't a volume or isn't mounted.
-                    return string.Empty;
-                }
-
-                StringBuilder dosDevicePath = new StringBuilder(1024);
-                uint tlength = QueryDosDevice(VolumePath.Substring(0, 2), dosDevicePath, dosDevicePath.Capacity);
-                if (tlength > 0) {
-                    VolumeDosDevicePath = dosDevicePath.ToString();
-                }
-                return VolumeDevicePath;
-            } else {
-                StringBuilder dosDevicePath = new StringBuilder(1024);
-                uint tlength = QueryDosDevice(pathName, dosDevicePath, dosDevicePath.Capacity);
-                if (tlength > 0) {
-                    VolumeDosDevicePath = dosDevicePath.ToString();
-                }
-
-                // This could be a valid path (we don't know until it's opened later), but just not mounted as a volume.
-                return pathName;
             }
         }
 

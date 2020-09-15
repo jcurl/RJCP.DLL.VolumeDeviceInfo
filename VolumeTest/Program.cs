@@ -19,6 +19,7 @@
                     Console.WriteLine("  Volume");
                     Console.WriteLine("    Volume Path     : {0}", info.VolumePath);
                     Console.WriteLine("    Volume Device   : {0}", info.VolumeDevicePath);
+                    Console.WriteLine("    Volume Drive    : {0}", info.VolumeDrive);
                     Console.WriteLine("    NT DOS Device   : {0}", info.VolumeDosDevicePath);
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.VendorId);
