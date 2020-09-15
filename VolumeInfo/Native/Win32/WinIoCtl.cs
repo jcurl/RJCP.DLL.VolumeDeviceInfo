@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using static Kernel32;
 
     internal static partial class WinIoCtl
     {

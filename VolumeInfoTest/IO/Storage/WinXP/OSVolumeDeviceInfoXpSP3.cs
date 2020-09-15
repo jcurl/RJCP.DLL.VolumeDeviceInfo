@@ -40,6 +40,9 @@
         public const string VO = VC;
         public const string VOS = VCS;
 
+        public const string Z = @"Z:";
+        public const string ZS = @"Z:\";
+
         public OSVolumeDeviceInfoXpSP3()
         {
             // Drive C, is also the boot partition. Data is obtained from a test instance of Windows XP SP3 in a Virtual
@@ -110,6 +113,16 @@
             SetVolumePathName(@"C:\WINDOWS", CS);
             SetVolumeNameForVolumeMountPoint(@"C:\WINDOWS", 0x7B);
             SetCreateFileFromDeviceError(@"C:\WINDOWS", 0x05);
+
+            // Unmapped drive Z:
+            SetQueryDosDevice(Z, 0x02);
+            SetVolumePathName(Z, ZS);
+            SetVolumeNameForVolumeMountPoint(Z, 0x7B);
+            SetCreateFileFromDeviceError(Z, 0x03);
+
+            SetVolumePathName(ZS, ZS);
+            SetVolumeNameForVolumeMountPoint(ZS, 0x02);
+            SetCreateFileFromDeviceError(ZS, 0x03);
         }
     }
 }

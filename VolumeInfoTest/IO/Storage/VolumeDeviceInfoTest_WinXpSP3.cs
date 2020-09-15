@@ -1,5 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage
 {
+    using System.IO;
     using NUnit.Framework;
 
     /// <summary>
@@ -149,6 +150,14 @@
             Assert.That(vinfo.VolumeDosDevicePath, Is.EqualTo(WinXP.OSVolumeDeviceInfoXpSP3.OD));
             Assert.That(vinfo.VolumeDrive, Is.EqualTo(WinXP.OSVolumeDeviceInfoXpSP3.O));
             IsDrive1(vinfo);
+        }
+
+        [Test]
+        public void UnmappedDriveZ()
+        {
+            Assert.That(() => {
+                _ = new WinXP.VolumeDeviceInfoXpSP3(@"Z:");
+            }, Throws.TypeOf<FileNotFoundException>());
         }
     }
 }

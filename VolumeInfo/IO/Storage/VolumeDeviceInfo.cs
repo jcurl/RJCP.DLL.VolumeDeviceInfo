@@ -1,6 +1,7 @@
 ﻿namespace VolumeInfo.IO.Storage
 {
     using System;
+    using System.IO;
     using System.Runtime.InteropServices;
 
     public partial class VolumeDeviceInfo
@@ -17,6 +18,7 @@
         /// The parameter <paramref name="pathName"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">The parameter <paramref name="pathName"/> is empty.</exception>
+        /// <exception cref="FileNotFoundException">The path is not recognized in the system.</exception>
         /// <remarks>
         /// This is a Windows only implementation that calls the Operating System direct to get information about the
         /// drive, including IOCTLs, from the path given.
@@ -162,7 +164,7 @@
         private string ResolveDevicePathNames(string pathName)
         {
             string volumePath;
-            string volumeDevicePath;
+            string volumeDevicePath = null;
             string volumeDrive = null;
             string volumeDosDevice = null;
 
@@ -214,6 +216,12 @@
             // loop.
             if (loop == 0) throw new InvalidOperationException("Operation took too long to complete");
 
+            if (volumeDosDevice == null && volumeDevicePath == null) {
+                // We couldn't map the drive letter to a DOS device, and didn't find a mount. The drive probably doesn't
+                // exist.
+                throw new FileNotFoundException("Path can't be resolved to a volume");
+            }
+
             VolumeDrive = volumeDrive ?? string.Empty;
             VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
             return VolumeDevicePath;
@@ -224,13 +232,15 @@
             if (IsDriveLetter(path)) {
                 string drive = path.Substring(0, 2);
                 string dosDevice = m_OS.QueryDosDevice(drive);
-                if (volumeDosDevice == null) {
-                    volumeDrive = drive;
-                    volumeDosDevice = dosDevice;
-                }
-                if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
-                    pathName = dosDevice.Substring(4);
-                    return true;
+                if (dosDevice != null) {
+                    if (volumeDosDevice == null) {
+                        volumeDrive = drive;
+                        volumeDosDevice = dosDevice;
+                    }
+                    if (dosDevice.StartsWith(@"\??\")) {
+                        pathName = dosDevice.Substring(4);
+                        return true;
+                    }
                 }
 
                 // This is a drive letter, but not a SUBST'd drive (e.g. it could be a network path).
