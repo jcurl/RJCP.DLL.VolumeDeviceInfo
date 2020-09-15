@@ -163,91 +163,82 @@
         {
             string volumePath;
             string volumeDevicePath;
-
             string volumeDrive = null;
             string volumeDosDevice = null;
 
-            while (true) {
-                if (pathName.StartsWith(@"\??\")) pathName = pathName.Substring(4);
-                if (string.IsNullOrEmpty(pathName)) return null;
+            if (pathName.StartsWith(@"\??\")) pathName = pathName.Substring(4);
 
+            int loop = 26;
+            while (loop > 0) {
+                loop--;
+                if (string.IsNullOrEmpty(pathName)) break;
+
+                // Finds the volume (win32 device path, or drive letter) with a trailing slash, for the path given.
                 volumePath = m_OS.GetVolumePathName(pathName);
                 if (volumePath == null) {
-                    if (IsDriveLetter(pathName)) {
-                        string dosDevice = m_OS.QueryDosDevice(pathName.Substring(0, 2));
-                        if (volumeDosDevice == null) {
-                            volumeDrive = pathName.Substring(0, 2);
-                            volumeDosDevice = dosDevice;
-                        }
-                        if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
-                            pathName = dosDevice;
-                            continue;
-                        }
-
-                        // This not drive which has been SUBST'd.
-                        VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-                        VolumeDrive = volumeDrive ?? string.Empty;
-                        return null;
-                    }
-                    VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-                    VolumeDrive = volumeDrive ?? string.Empty;
-                    return null;
+                    // GetVolumePath fails on drives that don't exist, or may fail on SUBST'd drives (e.g. Win10). If it
+                    // is a SUBST'd drive, get the new path and loop again.
+                    if (ParseDosDevice(pathName, ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
+                    break;
                 }
 
-                if (IsDriveLetter(volumePath)) {
-                    string dosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
-                    if (volumeDosDevice == null) {
-                        volumeDrive = volumePath.Substring(0, 2);
-                        volumeDosDevice = dosDevice;
-                    }
-                    if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
-                        pathName = dosDevice;
-                        continue;
-                    }
-                }
+                // Check if the resultant path is a SUBST'd drive. Windows XP can get here. Win10 doesn't. If it is a
+                // SUBST'd drive, then get the new path and loop again.
+                if (ParseDosDevice(volumePath, ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
 
-                // Converts the volume path. to the Win32 device path, that we can query it with an IOCTL later. The
+                // Converts the volume path to the Win32 device path, that we can query it with an IOCTL later. The
                 // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
                 // some API, like the IOCTL.
                 volumeDevicePath = m_OS.GetVolumeNameForVolumeMountPoint(volumePath);
                 if (volumeDevicePath == null) {
-                    if (IsDriveLetter(volumePath.Substring(0, 3))) {
-                        string dosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
-                        if (volumeDosDevice == null) {
-                            volumeDrive = volumePath.Substring(0, 2);
-                            volumeDosDevice = dosDevice;
-                        }
-                        if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
-                            pathName = dosDevice;
-                            continue;
-                        }
-
-                        // This not drive which has been SUBST'd.
-                        VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-                        VolumeDrive = volumeDrive ?? string.Empty;
-                        return null;
-                    }
-                    VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-                    VolumeDrive = volumeDrive ?? string.Empty;
-                    return null;
+                    // There is no mount point for the drive given. It could be a SUBST'd drive with a path, in which
+                    // case we take just the drive letter, get the new path from the SUBST'd drive and loop again.
+                    if (ParseDosDevice(volumePath.Substring(0, 3), ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
+                    break;
                 }
-
                 if (volumeDevicePath[volumeDevicePath.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
                     volumeDevicePath = volumeDevicePath.Remove(volumeDevicePath.Length - 1, 1);
                 }
 
                 VolumePath = volumePath;
                 VolumeDevicePath = volumeDevicePath;
-                if (volumeDosDevice == null) {
-                    if (IsDriveLetter(volumePath)) {
-                        volumeDrive = volumePath.Substring(0, 2);
-                        volumeDosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
-                    }
+                if (volumeDosDevice == null && IsDriveLetter(volumePath)) {
+                    volumeDrive = volumePath.Substring(0, 2);
+                    volumeDosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
                 }
-                VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-                VolumeDrive = volumeDrive ?? string.Empty;
-                return VolumeDevicePath;
+                break;
             }
+
+            // For some reason, the level of recursion when parsing the API is too high. This might be invalid data from
+            // the OS, or a bug in the program. Obviously, we should never get here, but it's better than an infinite
+            // loop.
+            if (loop == 0) throw new InvalidOperationException("Operation took too long to complete");
+
+            VolumeDrive = volumeDrive ?? string.Empty;
+            VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
+            return VolumeDevicePath;
+        }
+
+        private bool ParseDosDevice(string path, ref string volumeDosDevice, ref string volumeDrive, ref string pathName)
+        {
+            if (IsDriveLetter(path)) {
+                string drive = path.Substring(0, 2);
+                string dosDevice = m_OS.QueryDosDevice(drive);
+                if (volumeDosDevice == null) {
+                    volumeDrive = drive;
+                    volumeDosDevice = dosDevice;
+                }
+                if (dosDevice != null && dosDevice.StartsWith(@"\??\")) {
+                    pathName = dosDevice.Substring(4);
+                    return true;
+                }
+
+                // This is a drive letter, but not a SUBST'd drive (e.g. it could be a network path).
+                return false;
+            }
+
+            // Not a drive letter (but may be another path, or a Win32 device path).
+            return false;
         }
 
         private static bool IsDriveLetter(string path)
@@ -262,7 +253,6 @@
         private void GetDeviceInformation(string devicePathName)
         {
             SafeHandle hDevice = m_OS.CreateFileFromDevice(devicePathName);
-
             try {
                 m_DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
             } finally {

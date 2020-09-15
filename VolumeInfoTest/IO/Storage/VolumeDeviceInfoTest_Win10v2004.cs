@@ -275,6 +275,18 @@
         }
 
         [Test]
+        public void SubstOFolder()
+        {
+            VolumeDeviceInfo vinfo = new Win10.VolumeDeviceInfoWin10v2004(@"O:\Calculus");
+            Assert.That(vinfo.Path, Is.EqualTo(@"O:\Calculus"));
+            Assert.That(vinfo.VolumePath, Is.EqualTo(Win10.OSVolumeDeviceInfoWin10v2004.DS));  // Drive O: is mapped to D:\books
+            Assert.That(vinfo.VolumeDevicePath, Is.EqualTo(Win10.OSVolumeDeviceInfoWin10v2004.VD));
+            Assert.That(vinfo.VolumeDosDevicePath, Is.EqualTo(Win10.OSVolumeDeviceInfoWin10v2004.OD));
+            Assert.That(vinfo.VolumeDrive, Is.EqualTo(Win10.OSVolumeDeviceInfoWin10v2004.O));
+            IsDrive6(vinfo);
+        }
+
+        [Test]
         public void SubstP()
         {
             VolumeDeviceInfo vinfo = new Win10.VolumeDeviceInfoWin10v2004(@"P:");

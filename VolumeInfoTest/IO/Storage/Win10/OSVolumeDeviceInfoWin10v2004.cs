@@ -196,6 +196,13 @@
             SetVolumeNameForVolumeMountPoint(@"D:\books", 0x7B);
             SetCreateFileFromDeviceError(@"D:\books", 0x05);
 
+            SetFileAttributes(@"O:\Calculus", FileAttributes.Directory);
+            SetVolumePathName(@"O:\Calculus", @"O:\Calculus\");
+            SetVolumeNameForVolumeMountPoint(@"O:\Calculus", 0x7B);
+            SetCreateFileFromDeviceError(@"O:\Calculus", 0x05);
+            SetVolumeNameForVolumeMountPoint(@"O:\Calculus\", 0x7B);
+            SetCreateFileFromDeviceError(@"O:\Calculus\", 0x05);
+
             // P: is from "SUBST P: N:\" (so a recursive subst)
             SetFileAttributes(P, FileAttributes.Directory | FileAttributes.System | FileAttributes.Hidden);
             SetQueryDosDevice(P, PD);
