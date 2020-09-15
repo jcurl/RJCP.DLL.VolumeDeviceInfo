@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D967A527-4AAA-4543-9CC8-51CF89E35758}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VolumeInfo</RootNamespace>
+    <AssemblyName>VolumeInfo</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IO\Storage\IOSVolumeDeviceInfo.cs" />
+    <Compile Include="Native\Platform.cs" />
+    <Compile Include="IO\Storage\ScsiDeviceType.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceInfo+OSVolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\BusType.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceQuery.cs" />
+    <Compile Include="Native\Win32\Kernel32+FileAttributes.cs" />
+    <Compile Include="Native\Win32\Kernel32+ACCESS_MASK.cs" />
+    <Compile Include="Native\Win32\Kernel32+CreateFileFlags.cs" />
+    <Compile Include="Native\Win32\Kernel32+CreationDisposition.cs" />
+    <Compile Include="Native\Win32\Kernel32+FileAccess.cs" />
+    <Compile Include="Native\Win32\Kernel32+FileShare.cs" />
+    <Compile Include="Native\Win32\Kernel32+SafeObjectHandle.cs" />
+    <Compile Include="Native\Win32\Kernel32+SECURITY_IMPERSONATION_LEVEL.cs" />
+    <Compile Include="Native\Win32\Kernel32.cs" />
+    <Compile Include="Native\Win32\SafeAllocHandle.cs" />
+    <Compile Include="Native\Win32\Win32ErrorCode.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceType.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_PROPERTY_ID.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_PROPERTY_QUERY.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_QUERY_TYPE.cs" />
+    <Compile Include="Native\Win32\WinIoCtl.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DESCRIPTOR_HEADER.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
