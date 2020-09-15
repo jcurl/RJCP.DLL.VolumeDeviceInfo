@@ -17,7 +17,7 @@
         public static readonly int IOCTL_STORAGE_QUERY_PROPERTY = CtlCode(DeviceType.MassStorage, 0x500, DeviceControlMethod.Buffered, DeviceControlAccess.Any);
 
         [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool DeviceIoControl(SafeObjectHandle hDevice, int dwIoControlCode,
+        internal static extern bool DeviceIoControl(SafeHandle hDevice, int dwIoControlCode,
             SafeAllocHandle lpInBuffer, int nInBufferSize, SafeAllocHandle lpOutBuffer, int nOutBufferSize,
             out uint lpBytesReturned, IntPtr lpOverlapped);
     }
