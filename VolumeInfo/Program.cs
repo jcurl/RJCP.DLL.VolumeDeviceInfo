@@ -5,16 +5,39 @@
 
     public static class Program
     {
+        private class Options
+        {
+            public bool LogApi { get; set; }
+
+            public bool ParseOption(string arg)
+            {
+                if (arg == null) throw new ArgumentNullException(nameof(arg));
+                if (arg.Length < 2) return false;
+                if (arg[0] != '-') return false;
+
+                string option = arg.Substring(1);
+                if (option.Equals("l", StringComparison.Ordinal) || option.Equals("log", StringComparison.OrdinalIgnoreCase)) {
+                    LogApi = true;
+                    return true;
+                }
+
+                return true;
+            }
+        }
+
         static int Main(string[] args)
         {
+            Options options = new Options();
+
             foreach (string device in args) {
+                if (options.ParseOption(device)) continue;
+
                 Console.WriteLine("Device Path: {0}", device);
+
+                if (options.LogApi) LogApi.LogDeviceData.Capture(device);
 
                 VolumeDeviceInfo info;
                 try {
-#if DEBUG
-                    VolumeDeviceInfo.DebugOutput(device);
-#endif
                     info = new VolumeDeviceInfo(device);
                     Console.WriteLine("  Volume");
                     Console.WriteLine("    Volume Path     : {0}", info.VolumePath);

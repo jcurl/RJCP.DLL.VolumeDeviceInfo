@@ -2,135 +2,164 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Runtime.InteropServices;
+    using System.Xml;
 
-    public abstract class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
+    public class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
     {
+        private const string RootNode = "VolumeInfoTest";
+        private const string PathNode = "Path";
+        private const string PathAttr = "path";
+
         private class ResultOrError<T>
         {
             public ResultOrError(T result) { Result = result; }
 
-            public ResultOrError(int errorCode) { ErrorCode = errorCode; }
+            public ResultOrError(int errorCode, bool throws)
+            {
+                ErrorCode = errorCode;
+                Throws = throws;
+            }
 
             public T Result { get; private set; }
 
             public int ErrorCode { get; private set; }
+
+            public bool Throws { get; private set; }
         }
 
-        private readonly Dictionary<string, FileAttributes> m_FileAttributes = new Dictionary<string, FileAttributes>();
-
-        protected void SetFileAttributes(string pathName, FileAttributes attributes)
+        public OSVolumeDeviceInfo(string fileName)
         {
-            if (m_FileAttributes.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_FileAttributes.Add(pathName, attributes);
+            XmlDocument xmlDoc = new XmlDocument {
+                XmlResolver = null
+            };
+            xmlDoc.Load(fileName);
+
+            XmlNodeList paths = xmlDoc.SelectNodes($"/{RootNode}/{PathNode}");
+            foreach (XmlElement path in paths) {
+                ParsePath(path);
+            }
         }
+
+        private void ParsePath(XmlElement pathNode)
+        {
+            string path = pathNode.GetAttribute(PathAttr);
+            AddItem(m_FileAttributes, path, pathNode["FileAttributes"]);
+            AddItem(m_VolumePathName, path, pathNode["VolumePathName"]);
+            AddItem(m_QueryDosDevice, path, pathNode["QueryDosDevice"]);
+            AddItem(m_VolumeMountPoint, path, pathNode["VolumeNameForVolumeMountPoint"]);
+            AddItem(m_CreateFileFromDevice, path, pathNode["CreateFileFromDevice"]);
+            AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
+            AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
+        }
+
+        private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<VolumeDeviceQuery> result = GetResultOrError<VolumeDeviceQuery>(node);
+            if (result != null) {
+                m_StorageProperties.Add(path, result);
+                return;
+            }
+
+            string removableMedia = node["RemovableMedia"].Attributes["result"].Value;
+            string cmdQueuing = node["CommandQueueing"].Attributes["result"].Value;
+            string scsiDevType = node["ScsiDeviceType"].Attributes["result"].Value;
+            string scsiDevMod = node["ScsiModifier"].Attributes["result"].Value;
+            string busType = node["BusType"].Attributes["result"].Value;
+            VolumeDeviceQuery devQuery = new VolumeDeviceQuery() {
+                VendorId = node["VendorId"].Attributes["result"].Value,
+                DeviceSerialNumber = node["DeviceSerialNumber"].Attributes["result"].Value,
+                ProductId = node["ProductId"].Attributes["result"].Value,
+                ProductRevision = node["ProductRevision"].Attributes["result"].Value,
+                RemovableMedia = bool.Parse(removableMedia),
+                CommandQueueing = bool.Parse(cmdQueuing),
+                ScsiDeviceType = (ScsiDeviceType)int.Parse(scsiDevType, CultureInfo.InvariantCulture),
+                ScsiDeviceModifier = int.Parse(scsiDevMod, CultureInfo.InvariantCulture),
+                BusType = (BusType)int.Parse(busType, CultureInfo.InvariantCulture)
+            };
+            m_StorageProperties.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
+        }
+
+        private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            ResultOrError<T> result = GetResultOrError<T>(node);
+            if (result == null)
+                throw new ArgumentException("Complex types not supported", nameof(dictionary));
+
+            dictionary.Add(path, result);
+        }
+
+        private ResultOrError<T> GetResultOrError<T>(XmlElement node)
+        {
+            string nodeResult = node.Attributes["result"]?.Value;
+            string errorCodeStr = node.Attributes["error"]?.Value;
+            string throwsStr = node.Attributes["throws"]?.Value;
+            if (errorCodeStr != null) {
+                int errorCode = int.Parse(errorCodeStr, CultureInfo.InvariantCulture);
+                bool throws = false;
+                if (throwsStr != null) throws = bool.Parse(throwsStr);
+                return new ResultOrError<T>(errorCode, throws);
+            } else {
+                if (typeof(int).IsAssignableFrom(typeof(T))) {
+                    int iResult = int.Parse(nodeResult, CultureInfo.InvariantCulture);
+                    return new ResultOrError<T>((T)Convert.ChangeType(iResult, typeof(T)));
+                } else if (typeof(bool).IsAssignableFrom(typeof(T))) {
+                    bool bResult = bool.Parse(nodeResult);
+                    return new ResultOrError<T>((T)Convert.ChangeType(bResult, typeof(T)));
+                } else if (typeof(string).IsAssignableFrom(typeof(T))) {
+                    return new ResultOrError<T>((T)Convert.ChangeType(nodeResult, typeof(T)));
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        private T GetResultOrThrow<T>(Dictionary<string, ResultOrError<T>> dictionary, string pathName)
+        {
+            if (!dictionary.TryGetValue(pathName, out ResultOrError<T> result)) {
+                string message = string.Format("Path name '{0}' not defined", pathName);
+                throw new ArgumentException(message, nameof(pathName));
+            }
+            if (result.ErrorCode != 0) m_LastWin32Error = result.ErrorCode;
+            if (result.Throws) throw new IOException("IO Exception");
+            return result.Result;
+        }
+
+        private readonly Dictionary<string, ResultOrError<int>> m_FileAttributes = new Dictionary<string, ResultOrError<int>>();
 
         public FileAttributes GetFileAttributes(string pathName)
         {
-            if (!m_FileAttributes.TryGetValue(pathName, out FileAttributes attributes))
-                return (FileAttributes)(-1);
-            return attributes;
+            return (FileAttributes)GetResultOrThrow(m_FileAttributes, pathName);
         }
 
         private readonly Dictionary<string, ResultOrError<string>> m_VolumePathName = new Dictionary<string, ResultOrError<string>>();
 
-        protected void SetVolumePathName(string pathName, string result)
-        {
-            if (m_VolumePathName.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_VolumePathName.Add(pathName, new ResultOrError<string>(result));
-        }
-
-        protected void SetVolumePathName(string pathName, int error)
-        {
-            if (m_VolumePathName.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_VolumePathName.Add(pathName, new ResultOrError<string>(error));
-        }
-
         public string GetVolumePathName(string pathName)
         {
-            if (!m_VolumePathName.TryGetValue(pathName, out ResultOrError<string> result))
-                throw new ArgumentException("Unhandled path");
-
-            if (result.Result == null) {
-                SetLastWin32Error(result.ErrorCode);
-                return null;
-            }
-            return result.Result;
+            return GetResultOrThrow(m_VolumePathName, pathName);
         }
 
         private readonly Dictionary<string, ResultOrError<string>> m_QueryDosDevice = new Dictionary<string, ResultOrError<string>>();
 
-        protected void SetQueryDosDevice(string pathName, string result)
-        {
-            if (m_QueryDosDevice.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_QueryDosDevice.Add(pathName, new ResultOrError<string>(result));
-        }
-
-        protected void SetQueryDosDevice(string pathName, int error)
-        {
-            if (m_QueryDosDevice.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_QueryDosDevice.Add(pathName, new ResultOrError<string>(error));
-        }
-
         public string QueryDosDevice(string dosDevice)
         {
-            if (dosDevice == null) throw new ArgumentNullException(nameof(dosDevice));
-
-            if (dosDevice.Length != 2) {
-                SetLastWin32Error(0xA2);    // ERROR_BAD_PATHNAME
-                return null;
-            }
-
-            if (dosDevice[1] != ':' ||
-                (dosDevice[0] < 'a' || dosDevice[0] > 'z') && (dosDevice[0] < 'A' || dosDevice[0] > 'Z')) {
-                SetLastWin32Error(0x02);    // ERROR_FILE_NOT_FOUND
-                return null;
-            }
-
-            if (!m_QueryDosDevice.TryGetValue(dosDevice, out ResultOrError<string> result)) {
-                SetLastWin32Error(0x02);
-                return null;
-            }
-
-            if (result.Result == null) {
-                SetLastWin32Error(result.ErrorCode);
-                return null;
-            }
-            return result.Result;
+            return GetResultOrThrow(m_QueryDosDevice, dosDevice);
         }
 
-        private readonly Dictionary<string, ResultOrError<string>> m_VolumeNameForVolumeMountPoint = new Dictionary<string, ResultOrError<string>>();
-
-        protected void SetVolumeNameForVolumeMountPoint(string pathName, string result)
-        {
-            if (m_VolumeNameForVolumeMountPoint.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_VolumeNameForVolumeMountPoint.Add(pathName, new ResultOrError<string>(result));
-        }
-
-        protected void SetVolumeNameForVolumeMountPoint(string pathName, int error)
-        {
-            if (m_VolumeNameForVolumeMountPoint.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_VolumeNameForVolumeMountPoint.Add(pathName, new ResultOrError<string>(error));
-        }
+        private readonly Dictionary<string, ResultOrError<string>> m_VolumeMountPoint = new Dictionary<string, ResultOrError<string>>();
 
         public string GetVolumeNameForVolumeMountPoint(string pathName)
         {
-            if (!m_VolumeNameForVolumeMountPoint.TryGetValue(pathName, out ResultOrError<string> result))
-                throw new ArgumentException("Unhandled path");
-
-            if (result.Result == null) {
-                SetLastWin32Error(result.ErrorCode);
-                return null;
-            }
-            return result.Result;
+            return GetResultOrThrow(m_VolumeMountPoint, pathName);
         }
 
         private class SafeTestHandle : SafeHandle
@@ -156,45 +185,17 @@
             public string PathName { get; set; }
         }
 
-        private readonly Dictionary<string, int> m_CreateFailError = new Dictionary<string, int>();
-
-        protected void SetCreateFileFromDeviceError(string pathName, int errorCode)
-        {
-            if (m_CreateFailError.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_CreateFailError.Add(pathName, errorCode);
-        }
+        private readonly Dictionary<string, ResultOrError<string>> m_CreateFileFromDevice = new Dictionary<string, ResultOrError<string>>();
 
         public SafeHandle CreateFileFromDevice(string pathName)
         {
-            if (m_CreateFailError.TryGetValue(pathName, out int result) && result != 0) {
-                SetLastWin32Error(result);
-                int e = Marshal.GetHRForLastWin32Error();
-                Marshal.ThrowExceptionForHR(e, new IntPtr(-1));
-                throw new IOException("Couldn't open device for reading", e);
-            }
+            string result = GetResultOrThrow(m_CreateFileFromDevice, pathName);
+            if (result == null) return null;
 
             SafeTestHandle handle = new SafeTestHandle(new IntPtr(1)) {
                 PathName = pathName
             };
-
             return handle;
-        }
-
-        private readonly Dictionary<string, ResultOrError<VolumeDeviceQuery>> m_StorageDeviceProperty = new Dictionary<string, ResultOrError<VolumeDeviceQuery>>();
-
-        protected void SetStorageDeviceProperty(string pathName, VolumeDeviceQuery result)
-        {
-            if (m_StorageDeviceProperty.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_StorageDeviceProperty.Add(pathName, new ResultOrError<VolumeDeviceQuery>(result));
-        }
-
-        protected void SetStorageDeviceProperty(string pathName, int error)
-        {
-            if (m_StorageDeviceProperty.ContainsKey(pathName))
-                throw new ArgumentException("Path name already added");
-            m_StorageDeviceProperty.Add(pathName, new ResultOrError<VolumeDeviceQuery>(error));
         }
 
         private static SafeTestHandle CheckHandle(SafeHandle hDevice)
@@ -205,44 +206,27 @@
             return handle;
         }
 
+        private readonly Dictionary<string, ResultOrError<VolumeDeviceQuery>> m_StorageProperties = new Dictionary<string, ResultOrError<VolumeDeviceQuery>>();
+
         public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
         {
             SafeTestHandle handle = CheckHandle(hDevice);
-            if (!m_StorageDeviceProperty.TryGetValue(handle.PathName, out ResultOrError<VolumeDeviceQuery> result)) {
-                throw new ArgumentException("Unhandled path");
-            }
-
-            if (result.Result == null) {
-                SetLastWin32Error(result.ErrorCode);
-                return null;
-            }
-            return result.Result;
+            return GetResultOrThrow(m_StorageProperties, handle.PathName);
         }
 
-        private readonly Dictionary<string, bool> m_MediaPresent = new Dictionary<string, bool>();
-
-        protected void SetMediaPresent(string pathName, bool mediaPresent)
-        {
-            if (!m_MediaPresent.ContainsKey(pathName)) {
-                m_MediaPresent.Add(pathName, mediaPresent);
-            } else {
-                m_MediaPresent[pathName] = mediaPresent;
-            }
-        }
+        private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new Dictionary<string, ResultOrError<bool>>();
 
         public bool GetMediaPresent(SafeHandle hDevice)
         {
             SafeTestHandle handle = CheckHandle(hDevice);
-            if (!m_MediaPresent.TryGetValue(handle.PathName, out bool result)) {
-                return true;
-            }
-            return result;
+            return GetResultOrThrow(m_MediaPresent, handle.PathName);
         }
 
-        private int m_Win32Error;
+        private int m_LastWin32Error;
 
-        protected void SetLastWin32Error(int error) { m_Win32Error = error; }
-
-        public int GetLastWin32Error() { return m_Win32Error; }
+        public int GetLastWin32Error()
+        {
+            return m_LastWin32Error;
+        }
     }
 }

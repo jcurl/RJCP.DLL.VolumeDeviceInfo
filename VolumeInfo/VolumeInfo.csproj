@@ -38,10 +38,12 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\Storage\IOSVolumeDeviceInfo.cs" />
+    <Compile Include="LogApi\LogDeviceData.cs" />
     <Compile Include="Native\Platform.cs" />
     <Compile Include="IO\Storage\ScsiDeviceType.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfo+OSVolumeDeviceInfo.cs" />

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VolumeInfoTest>
+  <Path path="C:">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume1" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="C:\">
+    <FileAttributes result="54" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="3030303030303030303" />
+      <ProductId result="VMware Virtual IDE Hard Drive" />
+      <ProductRevision result="00000001" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="3" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\">
+    <FileAttributes result="54" />
+    <VolumePathName result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="D:">
+    <FileAttributes result="17" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice result="\Device\CdRom0" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="D:\">
+    <FileAttributes result="17" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="3031303030303030303" />
+      <ProductId result="NECVMWar VMware IDE CDR10" />
+      <ProductRevision result="1.00" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="5" />
+      <ScsiModifier result="0" />
+      <BusType result="2" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\">
+    <FileAttributes result="17" />
+    <VolumePathName result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\CdRom0">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\.\CdRom0\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="3031303030303030303" />
+      <ProductId result="NECVMWar VMware IDE CDR10" />
+      <ProductRevision result="1.00" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="5" />
+      <ScsiModifier result="0" />
+      <BusType result="2" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\.\CdRom0\">
+    <FileAttributes result="17" />
+    <VolumePathName result="\\.\CdRom0\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="M:">
+    <FileAttributes result="16" />
+    <VolumePathName result="M:\" />
+    <QueryDosDevice result="\Device\LanmanRedirector\;M:000000000000dc0d\devtest\share" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="123" throws="True" />
+  </Path>
+  <Path path="M:\">
+    <FileAttributes result="16" />
+    <VolumePathName result="M:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="3" />
+    <CreateFileFromDevice error="123" throws="True" />
+  </Path>
+  <Path path="N:">
+    <FileAttributes result="54" />
+    <VolumePathName result="N:\" />
+    <QueryDosDevice result="\??\C:" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="N:\">
+    <FileAttributes result="54" />
+    <VolumePathName result="N:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="O:">
+    <FileAttributes result="17" />
+    <VolumePathName result="O:\" />
+    <QueryDosDevice result="\??\D:\I386" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="O:\">
+    <FileAttributes result="17" />
+    <VolumePathName result="O:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="D:\I386">
+    <FileAttributes result="17" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="Z:">
+    <FileAttributes result="-1" />
+    <VolumePathName result="Z:\" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="Z:\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="Z:\" />
+    <QueryDosDevice error="3" />
+    <VolumeNameForVolumeMountPoint error="2" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="@:">
+    <FileAttributes result="-1" />
+    <VolumePathName result="@:\" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="@:\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="@:\" />
+    <QueryDosDevice error="3" />
+    <VolumeNameForVolumeMountPoint error="2" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="@">
+    <FileAttributes result="-1" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="2" throws="True" />
+  </Path>
+  <Path path="C:\Documents and Settings\User\My Documents">
+    <FileAttributes result="17" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+</VolumeInfoTest>

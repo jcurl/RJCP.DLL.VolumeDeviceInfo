@@ -9,7 +9,7 @@
 
     public partial class VolumeDeviceInfo
     {
-        private class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
+        internal class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
         {
             private readonly StringBuilder m_StringBuffer = new StringBuilder(1024);
 

@@ -41,16 +41,13 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\Storage\OSVolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win10v2004.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_WinXpSP3.cs" />
-    <Compile Include="IO\Storage\OSVolumeDeviceInfo.cs" />
-    <Compile Include="IO\Storage\Win10\OSVolumeDeviceInfoWin10v2004.cs" />
-    <Compile Include="IO\Storage\Win10\VolumeDeviceInfoWin10v2004.cs" />
-    <Compile Include="IO\Storage\WinXP\OSVolumeDeviceInfoXpSP3.cs" />
-    <Compile Include="IO\Storage\WinXP\VolumeDeviceInfoXpSP3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,7 +62,14 @@
       <Name>VolumeInfo</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Test\Win32\VolumeInfoTest.Win10v2004.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Test\Win32\VolumeInfoTest.WinXPSP3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

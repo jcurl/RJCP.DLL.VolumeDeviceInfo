@@ -1,0 +1,371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VolumeInfoTest>
+  <Path path="C:">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume3" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="C:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="D:">
+    <FileAttributes result="16" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume9" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="D:\">
+    <FileAttributes result="16" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="Generic-" />
+      <DeviceSerialNumber result="" />
+      <ProductId result="SD Card         " />
+      <ProductRevision result="1.00" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="13" />
+      <BusType result="7" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\">
+    <FileAttributes result="16" />
+    <VolumePathName result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="E:">
+    <FileAttributes result="22" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume21" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="SanDisk" />
+      <DeviceSerialNumber result="4C530001120606116282" />
+      <ProductId result="Cruzer Glide 3.0" />
+      <ProductRevision result="1.00" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="7" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="F:">
+    <FileAttributes result="22" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume22" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="SanDisk " />
+      <DeviceSerialNumber result="43202207CA531669" />
+      <ProductId result="U3 Cruzer Micro " />
+      <ProductRevision result="8.02" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="7" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="M:">
+    <FileAttributes result="16" />
+    <VolumePathName result="M:\" />
+    <QueryDosDevice result="\Device\LanmanRedirector\;M:00000000001fec6c\localhost\share" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="123" throws="True" />
+  </Path>
+  <Path path="M:\">
+    <FileAttributes result="16" />
+    <VolumePathName result="M:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <CreateFileFromDevice error="123" throws="True" />
+  </Path>
+  <Path path="N:">
+    <FileAttributes result="22" />
+    <VolumePathName result="N:\" />
+    <QueryDosDevice result="\??\C:" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="N:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="N:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="O:">
+    <FileAttributes result="16" />
+    <VolumePathName error="87" />
+    <QueryDosDevice result="\??\D:\books" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="O:\">
+    <FileAttributes result="16" />
+    <VolumePathName error="87" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="P:">
+    <FileAttributes result="22" />
+    <VolumePathName result="P:\" />
+    <QueryDosDevice result="\??\N:" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="P:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="P:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="D:\books">
+    <FileAttributes result="16" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="D:\books\">
+    <FileAttributes result="16" />
+    <VolumePathName result="D:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="1" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="O:\Calculus">
+    <FileAttributes result="16" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="O:\Calculus\">
+    <FileAttributes result="16" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="1" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="@">
+    <FileAttributes result="-1" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="2" throws="True" />
+  </Path>
+  <Path path="@:">
+    <FileAttributes result="-1" />
+    <VolumePathName error="2" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="@:\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="2" />
+    <QueryDosDevice error="3" />
+    <VolumeNameForVolumeMountPoint error="2" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="Z:">
+    <FileAttributes result="-1" />
+    <VolumePathName error="2" />
+    <QueryDosDevice error="2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="Z:\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="2" />
+    <QueryDosDevice error="3" />
+    <VolumeNameForVolumeMountPoint error="2" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\HarddiskVolume3">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\.\HarddiskVolume3\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice result="" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <MediaPresent result="True" />
+  </Path>
+  <Path path="\\.\HarddiskVolume3\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\.\HarddiskVolume3\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="C:\Users\user\Desktop">
+    <FileAttributes result="17" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1">
+    <FileAttributes result="16" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\windows">
+    <FileAttributes result="1040" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\windows\System32">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1">
+    <FileAttributes result="16" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1">
+    <FileAttributes result="1040" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1\windows">
+    <FileAttributes result="1040" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\calculus">
+    <FileAttributes result="1040" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1\calculus">
+    <FileAttributes result="1040" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+</VolumeInfoTest>
