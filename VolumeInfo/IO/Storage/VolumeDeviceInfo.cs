@@ -137,9 +137,15 @@
         /// Gets a value indicating if the device supports command queueing.
         /// </summary>
         /// <value>
-        /// Returns <see langword="true"/> if the device supports command queueing, <see langword="false"/> othereise.
+        /// Returns <see langword="true"/> if the device supports command queueing, <see langword="false"/> otherwise.
         /// </value>
         public bool CommandQueueing { get { return m_DeviceQuery != null && m_DeviceQuery.CommandQueueing; } }
+
+        /// <summary>
+        /// Gets if media was present at the time the device was queried on instantiation.
+        /// </summary>
+        /// <value><see langword="true"/> if was present; otherwise, <see langword="false"/>.</value>
+        public bool MediaPresent { get; private set; }
 
         /// <summary>
         /// Gets the type of the bus the device is attached to.
@@ -265,6 +271,7 @@
             SafeHandle hDevice = m_OS.CreateFileFromDevice(devicePathName);
             try {
                 m_DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
+                MediaPresent = m_OS.GetMediaPresent(hDevice);
             } finally {
                 hDevice.Close();
             }
@@ -302,6 +309,30 @@
             try {
                 hDevice = osInfo.CreateFileFromDevice(pathName);
                 Console.WriteLine("    CreateFile(): OK");
+
+                try {
+                    VolumeDeviceQuery devQuery = osInfo.GetStorageDeviceProperty(hDevice);
+                    if (devQuery == null) {
+                        Console.WriteLine("    VolumeDeviceQuery error: {0:X8}", osInfo.GetLastWin32Error());
+                    } else {
+                        Console.WriteLine("    VolumeDeviceQuery");
+                        Console.WriteLine("      Vendor ID: '{0}'", devQuery.VendorId);
+                        Console.WriteLine("      Product ID: '{0}'", devQuery.ProductId);
+                        Console.WriteLine("      Product Rev: '{0}'", devQuery.ProductRevision);
+                        Console.WriteLine("      Serial Number: '{0}'", devQuery.DeviceSerialNumber);
+                        Console.WriteLine("      Bus Type: {0}", devQuery.BusType);
+                        Console.WriteLine("      SCSI Type: {0}", devQuery.ScsiDeviceType);
+                        Console.WriteLine("      SCSI Type Mod: {0}", devQuery.ScsiDeviceModifier);
+                        Console.WriteLine("      Removable Media: {0}", devQuery.RemovableMedia);
+                        Console.WriteLine("      CommandQueueing: {0}", devQuery.CommandQueueing);
+                    }
+                } catch (Exception ex) {
+                    Console.WriteLine("    VolumeDeviceQuery error: {0:X8}", osInfo.GetLastWin32Error());
+                    Console.WriteLine("      Exception: {0}", ex.Message);
+                }
+
+                bool mediaPresent = osInfo.GetMediaPresent(hDevice);
+                Console.WriteLine("    MediaPresent: {0}", mediaPresent);
             } catch (Exception ex) {
                 Console.WriteLine("    CreateFile() error: {0:X8}", osInfo.GetLastWin32Error());
                 Console.WriteLine("      Exception: {0}", ex.Message);

@@ -26,11 +26,12 @@
                     Console.WriteLine("    Product         : {0}; Revision {1}", info.ProductId, info.ProductRevision);
                     Console.WriteLine("    SerialNumber    : {0}", info.DeviceSerialNumber);
                     Console.WriteLine("    Bus Type        : {0}", info.BusType.ToDescription(true));
-                    Console.WriteLine("    Removable Media : {0}", info.RemovableMedia);
-                    Console.WriteLine("    Command Queueing: {0}", info.CommandQueueing);
                     Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.ScsiDeviceType.ToDescription(), info.ScsiDeviceModifier);
+                    Console.WriteLine("    Command Queueing: {0}", info.CommandQueueing);
+                    Console.WriteLine("    Removable Media : {0}", info.RemovableMedia);
+                    Console.WriteLine("    Media Present   : {0}", info.MediaPresent);
                 } catch (Exception ex) {
-                    Console.WriteLine("  Error: {0}", ex.ToString());
+                    Console.WriteLine("  Error: {0}", ex.Message);
                 }
                 Console.WriteLine("");
             }

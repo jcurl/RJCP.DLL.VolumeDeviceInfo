@@ -197,12 +197,17 @@
             m_StorageDeviceProperty.Add(pathName, new ResultOrError<VolumeDeviceQuery>(error));
         }
 
-        public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
+        private static SafeTestHandle CheckHandle(SafeHandle hDevice)
         {
             if (hDevice == null) throw new ArgumentNullException(nameof(hDevice));
             if (hDevice.IsInvalid || hDevice.IsClosed) throw new ArgumentException("Handle is invalid or closed");
             if (!(hDevice is SafeTestHandle handle)) throw new ArgumentException("Handle is the wrong type");
+            return handle;
+        }
 
+        public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
             if (!m_StorageDeviceProperty.TryGetValue(handle.PathName, out ResultOrError<VolumeDeviceQuery> result)) {
                 throw new ArgumentException("Unhandled path");
             }
@@ -212,6 +217,26 @@
                 return null;
             }
             return result.Result;
+        }
+
+        private readonly Dictionary<string, bool> m_MediaPresent = new Dictionary<string, bool>();
+
+        protected void SetMediaPresent(string pathName, bool mediaPresent)
+        {
+            if (!m_MediaPresent.ContainsKey(pathName)) {
+                m_MediaPresent.Add(pathName, mediaPresent);
+            } else {
+                m_MediaPresent[pathName] = mediaPresent;
+            }
+        }
+
+        public bool GetMediaPresent(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            if (!m_MediaPresent.TryGetValue(handle.PathName, out bool result)) {
+                return true;
+            }
+            return result;
         }
 
         private int m_Win32Error;

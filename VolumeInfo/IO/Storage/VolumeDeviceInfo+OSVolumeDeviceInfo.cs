@@ -128,6 +128,12 @@
                 return volumeDeviceQuery;
             }
 
+            public bool GetMediaPresent(SafeHandle hDevice)
+            {
+                return DeviceIoControl(hDevice, IOCTL_STORAGE_CHECK_VERIFY2,
+                    IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
+            }
+
             private int m_Win32Error;
 
             public int GetLastWin32Error() { return m_Win32Error; }

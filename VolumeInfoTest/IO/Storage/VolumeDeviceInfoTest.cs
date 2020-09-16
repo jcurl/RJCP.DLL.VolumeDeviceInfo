@@ -13,6 +13,7 @@
             Assert.That(volumeInfo.Path, Is.EqualTo(@"\\.\BootPartition"));
             Assert.That(volumeInfo.VolumeDrive, Is.Not.Null.Or.Empty);
             Assert.That(volumeInfo.VolumeDevicePath, Is.Not.Null.Or.Empty);
+            Assert.That(volumeInfo.MediaPresent, Is.True);
         }
     }
 }

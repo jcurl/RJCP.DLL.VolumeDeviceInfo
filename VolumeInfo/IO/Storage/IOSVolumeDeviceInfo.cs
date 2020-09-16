@@ -17,6 +17,8 @@
 
         VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice);
 
+        bool GetMediaPresent(SafeHandle hDevice);
+
         int GetLastWin32Error();
     }
 }
