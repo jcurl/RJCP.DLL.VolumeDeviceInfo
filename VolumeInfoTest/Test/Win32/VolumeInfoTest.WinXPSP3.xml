@@ -5,6 +5,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice result="\Device\HarddiskVolume1" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="C:\">
@@ -12,6 +13,12 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="544D-DD66" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}">
@@ -19,6 +26,7 @@
     <VolumePathName result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
@@ -38,6 +46,12 @@
     <VolumePathName result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="544D-DD66" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:">
@@ -45,6 +59,12 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice result="\Device\CdRom0" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\">
@@ -52,6 +72,12 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}">
@@ -59,6 +85,7 @@
     <VolumePathName result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
@@ -78,6 +105,12 @@
     <VolumePathName result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\CdRom0">
@@ -85,6 +118,7 @@
     <VolumePathName result="\\.\CdRom0\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
@@ -104,6 +138,12 @@
     <VolumePathName result="\\.\CdRom0\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="M:">
@@ -111,6 +151,7 @@
     <VolumePathName result="M:\" />
     <QueryDosDevice result="\Device\LanmanRedirector\;M:000000000000dc0d\devtest\share" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="M:\">
@@ -118,6 +159,7 @@
     <VolumePathName result="M:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="3" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="N:">
@@ -125,6 +167,12 @@
     <VolumePathName result="N:\" />
     <QueryDosDevice result="\??\C:" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="544D-DD66" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="N:\">
@@ -132,6 +180,12 @@
     <VolumePathName result="N:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="544D-DD66" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:">
@@ -139,6 +193,12 @@
     <VolumePathName result="O:\" />
     <QueryDosDevice result="\??\D:\I386" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\">
@@ -146,6 +206,12 @@
     <VolumePathName result="O:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation result="">
+      <Label result="winxpsp3_090429" />
+      <SerialNumber result="1686-338B" />
+      <FileSystem result="CDFS" />
+      <Flags result="524293" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:\I386">
@@ -153,6 +219,7 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="Z:">
@@ -160,6 +227,7 @@
     <VolumePathName result="Z:\" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:\">
@@ -167,6 +235,7 @@
     <VolumePathName result="Z:\" />
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:">
@@ -174,6 +243,7 @@
     <VolumePathName result="@:\" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:\">
@@ -181,6 +251,7 @@
     <VolumePathName result="@:\" />
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@">
@@ -188,6 +259,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="2" throws="True" />
   </Path>
   <Path path="C:\Documents and Settings\User\My Documents">
@@ -195,6 +267,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
 </VolumeInfoTest>

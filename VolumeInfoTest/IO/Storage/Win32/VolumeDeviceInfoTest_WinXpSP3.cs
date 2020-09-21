@@ -121,6 +121,10 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.VolumeLabel, Is.Empty);
+            Assert.That(vinfo.VolumeSerial, Is.EqualTo("544D-DD66"));
+            Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
+            Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x000700FF));
         }
 
         [Test]
@@ -183,6 +187,10 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.VolumeLabel, Is.EqualTo("winxpsp3_090429"));
+            Assert.That(vinfo.VolumeSerial, Is.EqualTo("1686-338B"));
+            Assert.That(vinfo.FileSystem, Is.EqualTo("CDFS"));
+            Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x00080005));
         }
 
         [Test]

@@ -9,6 +9,7 @@
     {
         private readonly IOSVolumeDeviceInfo m_OS;
         private VolumeDeviceQuery m_DeviceQuery;
+        private VolumeInfo m_VolumeQuery;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -60,7 +61,10 @@
             m_OS = os;
             Path = pathName;
             string devicePathName = ResolveDevicePathNames(pathName);
-            if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
+            if (!string.IsNullOrEmpty(devicePathName)) {
+                GetDeviceInformation(devicePathName);
+                GetVolumeInformation(VolumeDevicePathSlash);
+            }
         }
 
         /// <summary>
@@ -95,6 +99,9 @@
         /// The Win32 device path for the volume.
         /// </value>
         public string VolumeDevicePath { get; private set; } = string.Empty;
+
+        private string VolumeDevicePathSlash { get; set; } = string.Empty;
+
 
         /// <summary>
         /// Gets the NT path, volume DOS device path.
@@ -168,10 +175,43 @@
         /// </value>
         public int ScsiDeviceModifier { get { return m_DeviceQuery == null ? 0 : m_DeviceQuery.ScsiDeviceModifier; } }
 
+        /// <summary>
+        /// Gets the volume label.
+        /// </summary>
+        /// <value>
+        /// The volume label.
+        /// </value>
+        public string VolumeLabel { get { return m_VolumeQuery?.VolumeLabel ?? string.Empty; } }
+
+        /// <summary>
+        /// Gets the volume serial.
+        /// </summary>
+        /// <value>
+        /// The volume serial.
+        /// </value>
+        public string VolumeSerial { get { return m_VolumeQuery?.VolumeSerial ?? string.Empty; } }
+
+        /// <summary>
+        /// Gets the name of the file system for the volume.
+        /// </summary>
+        /// <value>
+        /// The name of the file system for the volume.
+        /// </value>
+        public string FileSystem { get { return m_VolumeQuery?.FileSystem ?? string.Empty; } }
+
+        /// <summary>
+        /// Gets the file system flags for the volume.
+        /// </summary>
+        /// <value>
+        /// The file system flags for the volume.
+        /// </value>
+        public FileSystemFlags FileSystemFlags { get { return m_VolumeQuery == null ? (FileSystemFlags)0 : m_VolumeQuery.Flags; } }
+
         private string ResolveDevicePathNames(string pathName)
         {
             string volumePath;
-            string volumeDevicePath = null;
+            string volumeDevicePath;
+            string volumeDevicePathSlash = null;
             string volumeDrive = null;
             string volumeDosDevice = null;
 
@@ -198,19 +238,24 @@
                 // Converts the volume path to the Win32 device path, that we can query it with an IOCTL later. The
                 // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
                 // some API, like the IOCTL.
-                volumeDevicePath = m_OS.GetVolumeNameForVolumeMountPoint(volumePath);
-                if (volumeDevicePath == null) {
+                string volumeDevice = m_OS.GetVolumeNameForVolumeMountPoint(volumePath);
+                if (volumeDevice == null) {
                     // There is no mount point for the drive given. It could be a SUBST'd drive with a path, in which
                     // case we take just the drive letter, get the new path from the SUBST'd drive and loop again.
                     if (ParseDosDevice(volumePath.Substring(0, 3), ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
                     break;
                 }
-                if (volumeDevicePath[volumeDevicePath.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
-                    volumeDevicePath = volumeDevicePath.Remove(volumeDevicePath.Length - 1, 1);
+                if (volumeDevice[volumeDevice.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
+                    volumeDevicePath = volumeDevice.Remove(volumeDevice.Length - 1, 1);
+                    volumeDevicePathSlash = volumeDevice;
+                } else {
+                    volumeDevicePath = volumeDevice;
+                    volumeDevicePathSlash = string.Format("{0}{1}", volumeDevice, System.IO.Path.DirectorySeparatorChar);
                 }
 
                 VolumePath = volumePath;
                 VolumeDevicePath = volumeDevicePath;
+                VolumeDevicePathSlash = volumeDevicePathSlash;
                 if (volumeDosDevice == null && IsDriveLetter(volumePath)) {
                     volumeDrive = volumePath.Substring(0, 2);
                     volumeDosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
@@ -223,7 +268,7 @@
             // loop.
             if (loop == 0) throw new InvalidOperationException("Operation took too long to complete");
 
-            if (volumeDosDevice == null && volumeDevicePath == null) {
+            if (volumeDosDevice == null && volumeDevicePathSlash == null) {
                 // We couldn't map the drive letter to a DOS device, and didn't find a mount. The drive probably doesn't
                 // exist.
                 throw new FileNotFoundException("Path can't be resolved to a volume");
@@ -276,6 +321,11 @@
             } finally {
                 hDevice.Close();
             }
+        }
+
+        private void GetVolumeInformation(string devicePathName)
+        {
+            m_VolumeQuery = m_OS.GetVolumeInformation(devicePathName);
         }
     }
 }

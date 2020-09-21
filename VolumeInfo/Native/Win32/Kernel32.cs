@@ -13,6 +13,7 @@ namespace VolumeInfo.Native.Win32
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Text;
+    using IO.Storage;
 
     internal static partial class Kernel32
     {
@@ -50,5 +51,10 @@ namespace VolumeInfo.Native.Win32
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool GetVolumeNameForVolumeMountPoint(string volumeMountPoint, StringBuilder volumeName, int bufferLength);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool GetVolumeInformation(string rootPathName, StringBuilder volumeName, int volumeNameSize,
+            out uint volumeSerialNumber, out uint maxComponentLength, out FileSystemFlags fileSystemFlags,
+            StringBuilder fileSystemNameBuffer, int fileSystemNameSize);
     }
 }

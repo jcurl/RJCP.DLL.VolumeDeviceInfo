@@ -17,6 +17,8 @@
 
         VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice);
 
+        VolumeInfo GetVolumeInformation(string devicePathName);
+
         bool GetMediaPresent(SafeHandle hDevice);
 
         int GetLastWin32Error();

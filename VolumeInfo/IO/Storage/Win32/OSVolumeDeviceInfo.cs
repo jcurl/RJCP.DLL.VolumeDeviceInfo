@@ -126,6 +126,27 @@
             return volumeDeviceQuery;
         }
 
+        public VolumeInfo GetVolumeInformation(string devicePathName)
+        {
+            StringBuilder volumeName = new StringBuilder(256);
+            StringBuilder fileSystem = new StringBuilder(256);
+
+            bool success = Kernel32.GetVolumeInformation(devicePathName,
+                volumeName, volumeName.Capacity, out uint volumeSerial,
+                out uint _, out FileSystemFlags flags, fileSystem, fileSystem.Capacity);
+            if (!success) {
+                m_Win32Error = Marshal.GetLastWin32Error();
+                return null;
+            }
+
+            return new VolumeInfo() {
+                VolumeLabel = volumeName.ToString(),
+                VolumeSerial = string.Format("{0:X4}-{1:X4}", (volumeSerial & 0xFFFF0000) >> 16, volumeSerial & 0xFFFF),
+                Flags = flags,
+                FileSystem = fileSystem.ToString(),
+            };
+        }
+
         public bool GetMediaPresent(SafeHandle hDevice)
         {
             return DeviceIoControl(hDevice, IOCTL_STORAGE_CHECK_VERIFY2,

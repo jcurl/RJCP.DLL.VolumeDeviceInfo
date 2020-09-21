@@ -5,6 +5,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice result="\Device\HarddiskVolume3" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="C:\">
@@ -12,6 +13,12 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}">
@@ -19,6 +26,7 @@
     <VolumePathName result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
@@ -38,6 +46,12 @@
     <VolumePathName result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:">
@@ -45,6 +59,12 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice result="\Device\HarddiskVolume9" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="Samsung64GB" />
+      <SerialNumber result="0000-0000" />
+      <FileSystem result="exFAT" />
+      <Flags result="131590" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\">
@@ -52,6 +72,12 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <VolumeInformation result="">
+      <Label result="Samsung64GB" />
+      <SerialNumber result="0000-0000" />
+      <FileSystem result="exFAT" />
+      <Flags result="131590" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}">
@@ -59,6 +85,7 @@
     <VolumePathName result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="Generic-" />
@@ -78,6 +105,12 @@
     <VolumePathName result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\" />
+    <VolumeInformation result="">
+      <Label result="Samsung64GB" />
+      <SerialNumber result="0000-0000" />
+      <FileSystem result="exFAT" />
+      <Flags result="131590" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:">
@@ -85,6 +118,12 @@
     <VolumePathName result="E:\" />
     <QueryDosDevice result="\Device\HarddiskVolume21" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="USB" />
+      <SerialNumber result="36F8-F5F6" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="E:\">
@@ -92,6 +131,12 @@
     <VolumePathName result="E:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <VolumeInformation result="">
+      <Label result="USB" />
+      <SerialNumber result="36F8-F5F6" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}">
@@ -99,6 +144,7 @@
     <VolumePathName result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="SanDisk" />
@@ -118,6 +164,12 @@
     <VolumePathName result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\" />
+    <VolumeInformation result="">
+      <Label result="USB" />
+      <SerialNumber result="36F8-F5F6" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:">
@@ -125,6 +177,12 @@
     <VolumePathName result="F:\" />
     <QueryDosDevice result="\Device\HarddiskVolume22" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F099-8836" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\">
@@ -132,6 +190,12 @@
     <VolumePathName result="F:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F099-8836" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}">
@@ -139,6 +203,7 @@
     <VolumePathName result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="SanDisk " />
@@ -158,6 +223,12 @@
     <VolumePathName result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F099-8836" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="M:">
@@ -165,6 +236,13 @@
     <VolumePathName result="M:\" />
     <QueryDosDevice result="\Device\LanmanRedirector\;M:00000000001fec6c\localhost\share" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <!-- Obviously bogus, this is a network drive but returns details of the boot partition -->
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="13043455" />
+    </VolumeInformation>
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="M:\">
@@ -172,6 +250,13 @@
     <VolumePathName result="M:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="87" />
+    <!-- Obviously bogus, this is a network drive but returns details of the boot partition -->
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="13043455" />
+    </VolumeInformation>
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="N:">
@@ -179,6 +264,12 @@
     <VolumePathName result="N:\" />
     <QueryDosDevice result="\??\C:" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="N:\">
@@ -186,6 +277,12 @@
     <VolumePathName result="N:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:">
@@ -193,6 +290,12 @@
     <VolumePathName error="87" />
     <QueryDosDevice result="\??\D:\books" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="Samsung64GB" />
+      <SerialNumber result="0000-0000" />
+      <FileSystem result="exFAT" />
+      <Flags result="131590" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\">
@@ -200,6 +303,12 @@
     <VolumePathName error="87" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation result="">
+      <Label result="Samsung64GB" />
+      <SerialNumber result="0000-0000" />
+      <FileSystem result="exFAT" />
+      <Flags result="131590" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="P:">
@@ -207,6 +316,12 @@
     <VolumePathName result="P:\" />
     <QueryDosDevice result="\??\N:" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="P:\">
@@ -214,6 +329,12 @@
     <VolumePathName result="P:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:\books">
@@ -221,6 +342,7 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\books\">
@@ -228,6 +350,7 @@
     <VolumePathName result="D:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="1" />
+    <VolumeInformation error="144" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:\Calculus">
@@ -235,6 +358,7 @@
     <VolumePathName result="O:\Calculus\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\Calculus\">
@@ -242,6 +366,7 @@
     <VolumePathName result="O:\Calculus\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="1" />
+    <VolumeInformation error="144" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@">
@@ -249,6 +374,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="2" throws="True" />
   </Path>
   <Path path="@:">
@@ -256,6 +382,7 @@
     <VolumePathName error="2" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:\">
@@ -263,6 +390,7 @@
     <VolumePathName error="2" />
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:">
@@ -270,6 +398,7 @@
     <VolumePathName error="2" />
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:\">
@@ -277,6 +406,7 @@
     <VolumePathName error="2" />
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
+    <VolumeInformation error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\HarddiskVolume3">
@@ -284,6 +414,7 @@
     <VolumePathName result="\\.\HarddiskVolume3\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
@@ -303,6 +434,12 @@
     <VolumePathName result="\\.\HarddiskVolume3\" />
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint result="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\" />
+    <VolumeInformation result="">
+      <Label result="Local Disk" />
+      <SerialNumber result="D470-C5ED" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="C:\Users\user\Desktop">
@@ -310,6 +447,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="E:\efolder1">
@@ -317,6 +455,7 @@
     <VolumePathName result="E:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="E:\efolder1\windows">
@@ -324,6 +463,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="E:\efolder1\windows\System32">
@@ -331,6 +471,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\ffolder1">
@@ -338,6 +479,7 @@
     <VolumePathName result="F:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1">
@@ -345,6 +487,7 @@
     <VolumePathName result="E:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1\windows">
@@ -352,6 +495,7 @@
     <VolumePathName result="C:\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="E:\efolder1\calculus">
@@ -359,6 +503,7 @@
     <VolumePathName result="O:\Calculus\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1\calculus">
@@ -366,6 +511,7 @@
     <VolumePathName result="O:\Calculus\" />
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
 </VolumeInfoTest>

@@ -53,6 +53,7 @@
             AddItem(m_CreateFileFromDevice, path, pathNode["CreateFileFromDevice"]);
             AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
+            AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -84,6 +85,28 @@
                 BusType = (BusType)int.Parse(busType, CultureInfo.InvariantCulture)
             };
             m_StorageProperties.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
+        }
+
+        private void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<VolumeInfo> result = GetResultOrError<VolumeInfo>(node);
+            if (result != null) {
+                m_VolumeInfo.Add(path, result);
+                return;
+            }
+
+            string flags = node["Flags"].Attributes["result"].Value;
+            VolumeInfo volInfo = new VolumeInfo() {
+                VolumeLabel = node["Label"].Attributes["result"].Value,
+                VolumeSerial = node["SerialNumber"].Attributes["result"].Value,
+                FileSystem = node["FileSystem"].Attributes["result"].Value,
+                Flags = (FileSystemFlags)int.Parse(flags, CultureInfo.InvariantCulture)
+            };
+            m_VolumeInfo.Add(path, new ResultOrError<VolumeInfo>(volInfo));
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -212,6 +235,13 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_StorageProperties, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<VolumeInfo>> m_VolumeInfo = new Dictionary<string, ResultOrError<VolumeInfo>>();
+
+        public VolumeInfo GetVolumeInformation(string devicePathName)
+        {
+            return GetResultOrThrow(m_VolumeInfo, devicePathName);
         }
 
         private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new Dictionary<string, ResultOrError<bool>>();

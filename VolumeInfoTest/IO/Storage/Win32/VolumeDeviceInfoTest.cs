@@ -14,6 +14,10 @@
             Assert.That(volumeInfo.VolumeDrive, Is.Not.Null.Or.Empty);
             Assert.That(volumeInfo.VolumeDevicePath, Is.Not.Null.Or.Empty);
             Assert.That(volumeInfo.MediaPresent, Is.True);
+
+            Assert.That(volumeInfo.VolumeLabel, Is.Not.Null);
+            Assert.That(volumeInfo.VolumeSerial, Is.Not.Null);
+            Assert.That(volumeInfo.FileSystem, Is.Not.Null);
         }
     }
 }

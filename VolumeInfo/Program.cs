@@ -44,6 +44,10 @@
                     Console.WriteLine("    Volume Device   : {0}", info.VolumeDevicePath);
                     Console.WriteLine("    Volume Drive    : {0}", info.VolumeDrive);
                     Console.WriteLine("    NT DOS Device   : {0}", info.VolumeDosDevicePath);
+                    Console.WriteLine("    Label:          : {0}", info.VolumeLabel);
+                    Console.WriteLine("    Serial Number   : {0}", info.VolumeSerial);
+                    Console.WriteLine("    Flags           : {0}", info.FileSystemFlags);
+                    Console.WriteLine("    File System     : {0}", info.FileSystem);
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.VendorId);
                     Console.WriteLine("    Product         : {0}; Revision {1}", info.ProductId, info.ProductRevision);

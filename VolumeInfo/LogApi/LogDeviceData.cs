@@ -81,6 +81,7 @@
             QueryApi(pathNode, "VolumePathName", vinfo, () => { return vinfo.GetVolumePathName(devicePath); });
             QueryApi(pathNode, "QueryDosDevice", vinfo, () => { return vinfo.QueryDosDevice(devicePath); });
             QueryApi(pathNode, "VolumeNameForVolumeMountPoint", vinfo, () => { return vinfo.GetVolumeNameForVolumeMountPoint(devicePath); });
+            QueryVolumeInfo(pathNode, vinfo, devicePath);
 
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
                 if (hDevice != null && !hDevice.IsInvalid) {
@@ -107,6 +108,19 @@
             WriteApiResult(storageNode, "ScsiDeviceType", (int)query.ScsiDeviceType);
             WriteApiResult(storageNode, "ScsiModifier", query.ScsiDeviceModifier);
             WriteApiResult(storageNode, "BusType", (int)query.BusType);
+        }
+
+        private void QueryVolumeInfo(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)
+        {
+            VolumeInfo info = QueryApi(pathNode, "VolumeInformation", vinfo, () => {
+                return vinfo.GetVolumeInformation(pathName);
+            }, out XmlElement volumeInfoNode);
+
+            if (info == null) return;
+            WriteApiResult(volumeInfoNode, "Label", info.VolumeLabel);
+            WriteApiResult(volumeInfoNode, "SerialNumber", info.VolumeSerial);
+            WriteApiResult(volumeInfoNode, "FileSystem", info.FileSystem);
+            WriteApiResult(volumeInfoNode, "Flags", (int)info.Flags);
         }
 
         private XmlElement CreateDevicePath(string devicePath)
