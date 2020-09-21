@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Runtime.InteropServices;
+    using Win32;
 
     public partial class VolumeDeviceInfo
     {

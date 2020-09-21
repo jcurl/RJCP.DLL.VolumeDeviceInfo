@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IO\Storage\OSVolumeDeviceInfo.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceInfoTest.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win10v2004.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceInfoTest_WinXpSP3.cs" />
+    <Compile Include="IO\Storage\Win32\OSVolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\Win32\VolumeDeviceInfoTest.cs" />
+    <Compile Include="IO\Storage\Win32\VolumeDeviceInfoTest_Win10v2004.cs" />
+    <Compile Include="IO\Storage\Win32\VolumeDeviceInfoTest_WinXpSP3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

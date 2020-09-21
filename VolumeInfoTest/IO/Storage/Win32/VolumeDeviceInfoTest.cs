@@ -1,4 +1,4 @@
-﻿namespace VolumeInfo.IO.Storage
+﻿namespace VolumeInfo.IO.Storage.Win32
 {
     using NUnit.Framework;
 

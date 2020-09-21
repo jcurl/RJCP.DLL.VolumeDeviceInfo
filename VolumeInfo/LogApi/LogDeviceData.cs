@@ -5,7 +5,7 @@
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Xml;
-    using VolumeInfo.IO.Storage;
+    using IO.Storage.Win32;
 
     public class LogDeviceData
     {
@@ -74,7 +74,7 @@
             XmlElement rootNode = (XmlElement)m_Document.SelectSingleNode($"/{RootNode}");
             XmlElement pathNode = CreateDevicePath(devicePath);
 
-            IOSVolumeDeviceInfo vinfo = new VolumeDeviceInfo.OSVolumeDeviceInfo();
+            IOSVolumeDeviceInfo vinfo = new OSVolumeDeviceInfo();
             QueryApi(pathNode, "FileAttributes", vinfo, () => {
                 return ((int)vinfo.GetFileAttributes(devicePath)).ToString(CultureInfo.InvariantCulture);
             });

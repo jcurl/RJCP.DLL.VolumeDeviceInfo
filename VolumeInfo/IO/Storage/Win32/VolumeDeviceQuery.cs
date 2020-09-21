@@ -1,4 +1,4 @@
-﻿namespace VolumeInfo.IO.Storage
+﻿namespace VolumeInfo.IO.Storage.Win32
 {
     public class VolumeDeviceQuery
     {

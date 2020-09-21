@@ -42,14 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IO\Storage\IOSVolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\Win32\IOSVolumeDeviceInfo.cs" />
     <Compile Include="LogApi\LogDeviceData.cs" />
     <Compile Include="Native\Platform.cs" />
     <Compile Include="IO\Storage\ScsiDeviceType.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceInfo+OSVolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\Win32\OSVolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\BusType.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceQuery.cs" />
+    <Compile Include="IO\Storage\Win32\VolumeDeviceQuery.cs" />
     <Compile Include="Native\Win32\Kernel32+FileAttributes.cs" />
     <Compile Include="Native\Win32\Kernel32+ACCESS_MASK.cs" />
     <Compile Include="Native\Win32\Kernel32+CreateFileFlags.cs" />
