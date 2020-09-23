@@ -86,6 +86,7 @@
 
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
                 if (hDevice != null && !hDevice.IsInvalid) {
+                    QueryApi(pathNode, "DiskUpdateProperties", vinfo, true, () => { return vinfo.RefreshVolume(hDevice); });
                     QueryStorageProperty(pathNode, vinfo, hDevice);
                     QueryDeviceNumber(pathNode, vinfo, hDevice);
                     QueryDeviceNumberEx(pathNode, vinfo, hDevice);
@@ -192,6 +193,19 @@
 
         private T QueryApi<T>(XmlElement parent, string elementName, IOSVolumeDeviceInfo vinfo, Func<T> method, out XmlElement node)
         {
+            return QueryApi(parent, elementName, vinfo, false, method, out node);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S3241:Methods should not return values that are never used",
+            Justification = "Similar code patterns")]
+        private T QueryApi<T>(XmlElement parent, string elementName, IOSVolumeDeviceInfo vinfo, bool errorIfFalse, Func<T> method)
+        {
+            return QueryApi(parent, elementName, vinfo, errorIfFalse, method, out _);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Bug", "S2583:Conditionally executed code should be reachable", Justification = "False Positive")]
+        private T QueryApi<T>(XmlElement parent, string elementName, IOSVolumeDeviceInfo vinfo, bool errorIfFalse, Func<T> method, out XmlElement node)
+        {
             T result;
             try {
                 result = method();
@@ -207,7 +221,13 @@
             } else if (result is int iResult) {
                 node = WriteApiResult(parent, elementName, iResult);
             } else if (result is bool bResult) {
-                node = WriteApiResult(parent, elementName, bResult);
+                // S2583: False positive. bResult can be either true or false, so can errorIfFalse. Manually verified
+                //        that it works.
+                if (!bResult && errorIfFalse) {
+                    node = WriteApiResult(parent, elementName, bResult, vinfo.GetLastWin32Error());
+                } else {
+                    node = WriteApiResult(parent, elementName, bResult);
+                }
             } else if (result is BoolUnknown buResult) {
                 if (buResult == BoolUnknown.Unknown) {
                     node = WriteApiResult(parent, elementName, buResult.ToString(), vinfo.GetLastWin32Error(), false);
@@ -233,6 +253,11 @@
         private XmlElement WriteApiResult(XmlElement parent, string elementName, bool result)
         {
             return WriteApiResult(parent, elementName, result.ToString(CultureInfo.InvariantCulture), 0, false);
+        }
+
+        private XmlElement WriteApiResult(XmlElement parent, string elementName, bool result, int errorCode)
+        {
+            return WriteApiResult(parent, elementName, result.ToString(CultureInfo.InvariantCulture), errorCode, false);
         }
 
         private XmlElement WriteApiResult(XmlElement parent, string elementName, int result)

@@ -429,6 +429,7 @@
         {
             SafeHandle hDevice = m_OS.CreateFileFromDevice(devicePathName);
             try {
+                m_OS.RefreshVolume(hDevice);
                 m_DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
                 MediaPresent = m_OS.GetMediaPresent(hDevice);
                 HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);

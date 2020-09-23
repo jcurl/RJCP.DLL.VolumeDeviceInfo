@@ -57,6 +57,7 @@
             AddItem(m_QueryDosDevice, path, pathNode["QueryDosDevice"]);
             AddItem(m_VolumeMountPoint, path, pathNode["VolumeNameForVolumeMountPoint"]);
             AddItem(m_CreateFileFromDevice, path, pathNode["CreateFileFromDevice"]);
+            AddItem(m_DiskUpdateProperties, path, pathNode["DiskUpdateProperties"]);
             AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
@@ -322,6 +323,14 @@
             if (hDevice.IsInvalid || hDevice.IsClosed) throw new ArgumentException("Handle is invalid or closed");
             if (!(hDevice is SafeTestHandle handle)) throw new ArgumentException("Handle is the wrong type");
             return handle;
+        }
+
+        private readonly Dictionary<string, ResultOrError<bool>> m_DiskUpdateProperties = new Dictionary<string, ResultOrError<bool>>();
+
+        public bool RefreshVolume(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_DiskUpdateProperties, handle.PathName);
         }
 
         private readonly Dictionary<string, ResultOrError<VolumeDeviceQuery>> m_StorageProperties = new Dictionary<string, ResultOrError<VolumeDeviceQuery>>();

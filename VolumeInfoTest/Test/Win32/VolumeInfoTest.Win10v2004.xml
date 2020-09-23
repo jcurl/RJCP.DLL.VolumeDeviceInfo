@@ -28,6 +28,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
       <DeviceSerialNumber result="0025_3844_61B5_6586." />
@@ -107,6 +108,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="Generic-" />
       <DeviceSerialNumber result="" />
@@ -197,6 +199,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="SanDisk" />
       <DeviceSerialNumber result="4C530001120606116282" />
@@ -276,6 +279,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="SanDisk " />
       <DeviceSerialNumber result="43202207CA531669" />
@@ -507,6 +511,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
       <DeviceSerialNumber result="0025_3844_61B5_6586." />

@@ -57,6 +57,14 @@
             return hDevice;
         }
 
+        public bool RefreshVolume(SafeHandle hDevice)
+        {
+            bool success = DeviceIoControl(hDevice, IOCTL_DISK_UPDATE_PROPERTIES,
+                IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
+            if (!success) m_Win32Error = Marshal.GetLastWin32Error();
+            return success;
+        }
+
         public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
         {
             VolumeDeviceQuery volumeDeviceQuery = new VolumeDeviceQuery();

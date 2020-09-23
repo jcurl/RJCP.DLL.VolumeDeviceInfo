@@ -15,6 +15,8 @@
 
         SafeHandle CreateFileFromDevice(string pathName);
 
+        bool RefreshVolume(SafeHandle hDevice);
+
         VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice);
 
         VolumeInfo GetVolumeInformation(string devicePathName);

@@ -28,6 +28,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
       <DeviceSerialNumber result="3030303030303030303" />
@@ -101,6 +102,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
       <DeviceSerialNumber result="3031303030303030303" />
@@ -148,6 +150,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty result="">
       <VendorId result="" />
       <DeviceSerialNumber result="3031303030303030303" />
