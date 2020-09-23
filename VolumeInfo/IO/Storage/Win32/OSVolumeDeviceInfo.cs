@@ -120,7 +120,7 @@
             } finally {
                 if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
                 if (storageDescriptorHeaderPtr != null) storageDescriptorHeaderPtr.Close();
-                if (storageDeviceDescriptorPtr != null) storageDescriptorHeaderPtr.Close();
+                if (storageDeviceDescriptorPtr != null) storageDeviceDescriptorPtr.Close();
             }
 
             return volumeDeviceQuery;
