@@ -39,6 +39,18 @@
       <ScsiModifier result="0" />
       <BusType result="17" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumberEx>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\">
@@ -98,6 +110,18 @@
       <ScsiModifier result="13" />
       <BusType result="7" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="1" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="2" />
+      <DeviceGuid result="537baabc-f7f9-11ea-9169-985fd3d32a6a" />
+      <DeviceNumber result="1" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumberEx>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\">
@@ -126,6 +150,17 @@
     </VolumeInformation>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
+  <!-- Path E: has the current directory E:\. If you changed the path while in E: to
+       E:\folder1\calculus, the results would be different, but perfectly correct!
+  <Path path="E:">
+    <FileAttributes result="1040" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice result="\Device\HarddiskVolume9" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  -->
   <Path path="E:\">
     <FileAttributes result="22" />
     <VolumePathName result="E:\" />
@@ -157,6 +192,18 @@
       <ScsiModifier result="0" />
       <BusType result="7" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="2" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="0" />
+      <DeviceGuid result="a183a5b5-d50a-86a9-188b-739eab126a73" />
+      <DeviceNumber result="2" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumberEx>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\">
@@ -216,6 +263,18 @@
       <ScsiModifier result="0" />
       <BusType result="7" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="3" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="0" />
+      <DeviceGuid result="8efcc1d1-b02a-05d7-56a6-06aaae42be6a" />
+      <DeviceNumber result="3" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumberEx>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\">
@@ -427,6 +486,18 @@
       <ScsiModifier result="0" />
       <BusType result="17" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumberEx>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\.\HarddiskVolume3\">

@@ -46,6 +46,7 @@
         private void ParsePath(XmlElement pathNode)
         {
             string path = pathNode.GetAttribute(PathAttr);
+            Console.WriteLine("Adding path: {0}", path);
             AddItem(m_FileAttributes, path, pathNode["FileAttributes"]);
             AddItem(m_VolumePathName, path, pathNode["VolumePathName"]);
             AddItem(m_QueryDosDevice, path, pathNode["QueryDosDevice"]);
@@ -54,6 +55,8 @@
             AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
+            AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
+            AddDeviceNumberEx(m_DeviceNumberEx, path, pathNode["StorageDeviceNumberEx"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -64,7 +67,7 @@
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<VolumeDeviceQuery> result = GetResultOrError<VolumeDeviceQuery>(node);
             if (result != null) {
-                m_StorageProperties.Add(path, result);
+                dictionary.Add(path, result);
                 return;
             }
 
@@ -84,7 +87,7 @@
                 ScsiDeviceModifier = int.Parse(scsiDevMod, CultureInfo.InvariantCulture),
                 BusType = (BusType)int.Parse(busType, CultureInfo.InvariantCulture)
             };
-            m_StorageProperties.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
+            dictionary.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
         }
 
         private void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
@@ -95,7 +98,7 @@
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<VolumeInfo> result = GetResultOrError<VolumeInfo>(node);
             if (result != null) {
-                m_VolumeInfo.Add(path, result);
+                dictionary.Add(path, result);
                 return;
             }
 
@@ -106,7 +109,56 @@
                 FileSystem = node["FileSystem"].Attributes["result"].Value,
                 Flags = (FileSystemFlags)int.Parse(flags, CultureInfo.InvariantCulture)
             };
-            m_VolumeInfo.Add(path, new ResultOrError<VolumeInfo>(volInfo));
+            dictionary.Add(path, new ResultOrError<VolumeInfo>(volInfo));
+        }
+
+        private void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<StorageDeviceNumber> result = GetResultOrError<StorageDeviceNumber>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string deviceType = node["DeviceType"].Attributes["result"].Value;
+            string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
+            string devicePartition = node["DevicePartition"].Attributes["result"].Value;
+            StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
+                DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
+                PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
+            };
+            dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+        }
+
+        private void AddDeviceNumberEx(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<StorageDeviceNumber> result = GetResultOrError<StorageDeviceNumber>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string deviceType = node["DeviceType"].Attributes["result"].Value;
+            string deviceGuidFlags = node["DeviceGuidFlags"].Attributes["result"].Value;
+            string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
+            string devicePartition = node["DevicePartition"].Attributes["result"].Value;
+            StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
+                DeviceGuidFlags = (DeviceGuidFlags)int.Parse(deviceGuidFlags, CultureInfo.InvariantCulture),
+                DeviceGuid = new Guid(node["DeviceGuid"].Attributes["result"].Value),
+                DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
+                PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
+            };
+            dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -250,6 +302,22 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_MediaPresent, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumber = new Dictionary<string, ResultOrError<StorageDeviceNumber>>();
+
+        public StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_DeviceNumber, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumberEx = new Dictionary<string, ResultOrError<StorageDeviceNumber>>();
+
+        public StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_DeviceNumberEx, handle.PathName);
         }
 
         private int m_LastWin32Error;

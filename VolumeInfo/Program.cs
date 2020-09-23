@@ -48,6 +48,9 @@
                     Console.WriteLine("    Serial Number   : {0}", info.VolumeSerial);
                     Console.WriteLine("    Flags           : {0}", info.FileSystemFlags);
                     Console.WriteLine("    File System     : {0}", info.FileSystem);
+                    Console.WriteLine("    Device GUID:    : {0} ({1})", info.DeviceGuid, info.DeviceGuidFlags);
+                    Console.WriteLine("    Device Number   : {0} #{1}", info.DeviceType, info.DeviceNumber);
+                    Console.WriteLine("    Partition Number: {0}", info.DevicePartitionNumber);
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.VendorId);
                     Console.WriteLine("    Product         : {0}; Revision {1}", info.ProductId, info.ProductRevision);

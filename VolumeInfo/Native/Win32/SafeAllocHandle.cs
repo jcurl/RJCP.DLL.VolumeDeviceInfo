@@ -13,7 +13,15 @@
     {
         private readonly bool withObj;
 
-        public SafeAllocHandle() { }
+        public SafeAllocHandle()
+        {
+            SizeOf = Marshal.SizeOf(typeof(T));
+            try {
+                // The finally part can't be interrupted by Thread.Abort
+            } finally {
+                handle = Marshal.AllocHGlobal(SizeOf);
+            }
+        }
 
         public SafeAllocHandle(object obj)
         {

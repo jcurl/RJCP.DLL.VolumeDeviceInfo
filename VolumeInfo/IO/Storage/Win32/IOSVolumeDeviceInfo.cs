@@ -19,6 +19,10 @@
 
         VolumeInfo GetVolumeInformation(string devicePathName);
 
+        StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice);
+
+        StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice);
+
         bool GetMediaPresent(SafeHandle hDevice);
 
         int GetLastWin32Error();

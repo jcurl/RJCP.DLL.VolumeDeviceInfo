@@ -125,6 +125,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("544D-DD66"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x000700FF));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
         }
 
         [Test]
@@ -191,6 +196,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("1686-338B"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("CDFS"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x00080005));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.CdRom));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(-1));  // No partitions
         }
 
         [Test]

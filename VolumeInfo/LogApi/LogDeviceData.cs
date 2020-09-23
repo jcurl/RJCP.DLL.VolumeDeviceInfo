@@ -86,6 +86,8 @@
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
                 if (hDevice != null && !hDevice.IsInvalid) {
                     QueryStorageProperty(pathNode, vinfo, hDevice);
+                    QueryDeviceNumber(pathNode, vinfo, hDevice);
+                    QueryDeviceNumberEx(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
                 }
             }
@@ -108,6 +110,32 @@
             WriteApiResult(storageNode, "ScsiDeviceType", (int)query.ScsiDeviceType);
             WriteApiResult(storageNode, "ScsiModifier", query.ScsiDeviceModifier);
             WriteApiResult(storageNode, "BusType", (int)query.BusType);
+        }
+
+        private void QueryDeviceNumber(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            StorageDeviceNumber device = QueryApi(pathNode, "StorageDeviceNumber", vinfo, () => {
+                return vinfo.GetDeviceNumber(hDevice);
+            }, out XmlElement deviceNode);
+
+            if (device == null) return;
+            WriteApiResult(deviceNode, "DeviceType", (int)device.DeviceType);
+            WriteApiResult(deviceNode, "DeviceNumber", device.DeviceNumber);
+            WriteApiResult(deviceNode, "DevicePartition", device.PartitionNumber);
+        }
+
+        private void QueryDeviceNumberEx(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            StorageDeviceNumber device = QueryApi(pathNode, "StorageDeviceNumberEx", vinfo, () => {
+                return vinfo.GetDeviceNumberEx(hDevice);
+            }, out XmlElement deviceNode);
+
+            if (device == null) return;
+            WriteApiResult(deviceNode, "DeviceType", (int)device.DeviceType);
+            WriteApiResult(deviceNode, "DeviceGuidFlags", (int)device.DeviceGuidFlags);
+            WriteApiResult(deviceNode, "DeviceGuid", device.DeviceGuid.ToString());
+            WriteApiResult(deviceNode, "DeviceNumber", device.DeviceNumber);
+            WriteApiResult(deviceNode, "DevicePartition", device.PartitionNumber);
         }
 
         private void QueryVolumeInfo(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)

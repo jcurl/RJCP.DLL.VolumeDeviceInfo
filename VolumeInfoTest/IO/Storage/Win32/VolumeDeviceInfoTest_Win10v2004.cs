@@ -133,6 +133,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("D470-C5ED"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.Page83DeviceGuid));
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("ba408eac-457b-e82e-f5ea-f5764f6a8c94"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(3));
         }
 
         [Test]
@@ -199,6 +204,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("0000-0000"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("exFAT"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x00020206));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.RandomDeviceGuidReasonNoHwId));
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("537baabc-f7f9-11ea-9169-985fd3d32a6a"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(1));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
         }
 
         [Test]
@@ -265,6 +275,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("36F8-F5F6"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("a183a5b5-d50a-86a9-188b-739eab126a73"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(2));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
         }
 
         [Test]
@@ -461,6 +476,11 @@
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("F099-8836"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.DeviceGuid.ToString(), Is.EqualTo("8efcc1d1-b02a-05d7-56a6-06aaae42be6a"));
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(3));
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
         }
 
         [Test]

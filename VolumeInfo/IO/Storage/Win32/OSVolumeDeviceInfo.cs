@@ -153,6 +153,52 @@
                 IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
         }
 
+        public StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice)
+        {
+            StorageDeviceNumber deviceNumber = new StorageDeviceNumber();
+            SafeAllocHandle<STORAGE_DEVICE_NUMBER> storageDeviceNumberPtr = null;
+            try {
+                storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER>();
+                bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_GET_DEVICE_NUMBER, IntPtr.Zero, 0,
+                    storageDeviceNumberPtr, storageDeviceNumberPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+                STORAGE_DEVICE_NUMBER storageDeviceNumber = storageDeviceNumberPtr.ToStructure();
+                deviceNumber.DeviceType = storageDeviceNumber.DeviceType;
+                deviceNumber.DeviceNumber = storageDeviceNumber.DeviceNumber;
+                deviceNumber.PartitionNumber = storageDeviceNumber.PartitionNumber;
+            } finally {
+                if (storageDeviceNumberPtr != null) storageDeviceNumberPtr.Close();
+            }
+            return deviceNumber;
+        }
+
+        public StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice)
+        {
+            StorageDeviceNumber deviceNumber = new StorageDeviceNumber();
+            SafeAllocHandle<STORAGE_DEVICE_NUMBER_EX> storageDeviceNumberPtr = null;
+            try {
+                storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER_EX>();
+                bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_GET_DEVICE_NUMBER_EX, IntPtr.Zero, 0,
+                    storageDeviceNumberPtr, storageDeviceNumberPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+                STORAGE_DEVICE_NUMBER_EX storageDeviceNumber = storageDeviceNumberPtr.ToStructure();
+                deviceNumber.DeviceType = storageDeviceNumber.DeviceType;
+                deviceNumber.DeviceNumber = storageDeviceNumber.DeviceNumber;
+                deviceNumber.DeviceGuidFlags = (DeviceGuidFlags)storageDeviceNumber.Flags;
+                deviceNumber.DeviceGuid = new Guid(storageDeviceNumber.DeviceGuid);
+                deviceNumber.PartitionNumber = storageDeviceNumber.PartitionNumber;
+            } finally {
+                if (storageDeviceNumberPtr != null) storageDeviceNumberPtr.Close();
+            }
+            return deviceNumber;
+        }
+
         private int m_Win32Error;
 
         public int GetLastWin32Error() { return m_Win32Error; }

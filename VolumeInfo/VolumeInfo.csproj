@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IO\Storage\DeviceGuidFlags.cs" />
+    <Compile Include="IO\Storage\DeviceType.cs" />
     <Compile Include="IO\Storage\FileSystemFlags.cs" />
+    <Compile Include="IO\Storage\Win32\StorageDeviceNumber.cs" />
     <Compile Include="IO\Storage\Win32\IOSVolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\Win32\VolumeInfo.cs" />
     <Compile Include="LogApi\LogDeviceData.cs" />
@@ -65,9 +68,11 @@
     <Compile Include="Native\Win32\Win32ErrorCode.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
-    <Compile Include="Native\Win32\WinIoCtl+DeviceType.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_FLAGS.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_NUMBER_EX.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_NUMBER.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_PROPERTY_ID.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_PROPERTY_QUERY.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_QUERY_TYPE.cs" />

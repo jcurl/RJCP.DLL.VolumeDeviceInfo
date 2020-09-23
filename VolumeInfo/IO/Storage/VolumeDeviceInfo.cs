@@ -10,6 +10,7 @@
         private readonly IOSVolumeDeviceInfo m_OS;
         private VolumeDeviceQuery m_DeviceQuery;
         private VolumeInfo m_VolumeQuery;
+        private StorageDeviceNumber m_DeviceNumber;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -31,6 +32,13 @@
         /// </list>
         /// Note, that if you give an NT-path style, like <c>\Device\HarddiskVolume1</c>, it will be interpreted as a
         /// normal Win32 path, and the boot partition will be given.
+        /// <para>
+        /// The path name <paramref name="pathName"/> is specified as just a drive letter, e.g. <c>C:</c>, then the path
+        /// used is the current directory for that drive, which may lead to unexpected results, e.g. the current path is
+        /// within a junction that points to drive <c>D:\</c> which will result details for the junction, and not drive
+        /// <c>C:\</c> as probably expected. Provide the trailing backslash in this case to ensure the path for the
+        /// drive is returned as one would expect.
+        /// </para>
         /// </remarks>
         public VolumeDeviceInfo(string pathName) : this(new OSVolumeDeviceInfo(), pathName) { }
 
@@ -85,7 +93,7 @@
         public string VolumePath { get; private set; } = string.Empty;
 
         /// <summary>
-        /// Gets the drive letter for the drive in question.
+        /// Gets the drive letter for the volume device in question.
         /// </summary>
         /// <value>
         /// The drive letter for the <see cref="Path"/>.
@@ -101,7 +109,6 @@
         public string VolumeDevicePath { get; private set; } = string.Empty;
 
         private string VolumeDevicePathSlash { get; set; } = string.Empty;
-
 
         /// <summary>
         /// Gets the NT path, volume DOS device path.
@@ -205,7 +212,49 @@
         /// <value>
         /// The file system flags for the volume.
         /// </value>
-        public FileSystemFlags FileSystemFlags { get { return m_VolumeQuery == null ? (FileSystemFlags)0 : m_VolumeQuery.Flags; } }
+        public FileSystemFlags FileSystemFlags { get { return m_VolumeQuery == null ? 0 : m_VolumeQuery.Flags; } }
+
+        /// <summary>
+        /// Gets the Device Type where the volume is found.
+        /// </summary>
+        /// <value>
+        /// The type of the device.
+        /// </value>
+        public DeviceType DeviceType { get { return m_DeviceNumber == null ? DeviceType.Unknown : m_DeviceNumber.DeviceType; } }
+
+        /// <summary>
+        /// Gets the device number assigned in the system for this volume.
+        /// </summary>
+        /// <value>The device number.</value>
+        /// <remarks>
+        /// This value is unique in the system for the given <see cref="DeviceType"/>. THe Device Number remains
+        /// constant until the device is removed, or the system is restarted.
+        /// </remarks>
+        public int DeviceNumber { get { return m_DeviceNumber == null ? -1 : m_DeviceNumber.DeviceNumber; } }
+
+        /// <summary>
+        /// Gets the partition number assigned in the system for this volume.
+        /// </summary>
+        /// <value>
+        /// The partition number assigned in the system for this volume.
+        /// </value>
+        public int DevicePartitionNumber { get { return m_DeviceNumber == null ? -1 : m_DeviceNumber.PartitionNumber; } }
+
+        /// <summary>
+        /// Gets the source of the device unique identifier.
+        /// </summary>
+        /// <value>
+        /// The source of the device unique identifier.
+        /// </value>
+        public DeviceGuidFlags DeviceGuidFlags { get { return m_DeviceNumber == null ? DeviceGuidFlags.None : m_DeviceNumber.DeviceGuidFlags; } }
+
+        /// <summary>
+        /// Gets the device unique identifier.
+        /// </summary>
+        /// <value>
+        /// The device unique identifier.
+        /// </value>
+        public Guid DeviceGuid { get { return m_DeviceNumber == null ? Guid.Empty : m_DeviceNumber.DeviceGuid; } }
 
         private string ResolveDevicePathNames(string pathName)
         {
@@ -318,6 +367,8 @@
             try {
                 m_DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
                 MediaPresent = m_OS.GetMediaPresent(hDevice);
+                m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
+                if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
             } finally {
                 hDevice.Close();
             }

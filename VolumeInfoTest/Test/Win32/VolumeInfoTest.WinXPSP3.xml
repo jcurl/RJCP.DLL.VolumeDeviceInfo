@@ -39,6 +39,12 @@
       <ScsiModifier result="0" />
       <BusType result="3" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx error="1" />
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\">
@@ -98,6 +104,12 @@
       <ScsiModifier result="0" />
       <BusType result="2" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="2" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="-1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx error="1" />
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\">
@@ -131,6 +143,12 @@
       <ScsiModifier result="0" />
       <BusType result="2" />
     </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="2" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="-1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx error="1" />
     <MediaPresent result="True" />
   </Path>
   <Path path="\\.\CdRom0\">
