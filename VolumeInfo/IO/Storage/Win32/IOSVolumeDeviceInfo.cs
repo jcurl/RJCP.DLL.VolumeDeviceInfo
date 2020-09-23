@@ -23,6 +23,8 @@
 
         StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice);
 
+        DiskGeometry GetDiskGeometry(SafeHandle hDevice);
+
         bool GetMediaPresent(SafeHandle hDevice);
 
         int GetLastWin32Error();

@@ -199,6 +199,30 @@
             return deviceNumber;
         }
 
+        public DiskGeometry GetDiskGeometry(SafeHandle hDevice)
+        {
+            DiskGeometry geometry = new DiskGeometry();
+            SafeAllocHandle<DISK_GEOMETRY> diskGeoPtr = null;
+            try {
+                diskGeoPtr = new SafeAllocHandle<DISK_GEOMETRY>();
+                bool success = DeviceIoControl(hDevice, IOCTL_DISK_GET_DRIVE_GEOMETRY, IntPtr.Zero, 0,
+                    diskGeoPtr, diskGeoPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+                DISK_GEOMETRY diskGeo = diskGeoPtr.ToStructure();
+                geometry.MediaType = diskGeo.MediaType;
+                geometry.Cylinders = diskGeo.Cylinders;
+                geometry.TracksPerCylinder = diskGeo.TracksPerCylinder;
+                geometry.SectorsPerTrack = diskGeo.SectorsPerTrack;
+                geometry.BytesPerSector = diskGeo.BytesPerSector;
+            } finally {
+                if (diskGeoPtr != null) diskGeoPtr.Close();
+            }
+            return geometry;
+        }
+
         private int m_Win32Error;
 
         public int GetLastWin32Error() { return m_Win32Error; }

@@ -88,6 +88,7 @@
                     QueryStorageProperty(pathNode, vinfo, hDevice);
                     QueryDeviceNumber(pathNode, vinfo, hDevice);
                     QueryDeviceNumberEx(pathNode, vinfo, hDevice);
+                    QueryDiskGeometry(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
                 }
             }
@@ -138,6 +139,20 @@
             WriteApiResult(deviceNode, "DevicePartition", device.PartitionNumber);
         }
 
+        private void QueryDiskGeometry(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            DiskGeometry diskGeo = QueryApi(pathNode, "DiskGeometry", vinfo, () => {
+                return vinfo.GetDiskGeometry(hDevice);
+            }, out XmlElement geoNode);
+
+            if (diskGeo == null) return;
+            WriteApiResult(geoNode, "MediaType", (int)diskGeo.MediaType);
+            WriteApiResult(geoNode, "Cylinders", diskGeo.Cylinders);
+            WriteApiResult(geoNode, "TracksPerCylinder", diskGeo.TracksPerCylinder);
+            WriteApiResult(geoNode, "SectorsPerTrack", diskGeo.SectorsPerTrack);
+            WriteApiResult(geoNode, "BytesPerSector", diskGeo.BytesPerSector);
+        }
+
         private void QueryVolumeInfo(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)
         {
             VolumeInfo info = QueryApi(pathNode, "VolumeInformation", vinfo, () => {
@@ -185,6 +200,8 @@
 
             if (result is string sResult) {
                 node = WriteApiResult(parent, elementName, sResult);
+            } else if (result is long lResult) {
+                node = WriteApiResult(parent, elementName, lResult);
             } else if (result is int iResult) {
                 node = WriteApiResult(parent, elementName, iResult);
             } else if (result is bool bResult) {
@@ -211,6 +228,11 @@
         }
 
         private XmlElement WriteApiResult(XmlElement parent, string elementName, int result)
+        {
+            return WriteApiResult(parent, elementName, result.ToString(CultureInfo.InvariantCulture), 0, false);
+        }
+
+        private XmlElement WriteApiResult(XmlElement parent, string elementName, long result)
         {
             return WriteApiResult(parent, elementName, result.ToString(CultureInfo.InvariantCulture), 0, false);
         }

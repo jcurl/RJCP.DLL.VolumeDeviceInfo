@@ -138,6 +138,11 @@
             Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
             Assert.That(vinfo.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(3));
+            Assert.That(vinfo.DiskMediaType, Is.EqualTo(MediaType.FixedMedia));
+            Assert.That(vinfo.DiskCylinders, Is.EqualTo(62260));
+            Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
         }
 
         [Test]
@@ -209,6 +214,11 @@
             Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
             Assert.That(vinfo.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
+            Assert.That(vinfo.DiskMediaType, Is.EqualTo(MediaType.RemovableMedia));
+            Assert.That(vinfo.DiskCylinders, Is.EqualTo(7783));
+            Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
         }
 
         [Test]
@@ -280,6 +290,11 @@
             Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
             Assert.That(vinfo.DeviceNumber, Is.EqualTo(2));
             Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
+            Assert.That(vinfo.DiskMediaType, Is.EqualTo(MediaType.RemovableMedia));
+            Assert.That(vinfo.DiskCylinders, Is.EqualTo(7664));
+            Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
         }
 
         [Test]
@@ -481,6 +496,11 @@
             Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Disk));
             Assert.That(vinfo.DeviceNumber, Is.EqualTo(3));
             Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(1));
+            Assert.That(vinfo.DiskMediaType, Is.EqualTo(MediaType.RemovableMedia));
+            Assert.That(vinfo.DiskCylinders, Is.EqualTo(492));
+            Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
         }
 
         [Test]

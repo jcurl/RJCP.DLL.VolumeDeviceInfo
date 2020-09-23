@@ -45,6 +45,13 @@
       <DevicePartition result="1" />
     </StorageDeviceNumber>
     <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="5221" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\">
@@ -110,6 +117,13 @@
       <DevicePartition result="-1" />
     </StorageDeviceNumber>
     <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="11" />
+      <Cylinders result="904" />
+      <TracksPerCylinder result="64" />
+      <SectorsPerTrack result="32" />
+      <BytesPerSector result="2048" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\">
@@ -149,6 +163,13 @@
       <DevicePartition result="-1" />
     </StorageDeviceNumber>
     <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="11" />
+      <Cylinders result="904" />
+      <TracksPerCylinder result="64" />
+      <SectorsPerTrack result="32" />
+      <BytesPerSector result="2048" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\.\CdRom0\">

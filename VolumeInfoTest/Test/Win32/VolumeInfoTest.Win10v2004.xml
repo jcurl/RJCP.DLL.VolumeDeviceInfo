@@ -51,6 +51,13 @@
       <DeviceNumber result="0" />
       <DevicePartition result="3" />
     </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\">
@@ -122,6 +129,13 @@
       <DeviceNumber result="1" />
       <DevicePartition result="1" />
     </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="11" />
+      <Cylinders result="7783" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\">
@@ -204,6 +218,13 @@
       <DeviceNumber result="2" />
       <DevicePartition result="1" />
     </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="11" />
+      <Cylinders result="7664" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\">
@@ -275,6 +296,13 @@
       <DeviceNumber result="3" />
       <DevicePartition result="1" />
     </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="11" />
+      <Cylinders result="492" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\">
@@ -498,6 +526,13 @@
       <DeviceNumber result="0" />
       <DevicePartition result="3" />
     </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
     <MediaPresent result="True" />
   </Path>
   <Path path="\\.\HarddiskVolume3\">

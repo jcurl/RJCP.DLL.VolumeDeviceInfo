@@ -11,6 +11,7 @@
         private VolumeDeviceQuery m_DeviceQuery;
         private VolumeInfo m_VolumeQuery;
         private StorageDeviceNumber m_DeviceNumber;
+        private DiskGeometry m_DiskGeometry;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -256,6 +257,59 @@
         /// </value>
         public Guid DeviceGuid { get { return m_DeviceNumber == null ? Guid.Empty : m_DeviceNumber.DeviceGuid; } }
 
+        /// <summary>
+        /// Gets the type of the disk media, if it's removable, fixed or a Floppy disk.
+        /// </summary>
+        /// <value>
+        /// The type of the disk media.
+        /// </value>
+        public MediaType DiskMediaType { get { return m_DiskGeometry == null ? MediaType.Unknown : m_DiskGeometry.MediaType; } }
+
+        /// <summary>
+        /// Gets the number of cylinders for the disk the volume is part of.
+        /// </summary>
+        /// <value>
+        /// The disk cylinders.
+        /// </value>
+        /// <remarks>
+        /// This is part of the disk geometry to get the number of Cylinders (total) for the disk.
+        /// </remarks>
+        public long DiskCylinders { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.Cylinders; } }
+
+        /// <summary>
+        /// Gets the disk tracks per cylinder.
+        /// </summary>
+        /// <value>
+        /// The disk tracks per cylinder.
+        /// </value>
+        /// <remarks>
+        /// This is part of the disk geometry to get the number of Tracks per Cylinder for the disk.
+        /// </remarks>
+        public int DiskTracksPerCylinder { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.TracksPerCylinder; } }
+
+        /// <summary>
+        /// Gets the disk sectors per track.
+        /// </summary>
+        /// <value>
+        /// The disk sectors per track.
+        /// </value>
+        /// <remarks>
+        /// This is part of the disk geometry to get the number of Sectors per Track for the disk.
+        /// </remarks>
+        public int DiskSectorsPerTrack { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.SectorsPerTrack; } }
+
+        /// <summary>
+        /// Gets the (logical) disk bytes per sector.
+        /// </summary>
+        /// <value>
+        /// The disk bytes per sector.
+        /// </value>
+        /// <remarks>
+        /// This is the number of bytes per sector for the disk geometry, and is a logical value (it is not related to
+        /// the size of the actual sectors of the media itself).
+        /// </remarks>
+        public int DiskBytesPerSector { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.BytesPerSector; } }
+
         private string ResolveDevicePathNames(string pathName)
         {
             string volumePath;
@@ -369,6 +423,7 @@
                 MediaPresent = m_OS.GetMediaPresent(hDevice);
                 m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
+                m_DiskGeometry = m_OS.GetDiskGeometry(hDevice);
             } finally {
                 hDevice.Close();
             }

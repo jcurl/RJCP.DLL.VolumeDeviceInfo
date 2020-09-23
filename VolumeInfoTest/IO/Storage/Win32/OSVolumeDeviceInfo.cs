@@ -57,6 +57,7 @@
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
             AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
             AddDeviceNumberEx(m_DeviceNumberEx, path, pathNode["StorageDeviceNumberEx"]);
+            AddGeometry(m_Geometry, path, pathNode["DiskGeometry"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -159,6 +160,33 @@
                 PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
             };
             dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+        }
+
+        private void AddGeometry(IDictionary<string, ResultOrError<DiskGeometry>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<DiskGeometry> result = GetResultOrError<DiskGeometry>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string mediaType = node["MediaType"].Attributes["result"].Value;
+            string cylinders = node["Cylinders"].Attributes["result"].Value;
+            string tracks = node["TracksPerCylinder"].Attributes["result"].Value;
+            string sectors = node["SectorsPerTrack"].Attributes["result"].Value;
+            string bytes = node["BytesPerSector"].Attributes["result"].Value;
+            DiskGeometry diskGeo = new DiskGeometry() {
+                MediaType = (MediaType)int.Parse(mediaType, CultureInfo.InvariantCulture),
+                Cylinders = int.Parse(cylinders, CultureInfo.InvariantCulture),
+                TracksPerCylinder = int.Parse(tracks, CultureInfo.InvariantCulture),
+                SectorsPerTrack = int.Parse(sectors, CultureInfo.InvariantCulture),
+                BytesPerSector = int.Parse(bytes, CultureInfo.InvariantCulture),
+            };
+            dictionary.Add(path, new ResultOrError<DiskGeometry>(diskGeo));
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -318,6 +346,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_DeviceNumberEx, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<DiskGeometry>> m_Geometry = new Dictionary<string, ResultOrError<DiskGeometry>>();
+
+        public DiskGeometry GetDiskGeometry(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_Geometry, handle.PathName);
         }
 
         private int m_LastWin32Error;
