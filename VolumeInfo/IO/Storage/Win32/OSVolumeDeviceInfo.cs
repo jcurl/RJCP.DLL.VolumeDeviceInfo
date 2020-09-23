@@ -223,6 +223,35 @@
             return geometry;
         }
 
+        public BoolUnknown IncursSeekPenalty(SafeHandle hDevice)
+        {
+            SafeAllocHandle<STORAGE_PROPERTY_QUERY> storagePropertyQueryPtr = null;
+            SafeAllocHandle<STORAGE_DEVICE_SEEK_PENALTY> storageSeekPenaltyPtr = null;
+            try {
+                STORAGE_PROPERTY_QUERY storagePropertyQuery = new STORAGE_PROPERTY_QUERY {
+                    PropertyId = (uint)STORAGE_PROPERTY_ID.StorageDeviceSeekPenaltyProperty,
+                    QueryType = (uint)STORAGE_QUERY_TYPE.PropertyStandardQuery
+                };
+                storagePropertyQueryPtr = new SafeAllocHandle<STORAGE_PROPERTY_QUERY>(storagePropertyQuery);
+
+                storageSeekPenaltyPtr = new SafeAllocHandle<STORAGE_DEVICE_SEEK_PENALTY>();
+                bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY,
+                    storagePropertyQueryPtr, storagePropertyQueryPtr.SizeOf,
+                    storageSeekPenaltyPtr, storageSeekPenaltyPtr.SizeOf,
+                    out uint bytesReturns, IntPtr.Zero);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return BoolUnknown.Unknown;
+                }
+
+                STORAGE_DEVICE_SEEK_PENALTY storageSeekPenalty = storageSeekPenaltyPtr.ToStructure();
+                return storageSeekPenalty.IncursSeekPenalty ? BoolUnknown.True : BoolUnknown.False;
+            } finally {
+                if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
+                if (storageSeekPenaltyPtr != null) storageSeekPenaltyPtr.Close();
+            }
+        }
+
         private int m_Win32Error;
 
         public int GetLastWin32Error() { return m_Win32Error; }

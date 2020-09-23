@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\Storage\MediaType.cs" />
+    <Compile Include="IO\Storage\BoolUnknown.cs" />
     <Compile Include="IO\Storage\DeviceGuidFlags.cs" />
     <Compile Include="IO\Storage\DeviceType.cs" />
     <Compile Include="IO\Storage\Win32\DiskGeometry.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Native\Win32\WinIoCtl+DISK_GEOMETRY.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_SEEK_PENALTY.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_FLAGS.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_NUMBER_EX.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_NUMBER.cs" />

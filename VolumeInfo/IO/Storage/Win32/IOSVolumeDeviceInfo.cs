@@ -27,6 +27,8 @@
 
         bool GetMediaPresent(SafeHandle hDevice);
 
+        BoolUnknown IncursSeekPenalty(SafeHandle hDevice);
+
         int GetLastWin32Error();
     }
 }

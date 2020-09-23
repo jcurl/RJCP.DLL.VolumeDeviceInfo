@@ -63,6 +63,7 @@
                     Console.WriteLine("    Media Type      : {0}", info.DiskMediaType);
                     Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)", info.DiskCylinders, info.DiskTracksPerCylinder, info.DiskSectorsPerTrack, info.DiskBytesPerSector,
                         info.DiskCylinders * info.DiskTracksPerCylinder * info.DiskSectorsPerTrack * info.DiskBytesPerSector / 1024.0 / 1024.0 / 1024.0);
+                    Console.WriteLine("    Seek Penalty    : {0}", info.HasSeekPenalty);
                 } catch (Exception ex) {
                     Console.WriteLine("  Error: {0}", ex.Message);
                 }

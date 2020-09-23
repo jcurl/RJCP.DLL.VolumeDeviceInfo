@@ -5,6 +5,7 @@
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Xml;
+    using IO.Storage;
     using IO.Storage.Win32;
 
     public class LogDeviceData
@@ -90,6 +91,7 @@
                     QueryDeviceNumberEx(pathNode, vinfo, hDevice);
                     QueryDiskGeometry(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
+                    QueryApi(pathNode, "SeekPenalty", vinfo, () => { return vinfo.IncursSeekPenalty(hDevice); });
                 }
             }
             rootNode.AppendChild(pathNode);
@@ -206,6 +208,12 @@
                 node = WriteApiResult(parent, elementName, iResult);
             } else if (result is bool bResult) {
                 node = WriteApiResult(parent, elementName, bResult);
+            } else if (result is BoolUnknown buResult) {
+                if (buResult == BoolUnknown.Unknown) {
+                    node = WriteApiResult(parent, elementName, buResult.ToString(), vinfo.GetLastWin32Error(), false);
+                } else {
+                    node = WriteApiResult(parent, elementName, buResult.ToString());
+                }
             } else if (result is object) {
                 // The result is an object and is not null, so the call was successful, we just can't serialize it, as
                 // it's complex.

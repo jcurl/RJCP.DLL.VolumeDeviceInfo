@@ -135,6 +135,7 @@
             Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(255));
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
         }
 
         [Test]
@@ -211,6 +212,7 @@
             Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(64));
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(32));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(2048));
+            Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.True));
         }
 
         [Test]

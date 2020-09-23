@@ -17,6 +17,12 @@
         {
             public ResultOrError(T result) { Result = result; }
 
+            public ResultOrError(T result, int errorCode)
+            {
+                ErrorCode = errorCode;
+                Result = result;
+            }
+
             public ResultOrError(int errorCode, bool throws)
             {
                 ErrorCode = errorCode;
@@ -46,7 +52,6 @@
         private void ParsePath(XmlElement pathNode)
         {
             string path = pathNode.GetAttribute(PathAttr);
-            Console.WriteLine("Adding path: {0}", path);
             AddItem(m_FileAttributes, path, pathNode["FileAttributes"]);
             AddItem(m_VolumePathName, path, pathNode["VolumePathName"]);
             AddItem(m_QueryDosDevice, path, pathNode["QueryDosDevice"]);
@@ -58,6 +63,7 @@
             AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
             AddDeviceNumberEx(m_DeviceNumberEx, path, pathNode["StorageDeviceNumberEx"]);
             AddGeometry(m_Geometry, path, pathNode["DiskGeometry"]);
+            AddItem(m_SeekPenalty, path, pathNode["SeekPenalty"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -206,23 +212,32 @@
             string nodeResult = node.Attributes["result"]?.Value;
             string errorCodeStr = node.Attributes["error"]?.Value;
             string throwsStr = node.Attributes["throws"]?.Value;
+            int errorCode = 0;
             if (errorCodeStr != null) {
-                int errorCode = int.Parse(errorCodeStr, CultureInfo.InvariantCulture);
-                bool throws = false;
-                if (throwsStr != null) throws = bool.Parse(throwsStr);
-                return new ResultOrError<T>(errorCode, throws);
-            } else {
-                if (typeof(int).IsAssignableFrom(typeof(T))) {
+                errorCode = int.Parse(errorCodeStr, CultureInfo.InvariantCulture);
+                if (throwsStr != null) {
+                    bool throws = bool.Parse(throwsStr);
+                    return new ResultOrError<T>(errorCode, throws);
+                }
+            }
+
+            if (nodeResult != null) {
+                if (typeof(BoolUnknown).IsAssignableFrom(typeof(T))) {
+                    BoolUnknown buResult = (BoolUnknown)Enum.Parse(typeof(BoolUnknown), nodeResult, true);
+                    return new ResultOrError<T>((T)Convert.ChangeType(buResult, typeof(T)), errorCode);
+                } else if (typeof(int).IsAssignableFrom(typeof(T))) {
                     int iResult = int.Parse(nodeResult, CultureInfo.InvariantCulture);
-                    return new ResultOrError<T>((T)Convert.ChangeType(iResult, typeof(T)));
+                    return new ResultOrError<T>((T)Convert.ChangeType(iResult, typeof(T)), errorCode);
                 } else if (typeof(bool).IsAssignableFrom(typeof(T))) {
                     bool bResult = bool.Parse(nodeResult);
-                    return new ResultOrError<T>((T)Convert.ChangeType(bResult, typeof(T)));
+                    return new ResultOrError<T>((T)Convert.ChangeType(bResult, typeof(T)), errorCode);
                 } else if (typeof(string).IsAssignableFrom(typeof(T))) {
-                    return new ResultOrError<T>((T)Convert.ChangeType(nodeResult, typeof(T)));
+                    return new ResultOrError<T>((T)Convert.ChangeType(nodeResult, typeof(T)), errorCode);
                 } else {
                     return null;
                 }
+            } else {
+                return new ResultOrError<T>(errorCode, false);
             }
         }
 
@@ -354,6 +369,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_Geometry, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<BoolUnknown>> m_SeekPenalty = new Dictionary<string, ResultOrError<BoolUnknown>>();
+
+        public BoolUnknown IncursSeekPenalty(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_SeekPenalty, handle.PathName);
         }
 
         private int m_LastWin32Error;

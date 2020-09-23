@@ -310,6 +310,16 @@
         /// </remarks>
         public int DiskBytesPerSector { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.BytesPerSector; } }
 
+        /// <summary>
+        /// Gets a value indicating whether the disk will incur a seek penalty.
+        /// </summary>
+        /// <value>
+        /// Is <see cref="BoolUnknown.True"/> if the disk will incur a seek penalty (such as a mechanical HDD), or
+        /// <see cref="BoolUnknown.False"/> if not (such as an SSD). If this value cannot be determined, then
+        /// <see cref="BoolUnknown.Unknown"/> is returned.
+        /// </value>
+        public BoolUnknown HasSeekPenalty { get; private set; } = BoolUnknown.Unknown;
+
         private string ResolveDevicePathNames(string pathName)
         {
             string volumePath;
@@ -421,6 +431,7 @@
             try {
                 m_DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
                 MediaPresent = m_OS.GetMediaPresent(hDevice);
+                HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);
                 m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
                 m_DiskGeometry = m_OS.GetDiskGeometry(hDevice);
