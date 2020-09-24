@@ -92,9 +92,7 @@
                     out uint bytesReturns, IntPtr.Zero);
                 if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
-                    int e = Marshal.GetHRForLastWin32Error();
-                    Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
-                    throw new System.IO.IOException("Couldn't get storage header descriptor", e);
+                    return null;
                 }
 
                 STORAGE_DESCRIPTOR_HEADER storageDescriptorHeaderResult = storageDescriptorHeaderPtr.ToStructure();
@@ -106,9 +104,7 @@
                     out bytesReturns, IntPtr.Zero);
                 if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
-                    int e = Marshal.GetHRForLastWin32Error();
-                    Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
-                    throw new System.IO.IOException("Couldn't get storage descriptor", e);
+                    return null;
                 }
 
                 STORAGE_DEVICE_DESCRIPTOR storageDeviceDescriptor = storageDeviceDescriptorPtr.ToStructure();

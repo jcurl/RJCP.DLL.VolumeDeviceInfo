@@ -1,5 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
+    using System;
     using System.IO;
     using NUnit.Framework;
 
@@ -68,6 +69,13 @@
         private const string P = @"P:";
         private const string PS = @"P:\";
         private const string PD = @"\??\N:";
+
+        // ImDisk RAMDISK R:
+        private const string R = @"R:";
+        private const string RS = @"R:\";
+        private const string RV = @"\\.\GLOBALROOT\Device\ImDisk0";
+        private const string RVS = @"\\.\GLOBALROOT\Device\ImDisk0\";
+        private const string RD = @"\Device\ImDisk0";
 
         [Test]
         public void DriveC()
@@ -422,6 +430,85 @@
             Assert.That(vinfo.VolumeDosDevicePath, Is.EqualTo(PD));
             Assert.That(vinfo.VolumeDrive, Is.EqualTo(P));
             IsDriveSamsung(vinfo);
+        }
+
+        [Test]
+        public void ImDiskR()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"R:");
+            Assert.That(vinfo.Path, Is.EqualTo(R));
+            Assert.That(vinfo.VolumePath, Is.EqualTo(RVS));  // GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
+            Assert.That(vinfo.VolumeDevicePath, Is.EqualTo(RV));
+            Assert.That(vinfo.VolumeDosDevicePath, Is.EqualTo(RD));
+            Assert.That(vinfo.VolumeDrive, Is.EqualTo(R));
+            IsImDiskRamDisk(vinfo);
+        }
+
+        [Test]
+        public void ImDiskRS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"R:\");
+            Assert.That(vinfo.Path, Is.EqualTo(RS));
+            Assert.That(vinfo.VolumePath, Is.EqualTo(RVS));  // GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
+            Assert.That(vinfo.VolumeDevicePath, Is.EqualTo(RV));
+            Assert.That(vinfo.VolumeDosDevicePath, Is.EqualTo(RD));
+            Assert.That(vinfo.VolumeDrive, Is.EqualTo(R));
+            IsImDiskRamDisk(vinfo);
+        }
+
+        [Test]
+        public void ImDiskRV()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"\\.\GLOBALROOT\Device\ImDisk0");
+            Assert.That(vinfo.Path, Is.EqualTo(RV));
+            Assert.That(vinfo.VolumePath, Is.EqualTo(RVS));
+            Assert.That(vinfo.VolumeDevicePath, Is.EqualTo(RV));
+            Assert.That(vinfo.VolumeDosDevicePath, Is.Empty);
+            Assert.That(vinfo.VolumeDrive, Is.Empty);
+            IsImDiskRamDisk(vinfo);
+        }
+
+        [Test]
+        public void ImDiskRVS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"\\.\GLOBALROOT\Device\ImDisk0\");
+            Assert.That(vinfo.Path, Is.EqualTo(RVS));
+            Assert.That(vinfo.VolumePath, Is.EqualTo(RVS));
+            Assert.That(vinfo.VolumeDevicePath, Is.EqualTo(RV));
+            Assert.That(vinfo.VolumeDosDevicePath, Is.Empty);
+            Assert.That(vinfo.VolumeDrive, Is.Empty);
+            IsImDiskRamDisk(vinfo);
+        }
+
+        private void IsImDiskRamDisk(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.VendorId, Is.Empty);                                    // Unsupported
+            Assert.That(vinfo.ProductId, Is.Empty);                                   // Unsupported
+            Assert.That(vinfo.ProductRevision, Is.Empty);                             // Unsupported
+            Assert.That(vinfo.DeviceSerialNumber, Is.Empty);                          // Unsupported
+            Assert.That(vinfo.BusType, Is.EqualTo(BusType.Unknown));                  // Unsupported
+            Assert.That(vinfo.RemovableMedia, Is.False);
+            Assert.That(vinfo.CommandQueueing, Is.False);                             // Unsupported
+            Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.Unknown));    // Unsupported
+            Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.IsDiskReadOnly, Is.False);
+            Assert.That(vinfo.VolumeLabel, Is.EqualTo("RAMDISK"));
+            Assert.That(vinfo.VolumeSerial, Is.EqualTo("C858-F289"));
+            Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
+            Assert.That((int)vinfo.FileSystemFlags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.DeviceGuidFlags, Is.EqualTo(DeviceGuidFlags.None));     // Unsupported
+            Assert.That(vinfo.DeviceGuid, Is.EqualTo(Guid.Empty));                    // Unsupported
+            Assert.That(vinfo.DeviceType, Is.EqualTo(DeviceType.Unknown));            // Unsupported
+            Assert.That(vinfo.DeviceNumber, Is.EqualTo(-1));                          // Unsupported
+            Assert.That(vinfo.DevicePartitionNumber, Is.EqualTo(-1));                 // Unsupported
+            Assert.That(vinfo.DiskMediaType, Is.EqualTo(MediaType.FixedMedia));
+            Assert.That(vinfo.DiskCylinders, Is.EqualTo(130));
+            Assert.That(vinfo.DiskTracksPerCylinder, Is.EqualTo(128));
+            Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));       // Unsupported
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));           // Unsupported
         }
 
         [Test]

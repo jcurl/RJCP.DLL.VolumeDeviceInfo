@@ -592,6 +592,68 @@
     </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
+  <Path path="R:">
+    <FileAttributes result="22" />
+    <VolumePathName error="1" />
+    <QueryDosDevice result="\Device\ImDisk0" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="RAMDISK" />
+      <SerialNumber result="C858-F289" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="R:\">
+    <FileAttributes result="22" />
+    <VolumePathName error="1" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="1" />
+    <VolumeInformation result="">
+      <Label result="RAMDISK" />
+      <SerialNumber result="C858-F289" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\GLOBALROOT\Device\ImDisk0">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\.\GLOBALROOT\Device\ImDisk0\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty error="1" />
+    <StorageDeviceNumber error="1" />
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="130" />
+      <TracksPerCylinder result="128" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment error="1" />
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="Unknown" error="1" />
+  </Path>
+  <Path path="\\.\GLOBALROOT\Device\ImDisk0\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\.\GLOBALROOT\Device\ImDisk0\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="4390" />
+    <VolumeInformation result="">
+      <Label result="RAMDISK" />
+      <SerialNumber result="C858-F289" />
+      <FileSystem result="NTFS" />
+      <Flags result="65472255" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
   <Path path="C:\Users\user\Desktop">
     <FileAttributes result="17" />
     <VolumePathName result="C:\" />

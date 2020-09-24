@@ -357,7 +357,13 @@
                     // GetVolumePath fails on drives that don't exist, or may fail on SUBST'd drives (e.g. Win10). If it
                     // is a SUBST'd drive, get the new path and loop again.
                     if (ParseDosDevice(pathName, ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
-                    break;
+
+                    // A device that doesn't support GetVolumeNameForVolumeMountPoint, isn't subst'd.
+                    if (volumeDosDevice != null) {
+                        volumePath = string.Format("\\\\.\\GLOBALROOT{0}\\", volumeDosDevice);
+                    } else {
+                        break;
+                    }
                 }
 
                 // Check if the resultant path is a SUBST'd drive. Windows XP can get here. Win10 doesn't. If it is a
@@ -372,7 +378,16 @@
                     // There is no mount point for the drive given. It could be a SUBST'd drive with a path, in which
                     // case we take just the drive letter, get the new path from the SUBST'd drive and loop again.
                     if (ParseDosDevice(volumePath.Substring(0, 3), ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
-                    break;
+
+                    // We got here, because the path can't be mapped to a volume, and the test above shows it's not
+                    // SUBST'd. It could be a network drive, or a badly implemented driver (like the ImDisk driver that
+                    // doesn't support GetVolumeNameForVolumeMountPoint()).
+                    if (IsWin32Device(volumePath)) {
+                        volumeDevice = volumePath;
+                    } else {
+                        // Probably a network drive, then we really don't have a volume device.
+                        break;
+                    }
                 }
                 if (volumeDevice[volumeDevice.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
                     volumeDevicePath = volumeDevice.Remove(volumeDevice.Length - 1, 1);
@@ -439,6 +454,12 @@
             if (pathLen == 3 && path[2] != System.IO.Path.DirectorySeparatorChar) return false;
 
             return ((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':';
+        }
+
+        private static bool IsWin32Device(string path)
+        {
+            if (path == null) return false;
+            return path.StartsWith(@"\\.\") || path.StartsWith(@"\\?\");
         }
 
         private void GetDeviceInformation(string devicePathName)
