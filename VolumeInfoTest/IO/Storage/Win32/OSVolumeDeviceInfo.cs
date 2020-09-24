@@ -43,10 +43,18 @@
             };
             xmlDoc.Load(fileName);
 
+            m_LogicalDrives = LoadGetLogicalDrives((XmlElement)xmlDoc.SelectSingleNode($"/{RootNode}/GetLogicalDrives"));
             XmlNodeList paths = xmlDoc.SelectNodes($"/{RootNode}/{PathNode}");
             foreach (XmlElement path in paths) {
                 ParsePath(path);
             }
+        }
+
+        private int LoadGetLogicalDrives(XmlElement pathNode)
+        {
+            if (pathNode == null) return 0;
+            string nodeResult = pathNode.Attributes["result"]?.Value;
+            return int.Parse(nodeResult, CultureInfo.InvariantCulture);
         }
 
         private void ParsePath(XmlElement pathNode)
@@ -431,6 +439,13 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_ReadOnly, handle.PathName);
+        }
+
+        private readonly int m_LogicalDrives;
+
+        public int GetLogicalDrives()
+        {
+            return m_LogicalDrives;
         }
 
         private int m_LastWin32Error;

@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VolumeInfoTest>
+  <!-- 0x0700C = 00 0000 0000 0111 0000 0000 1100
+                 ZY XWVU TSRQ PONM LKJI HGFE DCBA
+       Drives C, D, M, N, O -->
+  <GetLogicalDrives result="28684" />
   <Path path="C:">
     <FileAttributes result="16" />
     <VolumePathName result="C:\" />

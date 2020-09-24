@@ -299,6 +299,11 @@
                 IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
         }
 
+        public int GetLogicalDrives()
+        {
+            return Kernel32.GetLogicalDrives();
+        }
+
         private int m_Win32Error;
 
         public int GetLastWin32Error() { return m_Win32Error; }

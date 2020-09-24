@@ -418,6 +418,10 @@
                 throw new FileNotFoundException("Path can't be resolved to a volume");
             }
 
+            // In case a Win32 device was given, we now do a reverse lookup.
+            if (volumeDrive == null)
+                ResolveDriveLetter(volumeDevicePathSlash, ref volumeDrive, ref volumeDosDevice);
+
             VolumeDrive = volumeDrive ?? string.Empty;
             VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
             return VolumeDevicePath;
@@ -483,6 +487,33 @@
         private void GetVolumeInformation(string devicePathName)
         {
             m_VolumeQuery = m_OS.GetVolumeInformation(devicePathName);
+        }
+
+        private void ResolveDriveLetter(string volumeDevicePath, ref string volumeDrive, ref string volumeDosDevice)
+        {
+            char[] drivePath = new char[] {'A', ':'};
+            char[] driveFullPath = new char[] { 'A', ':', '\\' };
+            int drives = m_OS.GetLogicalDrives();
+            if (drives == 0) return;
+
+            for (int drive = 0; drive < 26; drive++) {
+                if ((drives & (1 << drive)) != 0) {
+                    drivePath[0] = (char)('A' + (char)drive);
+
+                    string dosVolume = new string(drivePath);
+                    string dosDevice = m_OS.QueryDosDevice(dosVolume);
+                    if (dosDevice != null && !dosDevice.StartsWith(@"\??\")) {
+                        driveFullPath[0] = (char)('A' + (char)drive);
+                        string dosVolumeFull = new string(driveFullPath);
+                        string volume = m_OS.GetVolumeNameForVolumeMountPoint(dosVolumeFull);
+                        if (volume != null && volume.Equals(volumeDevicePath)) {
+                            volumeDrive = dosVolume;
+                            volumeDosDevice = dosDevice;
+                            return;
+                        }
+                    }
+                }
+            }
         }
     }
 }

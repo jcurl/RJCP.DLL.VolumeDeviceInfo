@@ -56,5 +56,8 @@ namespace VolumeInfo.Native.Win32
         public static extern bool GetVolumeInformation(string rootPathName, StringBuilder volumeName, int volumeNameSize,
             out uint volumeSerialNumber, out uint maxComponentLength, out FileSystemFlags fileSystemFlags,
             StringBuilder fileSystemNameBuffer, int fileSystemNameSize);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern int GetLogicalDrives();
     }
 }
