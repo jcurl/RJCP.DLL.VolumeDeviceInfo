@@ -12,6 +12,7 @@
         private VolumeInfo m_VolumeQuery;
         private StorageDeviceNumber m_DeviceNumber;
         private DiskGeometry m_DiskGeometry;
+        private StorageAccessAlignment m_Alignment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -317,6 +318,15 @@
         public int DiskBytesPerSector { get { return m_DiskGeometry == null ? -1 : m_DiskGeometry.BytesPerSector; } }
 
         /// <summary>
+        /// Gets the physical disk bytes per sector.
+        /// </summary>
+        /// <value>The disk physical bytes per physical sector.</value>
+        /// <remarks>
+        /// If this value cannot be determined, then it is the same as the <see cref="DiskBytesPerSector"/>.
+        /// </remarks>
+        public int DiskBytesPerPhysicalSector { get { return m_Alignment == null ? DiskBytesPerSector : m_Alignment.BytesPerPhysicalSector; } }
+
+        /// <summary>
         /// Gets a value indicating whether the disk will incur a seek penalty.
         /// </summary>
         /// <value>
@@ -442,6 +452,7 @@
                 m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
                 m_DiskGeometry = m_OS.GetDiskGeometry(hDevice);
+                m_Alignment = m_OS.GetAlignment(hDevice);
                 IsDiskReadOnly = m_OS.IsReadOnly(hDevice);
             } finally {
                 hDevice.Close();

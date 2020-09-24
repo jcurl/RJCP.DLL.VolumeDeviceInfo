@@ -91,6 +91,7 @@
                     QueryDeviceNumber(pathNode, vinfo, hDevice);
                     QueryDeviceNumberEx(pathNode, vinfo, hDevice);
                     QueryDiskGeometry(pathNode, vinfo, hDevice);
+                    QueryDiskAlignment(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
                     QueryApi(pathNode, "DiskReadOnly", vinfo, () => { return vinfo.IsReadOnly(hDevice); });
                     QueryApi(pathNode, "SeekPenalty", vinfo, () => { return vinfo.IncursSeekPenalty(hDevice); });
@@ -155,6 +156,20 @@
             WriteApiResult(geoNode, "TracksPerCylinder", diskGeo.TracksPerCylinder);
             WriteApiResult(geoNode, "SectorsPerTrack", diskGeo.SectorsPerTrack);
             WriteApiResult(geoNode, "BytesPerSector", diskGeo.BytesPerSector);
+        }
+
+        private void QueryDiskAlignment(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            StorageAccessAlignment diskAlignment = QueryApi(pathNode, "StorageAlignment", vinfo, () => {
+                return vinfo.GetAlignment(hDevice);
+            }, out XmlElement alignNode);
+
+            if (diskAlignment == null) return;
+            WriteApiResult(alignNode, "BytesPerCacheLine", diskAlignment.BytesPerCacheLine);
+            WriteApiResult(alignNode, "BytesOffsetForCacheAlignment", diskAlignment.BytesOffsetForCacheAlignment);
+            WriteApiResult(alignNode, "BytesPerLogicalSector", diskAlignment.BytesPerLogicalSector);
+            WriteApiResult(alignNode, "BytesPerPhysicalSector", diskAlignment.BytesPerPhysicalSector);
+            WriteApiResult(alignNode, "BytesOffsetForSectorAlignment", diskAlignment.BytesOffsetForSectorAlignment);
         }
 
         private void QueryVolumeInfo(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)

@@ -53,6 +53,7 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
@@ -128,6 +129,7 @@
       <SectorsPerTrack result="32" />
       <BytesPerSector result="2048" />
     </DiskGeometry>
+    <StorageAlignment error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="True" />
@@ -177,6 +179,7 @@
       <SectorsPerTrack result="32" />
       <BytesPerSector result="2048" />
     </DiskGeometry>
+    <StorageAlignment error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="True" />

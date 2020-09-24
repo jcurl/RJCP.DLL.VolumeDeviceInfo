@@ -65,6 +65,7 @@
             AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
             AddDeviceNumberEx(m_DeviceNumberEx, path, pathNode["StorageDeviceNumberEx"]);
             AddGeometry(m_Geometry, path, pathNode["DiskGeometry"]);
+            AddAlignment(m_Alignment, path, pathNode["StorageAlignment"]);
             AddItem(m_SeekPenalty, path, pathNode["SeekPenalty"]);
         }
 
@@ -195,6 +196,33 @@
                 BytesPerSector = int.Parse(bytes, CultureInfo.InvariantCulture),
             };
             dictionary.Add(path, new ResultOrError<DiskGeometry>(diskGeo));
+        }
+
+        private void AddAlignment(IDictionary<string, ResultOrError<StorageAccessAlignment>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<StorageAccessAlignment> result = GetResultOrError<StorageAccessAlignment>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string bytesPerCacheLine = node["BytesPerCacheLine"].Attributes["result"].Value;
+            string bytesOffsetForCacheAlignment = node["BytesOffsetForCacheAlignment"].Attributes["result"].Value;
+            string bytesPerLogicalSector = node["BytesPerLogicalSector"].Attributes["result"].Value;
+            string bytesPerPhysicalSector = node["BytesPerPhysicalSector"].Attributes["result"].Value;
+            string bytesOffsetForSectorAlignment = node["BytesOffsetForSectorAlignment"].Attributes["result"].Value;
+            StorageAccessAlignment diskAlignment = new StorageAccessAlignment() {
+                BytesPerCacheLine = int.Parse(bytesPerCacheLine, CultureInfo.InvariantCulture),
+                BytesOffsetForCacheAlignment = int.Parse(bytesOffsetForCacheAlignment, CultureInfo.InvariantCulture),
+                BytesPerLogicalSector = int.Parse(bytesPerLogicalSector, CultureInfo.InvariantCulture),
+                BytesPerPhysicalSector = int.Parse(bytesPerPhysicalSector, CultureInfo.InvariantCulture),
+                BytesOffsetForSectorAlignment = int.Parse(bytesOffsetForSectorAlignment, CultureInfo.InvariantCulture),
+            };
+            dictionary.Add(path, new ResultOrError<StorageAccessAlignment>(diskAlignment));
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -379,6 +407,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_Geometry, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<StorageAccessAlignment>> m_Alignment = new Dictionary<string, ResultOrError<StorageAccessAlignment>>();
+
+        public StorageAccessAlignment GetAlignment(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_Alignment, handle.PathName);
         }
 
         private readonly Dictionary<string, ResultOrError<BoolUnknown>> m_SeekPenalty = new Dictionary<string, ResultOrError<BoolUnknown>>();

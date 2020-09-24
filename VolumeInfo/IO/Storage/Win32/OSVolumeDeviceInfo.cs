@@ -90,7 +90,7 @@
                     storagePropertyQueryPtr, storagePropertyQueryPtr.SizeOf,
                     storageDescriptorHeaderPtr, storageDescriptorHeaderPtr.SizeOf,
                     out uint bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     int e = Marshal.GetHRForLastWin32Error();
                     Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
@@ -104,7 +104,7 @@
                     storagePropertyQueryPtr, storagePropertyQueryPtr.SizeOf,
                     storageDeviceDescriptorPtr, storageDeviceDescriptorPtr.SizeOf,
                     out bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     int e = Marshal.GetHRForLastWin32Error();
                     Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
@@ -169,7 +169,7 @@
                 storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER>();
                 bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_GET_DEVICE_NUMBER, IntPtr.Zero, 0,
                     storageDeviceNumberPtr, storageDeviceNumberPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     return null;
                 }
@@ -191,7 +191,7 @@
                 storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER_EX>();
                 bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_GET_DEVICE_NUMBER_EX, IntPtr.Zero, 0,
                     storageDeviceNumberPtr, storageDeviceNumberPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     return null;
                 }
@@ -215,7 +215,7 @@
                 diskGeoPtr = new SafeAllocHandle<DISK_GEOMETRY>();
                 bool success = DeviceIoControl(hDevice, IOCTL_DISK_GET_DRIVE_GEOMETRY, IntPtr.Zero, 0,
                     diskGeoPtr, diskGeoPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     return null;
                 }
@@ -229,6 +229,43 @@
                 if (diskGeoPtr != null) diskGeoPtr.Close();
             }
             return geometry;
+        }
+
+        public StorageAccessAlignment GetAlignment(SafeHandle hDevice)
+        {
+            StorageAccessAlignment alignment = new StorageAccessAlignment();
+
+            SafeAllocHandle<STORAGE_PROPERTY_QUERY> storagePropertyQueryPtr = null;
+            SafeAllocHandle<STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR> storageAlignmentPtr = null;
+            try {
+                STORAGE_PROPERTY_QUERY storagePropertyQuery = new STORAGE_PROPERTY_QUERY {
+                    PropertyId = (uint)STORAGE_PROPERTY_ID.StorageAccessAlignmentProperty,
+                    QueryType = (uint)STORAGE_QUERY_TYPE.PropertyStandardQuery
+                };
+                storagePropertyQueryPtr = new SafeAllocHandle<STORAGE_PROPERTY_QUERY>(storagePropertyQuery);
+                storageAlignmentPtr = new SafeAllocHandle<STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR>();
+                bool success = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY,
+                    storagePropertyQueryPtr, storagePropertyQueryPtr.SizeOf,
+                    storageAlignmentPtr, storageAlignmentPtr.SizeOf,
+                    out uint bytesReturns, IntPtr.Zero);
+                if (!success || bytesReturns == 0) {
+                    // Windows XP returns success, byte bytesReturns == 0.
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+
+                STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR storageAlignment = storageAlignmentPtr.ToStructure();
+                alignment.BytesPerCacheLine = (int)storageAlignment.BytesPerCacheLine;
+                alignment.BytesOffsetForCacheAlignment = (int)storageAlignment.BytesOffsetForCacheAlignment;
+                alignment.BytesPerLogicalSector = (int)storageAlignment.BytesPerLogicalSector;
+                alignment.BytesPerPhysicalSector = (int)storageAlignment.BytesPerPhysicalSector;
+                alignment.BytesOffsetForSectorAlignment = (int)storageAlignment.BytesOffsetForSectorAlignment;
+            } finally {
+                if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
+                if (storageAlignmentPtr != null) storageAlignmentPtr.Close();
+            }
+
+            return alignment;
         }
 
         public BoolUnknown IncursSeekPenalty(SafeHandle hDevice)
@@ -247,7 +284,7 @@
                     storagePropertyQueryPtr, storagePropertyQueryPtr.SizeOf,
                     storageSeekPenaltyPtr, storageSeekPenaltyPtr.SizeOf,
                     out uint bytesReturns, IntPtr.Zero);
-                if (!success) {
+                if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     return BoolUnknown.Unknown;
                 }

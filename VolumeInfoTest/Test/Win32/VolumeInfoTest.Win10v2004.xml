@@ -59,6 +59,13 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
@@ -140,6 +147,13 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="512" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -232,6 +246,13 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="512" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -313,6 +334,7 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -546,6 +568,13 @@
       <SectorsPerTrack result="63" />
       <BytesPerSector result="512" />
     </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />

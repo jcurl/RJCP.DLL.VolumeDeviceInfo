@@ -136,6 +136,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(vinfo.DiskBytesPerSector)); // Not supported on WinXP
         }
 
         [Test]
@@ -213,6 +214,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(32));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(2048));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.True));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(vinfo.DiskBytesPerSector)); // Not supported on WinXP
         }
 
         [Test]

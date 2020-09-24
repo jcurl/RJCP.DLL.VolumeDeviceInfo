@@ -48,6 +48,7 @@
     <Compile Include="IO\Storage\DeviceType.cs" />
     <Compile Include="IO\Storage\Win32\DiskGeometry.cs" />
     <Compile Include="IO\Storage\FileSystemFlags.cs" />
+    <Compile Include="IO\Storage\Win32\StorageAccessAlignment.cs" />
     <Compile Include="IO\Storage\Win32\StorageDeviceNumber.cs" />
     <Compile Include="IO\Storage\Win32\IOSVolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\Win32\VolumeInfo.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DISK_GEOMETRY.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_SEEK_PENALTY.cs" />

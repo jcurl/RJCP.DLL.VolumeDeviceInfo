@@ -27,6 +27,8 @@
 
         DiskGeometry GetDiskGeometry(SafeHandle hDevice);
 
+        StorageAccessAlignment GetAlignment(SafeHandle hDevice);
+
         bool GetMediaPresent(SafeHandle hDevice);
 
         BoolUnknown IncursSeekPenalty(SafeHandle hDevice);

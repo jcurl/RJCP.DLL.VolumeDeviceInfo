@@ -145,6 +145,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(4096));
         }
 
         [Test]
@@ -223,6 +224,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));
         }
 
         [Test]
@@ -301,6 +303,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));
         }
 
         [Test]
@@ -509,6 +512,7 @@
             Assert.That(vinfo.DiskSectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+            Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(vinfo.DiskBytesPerSector)); // OS returns Error 1
         }
 
         [Test]
