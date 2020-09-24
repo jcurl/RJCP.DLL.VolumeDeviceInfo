@@ -57,6 +57,7 @@
                     Console.WriteLine("    Command Queueing: {0}", info.CommandQueueing);
                     Console.WriteLine("    Removable Media : {0}", info.RemovableMedia);
                     Console.WriteLine("    Media Present   : {0}", info.MediaPresent);
+                    Console.WriteLine("    Disk Read Only  : {0}", info.IsDiskReadOnly);
                     Console.WriteLine("    Device GUID:    : {0} ({1})", info.DeviceGuid, info.DeviceGuidFlags);
                     Console.WriteLine("    Device Number   : {0} #{1}", info.DeviceType, info.DeviceNumber);
                     Console.WriteLine("    Partition Number: {0}", info.DevicePartitionNumber);

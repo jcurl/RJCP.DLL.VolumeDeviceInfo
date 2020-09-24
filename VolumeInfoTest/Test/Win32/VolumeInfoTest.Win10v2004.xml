@@ -60,6 +60,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
   </Path>
   <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\">
@@ -140,6 +141,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
   </Path>
   <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}\">
@@ -231,6 +233,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
   </Path>
   <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}\">
@@ -311,6 +314,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
   </Path>
   <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}\">
@@ -543,6 +547,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
   </Path>
   <Path path="\\.\HarddiskVolume3\">

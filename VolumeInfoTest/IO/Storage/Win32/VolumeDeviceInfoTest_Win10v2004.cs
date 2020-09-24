@@ -129,6 +129,7 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.IsDiskReadOnly, Is.False);
             Assert.That(vinfo.VolumeLabel, Is.EqualTo("Local Disk"));
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("D470-C5ED"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
@@ -206,6 +207,7 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(13));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.IsDiskReadOnly, Is.False);
             Assert.That(vinfo.VolumeLabel, Is.EqualTo("Samsung64GB"));
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("0000-0000"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("exFAT"));
@@ -283,6 +285,7 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.IsDiskReadOnly, Is.False);
             Assert.That(vinfo.VolumeLabel, Is.EqualTo("USB"));
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("36F8-F5F6"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));
@@ -490,6 +493,7 @@
             Assert.That(vinfo.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
             Assert.That(vinfo.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.MediaPresent, Is.True);
+            Assert.That(vinfo.IsDiskReadOnly, Is.False);
             Assert.That(vinfo.VolumeLabel, Is.Empty);
             Assert.That(vinfo.VolumeSerial, Is.EqualTo("F099-8836"));
             Assert.That(vinfo.FileSystem, Is.EqualTo("NTFS"));

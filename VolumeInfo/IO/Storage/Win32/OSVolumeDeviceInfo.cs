@@ -260,6 +260,12 @@
             }
         }
 
+        public bool IsReadOnly(SafeHandle hDevice)
+        {
+            return !DeviceIoControl(hDevice, IOCTL_DISK_IS_WRITABLE,
+                IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
+        }
+
         private int m_Win32Error;
 
         public int GetLastWin32Error() { return m_Win32Error; }

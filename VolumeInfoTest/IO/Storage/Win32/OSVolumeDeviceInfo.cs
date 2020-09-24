@@ -59,6 +59,7 @@
             AddItem(m_CreateFileFromDevice, path, pathNode["CreateFileFromDevice"]);
             AddItem(m_DiskUpdateProperties, path, pathNode["DiskUpdateProperties"]);
             AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
+            AddItem(m_ReadOnly, path, pathNode["DiskReadOnly"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
             AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
@@ -386,6 +387,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_SeekPenalty, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<bool>> m_ReadOnly = new Dictionary<string, ResultOrError<bool>>();
+
+        public bool IsReadOnly(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_ReadOnly, handle.PathName);
         }
 
         private int m_LastWin32Error;

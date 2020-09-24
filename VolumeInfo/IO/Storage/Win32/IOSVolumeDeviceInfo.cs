@@ -31,6 +31,8 @@
 
         BoolUnknown IncursSeekPenalty(SafeHandle hDevice);
 
+        bool IsReadOnly(SafeHandle hDevice);
+
         int GetLastWin32Error();
     }
 }

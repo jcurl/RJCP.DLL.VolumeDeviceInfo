@@ -164,6 +164,12 @@
         public bool MediaPresent { get; private set; }
 
         /// <summary>
+        /// Gets a value indicating whether the disk is read-only.
+        /// </summary>
+        /// <value><see langword="true"/> if the disk is read only; otherwise, <see langword="false"/>.</value>
+        public bool IsDiskReadOnly { get; private set; }
+
+        /// <summary>
         /// Gets the type of the bus the device is attached to.
         /// </summary>
         /// <value>The type of the bus the device is attached to.</value>
@@ -436,6 +442,7 @@
                 m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
                 m_DiskGeometry = m_OS.GetDiskGeometry(hDevice);
+                IsDiskReadOnly = m_OS.IsReadOnly(hDevice);
             } finally {
                 hDevice.Close();
             }

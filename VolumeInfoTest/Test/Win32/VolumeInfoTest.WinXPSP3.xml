@@ -54,6 +54,7 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
   </Path>
   <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\">
@@ -128,6 +129,7 @@
       <BytesPerSector result="2048" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="True" />
     <SeekPenalty result="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\">
@@ -176,6 +178,7 @@
       <BytesPerSector result="2048" />
     </DiskGeometry>
     <MediaPresent result="True" />
+    <DiskReadOnly result="True" />
     <SeekPenalty result="True" />
   </Path>
   <Path path="\\.\CdRom0\">
