@@ -13,6 +13,7 @@
         private StorageDeviceNumber m_DeviceNumber;
         private DiskGeometry m_DiskGeometry;
         private StorageAccessAlignment m_Alignment;
+        private PartitionInformation m_PartitionInfo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -327,6 +328,14 @@
         public int DiskBytesPerPhysicalSector { get { return m_Alignment == null ? DiskBytesPerSector : m_Alignment.BytesPerPhysicalSector; } }
 
         /// <summary>
+        /// Gets information about the partition.
+        /// </summary>
+        /// <value>
+        /// Information about the partition.
+        /// </value>
+        public PartitionInformation PartitionInformation { get { return m_PartitionInfo; } }
+
+        /// <summary>
         /// Gets a value indicating whether the disk will incur a seek penalty.
         /// </summary>
         /// <value>
@@ -476,6 +485,7 @@
                 HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);
                 m_DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_DeviceNumber == null) m_DeviceNumber = m_OS.GetDeviceNumber(hDevice);
+                m_PartitionInfo = m_OS.GetPartitionInfo(hDevice);
                 m_DiskGeometry = m_OS.GetDiskGeometry(hDevice);
                 m_Alignment = m_OS.GetAlignment(hDevice);
                 IsDiskReadOnly = m_OS.IsReadOnly(hDevice);
@@ -491,7 +501,7 @@
 
         private void ResolveDriveLetter(string volumeDevicePath, ref string volumeDrive, ref string volumeDosDevice)
         {
-            char[] drivePath = new char[] {'A', ':'};
+            char[] drivePath = new char[] { 'A', ':' };
             char[] driveFullPath = new char[] { 'A', ':', '\\' };
             int drives = m_OS.GetLogicalDrives();
             if (drives == 0) return;

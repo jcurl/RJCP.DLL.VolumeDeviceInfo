@@ -92,6 +92,7 @@
                     QueryDeviceNumberEx(pathNode, vinfo, hDevice);
                     QueryDiskGeometry(pathNode, vinfo, hDevice);
                     QueryDiskAlignment(pathNode, vinfo, hDevice);
+                    QueryPartition(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
                     QueryApi(pathNode, "DiskReadOnly", vinfo, () => { return vinfo.IsReadOnly(hDevice); });
                     QueryApi(pathNode, "SeekPenalty", vinfo, () => { return vinfo.IncursSeekPenalty(hDevice); });
@@ -170,6 +171,35 @@
             WriteApiResult(alignNode, "BytesPerLogicalSector", diskAlignment.BytesPerLogicalSector);
             WriteApiResult(alignNode, "BytesPerPhysicalSector", diskAlignment.BytesPerPhysicalSector);
             WriteApiResult(alignNode, "BytesOffsetForSectorAlignment", diskAlignment.BytesOffsetForSectorAlignment);
+        }
+
+        private void QueryPartition(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            PartitionInformation partInfo = QueryApi(pathNode, "PartitionInformation", vinfo, () => {
+                return vinfo.GetPartitionInfo(hDevice);
+            }, out XmlElement partNode);
+
+            if (partInfo == null) return;
+            WriteApiResult(partNode, "Style", (int)partInfo.Style);
+            WriteApiResult(partNode, "Number", partInfo.Number);
+            WriteApiResult(partNode, "Offset", partInfo.Offset);
+            WriteApiResult(partNode, "Length", partInfo.Length);
+
+            switch (partInfo.Style) {
+            case PartitionStyle.MasterBootRecord:
+                MbrPartition mbrInfo = (MbrPartition)partInfo;
+                WriteApiResult(partNode, "MbrType", mbrInfo.Type);
+                WriteApiResult(partNode, "MbrBootable", mbrInfo.Bootable);
+                WriteApiResult(partNode, "MbrOffset", mbrInfo.HiddenSectors);
+                break;
+            case PartitionStyle.GuidPartitionTable:
+                GptPartition gptInfo = (GptPartition)partInfo;
+                WriteApiResult(partNode, "GptAttributes", (long)gptInfo.Attributes);
+                WriteApiResult(partNode, "GptId", gptInfo.Id.ToString());
+                WriteApiResult(partNode, "GptType", gptInfo.Type.ToString());
+                WriteApiResult(partNode, "GptName", gptInfo.Name);
+                break;
+            }
         }
 
         private void QueryVolumeInfo(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)

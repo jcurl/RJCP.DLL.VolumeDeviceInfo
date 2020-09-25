@@ -154,6 +154,14 @@
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
             Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(4096));
+            Assert.That(vinfo.PartitionInformation.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
+            Assert.That(vinfo.PartitionInformation.Number, Is.EqualTo(3));
+            Assert.That(vinfo.PartitionInformation.Offset, Is.EqualTo(407896064));
+            Assert.That(vinfo.PartitionInformation.Length, Is.EqualTo(510653366272));
+            Assert.That(((GptPartition)vinfo.PartitionInformation).Type.ToString(), Is.EqualTo("ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"));
+            Assert.That(((GptPartition)vinfo.PartitionInformation).Id.ToString(), Is.EqualTo("4a2248f3-ec20-4c41-b781-ff19fa7913e6"));
+            Assert.That(((GptPartition)vinfo.PartitionInformation).Name, Is.EqualTo("Basic data partition"));
+            Assert.That((int)((GptPartition)vinfo.PartitionInformation).Attributes, Is.EqualTo(0));
         }
 
         [Test]
@@ -233,6 +241,13 @@
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));
+            Assert.That(vinfo.PartitionInformation.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
+            Assert.That(vinfo.PartitionInformation.Number, Is.EqualTo(1));
+            Assert.That(vinfo.PartitionInformation.Offset, Is.EqualTo(16777216));
+            Assert.That(vinfo.PartitionInformation.Length, Is.EqualTo(64005079040));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Type, Is.EqualTo(7));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Bootable, Is.False);
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).HiddenSectors, Is.EqualTo(32768));
         }
 
         [Test]
@@ -312,6 +327,13 @@
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));
+            Assert.That(vinfo.PartitionInformation.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
+            Assert.That(vinfo.PartitionInformation.Number, Is.EqualTo(1));
+            Assert.That(vinfo.PartitionInformation.Offset, Is.EqualTo(1048576));
+            Assert.That(vinfo.PartitionInformation.Length, Is.EqualTo(63041437696));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Type, Is.EqualTo(7));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Bootable, Is.False);
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).HiddenSectors, Is.EqualTo(2048));
         }
 
         [Test]
@@ -509,6 +531,13 @@
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));       // Unsupported
             Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(512));           // Unsupported
+            Assert.That(vinfo.PartitionInformation.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
+            Assert.That(vinfo.PartitionInformation.Number, Is.EqualTo(1));
+            Assert.That(vinfo.PartitionInformation.Offset, Is.EqualTo(32256));
+            Assert.That(vinfo.PartitionInformation.Length, Is.EqualTo(536870912));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Type, Is.EqualTo(6));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Bootable, Is.False);
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).HiddenSectors, Is.EqualTo(1));
         }
 
         [Test]
@@ -600,6 +629,13 @@
             Assert.That(vinfo.DiskBytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.DiskBytesPerPhysicalSector, Is.EqualTo(vinfo.DiskBytesPerSector)); // OS returns Error 1
+            Assert.That(vinfo.PartitionInformation.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
+            Assert.That(vinfo.PartitionInformation.Number, Is.EqualTo(1));
+            Assert.That(vinfo.PartitionInformation.Offset, Is.EqualTo(65536));
+            Assert.That(vinfo.PartitionInformation.Length, Is.EqualTo(4051566592));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Type, Is.EqualTo(7));
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).Bootable, Is.True);
+            Assert.That(((MbrPartition)vinfo.PartitionInformation).HiddenSectors, Is.EqualTo(128));
         }
 
         [Test]

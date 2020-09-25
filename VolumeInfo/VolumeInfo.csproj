@@ -42,10 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IO\Storage\EFIPartitionAttributes.cs" />
+    <Compile Include="IO\Storage\GptPartition.cs" />
+    <Compile Include="IO\Storage\MbrPartition.cs" />
     <Compile Include="IO\Storage\MediaType.cs" />
     <Compile Include="IO\Storage\BoolUnknown.cs" />
     <Compile Include="IO\Storage\DeviceGuidFlags.cs" />
     <Compile Include="IO\Storage\DeviceType.cs" />
+    <Compile Include="IO\Storage\PartitionInformation.cs" />
+    <Compile Include="IO\Storage\PartitionStyle.cs" />
     <Compile Include="IO\Storage\Win32\DiskGeometry.cs" />
     <Compile Include="IO\Storage\FileSystemFlags.cs" />
     <Compile Include="IO\Storage\Win32\StorageAccessAlignment.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DISK_GEOMETRY.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+PARTITION_INFORMATION_EX.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_BUS_TYPE.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_DEVICE_DESCRIPTOR.cs" />

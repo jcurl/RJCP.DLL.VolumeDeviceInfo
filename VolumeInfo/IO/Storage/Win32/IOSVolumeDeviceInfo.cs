@@ -35,6 +35,8 @@
 
         bool IsReadOnly(SafeHandle hDevice);
 
+        PartitionInformation GetPartitionInfo(SafeHandle hDevice);
+
         int GetLogicalDrives();
 
         int GetLastWin32Error();

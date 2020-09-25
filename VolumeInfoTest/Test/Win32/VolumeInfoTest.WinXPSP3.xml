@@ -58,6 +58,15 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <StorageAlignment error="1" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="1" />
+      <Offset result="32256" />
+      <Length result="42935929344" />
+      <MbrType result="7" />
+      <MbrBootable result="True" />
+      <MbrOffset result="63" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
@@ -134,6 +143,15 @@
       <BytesPerSector result="2048" />
     </DiskGeometry>
     <StorageAlignment error="1" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="0" />
+      <Offset result="0" />
+      <Length result="3794823168" />
+      <MbrType result="11" />
+      <MbrBootable result="False" />
+      <MbrOffset result="0" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="True" />
@@ -184,6 +202,15 @@
       <BytesPerSector result="2048" />
     </DiskGeometry>
     <StorageAlignment error="1" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="0" />
+      <Offset result="0" />
+      <Length result="3794823168" />
+      <MbrType result="11" />
+      <MbrBootable result="False" />
+      <MbrOffset result="0" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="True" />

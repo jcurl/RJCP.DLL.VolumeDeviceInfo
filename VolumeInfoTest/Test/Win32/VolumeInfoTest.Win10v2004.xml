@@ -70,6 +70,16 @@
       <BytesPerPhysicalSector result="4096" />
       <BytesOffsetForSectorAlignment result="0" />
     </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="3" />
+      <Offset result="407896064" />
+      <Length result="510653366272" />
+      <GptAttributes result="0" />
+      <GptId result="4a2248f3-ec20-4c41-b781-ff19fa7913e6" />
+      <GptType result="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7" />
+      <GptName result="Basic data partition" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
@@ -158,6 +168,15 @@
       <BytesPerPhysicalSector result="512" />
       <BytesOffsetForSectorAlignment result="0" />
     </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="1" />
+      <Offset result="16777216" />
+      <Length result="64005079040" />
+      <MbrType result="7" />
+      <MbrBootable result="False" />
+      <MbrOffset result="32768" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -257,6 +276,15 @@
       <BytesPerPhysicalSector result="512" />
       <BytesOffsetForSectorAlignment result="0" />
     </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="1" />
+      <Offset result="1048576" />
+      <Length result="63041437696" />
+      <MbrType result="7" />
+      <MbrBootable result="False" />
+      <MbrOffset result="2048" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -339,6 +367,15 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <StorageAlignment error="1" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="1" />
+      <Offset result="65536" />
+      <Length result="4051566592" />
+      <MbrType result="7" />
+      <MbrBootable result="True" />
+      <MbrOffset result="128" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -579,6 +616,16 @@
       <BytesPerPhysicalSector result="4096" />
       <BytesOffsetForSectorAlignment result="0" />
     </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="3" />
+      <Offset result="407896064" />
+      <Length result="510653366272" />
+      <GptAttributes result="0" />
+      <GptId result="4a2248f3-ec20-4c41-b781-ff19fa7913e6" />
+      <GptType result="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7" />
+      <GptName result="Basic data partition" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="False" />
@@ -641,6 +688,15 @@
       <BytesPerSector result="512" />
     </DiskGeometry>
     <StorageAlignment error="1" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="1" />
+      <Offset result="32256" />
+      <Length result="536870912" />
+      <MbrType result="6" />
+      <MbrBootable result="False" />
+      <MbrOffset result="1" />
+    </PartitionInformation>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />

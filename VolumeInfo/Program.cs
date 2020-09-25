@@ -48,6 +48,25 @@
                     Console.WriteLine("    Serial Number   : {0}", info.VolumeSerial);
                     Console.WriteLine("    Flags           : {0}", info.FileSystemFlags);
                     Console.WriteLine("    File System     : {0}", info.FileSystem);
+                    Console.WriteLine("    Partition Style : {0}", info.PartitionInformation.Style);
+                    Console.WriteLine("    Part Number     : {0}", info.PartitionInformation.Number);
+                    Console.WriteLine("    Part Offset     : {0:X8}", info.PartitionInformation.Offset);
+                    Console.WriteLine("    Part Length     : {0:F1} GB", info.PartitionInformation.Length / 1024.0 / 1024.0 / 1024.0);
+                    switch (info.PartitionInformation.Style) {
+                    case PartitionStyle.MasterBootRecord:
+                        MbrPartition mbrPart = (MbrPartition)info.PartitionInformation;
+                        Console.WriteLine("     MBR bootable   : {0}", mbrPart.Bootable);
+                        Console.WriteLine("     MBR Type       : {0}", mbrPart.Type);
+                        Console.WriteLine("     MBR Offset     : {0}", mbrPart.HiddenSectors);
+                        break;
+                    case PartitionStyle.GuidPartitionTable:
+                        GptPartition gptPart = (GptPartition)info.PartitionInformation;
+                        Console.WriteLine("     GPT Attributes : {0}", gptPart.Attributes);
+                        Console.WriteLine("     GPT Name       : {0}", gptPart.Name);
+                        Console.WriteLine("     GPT Type       : {0}", gptPart.Type);
+                        Console.WriteLine("     GPT Id         : {0}", gptPart.Id);
+                        break;
+                    }
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.VendorId);
                     Console.WriteLine("    Product         : {0}; Revision {1}", info.ProductId, info.ProductRevision);

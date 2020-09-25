@@ -75,6 +75,7 @@
             AddGeometry(m_Geometry, path, pathNode["DiskGeometry"]);
             AddAlignment(m_Alignment, path, pathNode["StorageAlignment"]);
             AddItem(m_SeekPenalty, path, pathNode["SeekPenalty"]);
+            AddPartitionInfo(m_PartitionInfo, path, pathNode["PartitionInformation"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -231,6 +232,61 @@
                 BytesOffsetForSectorAlignment = int.Parse(bytesOffsetForSectorAlignment, CultureInfo.InvariantCulture),
             };
             dictionary.Add(path, new ResultOrError<StorageAccessAlignment>(diskAlignment));
+        }
+
+        private void AddPartitionInfo(IDictionary<string, ResultOrError<PartitionInformation>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<PartitionInformation> result = GetResultOrError<PartitionInformation>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string style = node["Style"].Attributes["result"].Value;
+            string number = node["Number"].Attributes["result"].Value;
+            string offset = node["Offset"].Attributes["result"].Value;
+            string length = node["Length"].Attributes["result"].Value;
+            PartitionStyle partStyle = (PartitionStyle)int.Parse(style, CultureInfo.InvariantCulture);
+            int partNumber = int.Parse(number, CultureInfo.InvariantCulture);
+            long partOffset = long.Parse(offset, CultureInfo.InvariantCulture);
+            long partLength = long.Parse(length, CultureInfo.InvariantCulture);
+            switch (partStyle) {
+            case PartitionStyle.MasterBootRecord:
+                dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                    new MbrPartition() {
+                        Number = partNumber,
+                        Offset = partOffset,
+                        Length = partLength,
+                        Bootable = bool.Parse(node["MbrBootable"].Attributes["result"].Value),
+                        HiddenSectors = int.Parse(node["MbrOffset"].Attributes["result"].Value),
+                        Type = int.Parse(node["MbrType"].Attributes["result"].Value)
+                    }));
+                break;
+            case PartitionStyle.GuidPartitionTable:
+                dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                    new GptPartition() {
+                        Number = partNumber,
+                        Offset = partOffset,
+                        Length = partLength,
+                        Type = new Guid(node["GptType"].Attributes["result"].Value),
+                        Id = new Guid(node["GptId"].Attributes["result"].Value),
+                        Name = node["GptName"].Attributes["result"].Value,
+                        Attributes = (EFIPartitionAttributes)long.Parse(node["GptAttributes"].Attributes["result"].Value, CultureInfo.InvariantCulture)
+                    }));
+                break;
+            default:
+                dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                    new PartitionInformation(partStyle) {
+                        Number = partNumber,
+                        Offset = partOffset,
+                        Length = partLength
+                    }));
+                break;
+            }
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -439,6 +495,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_ReadOnly, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<PartitionInformation>> m_PartitionInfo = new Dictionary<string, ResultOrError<PartitionInformation>>();
+
+        public PartitionInformation GetPartitionInfo(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_PartitionInfo, handle.PathName);
         }
 
         private readonly int m_LogicalDrives;

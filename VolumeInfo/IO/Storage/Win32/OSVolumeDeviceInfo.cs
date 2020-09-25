@@ -299,6 +299,52 @@
                 IntPtr.Zero, 0, IntPtr.Zero, 0, out uint _, IntPtr.Zero);
         }
 
+        public PartitionInformation GetPartitionInfo(SafeHandle hDevice)
+        {
+            SafeAllocHandle<PARTITION_INFORMATION_EX> partitionInfoPtr = null;
+            try {
+                partitionInfoPtr = new SafeAllocHandle<PARTITION_INFORMATION_EX>();
+                bool success = DeviceIoControl(hDevice, IOCTL_DISK_GET_PARTITION_INFO_EX,
+                    IntPtr.Zero, 0, partitionInfoPtr, partitionInfoPtr.SizeOf,
+                    out uint bytesReturns, IntPtr.Zero);
+                if (!success || bytesReturns == 0) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+
+                PARTITION_INFORMATION_EX partitionInfo = partitionInfoPtr.ToStructure();
+                switch (partitionInfo.PartitionStyle) {
+                case PartitionStyle.MasterBootRecord:
+                    return new MbrPartition() {
+                        Number = partitionInfo.PartitionNumber,
+                        Offset = partitionInfo.StartingOffset,
+                        Length = partitionInfo.PartitionLength,
+                        Bootable = partitionInfo.DriveLayoutInformaiton.Mbr.BootIndicator != 0,
+                        Type = partitionInfo.DriveLayoutInformaiton.Mbr.PartitionType,
+                        HiddenSectors = partitionInfo.DriveLayoutInformaiton.Mbr.HiddenSectors
+                    };
+                case PartitionStyle.GuidPartitionTable:
+                    return new GptPartition() {
+                        Number = partitionInfo.PartitionNumber,
+                        Offset = partitionInfo.StartingOffset,
+                        Length = partitionInfo.PartitionLength,
+                        Id = partitionInfo.DriveLayoutInformaiton.Gpt.PartitionId,
+                        Type = partitionInfo.DriveLayoutInformaiton.Gpt.PartitionType,
+                        Name = partitionInfo.DriveLayoutInformaiton.Gpt.Name,
+                        Attributes = partitionInfo.DriveLayoutInformaiton.Gpt.Attributes
+                    };
+                default:
+                    return new PartitionInformation(partitionInfo.PartitionStyle) {
+                        Number = partitionInfo.PartitionNumber,
+                        Offset = partitionInfo.StartingOffset,
+                        Length = partitionInfo.PartitionLength,
+                    };
+                }
+            } finally {
+                if (partitionInfoPtr != null) partitionInfoPtr.Close();
+            }
+        }
+
         public int GetLogicalDrives()
         {
             return Kernel32.GetLogicalDrives();
