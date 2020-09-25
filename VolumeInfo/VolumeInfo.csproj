@@ -43,13 +43,13 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\Storage\EFIPartitionAttributes.cs" />
-    <Compile Include="IO\Storage\GptPartition.cs" />
-    <Compile Include="IO\Storage\MbrPartition.cs" />
+    <Compile Include="IO\Storage\Win32\GptPartition.cs" />
+    <Compile Include="IO\Storage\Win32\MbrPartition.cs" />
     <Compile Include="IO\Storage\MediaType.cs" />
     <Compile Include="IO\Storage\BoolUnknown.cs" />
     <Compile Include="IO\Storage\DeviceGuidFlags.cs" />
     <Compile Include="IO\Storage\DeviceType.cs" />
-    <Compile Include="IO\Storage\PartitionInformation.cs" />
+    <Compile Include="IO\Storage\Win32\PartitionInformation.cs" />
     <Compile Include="IO\Storage\PartitionStyle.cs" />
     <Compile Include="IO\Storage\Win32\DiskGeometry.cs" />
     <Compile Include="IO\Storage\FileSystemFlags.cs" />

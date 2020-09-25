@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace VolumeInfo.IO.Storage.Win32
+﻿namespace VolumeInfo.IO.Storage.Win32
 {
+    using System;
+
     public class StorageDeviceNumber
     {
         public DeviceType DeviceType { get; set; }

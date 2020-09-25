@@ -40,51 +40,51 @@
                 try {
                     info = new VolumeDeviceInfo(device);
                     Console.WriteLine("  Volume");
-                    Console.WriteLine("    Volume Path     : {0}", info.VolumePath);
-                    Console.WriteLine("    Volume Device   : {0}", info.VolumeDevicePath);
-                    Console.WriteLine("    Volume Drive    : {0}", info.VolumeDrive);
-                    Console.WriteLine("    NT DOS Device   : {0}", info.VolumeDosDevicePath);
-                    Console.WriteLine("    Label           : {0}", info.VolumeLabel);
-                    Console.WriteLine("    Serial Number   : {0}", info.VolumeSerial);
-                    Console.WriteLine("    Flags           : {0}", info.FileSystemFlags);
-                    Console.WriteLine("    File System     : {0}", info.FileSystem);
-                    Console.WriteLine("    Partition Style : {0}", info.PartitionInformation.Style);
-                    Console.WriteLine("    Part Number     : {0}", info.PartitionInformation.Number);
-                    Console.WriteLine("    Part Offset     : {0:X8}", info.PartitionInformation.Offset);
-                    Console.WriteLine("    Part Length     : {0:F1} GB", info.PartitionInformation.Length / 1024.0 / 1024.0 / 1024.0);
-                    switch (info.PartitionInformation.Style) {
+                    Console.WriteLine("    Volume Path     : {0}", info.Volume.Path);
+                    Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
+                    Console.WriteLine("    Volume Drive    : {0}", info.Volume.DriveLetter);
+                    Console.WriteLine("    NT DOS Device   : {0}", info.Volume.DosDevicePath);
+                    Console.WriteLine("    Label           : {0}", info.FileSystem.Label);
+                    Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
+                    Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
+                    Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
+                    Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
+                    Console.WriteLine("    Part Number     : {0}", info.Partition.Number);
+                    Console.WriteLine("    Part Offset     : {0:X8}", info.Partition.Offset);
+                    Console.WriteLine("    Part Length     : {0:F1} GB", info.Partition.Length / 1024.0 / 1024.0 / 1024.0);
+                    switch (info.Partition.Style) {
                     case PartitionStyle.MasterBootRecord:
-                        MbrPartition mbrPart = (MbrPartition)info.PartitionInformation;
-                        Console.WriteLine("     MBR bootable   : {0}", mbrPart.Bootable);
-                        Console.WriteLine("     MBR Type       : {0}", mbrPart.Type);
-                        Console.WriteLine("     MBR Offset     : {0}", mbrPart.HiddenSectors);
+                        var mbrPart = (VolumeDeviceInfo.IMbrPartition)info.Partition;
+                        Console.WriteLine("    MBR bootable    : {0}", mbrPart.Bootable);
+                        Console.WriteLine("    MBR Type        : {0}", mbrPart.Type);
+                        Console.WriteLine("    MBR Offset      : {0}", mbrPart.MbrSectorsOffset);
                         break;
                     case PartitionStyle.GuidPartitionTable:
-                        GptPartition gptPart = (GptPartition)info.PartitionInformation;
-                        Console.WriteLine("     GPT Attributes : {0}", gptPart.Attributes);
-                        Console.WriteLine("     GPT Name       : {0}", gptPart.Name);
-                        Console.WriteLine("     GPT Type       : {0}", gptPart.Type);
-                        Console.WriteLine("     GPT Id         : {0}", gptPart.Id);
+                        var gptPart = (VolumeDeviceInfo.IGptPartition)info.Partition;
+                        Console.WriteLine("    GPT Attributes  : {0}", gptPart.Attributes);
+                        Console.WriteLine("    GPT Name        : {0}", gptPart.Name);
+                        Console.WriteLine("    GPT Type        : {0}", gptPart.Type);
+                        Console.WriteLine("    GPT Id          : {0}", gptPart.Id);
                         break;
                     }
                     Console.WriteLine("  Device");
-                    Console.WriteLine("    Vendor          : {0}", info.VendorId);
-                    Console.WriteLine("    Product         : {0}; Revision {1}", info.ProductId, info.ProductRevision);
-                    Console.WriteLine("    SerialNumber    : {0}", info.DeviceSerialNumber);
-                    Console.WriteLine("    Bus Type        : {0}", info.BusType.ToDescription(true));
-                    Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.ScsiDeviceType.ToDescription(), info.ScsiDeviceModifier);
-                    Console.WriteLine("    Command Queueing: {0}", info.CommandQueueing);
-                    Console.WriteLine("    Removable Media : {0}", info.RemovableMedia);
-                    Console.WriteLine("    Media Present   : {0}", info.MediaPresent);
-                    Console.WriteLine("    Disk Read Only  : {0}", info.IsDiskReadOnly);
-                    Console.WriteLine("    Device GUID:    : {0} ({1})", info.DeviceGuid, info.DeviceGuidFlags);
-                    Console.WriteLine("    Device Number   : {0} #{1}", info.DeviceType, info.DeviceNumber);
-                    Console.WriteLine("    Partition Number: {0}", info.DevicePartitionNumber);
-                    Console.WriteLine("    Media Type      : {0}", info.DiskMediaType);
-                    Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)", info.DiskCylinders, info.DiskTracksPerCylinder, info.DiskSectorsPerTrack, info.DiskBytesPerSector,
-                        info.DiskCylinders * info.DiskTracksPerCylinder * info.DiskSectorsPerTrack * info.DiskBytesPerSector / 1024.0 / 1024.0 / 1024.0);
-                    Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}", info.DiskBytesPerPhysicalSector, info.DiskBytesPerSector);
-                    Console.WriteLine("    Seek Penalty    : {0}", info.HasSeekPenalty);
+                    Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
+                    Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
+                    Console.WriteLine("    SerialNumber    : {0}", info.Disk.SerialNumber);
+                    Console.WriteLine("    Bus Type        : {0}", info.Disk.BusType.ToDescription(true));
+                    Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.ScsiDeviceType.ToDescription(), info.Disk.ScsiDeviceModifier);
+                    Console.WriteLine("    Command Queueing: {0}", info.Disk.HasCommandQueueing);
+                    Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
+                    Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
+                    Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
+                    Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Guid, info.Disk.GuidFlags);
+                    Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.DeviceType, info.Disk.DeviceNumber);
+                    Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
+                    Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
+                        info.Disk.Cylinders, info.Disk.TracksPerCylinder, info.Disk.SectorsPerTrack, info.Disk.BytesPerSector,
+                        info.Disk.Cylinders * info.Disk.TracksPerCylinder * info.Disk.SectorsPerTrack * info.Disk.BytesPerSector / 1024.0 / 1024.0 / 1024.0);
+                    Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}", info.Disk.BytesPerPhysicalSector, info.Disk.BytesPerSector);
+                    Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                 } catch (Exception ex) {
                     Console.WriteLine("  Error: {0}", ex.Message);
                 }
