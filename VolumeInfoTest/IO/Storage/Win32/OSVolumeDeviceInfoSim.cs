@@ -7,7 +7,7 @@
     using System.Runtime.InteropServices;
     using System.Xml;
 
-    public class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
+    public class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
     {
         private const string RootNode = "VolumeInfoTest";
         private const string PathNode = "Path";
@@ -36,7 +36,7 @@
             public bool Throws { get; private set; }
         }
 
-        public OSVolumeDeviceInfo(string fileName)
+        public OSVolumeDeviceInfoSim(string fileName)
         {
             XmlDocument xmlDoc = new XmlDocument {
                 XmlResolver = null

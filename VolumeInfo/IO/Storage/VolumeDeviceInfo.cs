@@ -437,7 +437,8 @@
 
             public bool IsMediaPresent { get { return m_Data.MediaPresent; } }
 
-            public bool IsRemovableMedia {
+            public bool IsRemovableMedia
+            {
                 get
                 {
                     // Floppy drives don't return device queries, so need to get this information some other way.
