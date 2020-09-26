@@ -134,7 +134,8 @@
             // It's possible that drivers return file system and partition information, even when no media is present.
             // In this case, the data is useless, and it's better that we don't present the information at all.
             if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
-                FileSystem = new FileSystemInfo(m_VolumeData);
+                if (m_VolumeData.VolumeQuery != null)
+                    FileSystem = new FileSystemInfo(m_VolumeData);
                 if (m_VolumeData.PartitionInfo != null) {
                     // If there is no partition information, the property "Partition" is null.
                     switch (m_VolumeData.PartitionInfo.Style) {
@@ -704,11 +705,13 @@
                     // is a SUBST'd drive, get the new path and loop again.
                     if (ParseDosDevice(pathName, ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
 
-                    // A device that doesn't support GetVolumeNameForVolumeMountPoint, isn't subst'd.
                     if (volumeDosDevice != null) {
+                        // A drive letter that doesn't support GetVolumeNameForVolumeMountPoint, isn't subst'd.
                         volumePath = string.Format("\\\\.\\GLOBALROOT{0}\\", volumeDosDevice);
                     } else {
-                        break;
+                        // A device that isn't a volume, i.e. a physical drive like '\\.\PhysicalDrive0'.
+                        volumePath = string.Format("{0}\\",
+                            pathName.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar));
                     }
                 }
 
@@ -726,8 +729,8 @@
                     if (ParseDosDevice(volumePath.Substring(0, 3), ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
 
                     // We got here, because the path can't be mapped to a volume, and the test above shows it's not
-                    // SUBST'd. It could be a network drive, or a badly implemented driver (like the ImDisk driver that
-                    // doesn't support GetVolumeNameForVolumeMountPoint()).
+                    // SUBST'd. It could be a network drive, a physical drive, or a badly implemented driver (like the
+                    // ImDisk driver that doesn't support GetVolumeNameForVolumeMountPoint()).
                     if (IsWin32Device(volumePath)) {
                         volumeDevice = volumePath;
                     } else {

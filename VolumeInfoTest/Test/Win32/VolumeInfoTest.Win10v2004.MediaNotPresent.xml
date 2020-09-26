@@ -136,4 +136,50 @@
     <VolumeInformation error="21" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
+  <Path path="\\.\PhysicalDrive3">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="DELL    " />
+      <DeviceSerialNumber result="00000208A3E0" />
+      <ProductId result="USB   HS-CF Card" />
+      <ProductRevision result="7.12" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="7" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="3" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="0" />
+      <DeviceGuid result="ab937ae9-e419-2f45-32f5-fa67c2e6c520" />
+      <DeviceNumber result="3" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry error="21" />
+    <StorageAlignment error="1" />
+    <PartitionInformation error="21" />
+    <MediaPresent result="False" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="Unknown" error="1" />
+  </Path>
+  <Path path="\\.\PhysicalDrive3\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="31" />
+    <VolumeInformation error="31" />
+    <CreateFileFromDevice error="31" throws="True" />
+  </Path>
 </VolumeInfoTest>
