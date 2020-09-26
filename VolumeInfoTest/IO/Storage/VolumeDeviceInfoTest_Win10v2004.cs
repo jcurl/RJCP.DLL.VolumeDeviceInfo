@@ -25,6 +25,11 @@
         private const string CVS = @"\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}\";
         private const string CD = @"\Device\HarddiskVolume3";
 
+        // A hidden partition installed by Win10
+        private const string Dev1 = @"\\.\HarddiskVolume1";
+        private const string Dev1S = @"\\.\HarddiskVolume1\";
+        private const string Dev1V = @"\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}";
+
         // An integrated SD-Card
         private const string D = @"D:";
         private const string DS = @"D:\";
@@ -315,6 +320,68 @@
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Id.ToString(), Is.EqualTo("4a2248f3-ec20-4c41-b781-ff19fa7913e6"));
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Name, Is.EqualTo("Basic data partition"));
             Assert.That((int)((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Attributes, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void DriveDev1()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win10Sim, @"\\.\HarddiskVolume1");
+            Assert.That(vinfo.Path, Is.EqualTo(Dev1));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(Dev1S));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Dev1V));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not mounted
+            Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not mounted
+            IsDriveSamsungHiddenPart(vinfo);
+        }
+
+        [Test]
+        public void DriveDev1S()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win10Sim, @"\\.\HarddiskVolume1\");
+            Assert.That(vinfo.Path, Is.EqualTo(Dev1S));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(Dev1S));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Dev1V));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not mounted
+            Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not mounted
+            IsDriveSamsungHiddenPart(vinfo);
+        }
+
+        private void IsDriveSamsungHiddenPart(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.Disk.VendorId, Is.Empty);
+            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("SAMSUNG MZFLV512HCJH-000MV"));
+            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("BXV75M0Q"));
+            Assert.That(vinfo.Disk.SerialNumber, Is.EqualTo("0025_3844_61B5_6586."));
+            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Nvme));
+            Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
+            Assert.That(vinfo.Disk.HasCommandQueueing, Is.True);
+            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
+            Assert.That(vinfo.Disk.IsReadOnly, Is.False);
+            Assert.That(vinfo.FileSystem.Label, Is.EqualTo("SYSTEM"));
+            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("CC1F-1834"));
+            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("FAT32"));
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x20206));
+            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.Page83DeviceGuid));
+            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("ba408eac-457b-e82e-f5ea-f5764f6a8c94"));
+            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
+            Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(62260));
+            Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.Disk.Geometry.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.Disk.Geometry.BytesPerPhysicalSector, Is.EqualTo(4096));
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
+            Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
+            Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
+            Assert.That(vinfo.Partition.Offset, Is.EqualTo(1048576));
+            Assert.That(vinfo.Partition.Length, Is.EqualTo(272629760));
+            Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Type.ToString(), Is.EqualTo("c12a7328-f81f-11d2-ba4b-00a0c93ec93b"));
+            Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Id.ToString(), Is.EqualTo("49c071ff-6931-498b-afad-d095ee3500d2"));
+            Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Name, Is.EqualTo("EFI system partition"));
+            Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Attributes, Is.EqualTo(EFIPartitionAttributes.GptBasicDataAttributeNoDriveLetter));
         }
 
         [Test]

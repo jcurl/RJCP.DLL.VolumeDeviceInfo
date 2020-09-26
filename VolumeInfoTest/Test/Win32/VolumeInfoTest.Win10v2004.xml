@@ -726,6 +726,150 @@
     </VolumeInformation>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
+  <Path path="\\.\HarddiskVolume1">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\.\HarddiskVolume1\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="1" />
+      <Offset result="1048576" />
+      <Length result="272629760" />
+      <GptAttributes result="-9223372036854775808" />
+      <GptId result="49c071ff-6931-498b-afad-d095ee3500d2" />
+      <GptType result="c12a7328-f81f-11d2-ba4b-00a0c93ec93b" />
+      <GptName result="EFI system partition" />
+    </PartitionInformation>
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="False" />
+  </Path>
+  <Path path="\\.\HarddiskVolume1\">
+    <FileAttributes result="16" />
+    <VolumePathName result="\\.\HarddiskVolume1\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}\" />
+    <VolumeInformation result="">
+      <Label result="SYSTEM" />
+      <SerialNumber result="CC1F-1834" />
+      <FileSystem result="FAT32" />
+      <Flags result="131590" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="1" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="1" />
+      <Offset result="1048576" />
+      <Length result="272629760" />
+      <GptAttributes result="-9223372036854775808" />
+      <GptId result="49c071ff-6931-498b-afad-d095ee3500d2" />
+      <GptType result="c12a7328-f81f-11d2-ba4b-00a0c93ec93b" />
+      <GptName result="EFI system partition" />
+    </PartitionInformation>
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="False" />
+  </Path>
+  <Path path="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}\">
+    <FileAttributes result="16" />
+    <VolumePathName result="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}\" />
+    <VolumeInformation result="">
+      <Label result="SYSTEM" />
+      <SerialNumber result="CC1F-1834" />
+      <FileSystem result="FAT32" />
+      <Flags result="131590" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
   <Path path="R:">
     <FileAttributes result="22" />
     <VolumePathName error="1" />
