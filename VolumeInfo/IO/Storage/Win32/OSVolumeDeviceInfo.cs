@@ -140,20 +140,25 @@
             StringBuilder volumeName = new StringBuilder(256);
             StringBuilder fileSystem = new StringBuilder(256);
 
-            bool success = Kernel32.GetVolumeInformation(devicePathName,
-                volumeName, volumeName.Capacity, out uint volumeSerial,
-                out uint _, out FileSystemFlags flags, fileSystem, fileSystem.Capacity);
-            if (!success) {
-                m_Win32Error = Marshal.GetLastWin32Error();
-                return null;
-            }
+            ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
+            try {
+                bool success = Kernel32.GetVolumeInformation(devicePathName,
+                    volumeName, volumeName.Capacity, out uint volumeSerial,
+                    out uint _, out FileSystemFlags flags, fileSystem, fileSystem.Capacity);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
 
-            return new VolumeInfo() {
-                VolumeLabel = volumeName.ToString(),
-                VolumeSerial = string.Format("{0:X4}-{1:X4}", (volumeSerial & 0xFFFF0000) >> 16, volumeSerial & 0xFFFF),
-                Flags = flags,
-                FileSystem = fileSystem.ToString(),
-            };
+                return new VolumeInfo() {
+                    VolumeLabel = volumeName.ToString(),
+                    VolumeSerial = string.Format("{0:X4}-{1:X4}", (volumeSerial & 0xFFFF0000) >> 16, volumeSerial & 0xFFFF),
+                    Flags = flags,
+                    FileSystem = fileSystem.ToString(),
+                };
+            } finally {
+                SetErrorMode(mode);
+            }
         }
 
         public bool GetMediaPresent(SafeHandle hDevice)
