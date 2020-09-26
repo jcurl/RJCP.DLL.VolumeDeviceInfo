@@ -128,21 +128,26 @@
             string devicePathName = ResolveDevicePathNames(pathName);
             if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
 
-            Volume = new VolumePathInfo(m_VolumeData);
-            FileSystem = new FileSystemInfo(m_VolumeData);
             Disk = new DiskInfo(m_VolumeData);
-            if (m_VolumeData.PartitionInfo != null) {
-                // If there is no partition information, the property "Partition" is null.
-                switch (m_VolumeData.PartitionInfo.Style) {
-                case PartitionStyle.GuidPartitionTable:
-                    Partition = new GptPartitionInfo(m_VolumeData);
-                    break;
-                case PartitionStyle.MasterBootRecord:
-                    Partition = new MbrPartitionInfo(m_VolumeData);
-                    break;
-                default:
-                    Partition = new PartitionInfo(m_VolumeData);
-                    break;
+            Volume = new VolumePathInfo(m_VolumeData);
+
+            // It's possible that drivers return file system and partition information, even when no media is present.
+            // In this case, the data is useless, and it's better that we don't present the information at all.
+            if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
+                FileSystem = new FileSystemInfo(m_VolumeData);
+                if (m_VolumeData.PartitionInfo != null) {
+                    // If there is no partition information, the property "Partition" is null.
+                    switch (m_VolumeData.PartitionInfo.Style) {
+                    case PartitionStyle.GuidPartitionTable:
+                        Partition = new GptPartitionInfo(m_VolumeData);
+                        break;
+                    case PartitionStyle.MasterBootRecord:
+                        Partition = new MbrPartitionInfo(m_VolumeData);
+                        break;
+                    default:
+                        Partition = new PartitionInfo(m_VolumeData);
+                        break;
+                    }
                 }
             }
         }
@@ -256,7 +261,77 @@
         /// Gets file system information.
         /// </summary>
         /// <value>File system information.</value>
+        /// <remarks>
+        /// This property can return <see langword="null"/> if there is no volume mounted information. This can occur
+        /// for example for floppy drives, card readers, etc.
+        /// </remarks>
         public IFileSystemInfo FileSystem { get; private set; }
+
+        /// <summary>
+        /// Provides geometry information about the disk, if present.
+        /// </summary>
+        public interface IGeometryInfo
+        {
+
+            /// <summary>
+            /// Gets the number of cylinders for the disk the volume is part of.
+            /// </summary>
+            /// <value>The disk cylinders.</value>
+            /// <remarks>This is part of the disk geometry to get the number of Cylinders (total) for the disk.</remarks>
+            long Cylinders { get; }
+
+            /// <summary>
+            /// Gets the disk tracks per cylinder.
+            /// </summary>
+            /// <value>The disk tracks per cylinder.</value>
+            /// <remarks>
+            /// This is part of the disk geometry to get the number of Tracks per Cylinder for the disk.
+            /// </remarks>
+            int TracksPerCylinder { get; }
+
+            /// <summary>
+            /// Gets the disk sectors per track.
+            /// </summary>
+            /// <value>The disk sectors per track.</value>
+            /// <remarks>This is part of the disk geometry to get the number of Sectors per Track for the disk.</remarks>
+            int SectorsPerTrack { get; }
+
+            /// <summary>
+            /// Gets the (logical) disk bytes per sector.
+            /// </summary>
+            /// <value>The disk bytes per sector.</value>
+            /// <remarks>
+            /// This is the number of bytes per sector for the disk geometry, and is a logical value (it is not related
+            /// to the size of the actual sectors of the media itself).
+            /// </remarks>
+            int BytesPerSector { get; }
+
+            /// <summary>
+            /// Gets the physical disk bytes per sector.
+            /// </summary>
+            /// <value>The disk physical bytes per physical sector.</value>
+            /// <remarks>
+            /// If this value cannot be determined, then it is the same as the <see cref="DiskBytesPerSector"/>.
+            /// </remarks>
+            int BytesPerPhysicalSector { get; }
+        }
+
+        private class GeometryInfo : IGeometryInfo
+        {
+            private readonly VolumeData m_Data;
+
+            public GeometryInfo(VolumeData data) { m_Data = data; }
+
+            public long Cylinders { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.Cylinders; } }
+
+            public int TracksPerCylinder { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.TracksPerCylinder; } }
+
+            public int SectorsPerTrack { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.SectorsPerTrack; } }
+
+            public int BytesPerSector { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.BytesPerSector; } }
+
+            public int BytesPerPhysicalSector { get { return m_Data.Alignment == null ? BytesPerSector : m_Data.Alignment.BytesPerPhysicalSector; } }
+        }
 
         /// <summary>
         /// All properties relevant for the disk.
@@ -379,53 +454,26 @@
             MediaType MediaType { get; }
 
             /// <summary>
-            /// Gets the number of cylinders for the disk the volume is part of.
+            /// Gets information about the geometry of the disk.
             /// </summary>
-            /// <value>The disk cylinders.</value>
-            /// <remarks>This is part of the disk geometry to get the number of Cylinders (total) for the disk.</remarks>
-            long Cylinders { get; }
-
-            /// <summary>
-            /// Gets the disk tracks per cylinder.
-            /// </summary>
-            /// <value>The disk tracks per cylinder.</value>
+            /// <value>
+            /// Information about the geometry of the disk.
+            /// </value>
             /// <remarks>
-            /// This is part of the disk geometry to get the number of Tracks per Cylinder for the disk.
+            /// This property may be <see langword="null"/>, if no disk is present.
             /// </remarks>
-            int TracksPerCylinder { get; }
-
-            /// <summary>
-            /// Gets the disk sectors per track.
-            /// </summary>
-            /// <value>The disk sectors per track.</value>
-            /// <remarks>This is part of the disk geometry to get the number of Sectors per Track for the disk.</remarks>
-            int SectorsPerTrack { get; }
-
-            /// <summary>
-            /// Gets the (logical) disk bytes per sector.
-            /// </summary>
-            /// <value>The disk bytes per sector.</value>
-            /// <remarks>
-            /// This is the number of bytes per sector for the disk geometry, and is a logical value (it is not related
-            /// to the size of the actual sectors of the media itself).
-            /// </remarks>
-            int BytesPerSector { get; }
-
-            /// <summary>
-            /// Gets the physical disk bytes per sector.
-            /// </summary>
-            /// <value>The disk physical bytes per physical sector.</value>
-            /// <remarks>
-            /// If this value cannot be determined, then it is the same as the <see cref="DiskBytesPerSector"/>.
-            /// </remarks>
-            int BytesPerPhysicalSector { get; }
+            IGeometryInfo Geometry { get; }
         }
 
         private class DiskInfo : IDiskInfo
         {
             private readonly VolumeData m_Data;
 
-            public DiskInfo(VolumeData data) { m_Data = data; }
+            public DiskInfo(VolumeData data)
+            {
+                m_Data = data;
+                if (!IsRemovableMedia || IsMediaPresent) Geometry = new GeometryInfo(data);
+            }
 
             public string VendorId { get { return m_Data.DeviceQuery?.VendorId ?? string.Empty; } }
 
@@ -478,15 +526,7 @@
 
             public MediaType MediaType { get { return m_Data.DiskGeometry == null ? MediaType.Unknown : m_Data.DiskGeometry.MediaType; } }
 
-            public long Cylinders { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.Cylinders; } }
-
-            public int TracksPerCylinder { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.TracksPerCylinder; } }
-
-            public int SectorsPerTrack { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.SectorsPerTrack; } }
-
-            public int BytesPerSector { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.BytesPerSector; } }
-
-            public int BytesPerPhysicalSector { get { return m_Data.Alignment == null ? BytesPerSector : m_Data.Alignment.BytesPerPhysicalSector; } }
+            public IGeometryInfo Geometry { get; set; }
         }
 
         /// <summary>

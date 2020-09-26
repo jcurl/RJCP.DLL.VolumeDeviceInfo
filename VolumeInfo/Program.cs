@@ -44,11 +44,8 @@
                     Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
                     Console.WriteLine("    Volume Drive    : {0}", info.Volume.DriveLetter);
                     Console.WriteLine("    NT DOS Device   : {0}", info.Volume.DosDevicePath);
-                    Console.WriteLine("    Label           : {0}", info.FileSystem.Label);
-                    Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
-                    Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
-                    Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
                     if (info.Partition != null) {
+                        Console.WriteLine("  Partition");
                         Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
                         Console.WriteLine("    Part Number     : {0}", info.Partition.Number);
                         Console.WriteLine("    Part Offset     : {0:X8}", info.Partition.Offset);
@@ -69,6 +66,13 @@
                             break;
                         }
                     }
+                    if (info.FileSystem != null) {
+                        Console.WriteLine("  File System");
+                        Console.WriteLine("    Label           : {0}", info.FileSystem.Label);
+                        Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
+                        Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
+                        Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
+                    }
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
                     Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
@@ -82,10 +86,15 @@
                     Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Guid, info.Disk.GuidFlags);
                     Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.DeviceType, info.Disk.DeviceNumber);
                     Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
-                    Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
-                        info.Disk.Cylinders, info.Disk.TracksPerCylinder, info.Disk.SectorsPerTrack, info.Disk.BytesPerSector,
-                        info.Disk.Cylinders * info.Disk.TracksPerCylinder * info.Disk.SectorsPerTrack * info.Disk.BytesPerSector / 1024.0 / 1024.0 / 1024.0);
-                    Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}", info.Disk.BytesPerPhysicalSector, info.Disk.BytesPerSector);
+                    if (info.Disk.Geometry != null) {
+                        Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
+                            info.Disk.Geometry.Cylinders, info.Disk.Geometry.TracksPerCylinder,
+                            info.Disk.Geometry.SectorsPerTrack, info.Disk.Geometry.BytesPerSector,
+                            info.Disk.Geometry.Cylinders * info.Disk.Geometry.TracksPerCylinder *
+                            info.Disk.Geometry.SectorsPerTrack * info.Disk.Geometry.BytesPerSector / 1024.0 / 1024.0 / 1024.0);
+                        Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}",
+                            info.Disk.Geometry.BytesPerPhysicalSector, info.Disk.Geometry.BytesPerSector);
+                    }
                     Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                 } catch (Exception ex) {
                     Console.WriteLine("  Error: {0}", ex.Message);

@@ -64,7 +64,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Test\Win32\VolumeInfoTest.Win10v2004.FloppyNotInserted.xml">
+    <Content Include="Test\Win32\VolumeInfoTest.Win10v2004.MediaNotPresent.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Test\Win32\VolumeInfoTest.Win10v2004.xml">
