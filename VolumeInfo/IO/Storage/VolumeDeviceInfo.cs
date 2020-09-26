@@ -28,6 +28,43 @@
             public DiskGeometry DiskGeometry;
             public StorageAccessAlignment Alignment;
             public PartitionInformation PartitionInfo;
+
+            public bool IsFloppy
+            {
+                get
+                {
+                    // Floppy disk doesn't support MediaPresent, so we need to do an alternative check
+                    if (DiskGeometry != null) {
+                        switch (DiskGeometry.MediaType) {
+                        case MediaType.F5_1pt2_512:
+                        case MediaType.F3_1Pt44_512:
+                        case MediaType.F3_2Pt88_512:
+                        case MediaType.F3_20Pt8_512:
+                        case MediaType.F3_720_512:
+                        case MediaType.F5_360_512:
+                        case MediaType.F5_320_512:
+                        case MediaType.F5_320_1024:
+                        case MediaType.F5_180_512:
+                        case MediaType.F5_160_512:
+                        case MediaType.F3_120M_512:
+                        case MediaType.F3_640_512:
+                        case MediaType.F5_640_512:
+                        case MediaType.F5_720_512:
+                        case MediaType.F3_1Pt2_512:
+                        case MediaType.F3_1Pt23_1024:
+                        case MediaType.F5_1Pt23_1024:
+                        case MediaType.F3_128Mb_512:
+                        case MediaType.F3_230Mb_512:
+                        case MediaType.F8_256_128:
+                        case MediaType.F3_200Mb_512:
+                        case MediaType.F3_240M_512:
+                        case MediaType.F3_32M_512:
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
         }
 
         private readonly VolumeData m_VolumeData = new VolumeData();
@@ -89,15 +126,13 @@
             m_OS = os;
             Path = pathName;
             string devicePathName = ResolveDevicePathNames(pathName);
-            if (!string.IsNullOrEmpty(devicePathName)) {
-                m_VolumeData.VolumeQuery = m_OS.GetVolumeInformation(m_VolumeData.VolumeDevicePathSlash);
-                GetDeviceInformation(devicePathName);
-            }
+            if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
 
             Volume = new VolumePathInfo(m_VolumeData);
             FileSystem = new FileSystemInfo(m_VolumeData);
             Disk = new DiskInfo(m_VolumeData);
             if (m_VolumeData.PartitionInfo != null) {
+                // If there is no partition information, the property "Partition" is null.
                 switch (m_VolumeData.PartitionInfo.Style) {
                 case PartitionStyle.GuidPartitionTable:
                     Partition = new GptPartitionInfo(m_VolumeData);
@@ -105,9 +140,11 @@
                 case PartitionStyle.MasterBootRecord:
                     Partition = new MbrPartitionInfo(m_VolumeData);
                     break;
+                default:
+                    Partition = new PartitionInfo(m_VolumeData);
+                    break;
                 }
             }
-            if (Partition == null) Partition = new PartitionInfo(m_VolumeData);
         }
 
         /// <summary>
@@ -400,7 +437,23 @@
 
             public bool IsMediaPresent { get { return m_Data.MediaPresent; } }
 
-            public bool IsRemovableMedia { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.RemovableMedia; } }
+            public bool IsRemovableMedia {
+                get
+                {
+                    // Floppy drives don't return device queries, so need to get this information some other way.
+                    if (m_Data.DeviceQuery != null) return m_Data.DeviceQuery.RemovableMedia;
+                    if (m_Data.IsFloppy) return true;
+                    if (m_Data.DiskGeometry != null) return m_Data.DiskGeometry.MediaType == MediaType.RemovableMedia;
+
+                    // Pretty much everything has failed, and we're probably a floppy disk drive with no disk inserted.
+                    // It is possible that other Device Drivers get here too, in which case we don't know what to do, so
+                    // use the "magic" NT path to really determine if this is a floppy disk.
+                    if (m_Data.VolumeDosDevicePath != null && m_Data.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
+                        return true;
+
+                    return false;
+                }
+            }
 
             public bool HasCommandQueueing { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.CommandQueueing; } }
 
@@ -581,6 +634,10 @@
         /// <item>When <see cref="PartitionStyle.MasterBootRecord"/>, type cast to <see cref="IMbrPartition"/>.</item>
         /// <item>When <see cref="PartitionStyle.GuidPartitionTable"/>, type cast to <see cref="IGptPartition"/>.</item>
         /// </list>
+        /// <para>
+        /// This property can return <see langword="null"/> if there is no partition information. This can occur for
+        /// example for floppy drives.
+        /// </para>
         /// </remarks>
         public IPartitionInfo Partition { get; private set; }
 
@@ -716,11 +773,19 @@
 
         private void GetDeviceInformation(string devicePathName)
         {
+            m_VolumeData.VolumeQuery = m_OS.GetVolumeInformation(m_VolumeData.VolumeDevicePathSlash);
+            FileAttributes attr = m_OS.GetFileAttributes(m_VolumeData.VolumeDevicePathSlash);
+
+            // For floppy drives, m_OS.GetMediaPresent is false, even if media is present. Looking into the sources from
+            // .NET, the DriveInfo class checks if the file attribute directory bit is set instead. So use that first,
+            // and only if it fails, then use the IOCTL later.
+            if ((int)attr != -1) m_VolumeData.MediaPresent = (attr & FileAttributes.Directory) != 0;
+
             SafeHandle hDevice = m_OS.CreateFileFromDevice(devicePathName);
             try {
                 m_OS.RefreshVolume(hDevice);
                 m_VolumeData.DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
-                m_VolumeData.MediaPresent = m_OS.GetMediaPresent(hDevice);
+                if ((int)attr == -1) m_VolumeData.MediaPresent = m_OS.GetMediaPresent(hDevice);
                 m_VolumeData.HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);
                 m_VolumeData.DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
                 if (m_VolumeData.DeviceNumber == null) m_VolumeData.DeviceNumber = m_OS.GetDeviceNumber(hDevice);

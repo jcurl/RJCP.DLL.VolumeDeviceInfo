@@ -20,6 +20,25 @@
             public VolumeDeviceInfoWin10v2004(string pathName) : base(new OSVolumeDeviceInfoWin10v2004(), pathName) { }
         }
 
+        private static readonly string Win10SimNoFloppy = Path.Combine(TestContext.CurrentContext.TestDirectory, "Test", "Win32", "VolumeInfoTest.Win10v2004.FloppyNotInserted.xml");
+
+        private class OSVolumeDeviceInfoWin10v2004NoFloppy : Win32.OSVolumeDeviceInfo
+        {
+            public OSVolumeDeviceInfoWin10v2004NoFloppy() : base(Win10SimNoFloppy) { }
+        }
+
+        private class VolumeDeviceInfoWin10v2004NoFloppy : VolumeDeviceInfo
+        {
+            public VolumeDeviceInfoWin10v2004NoFloppy(string pathName) : base(new OSVolumeDeviceInfoWin10v2004NoFloppy(), pathName) { }
+        }
+
+        // A 3.5" USB Floppy with disk present
+        private const string A = @"A:";
+        private const string AS = @"A:\";
+        private const string AV = @"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}";
+        private const string AVS = @"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\";
+        private const string AD = @"\Device\Floppy0";
+
         // The boot partition
         private const string C = @"C:";
         private const string CS = @"C:\";
@@ -76,6 +95,162 @@
         private const string RV = @"\\.\GLOBALROOT\Device\ImDisk0";
         private const string RVS = @"\\.\GLOBALROOT\Device\ImDisk0\";
         private const string RD = @"\Device\ImDisk0";
+
+        [Test]
+        public void DriveA()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"A:");
+            Assert.That(vinfo.Path, Is.EqualTo(A));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyA(vinfo);
+        }
+
+        [Test]
+        public void DriveAS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"A:\");
+            Assert.That(vinfo.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyA(vinfo);
+        }
+
+        [Test]
+        public void DriveAV()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}");
+            Assert.That(vinfo.Path, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyA(vinfo);
+        }
+
+        [Test]
+        public void DriveAVS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004(@"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\");
+            Assert.That(vinfo.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyA(vinfo);
+        }
+
+        private void IsDriveFloppyA(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.Disk.VendorId, Is.EqualTo("TEAC    "));
+            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("FD-05PUB        "));
+            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("3000"));
+            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Usb));
+            Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
+            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
+            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
+            Assert.That(vinfo.FileSystem.Label, Is.Empty);
+            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("0D18-1AEE"));
+            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("FAT"));
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x80206));
+            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.RandomDeviceGuidReasonNoHwId));
+            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("f35b67a2-fda7-11ea-b203-7085c2221e14"));
+            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.F3_1Pt44_512));
+            Assert.That(vinfo.Disk.Cylinders, Is.EqualTo(80));
+            Assert.That(vinfo.Disk.TracksPerCylinder, Is.EqualTo(2));
+            Assert.That(vinfo.Disk.SectorsPerTrack, Is.EqualTo(18));
+            Assert.That(vinfo.Disk.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+            Assert.That(vinfo.Disk.BytesPerPhysicalSector, Is.EqualTo(vinfo.Disk.BytesPerSector));
+            Assert.That(vinfo.Partition, Is.Null);
+        }
+
+        [Test]
+        public void DriveANoFloppy()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004NoFloppy(@"A:");
+            Assert.That(vinfo.Path, Is.EqualTo(A));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyANoFloppy(vinfo);
+        }
+
+        [Test]
+        public void DriveASNoFloppy()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004NoFloppy(@"A:\");
+            Assert.That(vinfo.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyANoFloppy(vinfo);
+        }
+
+        [Test]
+        public void DriveAVNoFloppy()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004NoFloppy(@"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}");
+            Assert.That(vinfo.Path, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyANoFloppy(vinfo);
+        }
+
+        [Test]
+        public void DriveAVSNoFloppy()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoWin10v2004NoFloppy(@"\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\");
+            Assert.That(vinfo.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(AD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(A));
+            IsDriveFloppyANoFloppy(vinfo);
+        }
+
+        private void IsDriveFloppyANoFloppy(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.Disk.VendorId, Is.EqualTo("TEAC    "));
+            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("FD-05PUB        "));
+            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("3000"));
+            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Usb));
+            Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
+            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
+            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.IsMediaPresent, Is.False);
+            Assert.That(vinfo.FileSystem.Label, Is.Empty);
+            Assert.That(vinfo.FileSystem.Serial, Is.Empty);
+            Assert.That(vinfo.FileSystem.Name, Is.Empty);
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.RandomDeviceGuidReasonNoHwId));
+            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("f35b67a2-fda7-11ea-b203-7085c2221e14"));
+            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.Unknown));
+            Assert.That(vinfo.Disk.Cylinders, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.TracksPerCylinder, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.SectorsPerTrack, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.BytesPerSector, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+            Assert.That(vinfo.Disk.BytesPerPhysicalSector, Is.EqualTo(vinfo.Disk.BytesPerSector));
+            Assert.That(vinfo.Partition, Is.Null);
+        }
 
         [Test]
         public void DriveC()

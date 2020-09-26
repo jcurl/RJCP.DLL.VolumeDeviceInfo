@@ -1,9 +1,114 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VolumeInfoTest>
-  <!-- 0x0700C = 00 0000 0000 0111 0000 0000 1100
+  <!-- 0x0700F = 00 0000 0000 0111 0000 0000 1111
                  ZY XWVU TSRQ PONM LKJI HGFE DCBA
-       Drives C, D, M, N, O -->
-  <GetLogicalDrives result="28684" />
+       Drives A, B, C, D, M, N, O -->
+  <GetLogicalDrives result="28687" />
+  <Path path="A:">
+    <FileAttributes result="16" />
+    <VolumePathName result="A:\" />
+    <QueryDosDevice result="\Device\Floppy0" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="FLOPPY" />
+      <SerialNumber result="6C26-C2C2" />
+      <FileSystem result="FAT" />
+      <Flags result="6" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="A:\">
+    <FileAttributes result="16" />
+    <VolumePathName result="A:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\" />
+    <VolumeInformation result="">
+      <Label result="FLOPPY" />
+      <SerialNumber result="6C26-C2C2" />
+      <FileSystem result="FAT" />
+      <Flags result="6" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="1" />
+    <StorageDeviceProperty error="1" />
+    <StorageDeviceNumber error="1" />
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="2" />
+      <Cylinders result="80" />
+      <TracksPerCylinder result="2" />
+      <SectorsPerTrack result="18" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment error="1" />
+    <PartitionInformation error="1" />
+    <MediaPresent result="False" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="Unknown" error="1" />
+  </Path>
+  <Path path="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\">
+    <FileAttributes result="16" />
+    <VolumePathName result="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\" />
+    <VolumeInformation result="">
+      <Label result="FLOPPY" />
+      <SerialNumber result="6C26-C2C2" />
+      <FileSystem result="FAT" />
+      <Flags result="6" />
+    </VolumeInformation>
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="B:">
+    <FileAttributes result="-1" />
+    <VolumePathName result="B:\" />
+    <QueryDosDevice result="\Device\Floppy1" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
+  <Path path="B:\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="B:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="1" />
+    <StorageDeviceProperty error="1" />
+    <StorageDeviceNumber error="1" />
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry error="21" />
+    <StorageAlignment error="1" />
+    <PartitionInformation error="1" />
+    <MediaPresent result="False" />
+    <DiskReadOnly result="True" />
+    <SeekPenalty result="Unknown" error="1" />
+  </Path>
+  <Path path="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
   <Path path="C:">
     <FileAttributes result="16" />
     <VolumePathName result="C:\" />

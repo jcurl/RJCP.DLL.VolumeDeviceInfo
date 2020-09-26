@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VolumeInfoTest>
+  <!-- 0x00001 = 00 0000 0000 0000 0000 0000 0001
+                 ZY XWVU TSRQ PONM LKJI HGFE DCBA
+       Drives A, C, D, E, F, M, N, O, P, R -->
+  <GetLogicalDrives result="1" />
+  <Path path="A:">
+    <FileAttributes result="-1" />
+    <VolumePathName result="A:\" />
+    <QueryDosDevice result="\Device\Floppy0" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
+  <Path path="A:\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="A:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="50" />
+    <StorageDeviceProperty result="">
+      <VendorId result="TEAC    " />
+      <DeviceSerialNumber result="" />
+      <ProductId result="FD-05PUB        " />
+      <ProductRevision result="3000" />
+      <RemovableMedia result="True" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="7" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="2" />
+      <DeviceGuid result="f35b67a2-fda7-11ea-b203-7085c2221e14" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry error="21" />
+    <StorageAlignment error="50" />
+    <PartitionInformation error="50" />
+    <MediaPresent result="False" />
+    <DiskReadOnly result="True" />
+    <SeekPenalty result="Unknown" error="87" />
+  </Path>
+  <Path path="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
+    <VolumeInformation error="21" />
+    <CreateFileFromDevice error="21" throws="True" />
+  </Path>
+</VolumeInfoTest>

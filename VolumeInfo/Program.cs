@@ -48,24 +48,26 @@
                     Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
                     Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
                     Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
-                    Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
-                    Console.WriteLine("    Part Number     : {0}", info.Partition.Number);
-                    Console.WriteLine("    Part Offset     : {0:X8}", info.Partition.Offset);
-                    Console.WriteLine("    Part Length     : {0:F1} GB", info.Partition.Length / 1024.0 / 1024.0 / 1024.0);
-                    switch (info.Partition.Style) {
-                    case PartitionStyle.MasterBootRecord:
-                        var mbrPart = (VolumeDeviceInfo.IMbrPartition)info.Partition;
-                        Console.WriteLine("    MBR bootable    : {0}", mbrPart.Bootable);
-                        Console.WriteLine("    MBR Type        : {0}", mbrPart.Type);
-                        Console.WriteLine("    MBR Offset      : {0}", mbrPart.MbrSectorsOffset);
-                        break;
-                    case PartitionStyle.GuidPartitionTable:
-                        var gptPart = (VolumeDeviceInfo.IGptPartition)info.Partition;
-                        Console.WriteLine("    GPT Attributes  : {0}", gptPart.Attributes);
-                        Console.WriteLine("    GPT Name        : {0}", gptPart.Name);
-                        Console.WriteLine("    GPT Type        : {0}", gptPart.Type);
-                        Console.WriteLine("    GPT Id          : {0}", gptPart.Id);
-                        break;
+                    if (info.Partition != null) {
+                        Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
+                        Console.WriteLine("    Part Number     : {0}", info.Partition.Number);
+                        Console.WriteLine("    Part Offset     : {0:X8}", info.Partition.Offset);
+                        Console.WriteLine("    Part Length     : {0:F1} GB", info.Partition.Length / 1024.0 / 1024.0 / 1024.0);
+                        switch (info.Partition.Style) {
+                        case PartitionStyle.MasterBootRecord:
+                            var mbrPart = (VolumeDeviceInfo.IMbrPartition)info.Partition;
+                            Console.WriteLine("    MBR bootable    : {0}", mbrPart.Bootable);
+                            Console.WriteLine("    MBR Type        : {0}", mbrPart.Type);
+                            Console.WriteLine("    MBR Offset      : {0}", mbrPart.MbrSectorsOffset);
+                            break;
+                        case PartitionStyle.GuidPartitionTable:
+                            var gptPart = (VolumeDeviceInfo.IGptPartition)info.Partition;
+                            Console.WriteLine("    GPT Attributes  : {0}", gptPart.Attributes);
+                            Console.WriteLine("    GPT Name        : {0}", gptPart.Name);
+                            Console.WriteLine("    GPT Type        : {0}", gptPart.Type);
+                            Console.WriteLine("    GPT Id          : {0}", gptPart.Id);
+                            break;
+                        }
                     }
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
