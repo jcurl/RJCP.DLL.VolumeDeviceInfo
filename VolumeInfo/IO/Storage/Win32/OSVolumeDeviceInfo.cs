@@ -13,7 +13,12 @@
 
         public System.IO.FileAttributes GetFileAttributes(string pathName)
         {
-            return (System.IO.FileAttributes)Kernel32.GetFileAttributes(pathName);
+            ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
+            try {
+                return (System.IO.FileAttributes)Kernel32.GetFileAttributes(pathName);
+            } finally {
+                SetErrorMode(mode);
+            }
         }
 
         public string GetVolumePathName(string pathName)

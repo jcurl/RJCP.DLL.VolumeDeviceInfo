@@ -64,6 +64,7 @@
     <Compile Include="IO\Storage\VolumeDeviceInfo.cs" />
     <Compile Include="IO\Storage\BusType.cs" />
     <Compile Include="IO\Storage\Win32\VolumeDeviceQuery.cs" />
+    <Compile Include="Native\Win32\Kernel32+ErrorModes.cs" />
     <Compile Include="Native\Win32\Kernel32+FileAttributes.cs" />
     <Compile Include="Native\Win32\Kernel32+ACCESS_MASK.cs" />
     <Compile Include="Native\Win32\Kernel32+CreateFileFlags.cs" />

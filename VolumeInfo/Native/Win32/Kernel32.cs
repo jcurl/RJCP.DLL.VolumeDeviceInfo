@@ -59,5 +59,8 @@ namespace VolumeInfo.Native.Win32
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern int GetLogicalDrives();
+
+        [DllImport("kernel32.dll")]
+        public static extern ErrorModes SetErrorMode(ErrorModes uMode);
     }
 }

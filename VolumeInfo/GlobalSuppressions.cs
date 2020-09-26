@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Major Code Smell", "S1144:Unused private types or members should be removed", Justification = "P/Invoke Code", Scope = "namespaceanddescendants", Target = "N:VolumeInfo.Native.Win32")]
 [assembly: SuppressMessage("Minor Code Smell", "S1210:\"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"", Justification = "P/Invoke code", Scope = "type", Target = "~T:VolumeInfo.Native.Win32.Kernel32.ACCESS_MASK")]
 [assembly: SuppressMessage("Minor Code Smell", "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes", Justification = "P/Invoke code", Scope = "namespaceanddescendants", Target = "N:VolumeInfo.Native.Win32")]
+[assembly: SuppressMessage("Critical Code Smell", "S2346:Flags enumerations zero-value members should be named \"None\"", Justification = "P/Invoke code", Scope = "namespaceanddescendants", Target = "N:VolumeInfo.Native.Win32")]
 [assembly: SuppressMessage("Major Code Smell", "S4016:Enumeration members should not be named \"Reserved\"", Justification = "P/Invoke code", Scope = "namespaceanddescendants", Target = "N:VolumeInfo.Native.Win32")]
 [assembly: SuppressMessage("Major Code Smell", "S4070:Non-flags enums should not be marked with \"FlagsAttribute\"", Justification = "P/Invoke code", Scope = "namespaceanddescendants", Target = "N:VolumeInfo.Native.Win32")]
 
