@@ -1,6 +1,7 @@
 ﻿namespace VolumeInfo
 {
     using System;
+    using System.Collections.Generic;
     using IO.Storage;
 
     public static class Program
@@ -25,6 +26,8 @@
             }
         }
 
+        private static HashSet<string> s_Paths = new HashSet<string>();
+
         static int Main(string[] args)
         {
             Options options = new Options();
@@ -32,13 +35,11 @@
             foreach (string device in args) {
                 if (options.ParseOption(device)) continue;
 
-                Console.WriteLine("Device Path: {0}", device);
-
-                if (options.LogApi) LogApi.LogDeviceData.Capture(device);
-
-                VolumeDeviceInfo info;
                 try {
-                    info = new VolumeDeviceInfo(device);
+                    VolumeDeviceInfo info = new VolumeDeviceInfo(device);
+                    Console.WriteLine("Device Path: {0}", info.Path);
+                    if (options.LogApi) Capture(info);
+
                     Console.WriteLine("  Volume");
                     Console.WriteLine("    Volume Path     : {0}", info.Volume.Path);
                     Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
@@ -97,12 +98,38 @@
                     }
                     Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                 } catch (Exception ex) {
+                    if (options.LogApi) Capture(device);
                     Console.WriteLine("  Error: {0}", ex.Message);
                 }
                 Console.WriteLine("");
             }
 
             return 0;
+        }
+
+        static void Capture(VolumeDeviceInfo info)
+        {
+            CaptureItem(info.Path);
+            Capture(info.Path);
+            Capture(info.Volume.Path);
+            Capture(info.Volume.DevicePath);
+        }
+
+        static void Capture(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return;
+            string noslash = path.TrimEnd(new[] { System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar });
+            CaptureItem(noslash);
+            CaptureItem(noslash + System.IO.Path.DirectorySeparatorChar);
+        }
+
+        static void CaptureItem(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return;
+            if (s_Paths.Contains(path)) return;
+            s_Paths.Add(path);
+            Console.WriteLine("  Logged: {0}", path);
+            LogApi.LogDeviceData.Capture(path);
         }
     }
 }
