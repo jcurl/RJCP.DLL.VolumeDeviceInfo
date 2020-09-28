@@ -184,6 +184,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("0D18-1AEE"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("FAT"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x80206));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(1));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(1457664));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(120832));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(120832));
         }
 
         [Test]
@@ -371,6 +376,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("D470-C5ED"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(510653362176));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(363201818624));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(363201818624));
         }
 
         [Test]
@@ -412,6 +422,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("CC1F-1834"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("FAT32"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x20206));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(268435456));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(240005120));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(240005120));
         }
 
         [Test]
@@ -539,6 +554,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("0000-0000"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("exFAT"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x00020206));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(256));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(63988301824));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(37841797120));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(37841797120));
         }
 
         [Test]
@@ -666,6 +686,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("36F8-F5F6"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(63041433600));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(62945357824));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(62945357824));
         }
 
         [Test]
@@ -772,6 +797,8 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Partition, Is.Null);
+            Assert.That(vinfo.FileSystem, Is.Null);
         }
 
         [Test]
@@ -783,6 +810,8 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Partition, Is.Null);
+            Assert.That(vinfo.FileSystem, Is.Null);
         }
 
         [Test]
@@ -934,6 +963,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("C858-F289"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(536866816));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(519839744));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(519839744));
             Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));           // Unsupported
             Assert.That(vinfo.Disk.Guid, Is.EqualTo(Guid.Empty));                          // Unsupported
             Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Unknown));            // Unsupported
@@ -952,6 +986,11 @@
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(6));
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(1));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(536866816));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(519839744));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(519839744));
         }
 
         [Test]
@@ -1039,10 +1078,6 @@
             Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.FileSystem.Label, Is.Empty);
-            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("F099-8836"));
-            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
-            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E706FF));
             Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("8efcc1d1-b02a-05d7-56a6-06aaae42be6a"));
             Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
@@ -1061,6 +1096,15 @@
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(7));
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.True);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(128));
+            Assert.That(vinfo.FileSystem.Label, Is.Empty);
+            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("F099-8836"));
+            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E706FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(4051562496));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(4032421888));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(4032421888));
         }
 
         [Test]

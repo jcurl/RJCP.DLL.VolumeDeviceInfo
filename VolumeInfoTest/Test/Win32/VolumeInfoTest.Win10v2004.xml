@@ -15,6 +15,13 @@
       <FileSystem result="FAT" />
       <Flags result="524806" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="1" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="1457664" />
+      <TotalBytesFree result="120832" />
+      <UserBytesFree result="120832" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="A:\">
@@ -28,6 +35,13 @@
       <FileSystem result="FAT" />
       <Flags result="524806" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="1" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="1457664" />
+      <TotalBytesFree result="120832" />
+      <UserBytesFree result="120832" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}">
@@ -36,6 +50,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="50" />
     <StorageDeviceProperty result="">
@@ -85,6 +100,13 @@
       <FileSystem result="FAT" />
       <Flags result="524806" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="1" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="1457664" />
+      <TotalBytesFree result="120832" />
+      <UserBytesFree result="120832" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="C:">
@@ -93,6 +115,13 @@
     <QueryDosDevice result="\Device\HarddiskVolume3" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="C:\">
@@ -106,6 +135,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{4a2248f3-ec20-4c41-b781-ff19fa7913e6}">
@@ -114,6 +150,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -178,6 +215,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:">
@@ -191,6 +235,13 @@
       <FileSystem result="exFAT" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\">
@@ -204,6 +255,13 @@
       <FileSystem result="exFAT" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{d5fcf8f3-1d12-11ea-913c-806e6f6e6963}">
@@ -212,6 +270,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -275,6 +334,13 @@
       <FileSystem result="exFAT" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:">
@@ -288,6 +354,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <!-- Path E: has the current directory E:\. If you changed the path while in E: to
@@ -312,6 +385,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{299b5220-f500-11ea-9168-985fd3d32a6a}">
@@ -320,6 +400,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -383,6 +464,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:">
@@ -396,6 +484,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="4051562496" />
+      <TotalBytesFree result="4032421888" />
+      <UserBytesFree result="4032421888" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="F:\">
@@ -409,6 +504,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="4051562496" />
+      <TotalBytesFree result="4032421888" />
+      <UserBytesFree result="4032421888" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{58184c44-f6bc-11ea-9169-985fd3d32a6a}">
@@ -417,6 +519,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -474,6 +577,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="4051562496" />
+      <TotalBytesFree result="4032421888" />
+      <UserBytesFree result="4032421888" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="M:">
@@ -488,6 +598,14 @@
       <FileSystem result="NTFS" />
       <Flags result="13043455" />
     </VolumeInformation>
+    <!-- Obviously bogus, this is a network drive but returns details of the boot partition -->
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="M:\">
@@ -502,6 +620,14 @@
       <FileSystem result="NTFS" />
       <Flags result="13043455" />
     </VolumeInformation>
+    <!-- Obviously bogus, this is a network drive but returns details of the boot partition -->
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="N:">
@@ -515,6 +641,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="N:\">
@@ -528,6 +661,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:">
@@ -541,6 +681,13 @@
       <FileSystem result="exFAT" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\">
@@ -554,6 +701,13 @@
       <FileSystem result="exFAT" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="P:">
@@ -567,6 +721,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="P:\">
@@ -580,6 +741,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:\books">
@@ -588,6 +756,13 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\books\">
@@ -596,6 +771,13 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="1" />
     <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:\Calculus">
@@ -604,6 +786,13 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\Calculus\">
@@ -612,6 +801,13 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="1" />
     <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@">
@@ -620,6 +816,7 @@
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="2" />
     <CreateFileFromDevice error="2" throws="True" />
   </Path>
   <Path path="@:">
@@ -628,6 +825,7 @@
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="3" />
+    <DiskFreeSpace error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:\">
@@ -636,6 +834,7 @@
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
     <VolumeInformation error="3" />
+    <DiskFreeSpace error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:">
@@ -644,6 +843,7 @@
     <QueryDosDevice error="2" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="3" />
+    <DiskFreeSpace error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:\">
@@ -652,6 +852,7 @@
     <QueryDosDevice error="3" />
     <VolumeNameForVolumeMountPoint error="2" />
     <VolumeInformation error="3" />
+    <DiskFreeSpace error="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\HarddiskVolume3">
@@ -660,6 +861,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -724,6 +926,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201818624" />
+      <UserBytesFree result="363201818624" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\HarddiskVolume1">
@@ -732,6 +941,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -796,6 +1006,13 @@
       <FileSystem result="FAT32" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="268435456" />
+      <TotalBytesFree result="240005120" />
+      <UserBytesFree result="240005120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{49c071ff-6931-498b-afad-d095ee3500d2}">
@@ -804,6 +1021,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -868,6 +1086,13 @@
       <FileSystem result="FAT32" />
       <Flags result="131590" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="268435456" />
+      <TotalBytesFree result="240005120" />
+      <UserBytesFree result="240005120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive0">
@@ -876,6 +1101,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -935,6 +1161,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="31" />
     <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
     <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive1">
@@ -943,6 +1170,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -1001,6 +1229,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="31" />
     <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
     <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive2">
@@ -1009,6 +1238,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -1067,6 +1297,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="31" />
     <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
     <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="R:">
@@ -1080,6 +1311,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="536866816" />
+      <TotalBytesFree result="519839744" />
+      <UserBytesFree result="519839744" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="R:\">
@@ -1093,6 +1331,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="536866816" />
+      <TotalBytesFree result="519839744" />
+      <UserBytesFree result="519839744" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\GLOBALROOT\Device\ImDisk0">
@@ -1101,6 +1346,7 @@
     <QueryDosDevice error="161" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty error="1" />
@@ -1138,6 +1384,13 @@
       <FileSystem result="NTFS" />
       <Flags result="65472255" />
     </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="536866816" />
+      <TotalBytesFree result="519839744" />
+      <UserBytesFree result="519839744" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="C:\Users\user\Desktop">
@@ -1146,7 +1399,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="C:\Users\user\Desktop\">
+    <FileAttributes result="17" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="4390" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:\efolder1">
     <FileAttributes result="16" />
@@ -1154,7 +1429,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\">
+    <FileAttributes result="16" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="4390" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:\efolder1\windows">
     <FileAttributes result="1040" />
@@ -1162,7 +1459,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\windows\">
+    <FileAttributes result="1040" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:\efolder1\windows\System32">
     <FileAttributes result="16" />
@@ -1170,7 +1489,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\windows\System32\">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="4390" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:\ffolder1">
     <FileAttributes result="16" />
@@ -1178,7 +1519,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="4051562496" />
+      <TotalBytesFree result="4032421888" />
+      <UserBytesFree result="4032421888" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\">
+    <FileAttributes result="16" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="4390" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="4051562496" />
+      <TotalBytesFree result="4032421888" />
+      <UserBytesFree result="4032421888" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1">
     <FileAttributes result="1040" />
@@ -1186,7 +1549,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1\">
+    <FileAttributes result="1040" />
+    <VolumePathName result="E:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63041433600" />
+      <TotalBytesFree result="62945357824" />
+      <UserBytesFree result="62945357824" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1\windows">
     <FileAttributes result="1040" />
@@ -1194,7 +1579,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1\windows\">
+    <FileAttributes result="1040" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="510653362176" />
+      <TotalBytesFree result="363201814528" />
+      <UserBytesFree result="363201814528" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="E:\efolder1\calculus">
     <FileAttributes result="1040" />
@@ -1202,7 +1609,29 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="E:\efolder1\calculus\">
+    <FileAttributes result="1040" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="F:\ffolder1\efolder1\calculus">
     <FileAttributes result="1040" />
@@ -1210,6 +1639,28 @@
     <QueryDosDevice error="6" />
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
     <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\ffolder1\efolder1\calculus\">
+    <FileAttributes result="1040" />
+    <VolumePathName result="O:\Calculus\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint error="87" />
+    <VolumeInformation error="144" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="256" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="63988301824" />
+      <TotalBytesFree result="37841797120" />
+      <UserBytesFree result="37841797120" />
+    </DiskFreeSpace>
+    <CreateFileFromDevice error="3" throws="True" />
   </Path>
 </VolumeInfoTest>

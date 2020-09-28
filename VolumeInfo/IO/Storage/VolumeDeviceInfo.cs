@@ -28,6 +28,7 @@
             public DiskGeometry DiskGeometry;
             public StorageAccessAlignment Alignment;
             public PartitionInformation PartitionInfo;
+            public DiskFreeSpace FreeSpace;
 
             public bool IsFloppy
             {
@@ -241,6 +242,46 @@
             /// </summary>
             /// <value>The name of the file system for the volume.</value>
             string Name { get; }
+
+            /// <summary>
+            /// Gets the bytes per sector for the file system.
+            /// </summary>
+            /// <value>
+            /// The bytes per sector for the file system.
+            /// </value>
+            int BytesPerSector { get; }
+
+            /// <summary>
+            /// Gets the sectors per cluster for the file system.
+            /// </summary>
+            /// <value>
+            /// The sectors per cluster for the file system.
+            /// </value>
+            int SectorsPerCluster { get; }
+
+            /// <summary>
+            /// Gets the amount of free bytes available to the user.
+            /// </summary>
+            /// <value>
+            /// The amount of free bytes available to the user.
+            /// </value>
+            long UserFreeBytes { get; }
+
+            /// <summary>
+            /// Gets the total free bytes for the file system.
+            /// </summary>
+            /// <value>
+            /// The total free bytes for the file system.
+            /// </value>
+            long TotalFreeBytes { get; }
+
+            /// <summary>
+            /// Gets the total number of bytes for the file system.
+            /// </summary>
+            /// <value>
+            /// The total bytes for the file system.
+            /// </value>
+            long TotalBytes { get; }
         }
 
         private class FileSystemInfo : IFileSystemInfo
@@ -253,9 +294,19 @@
 
             public string Serial { get { return m_Data.VolumeQuery?.VolumeSerial ?? string.Empty; } }
 
-            public FileSystemFlags Flags { get { return m_Data.VolumeQuery == null ? 0 : m_Data.VolumeQuery.Flags; } }
+            public FileSystemFlags Flags { get { return m_Data.VolumeQuery?.Flags ?? (FileSystemFlags)0; } }
 
             public string Name { get { return m_Data.VolumeQuery?.FileSystem ?? string.Empty; } }
+
+            public int BytesPerSector { get { return m_Data.FreeSpace?.BytesPerSector ?? 0; } }
+
+            public int SectorsPerCluster { get { return m_Data.FreeSpace?.SectorsPerCluster ?? 0; } }
+
+            public long UserFreeBytes { get { return m_Data.FreeSpace?.UserBytesFree ?? 0; } }
+
+            public long TotalFreeBytes { get { return m_Data.FreeSpace?.TotalBytesFree ?? 0; } }
+
+            public long TotalBytes { get { return m_Data.FreeSpace?.TotalBytes ?? 0; } }
         }
 
         /// <summary>
@@ -818,6 +869,7 @@
         private void GetDeviceInformation(string devicePathName)
         {
             m_VolumeData.VolumeQuery = m_OS.GetVolumeInformation(m_VolumeData.VolumeDevicePathSlash);
+            m_VolumeData.FreeSpace = m_OS.GetDiskFreeSpace(m_VolumeData.VolumeDevicePathSlash);
             FileAttributes attr = m_OS.GetFileAttributes(m_VolumeData.VolumeDevicePathSlash);
 
             // For floppy drives, m_OS.GetMediaPresent is false, even if media is present. Looking into the sources from

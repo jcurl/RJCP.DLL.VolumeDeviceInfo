@@ -83,6 +83,7 @@
             QueryApi(pathNode, "QueryDosDevice", vinfo, () => { return vinfo.QueryDosDevice(devicePath); });
             QueryApi(pathNode, "VolumeNameForVolumeMountPoint", vinfo, () => { return vinfo.GetVolumeNameForVolumeMountPoint(devicePath); });
             QueryVolumeInfo(pathNode, vinfo, devicePath);
+            QueryFreeSpace(pathNode, vinfo, devicePath);
 
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
                 if (hDevice != null && !hDevice.IsInvalid) {
@@ -213,6 +214,20 @@
             WriteApiResult(volumeInfoNode, "SerialNumber", info.VolumeSerial);
             WriteApiResult(volumeInfoNode, "FileSystem", info.FileSystem);
             WriteApiResult(volumeInfoNode, "Flags", (int)info.Flags);
+        }
+
+        private void QueryFreeSpace(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, string pathName)
+        {
+            DiskFreeSpace space = QueryApi(pathNode, "DiskFreeSpace", vinfo, () => {
+                return vinfo.GetDiskFreeSpace(pathName);
+            }, out XmlElement spaceInfo);
+
+            if (space == null) return;
+            WriteApiResult(spaceInfo, "SectorsPerCluster", space.SectorsPerCluster);
+            WriteApiResult(spaceInfo, "BytesPerSector", space.BytesPerSector);
+            WriteApiResult(spaceInfo, "TotalBytes", space.TotalBytes);
+            WriteApiResult(spaceInfo, "TotalBytesFree", space.TotalBytesFree);
+            WriteApiResult(spaceInfo, "UserBytesFree", space.UserBytesFree);
         }
 
         private XmlElement CreateDevicePath(string devicePath)

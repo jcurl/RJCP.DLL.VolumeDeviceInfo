@@ -233,7 +233,6 @@
         private void IsDrivePhys0(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
-            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
@@ -266,6 +265,7 @@
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
             Assert.That(vinfo.Disk.Geometry.BytesPerSector, Is.EqualTo(512));
             Assert.That(vinfo.Disk.Geometry.BytesPerPhysicalSector, Is.EqualTo(vinfo.Disk.Geometry.BytesPerSector)); // Not supported on WinXP
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
         }
 
         [Test]
@@ -331,7 +331,6 @@
         private void IsDriveBoot(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
-            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.False));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(32256));
@@ -419,7 +418,7 @@
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(32));
             Assert.That(vinfo.Disk.Geometry.BytesPerSector, Is.EqualTo(2048));
             Assert.That(vinfo.Disk.Geometry.BytesPerPhysicalSector, Is.EqualTo(vinfo.Disk.Geometry.BytesPerSector)); // Not supported on WinXP
-            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.True));
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));

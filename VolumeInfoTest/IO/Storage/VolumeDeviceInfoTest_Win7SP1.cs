@@ -179,6 +179,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("8C28-A8AD"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E700FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(251552329728));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(176125943808));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(176125943808));
         }
 
         [Test]
@@ -219,6 +224,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("D021-4443"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E700FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(104853504));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(74989568));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(74989568));
         }
 
         [Test]
@@ -575,6 +585,11 @@
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("6C45-9ED2"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
             Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x03E700FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(320070479872));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(292682526720));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(292682526720));
         }
 
         [Test]

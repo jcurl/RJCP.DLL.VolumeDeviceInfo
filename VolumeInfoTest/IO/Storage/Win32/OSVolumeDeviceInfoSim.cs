@@ -70,6 +70,7 @@
             AddItem(m_ReadOnly, path, pathNode["DiskReadOnly"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
+            AddDiskFreeSpace(m_DiskFree, path, pathNode["DiskFreeSpace"]);
             AddDeviceNumber(m_DeviceNumber, path, pathNode["StorageDeviceNumber"]);
             AddDeviceNumberEx(m_DeviceNumberEx, path, pathNode["StorageDeviceNumberEx"]);
             AddGeometry(m_Geometry, path, pathNode["DiskGeometry"]);
@@ -129,6 +130,33 @@
                 Flags = (FileSystemFlags)int.Parse(flags, CultureInfo.InvariantCulture)
             };
             dictionary.Add(path, new ResultOrError<VolumeInfo>(volInfo));
+        }
+
+        private void AddDiskFreeSpace(IDictionary<string, ResultOrError<DiskFreeSpace>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<DiskFreeSpace> result = GetResultOrError<DiskFreeSpace>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            string sectorsPerCluster = node["SectorsPerCluster"].Attributes["result"].Value;
+            string bytesPerSector = node["BytesPerSector"].Attributes["result"].Value;
+            string totalBytes = node["TotalBytes"].Attributes["result"].Value;
+            string totalBytesFree = node["TotalBytesFree"].Attributes["result"].Value;
+            string userBytesFree = node["UserBytesFree"].Attributes["result"].Value;
+            DiskFreeSpace freeInfo = new DiskFreeSpace() {
+                SectorsPerCluster = int.Parse(sectorsPerCluster, CultureInfo.InvariantCulture),
+                BytesPerSector = int.Parse(bytesPerSector, CultureInfo.InvariantCulture),
+                TotalBytes = long.Parse(totalBytes, CultureInfo.InvariantCulture),
+                TotalBytesFree = long.Parse(totalBytesFree, CultureInfo.InvariantCulture),
+                UserBytesFree = long.Parse(userBytesFree, CultureInfo.InvariantCulture),
+            };
+            dictionary.Add(path, new ResultOrError<DiskFreeSpace>(freeInfo));
         }
 
         private void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
@@ -439,6 +467,13 @@
         public VolumeInfo GetVolumeInformation(string devicePathName)
         {
             return GetResultOrThrow(m_VolumeInfo, devicePathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<DiskFreeSpace>> m_DiskFree = new Dictionary<string, ResultOrError<DiskFreeSpace>>();
+
+        public DiskFreeSpace GetDiskFreeSpace(string devicePathName)
+        {
+            return GetResultOrThrow(m_DiskFree, devicePathName);
         }
 
         private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new Dictionary<string, ResultOrError<bool>>();

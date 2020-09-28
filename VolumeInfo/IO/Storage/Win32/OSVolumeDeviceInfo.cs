@@ -50,16 +50,21 @@
 
         public SafeHandle CreateFileFromDevice(string pathName)
         {
-            SafeObjectHandle hDevice = CreateFile(pathName, 0,
-                FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING,
-                0, SafeObjectHandle.Null);
-            if (hDevice == null || hDevice.IsInvalid) {
-                m_Win32Error = Marshal.GetLastWin32Error();
-                int e = Marshal.GetHRForLastWin32Error();
-                Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
-                throw new System.IO.IOException("Couldn't open device for reading", e);
+            ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
+            try {
+                SafeObjectHandle hDevice = CreateFile(pathName, 0,
+                    FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING,
+                    0, SafeObjectHandle.Null);
+                if (hDevice == null || hDevice.IsInvalid) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    int e = Marshal.GetHRForLastWin32Error();
+                    Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
+                    throw new System.IO.IOException("Couldn't open device for reading", e);
+                }
+                return hDevice;
+            } finally {
+                SetErrorMode(mode);
             }
-            return hDevice;
         }
 
         public bool RefreshVolume(SafeHandle hDevice)
@@ -156,6 +161,42 @@
                     Flags = flags,
                     FileSystem = fileSystem.ToString(),
                 };
+            } finally {
+                SetErrorMode(mode);
+            }
+        }
+
+        public DiskFreeSpace GetDiskFreeSpace(string devicePathName)
+        {
+            DiskFreeSpace space = new DiskFreeSpace() {
+                SectorsPerCluster = 0,
+                BytesPerSector = 0,
+                UserBytesFree = 0,
+                TotalBytesFree = 0,
+                TotalBytes = 0
+            };
+
+            ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
+            try {
+                bool successEx = GetDiskFreeSpaceEx(devicePathName, out ulong freeBytes, out ulong totalBytes, out ulong totalFreeBytes);
+                if (!successEx) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                } else {
+                    space.UserBytesFree = (long)freeBytes;
+                    space.TotalBytes = (long)totalBytes;
+                    space.TotalBytesFree = (long)totalFreeBytes;
+                }
+
+                bool success = Kernel32.GetDiskFreeSpace(devicePathName, out int sectorsPerCluster, out int bytesPerSector, out int _, out int _);
+                if (!success) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                } else {
+                    space.SectorsPerCluster = sectorsPerCluster;
+                    space.BytesPerSector = bytesPerSector;
+                }
+
+                if (!success && !successEx) return null;
+                return space;
             } finally {
                 SetErrorMode(mode);
             }

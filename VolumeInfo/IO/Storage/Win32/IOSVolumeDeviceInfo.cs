@@ -21,6 +21,8 @@
 
         VolumeInfo GetVolumeInformation(string devicePathName);
 
+        DiskFreeSpace GetDiskFreeSpace(string devicePathName);
+
         StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice);
 
         StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice);

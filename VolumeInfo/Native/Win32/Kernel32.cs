@@ -62,5 +62,13 @@ namespace VolumeInfo.Native.Win32
 
         [DllImport("kernel32.dll")]
         public static extern ErrorModes SetErrorMode(ErrorModes uMode);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool GetDiskFreeSpace(string lpRootPathName,
+            out int lpSectorsPerCluster, out int lpBytesPerSector, out int lpNumberOfFreeClusters, out int lpTotalNumberOfClusters);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool GetDiskFreeSpaceEx(string lpDirectoryName,
+            out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
     }
 }

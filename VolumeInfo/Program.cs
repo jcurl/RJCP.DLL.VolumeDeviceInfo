@@ -26,7 +26,7 @@
             }
         }
 
-        private static HashSet<string> s_Paths = new HashSet<string>();
+        private static readonly HashSet<string> s_Paths = new HashSet<string>();
 
         static int Main(string[] args)
         {
@@ -73,6 +73,11 @@
                         Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
                         Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
                         Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
+                        Console.WriteLine("    Bytes Per Sector: {0}", info.FileSystem.BytesPerSector);
+                        Console.WriteLine("    Sectors Per Clus: {0}", info.FileSystem.SectorsPerCluster);
+                        Console.WriteLine("    User Free       : {0:F1} GB", info.FileSystem.UserFreeBytes / 1024.0 / 1024.0 / 1024.0);
+                        Console.WriteLine("    Total Free      : {0:F1} GB", info.FileSystem.TotalFreeBytes / 1024.0 / 1024.0 / 1024.0);
+                        Console.WriteLine("    Capacity        : {0:F1} GB", info.FileSystem.TotalBytes / 1024.0 / 1024.0 / 1024.0);
                     }
                     Console.WriteLine("  Device");
                     Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
