@@ -797,6 +797,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Disk, Is.Null);
             Assert.That(vinfo.Partition, Is.Null);
             Assert.That(vinfo.FileSystem, Is.Null);
         }
@@ -810,6 +811,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Disk, Is.Null);
             Assert.That(vinfo.Partition, Is.Null);
             Assert.That(vinfo.FileSystem, Is.Null);
         }

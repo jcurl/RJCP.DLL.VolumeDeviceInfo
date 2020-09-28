@@ -79,29 +79,31 @@
                         Console.WriteLine("    Total Free      : {0:F1} GB", info.FileSystem.TotalFreeBytes / 1024.0 / 1024.0 / 1024.0);
                         Console.WriteLine("    Capacity        : {0:F1} GB", info.FileSystem.TotalBytes / 1024.0 / 1024.0 / 1024.0);
                     }
-                    Console.WriteLine("  Device");
-                    Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
-                    Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
-                    Console.WriteLine("    SerialNumber    : {0}", info.Disk.SerialNumber);
-                    Console.WriteLine("    Bus Type        : {0}", info.Disk.BusType.ToDescription(true));
-                    Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.ScsiDeviceType.ToDescription(), info.Disk.ScsiDeviceModifier);
-                    Console.WriteLine("    Command Queueing: {0}", info.Disk.HasCommandQueueing);
-                    Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
-                    Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
-                    Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
-                    Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Guid, info.Disk.GuidFlags);
-                    Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.DeviceType, info.Disk.DeviceNumber);
-                    Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
-                    if (info.Disk.Geometry != null) {
-                        Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
-                            info.Disk.Geometry.Cylinders, info.Disk.Geometry.TracksPerCylinder,
-                            info.Disk.Geometry.SectorsPerTrack, info.Disk.Geometry.BytesPerSector,
-                            info.Disk.Geometry.Cylinders * info.Disk.Geometry.TracksPerCylinder *
-                            info.Disk.Geometry.SectorsPerTrack * info.Disk.Geometry.BytesPerSector / 1024.0 / 1024.0 / 1024.0);
-                        Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}",
-                            info.Disk.Geometry.BytesPerPhysicalSector, info.Disk.Geometry.BytesPerSector);
+                    if (info.Disk != null) {
+                        Console.WriteLine("  Device");
+                        Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
+                        Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
+                        Console.WriteLine("    SerialNumber    : {0}", info.Disk.SerialNumber);
+                        Console.WriteLine("    Bus Type        : {0}", info.Disk.BusType.ToDescription(true));
+                        Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.ScsiDeviceType.ToDescription(), info.Disk.ScsiDeviceModifier);
+                        Console.WriteLine("    Command Queueing: {0}", info.Disk.HasCommandQueueing);
+                        Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
+                        Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
+                        Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
+                        Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Guid, info.Disk.GuidFlags);
+                        Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.DeviceType, info.Disk.DeviceNumber);
+                        Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
+                        if (info.Disk.Geometry != null) {
+                            Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
+                                info.Disk.Geometry.Cylinders, info.Disk.Geometry.TracksPerCylinder,
+                                info.Disk.Geometry.SectorsPerTrack, info.Disk.Geometry.BytesPerSector,
+                                info.Disk.Geometry.Cylinders * info.Disk.Geometry.TracksPerCylinder *
+                                info.Disk.Geometry.SectorsPerTrack * info.Disk.Geometry.BytesPerSector / 1024.0 / 1024.0 / 1024.0);
+                            Console.WriteLine("    Bytes/Sector    : Physical {0}; Logical {1}",
+                                info.Disk.Geometry.BytesPerPhysicalSector, info.Disk.Geometry.BytesPerSector);
+                        }
+                        Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                     }
-                    Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                 } catch (Exception ex) {
                     if (options.LogApi) Capture(device);
                     Console.WriteLine("  Error: {0}", ex.Message);

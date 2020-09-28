@@ -129,26 +129,28 @@
             string devicePathName = ResolveDevicePathNames(pathName);
             if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
 
-            Disk = new DiskInfo(m_VolumeData);
             Volume = new VolumePathInfo(m_VolumeData);
+            if (m_VolumeData.VolumeDevicePath != null) {
+                Disk = new DiskInfo(m_VolumeData);
 
-            // It's possible that drivers return file system and partition information, even when no media is present.
-            // In this case, the data is useless, and it's better that we don't present the information at all.
-            if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
-                if (m_VolumeData.VolumeQuery != null)
-                    FileSystem = new FileSystemInfo(m_VolumeData);
-                if (m_VolumeData.PartitionInfo != null) {
-                    // If there is no partition information, the property "Partition" is null.
-                    switch (m_VolumeData.PartitionInfo.Style) {
-                    case PartitionStyle.GuidPartitionTable:
-                        Partition = new GptPartitionInfo(m_VolumeData);
-                        break;
-                    case PartitionStyle.MasterBootRecord:
-                        Partition = new MbrPartitionInfo(m_VolumeData);
-                        break;
-                    default:
-                        Partition = new PartitionInfo(m_VolumeData);
-                        break;
+                // It's possible that drivers return file system and partition information, even when no media is present.
+                // In this case, the data is useless, and it's better that we don't present the information at all.
+                if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
+                    if (m_VolumeData.VolumeQuery != null)
+                        FileSystem = new FileSystemInfo(m_VolumeData);
+                    if (m_VolumeData.PartitionInfo != null) {
+                        // If there is no partition information, the property "Partition" is null.
+                        switch (m_VolumeData.PartitionInfo.Style) {
+                        case PartitionStyle.GuidPartitionTable:
+                            Partition = new GptPartitionInfo(m_VolumeData);
+                            break;
+                        case PartitionStyle.MasterBootRecord:
+                            Partition = new MbrPartitionInfo(m_VolumeData);
+                            break;
+                        default:
+                            Partition = new PartitionInfo(m_VolumeData);
+                            break;
+                        }
                     }
                 }
             }
