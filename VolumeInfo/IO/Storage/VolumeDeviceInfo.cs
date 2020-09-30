@@ -21,6 +21,7 @@
             public string VolumeDosDevicePath;
             public bool MediaPresent;
             public bool DiskReadOnly;
+            public int DriveType;
             public BoolUnknown HasSeekPenalty;
             public VolumeDeviceQuery DeviceQuery;
             public VolumeInfo VolumeQuery;
@@ -126,8 +127,8 @@
 
             m_OS = os;
             Path = pathName;
-            string devicePathName = ResolveDevicePathNames(pathName);
-            if (!string.IsNullOrEmpty(devicePathName)) GetDeviceInformation(devicePathName);
+            ResolveDevicePathNames(pathName);
+            GetDeviceInformation();
 
             Volume = new VolumePathInfo(m_VolumeData);
             if (m_VolumeData.VolumeDevicePath != null) {
@@ -193,6 +194,14 @@
             /// </summary>
             /// <value>The NT path, volume dos device path.</value>
             string DosDevicePath { get; }
+
+            /// <summary>
+            /// Gets the type of the drive.
+            /// </summary>
+            /// <value>
+            /// The type of the drive.
+            /// </value>
+            DriveType DriveType { get; }
         }
 
         private class VolumePathInfo : IVolumeInfo
@@ -208,6 +217,32 @@
             public string DriveLetter { get { return m_Data.VolumeDrive ?? string.Empty; } }
 
             public string DosDevicePath { get { return m_Data.VolumeDosDevicePath ?? string.Empty; } }
+
+            public DriveType DriveType
+            {
+                get
+                {
+                    switch(m_Data.DriveType) {
+                    case 0: // DRIVE_UNKNOWN:
+                    case 1: // DRIVE_NO_ROOT_DIR:
+                        return DriveType.Unknown;
+                    case 2: // DRIVE_REMOVABLE
+                        if (m_Data.IsFloppy) return DriveType.Floppy;
+                        if (m_Data.VolumeDosDevicePath != null && m_Data.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
+                            return DriveType.Floppy;
+                        return DriveType.Removable;
+                    case 3: // DRIVE_FIXED
+                        return DriveType.Fixed;
+                    case 4: // DRIVE_REMOTE
+                        return DriveType.Remote;
+                    case 5: // DRIVE_CDROM
+                        return DriveType.CdRom;
+                    case 6: // DRIVE_RAMDISK
+                        return DriveType.RamDisk;
+                    }
+                    return DriveType.Unknown;
+                }
+            }
         }
 
         /// <summary>
@@ -736,7 +771,7 @@
         /// </remarks>
         public IPartitionInfo Partition { get; private set; }
 
-        private string ResolveDevicePathNames(string pathName)
+        private void ResolveDevicePathNames(string pathName)
         {
             string volumePath;
             string volumeDevicePath;
@@ -826,7 +861,6 @@
 
             m_VolumeData.VolumeDrive = volumeDrive ?? string.Empty;
             m_VolumeData.VolumeDosDevicePath = volumeDosDevice ?? string.Empty;
-            return m_VolumeData.VolumeDevicePath;
         }
 
         private bool ParseDosDevice(string path, ref string volumeDosDevice, ref string volumeDrive, ref string pathName)
@@ -868,18 +902,27 @@
             return path.StartsWith(@"\\.\") || path.StartsWith(@"\\?\");
         }
 
-        private void GetDeviceInformation(string devicePathName)
+        private void GetDeviceInformation()
         {
+            if (m_VolumeData.VolumeDevicePath == null && IsDriveLetter(m_VolumeData.VolumeDrive)) {
+                string drive = string.Format("{0}{1}",
+                    m_VolumeData.VolumeDrive.TrimEnd(new[] { System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar }),
+                    System.IO.Path.DirectorySeparatorChar);
+                m_VolumeData.DriveType = m_OS.GetDriveType(drive);
+                return;
+            }
+
+            m_VolumeData.DriveType = m_OS.GetDriveType(m_VolumeData.VolumeDevicePathSlash);
             m_VolumeData.VolumeQuery = m_OS.GetVolumeInformation(m_VolumeData.VolumeDevicePathSlash);
             m_VolumeData.FreeSpace = m_OS.GetDiskFreeSpace(m_VolumeData.VolumeDevicePathSlash);
-            FileAttributes attr = m_OS.GetFileAttributes(m_VolumeData.VolumeDevicePathSlash);
 
             // For floppy drives, m_OS.GetMediaPresent is false, even if media is present. Looking into the sources from
             // .NET, the DriveInfo class checks if the file attribute directory bit is set instead. So use that first,
             // and only if it fails, then use the IOCTL later.
+            FileAttributes attr = m_OS.GetFileAttributes(m_VolumeData.VolumeDevicePathSlash);
             if ((int)attr != -1) m_VolumeData.MediaPresent = (attr & FileAttributes.Directory) != 0;
 
-            SafeHandle hDevice = m_OS.CreateFileFromDevice(devicePathName);
+            SafeHandle hDevice = m_OS.CreateFileFromDevice(m_VolumeData.VolumeDevicePath);
             try {
                 m_OS.RefreshVolume(hDevice);
                 m_VolumeData.DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);

@@ -45,6 +45,7 @@
                     Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
                     Console.WriteLine("    Volume Drive    : {0}", info.Volume.DriveLetter);
                     Console.WriteLine("    NT DOS Device   : {0}", info.Volume.DosDevicePath);
+                    Console.WriteLine("    Drive Type      : {0}", info.Volume.DriveType);
                     if (info.Partition != null) {
                         Console.WriteLine("  Partition");
                         Console.WriteLine("    Partition Style : {0}", info.Partition.Style);

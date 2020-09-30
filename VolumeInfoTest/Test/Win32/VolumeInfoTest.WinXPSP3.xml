@@ -22,6 +22,7 @@
       <TotalBytesFree result="1282560" />
       <UserBytesFree result="1282560" />
     </DiskFreeSpace>
+    <DriveType result="2" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="A:\">
@@ -42,6 +43,7 @@
       <TotalBytesFree result="1282560" />
       <UserBytesFree result="1282560" />
     </DiskFreeSpace>
+    <DriveType result="2" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}">
@@ -51,6 +53,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="267" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty error="1" />
@@ -87,6 +90,7 @@
       <TotalBytesFree result="1282560" />
       <UserBytesFree result="1282560" />
     </DiskFreeSpace>
+    <DriveType result="2" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="B:">
@@ -96,6 +100,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="B:\">
@@ -105,6 +110,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}">
@@ -114,6 +120,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="87" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty error="1" />
@@ -133,6 +140,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="C:">
@@ -148,6 +156,7 @@
       <TotalBytesFree result="35961565184" />
       <UserBytesFree result="35961565184" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="C:\">
@@ -168,6 +177,7 @@
       <TotalBytesFree result="35961565184" />
       <UserBytesFree result="35961565184" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}">
@@ -177,6 +187,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="87" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -235,6 +246,7 @@
       <TotalBytesFree result="35961561088" />
       <UserBytesFree result="35961561088" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive0">
@@ -244,6 +256,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="87" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -291,6 +304,7 @@
     <VolumeNameForVolumeMountPoint error="31" />
     <VolumeInformation error="31" />
     <DiskFreeSpace error="31" />
+    <DriveType result="3" />
     <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="D:">
@@ -311,6 +325,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\">
@@ -331,6 +346,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}">
@@ -340,6 +356,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="267" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty result="">
@@ -398,6 +415,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="\\.\CdRom0">
@@ -407,6 +425,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="267" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="1" />
     <StorageDeviceProperty result="">
@@ -465,6 +484,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="M:">
@@ -485,6 +505,7 @@
       <TotalBytesFree result="35961552896" />
       <UserBytesFree result="35961552896" />
     </DiskFreeSpace>
+    <DriveType result="4" />
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="M:\">
@@ -505,6 +526,7 @@
       <TotalBytesFree result="35961552896" />
       <UserBytesFree result="35961552896" />
     </DiskFreeSpace>
+    <DriveType result="4" />
     <CreateFileFromDevice error="123" throws="True" />
   </Path>
   <Path path="N:">
@@ -525,6 +547,7 @@
       <TotalBytesFree result="35961552896" />
       <UserBytesFree result="35961552896" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="N:\">
@@ -545,6 +568,7 @@
       <TotalBytesFree result="35961552896" />
       <UserBytesFree result="35961552896" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="O:">
@@ -565,6 +589,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="O:\">
@@ -585,6 +610,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="D:\I386">
@@ -600,6 +626,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="1" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="D:\I386\">
@@ -615,6 +642,7 @@
       <TotalBytesFree result="0" />
       <UserBytesFree result="0" />
     </DiskFreeSpace>
+    <DriveType result="5" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:">
@@ -624,6 +652,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="3" />
     <DiskFreeSpace error="3" />
+    <DriveType result="1" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="Z:\">
@@ -633,6 +662,7 @@
     <VolumeNameForVolumeMountPoint error="2" />
     <VolumeInformation error="3" />
     <DiskFreeSpace error="3" />
+    <DriveType result="1" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:">
@@ -642,6 +672,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="3" />
     <DiskFreeSpace error="3" />
+    <DriveType result="1" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@:\">
@@ -651,6 +682,7 @@
     <VolumeNameForVolumeMountPoint error="2" />
     <VolumeInformation error="3" />
     <DiskFreeSpace error="3" />
+    <DriveType result="1" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
   <Path path="@">
@@ -660,6 +692,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="2" />
+    <DriveType result="1" />
     <CreateFileFromDevice error="2" throws="True" />
   </Path>
   <Path path="C:\Documents and Settings\User\My Documents">
@@ -675,6 +708,7 @@
       <TotalBytesFree result="35961544704" />
       <UserBytesFree result="35961544704" />
     </DiskFreeSpace>
+    <DriveType result="1" />
     <CreateFileFromDevice error="5" throws="True" />
   </Path>
   <Path path="C:\Documents and Settings\Jason Curl\My Documents\">
@@ -690,6 +724,7 @@
       <TotalBytesFree result="35961544704" />
       <UserBytesFree result="35961544704" />
     </DiskFreeSpace>
+    <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
   </Path>
 </VolumeInfoTest>

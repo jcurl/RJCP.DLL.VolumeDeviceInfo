@@ -15,6 +15,7 @@ namespace VolumeInfo.Native.Win32
     using System.Text;
     using IO.Storage;
 
+    [SuppressUnmanagedCodeSecurity]
     internal static partial class Kernel32
     {
         /// <summary>
@@ -30,7 +31,6 @@ namespace VolumeInfo.Native.Win32
         /// If the function succeeds, the return value is nonzero.
         /// If the function fails, the return value is zero.To get extended error information, call <see cref="GetLastError"/>.
         /// </returns>
-        [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool CloseHandle(IntPtr hObject);
@@ -70,5 +70,8 @@ namespace VolumeInfo.Native.Win32
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern bool GetDiskFreeSpaceEx(string lpDirectoryName,
             out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetDriveType(string lpRootPathName);
     }
 }

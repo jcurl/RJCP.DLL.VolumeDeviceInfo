@@ -23,6 +23,8 @@
 
         DiskFreeSpace GetDiskFreeSpace(string devicePathName);
 
+        int GetDriveType(string devicePathName);
+
         StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice);
 
         StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice);

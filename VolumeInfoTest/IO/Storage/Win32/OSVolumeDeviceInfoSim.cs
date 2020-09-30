@@ -68,6 +68,7 @@
             AddItem(m_DiskUpdateProperties, path, pathNode["DiskUpdateProperties"]);
             AddItem(m_MediaPresent, path, pathNode["MediaPresent"]);
             AddItem(m_ReadOnly, path, pathNode["DiskReadOnly"]);
+            AddItem(m_DriveType, path, pathNode["DriveType"]);
             AddStorageDevice(m_StorageProperties, path, pathNode["StorageDeviceProperty"]);
             AddVolumeInfo(m_VolumeInfo, path, pathNode["VolumeInformation"]);
             AddDiskFreeSpace(m_DiskFree, path, pathNode["DiskFreeSpace"]);
@@ -474,6 +475,13 @@
         public DiskFreeSpace GetDiskFreeSpace(string devicePathName)
         {
             return GetResultOrThrow(m_DiskFree, devicePathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<int>> m_DriveType = new Dictionary<string, ResultOrError<int>>();
+
+        public int GetDriveType(string devicePathName)
+        {
+            return GetResultOrThrow(m_DriveType, devicePathName);
         }
 
         private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new Dictionary<string, ResultOrError<bool>>();

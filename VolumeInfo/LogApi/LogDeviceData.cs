@@ -84,6 +84,7 @@
             QueryApi(pathNode, "VolumeNameForVolumeMountPoint", vinfo, () => { return vinfo.GetVolumeNameForVolumeMountPoint(devicePath); });
             QueryVolumeInfo(pathNode, vinfo, devicePath);
             QueryFreeSpace(pathNode, vinfo, devicePath);
+            QueryApi(pathNode, "DriveType", vinfo, () => { return vinfo.GetDriveType(devicePath); });
 
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
                 if (hDevice != null && !hDevice.IsInvalid) {

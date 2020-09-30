@@ -107,6 +107,7 @@
 
         private void IsDriveFloppyA(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.ProductId, Is.Empty);
             Assert.That(vinfo.Disk.ProductRevision, Is.Empty);
@@ -185,6 +186,7 @@
 
         private void IsDriveFloppyB(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.ProductId, Is.Empty);
             Assert.That(vinfo.Disk.ProductRevision, Is.Empty);
@@ -215,6 +217,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDrivePhys0(vinfo);
         }
 
@@ -227,6 +230,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDrivePhys0(vinfo);
         }
 
@@ -277,6 +281,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -289,6 +294,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -301,6 +307,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -313,6 +320,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -325,6 +333,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -353,6 +362,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 
@@ -365,6 +375,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 
@@ -377,6 +388,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 
@@ -389,6 +401,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 
@@ -437,6 +450,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
         }
 
         [Test]
@@ -448,6 +462,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
         }
 
         [Test]
@@ -459,6 +474,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ND));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(N));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -471,6 +487,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ND));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(N));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveBoot(vinfo);
         }
 
@@ -483,6 +500,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 
@@ -495,6 +513,7 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.CdRom));
             IsDriveCdRom(vinfo);
         }
 

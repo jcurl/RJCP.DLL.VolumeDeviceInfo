@@ -11,6 +11,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="A:\">
@@ -20,6 +21,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}">
@@ -29,6 +31,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="1" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="False" error="50" />
     <StorageDeviceProperty result="">
@@ -68,6 +71,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{f35b67a3-fda7-11ea-b203-7085c2221e14}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="H:">
@@ -77,6 +81,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="H:\">
@@ -86,6 +91,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{71045c21-add5-11e7-b180-806e6f6e6963}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="\\?\Volume{71045c21-add5-11e7-b180-806e6f6e6963}">
@@ -95,6 +101,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="1" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -142,6 +149,7 @@
     <VolumeNameForVolumeMountPoint result="\\?\Volume{71045c21-add5-11e7-b180-806e6f6e6963}\" />
     <VolumeInformation error="21" />
     <DiskFreeSpace error="21" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="21" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive3">
@@ -151,6 +159,7 @@
     <VolumeNameForVolumeMountPoint error="123" />
     <VolumeInformation error="123" />
     <DiskFreeSpace error="1" />
+    <DriveType result="1" />
     <CreateFileFromDevice result="" />
     <DiskUpdateProperties result="True" />
     <StorageDeviceProperty result="">
@@ -190,6 +199,7 @@
     <VolumeNameForVolumeMountPoint error="31" />
     <VolumeInformation error="31" />
     <DiskFreeSpace error="31" />
+    <DriveType result="2" />
     <CreateFileFromDevice error="31" throws="True" />
   </Path>
 </VolumeInfoTest>

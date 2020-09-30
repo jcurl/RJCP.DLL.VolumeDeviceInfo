@@ -202,6 +202,16 @@
             }
         }
 
+        public int GetDriveType(string devicePathName)
+        {
+            ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
+            try {
+                return Kernel32.GetDriveType(devicePathName);
+            } finally {
+                SetErrorMode(mode);
+            }
+        }
+
         public bool GetMediaPresent(SafeHandle hDevice)
         {
             return DeviceIoControl(hDevice, IOCTL_STORAGE_CHECK_VERIFY2,
