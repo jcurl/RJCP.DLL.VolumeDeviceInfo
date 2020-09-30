@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class DiskFreeSpace
+    internal class DiskFreeSpace
     {
         public int SectorsPerCluster { get; set; }
 

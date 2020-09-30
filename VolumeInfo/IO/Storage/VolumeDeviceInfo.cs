@@ -116,7 +116,7 @@
         /// This method is used to provide an implementation on how to access the Operating System, so this class isn't
         /// required to do this directly, making it testable for different OS behaviors.
         /// </remarks>
-        protected VolumeDeviceInfo(IOSVolumeDeviceInfo os, string pathName)
+        internal VolumeDeviceInfo(IOSVolumeDeviceInfo os, string pathName)
         {
             if (os == null) throw new ArgumentNullException(nameof(os));
             if (pathName == null) throw new ArgumentNullException(nameof(pathName));

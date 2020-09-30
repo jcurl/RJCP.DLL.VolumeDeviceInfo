@@ -7,7 +7,7 @@
     using System.Runtime.InteropServices;
     using System.Xml;
 
-    public class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
+    internal class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
     {
         private const string RootNode = "VolumeInfoTest";
         private const string PathNode = "Path";

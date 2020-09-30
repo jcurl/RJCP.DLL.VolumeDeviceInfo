@@ -4,12 +4,12 @@
     using System.Runtime.InteropServices;
     using System.Security;
 
-    public abstract class SafeAllocHandle : SafeHandle
+    internal abstract class SafeAllocHandle : SafeHandle
     {
         protected SafeAllocHandle() : base(IntPtr.Zero, true) { }
     }
 
-    public class SafeAllocHandle<T> : SafeAllocHandle where T : struct
+    internal class SafeAllocHandle<T> : SafeAllocHandle where T : struct
     {
         private readonly bool withObj;
 

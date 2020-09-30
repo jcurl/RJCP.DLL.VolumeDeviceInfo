@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class DiskGeometry
+    internal class DiskGeometry
     {
         public MediaType MediaType { get; set; }
 

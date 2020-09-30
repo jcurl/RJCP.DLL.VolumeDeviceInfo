@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class MbrPartition : PartitionInformation
+    internal class MbrPartition : PartitionInformation
     {
         public MbrPartition() : base(PartitionStyle.MasterBootRecord) { }
 

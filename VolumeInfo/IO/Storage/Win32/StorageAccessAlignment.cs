@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class StorageAccessAlignment
+    internal class StorageAccessAlignment
     {
         public int BytesPerCacheLine { get; set; }
 

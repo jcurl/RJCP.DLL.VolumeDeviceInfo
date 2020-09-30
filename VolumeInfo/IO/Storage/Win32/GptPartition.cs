@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class GptPartition : PartitionInformation
+    internal class GptPartition : PartitionInformation
     {
         public GptPartition() : base(PartitionStyle.GuidPartitionTable) { }
 

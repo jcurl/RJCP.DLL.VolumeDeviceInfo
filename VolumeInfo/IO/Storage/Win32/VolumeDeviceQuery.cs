@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class VolumeDeviceQuery
+    internal class VolumeDeviceQuery
     {
         public string VendorId { get; set; } = string.Empty;
 

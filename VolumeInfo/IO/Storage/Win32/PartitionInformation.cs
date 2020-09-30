@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class PartitionInformation
+    internal class PartitionInformation
     {
         public PartitionInformation(PartitionStyle style)
         {

@@ -1,6 +1,6 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public class VolumeInfo
+    internal class VolumeInfo
     {
         public string VolumeLabel { get; set; }
 

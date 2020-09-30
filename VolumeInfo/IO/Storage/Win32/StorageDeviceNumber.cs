@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class StorageDeviceNumber
+    internal class StorageDeviceNumber
     {
         public DeviceType DeviceType { get; set; }
 

@@ -3,7 +3,7 @@
     using System.IO;
     using System.Runtime.InteropServices;
 
-    public interface IOSVolumeDeviceInfo
+    internal interface IOSVolumeDeviceInfo
     {
         FileAttributes GetFileAttributes(string pathName);
 
