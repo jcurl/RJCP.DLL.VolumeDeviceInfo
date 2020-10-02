@@ -525,7 +525,7 @@
 
         private void IsMultiPartDrive(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a mirrored volume
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a spanning volume
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(32256));
             Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(4294967296));

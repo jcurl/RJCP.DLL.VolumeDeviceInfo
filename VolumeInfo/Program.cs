@@ -36,8 +36,8 @@
                 if (options.ParseOption(device)) continue;
 
                 try {
+                    Console.WriteLine("Device Path: {0}", device);
                     VolumeDeviceInfo info = new VolumeDeviceInfo(device);
-                    Console.WriteLine("Device Path: {0}", info.Path);
                     if (options.LogApi) Capture(info);
 
                     Console.WriteLine("  Volume");
