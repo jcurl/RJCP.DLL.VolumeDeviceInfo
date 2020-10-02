@@ -30,6 +30,7 @@
             public StorageAccessAlignment Alignment;
             public PartitionInformation PartitionInfo;
             public DiskFreeSpace FreeSpace;
+            public DiskExtent[] Extents;
 
             public bool IsFloppy
             {
@@ -222,7 +223,7 @@
             {
                 get
                 {
-                    switch(m_Data.DriveType) {
+                    switch (m_Data.DriveType) {
                     case 0: // DRIVE_UNKNOWN:
                     case 1: // DRIVE_NO_ROOT_DIR:
                         return DriveType.Unknown;
@@ -331,7 +332,7 @@
 
             public string Serial { get { return m_Data.VolumeQuery?.VolumeSerial ?? string.Empty; } }
 
-            public FileSystemFlags Flags { get { return m_Data.VolumeQuery?.Flags ?? (FileSystemFlags)0; } }
+            public FileSystemFlags Flags { get { return m_Data.VolumeQuery?.Flags ?? 0; } }
 
             public string Name { get { return m_Data.VolumeQuery?.FileSystem ?? string.Empty; } }
 
@@ -427,6 +428,21 @@
         /// </summary>
         public interface IDiskInfo
         {
+            /// <summary>
+            /// Gets the disk extents for this volume.
+            /// </summary>
+            /// <value>An array of the disk extents for this volume.</value>
+            /// <remarks>
+            /// If the device doesn't support disk extents (e.g. a floppy disk), then this parameter will be
+            /// <see langword="null"/>. Typically on Windows, if this is a basic disk, there is only one extent, and
+            /// this provides the physical drive device name. The <see cref="DiskExtent.StartingOffset"/> and
+            /// <see cref="DiskExtent.ExtentLength"/> are equal to the partition parameters
+            /// <see cref="IPartitionInfo.Offset"/> and <see cref="IPartitionInfo.Length"/> respectively (but for
+            /// multi-disk/partition volumes, the <see cref="VolumeDeviceInfo.Partition"/> is probably not available and
+            /// is <see langword="null"/>.
+            /// </remarks>
+            DiskExtent[] Extents { get; }
+
             /// <summary>
             /// Gets the vendor identifier for the device.
             /// </summary>
@@ -563,6 +579,8 @@
                 m_Data = data;
                 if (!IsRemovableMedia || IsMediaPresent) Geometry = new GeometryInfo(data);
             }
+
+            public DiskExtent[] Extents { get { return m_Data.Extents; } }
 
             public string VendorId { get { return m_Data.DeviceQuery?.VendorId ?? string.Empty; } }
 
@@ -925,6 +943,7 @@
             SafeHandle hDevice = m_OS.CreateFileFromDevice(m_VolumeData.VolumeDevicePath);
             try {
                 m_OS.RefreshVolume(hDevice);
+                m_VolumeData.Extents = m_OS.GetDiskExtents(hDevice);
                 m_VolumeData.DeviceQuery = m_OS.GetStorageDeviceProperty(hDevice);
                 if ((int)attr == -1) m_VolumeData.MediaPresent = m_OS.GetMediaPresent(hDevice);
                 m_VolumeData.HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);

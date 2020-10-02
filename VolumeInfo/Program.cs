@@ -82,6 +82,13 @@
                     }
                     if (info.Disk != null) {
                         Console.WriteLine("  Device");
+                        if (info.Disk.Extents != null) {
+                            foreach (DiskExtent extent in info.Disk.Extents) {
+                                Console.WriteLine("    Extent: {0}", extent.Device);
+                                Console.WriteLine("      Offset        : {0:X8}", extent.StartingOffset);
+                                Console.WriteLine("      Length        : {0:F1} GB", extent.ExtentLength / 1024.0 / 1024.0 / 1024.0);
+                            }
+                        }
                         Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
                         Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
                         Console.WriteLine("    SerialNumber    : {0}", info.Disk.SerialNumber);
@@ -121,6 +128,11 @@
             Capture(info.Path);
             Capture(info.Volume.Path);
             Capture(info.Volume.DevicePath);
+            if (info.Disk?.Extents != null) {
+                foreach (DiskExtent extent in info.Disk.Extents) {
+                    Capture(extent.Device);
+                }
+            }
         }
 
         static void Capture(string path)

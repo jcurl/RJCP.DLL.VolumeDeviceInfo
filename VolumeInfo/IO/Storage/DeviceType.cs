@@ -89,6 +89,7 @@
         UcmUcsi = 93,
 
         MountMgr = 'm',
-        MountMgrDevice = 'M'
+        MountMgrDevice = 'M',
+        Volume = 'V'
     }
 }

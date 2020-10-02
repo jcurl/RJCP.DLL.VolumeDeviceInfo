@@ -91,6 +91,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="206848" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="105906176" />
+        <Length result="251552333824" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -115,6 +122,71 @@
     </DiskFreeSpace>
     <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\PhysicalDrive0">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="2020202020203646303030304e46304758334338" />
+      <ProductId result="HGST HEJ423232H9E300" />
+      <ProductRevision result="F6BOA170" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="False" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="11" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="41345" />
+      <TracksPerCylinder result="240" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="0" />
+      <Offset result="0" />
+      <Length result="320072933376" />
+      <MbrType result="0" />
+      <MbrBootable result="False" />
+      <MbrOffset result="0" />
+    </PartitionInformation>
+    <DiskExtents error="1" />
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="True" />
+  </Path>
+  <Path path="\\.\PhysicalDrive0\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="31" />
+    <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
+    <DriveType result="3" />
+    <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="F:">
     <FileAttributes result="22" />
@@ -202,6 +274,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="2048" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive1" />
+        <Offset result="1048576" />
+        <Length result="320070483968" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="87" />
@@ -226,70 +305,6 @@
     </DiskFreeSpace>
     <DriveType result="3" />
     <CreateFileFromDevice error="3" throws="True" />
-  </Path>
-  <Path path="\\.\PhysicalDrive0">
-    <FileAttributes result="-1" />
-    <VolumePathName error="123" />
-    <QueryDosDevice error="161" />
-    <VolumeNameForVolumeMountPoint error="123" />
-    <VolumeInformation error="123" />
-    <DiskFreeSpace error="1" />
-    <DriveType result="1" />
-    <CreateFileFromDevice result="" />
-    <DiskUpdateProperties result="True" />
-    <StorageDeviceProperty result="">
-      <VendorId result="" />
-      <DeviceSerialNumber result="2020202020203646303030304e46304758334338" />
-      <ProductId result="HGST HEJ423232H9E300" />
-      <ProductRevision result="F6BOA170" />
-      <RemovableMedia result="False" />
-      <CommandQueueing result="False" />
-      <ScsiDeviceType result="0" />
-      <ScsiModifier result="0" />
-      <BusType result="11" />
-    </StorageDeviceProperty>
-    <StorageDeviceNumber result="">
-      <DeviceType result="7" />
-      <DeviceNumber result="0" />
-      <DevicePartition result="0" />
-    </StorageDeviceNumber>
-    <StorageDeviceNumberEx error="1" />
-    <DiskGeometry result="">
-      <MediaType result="12" />
-      <Cylinders result="41345" />
-      <TracksPerCylinder result="240" />
-      <SectorsPerTrack result="63" />
-      <BytesPerSector result="512" />
-    </DiskGeometry>
-    <StorageAlignment result="">
-      <BytesPerCacheLine result="0" />
-      <BytesOffsetForCacheAlignment result="0" />
-      <BytesPerLogicalSector result="512" />
-      <BytesPerPhysicalSector result="4096" />
-      <BytesOffsetForSectorAlignment result="0" />
-    </StorageAlignment>
-    <PartitionInformation result="">
-      <Style result="0" />
-      <Number result="0" />
-      <Offset result="0" />
-      <Length result="320072933376" />
-      <MbrType result="0" />
-      <MbrBootable result="False" />
-      <MbrOffset result="0" />
-    </PartitionInformation>
-    <MediaPresent result="True" />
-    <DiskReadOnly result="False" />
-    <SeekPenalty result="True" />
-  </Path>
-  <Path path="\\.\PhysicalDrive0\">
-    <FileAttributes result="-1" />
-    <VolumePathName error="123" />
-    <QueryDosDevice error="161" />
-    <VolumeNameForVolumeMountPoint error="31" />
-    <VolumeInformation error="31" />
-    <DiskFreeSpace error="31" />
-    <DriveType result="3" />
-    <CreateFileFromDevice error="31" throws="True" />
   </Path>
   <Path path="\\.\PhysicalDrive1">
     <FileAttributes result="-1" />
@@ -335,6 +350,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="87" />
@@ -407,6 +423,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="False" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="True" />
@@ -479,6 +496,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="False" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="Unknown" error="87" />
@@ -543,6 +561,13 @@
       <MbrBootable result="True" />
       <MbrOffset result="2048" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="1048576" />
+        <Length result="104857600" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -618,6 +643,13 @@
       <MbrBootable result="True" />
       <MbrOffset result="2048" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="1048576" />
+        <Length result="104857600" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -693,6 +725,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="206848" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="105906176" />
+        <Length result="251552333824" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -768,6 +807,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="1" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="251659288576" />
+        <Length result="64187531264" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -832,6 +878,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="125366274" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="315846819840" />
+        <Length result="4225761280" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="True" />
@@ -890,6 +943,13 @@
       <MbrBootable result="False" />
       <MbrOffset result="2048" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive1" />
+        <Offset result="1048576" />
+        <Length result="320070483968" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="87" />

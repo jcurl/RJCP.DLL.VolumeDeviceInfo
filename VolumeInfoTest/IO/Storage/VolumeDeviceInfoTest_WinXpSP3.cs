@@ -6,7 +6,8 @@
     [TestFixture]
     public class VolumeDeviceInfoTest_WinXpSP3
     {
-        private static readonly string WinXPSim = Path.Combine(TestContext.CurrentContext.TestDirectory, "Test", "Win32", "VolumeInfoTest.WinXPSP3.xml");
+        private static readonly string WinXPSim = Path.Combine(TestContext.CurrentContext.TestDirectory,
+            "Test", "Win32", "VolumeInfoTest.WinXPSP3.xml");
 
         // The Physical Drive containing C:
         private const string Phys0 = @"\\.\PhysicalDrive0";
@@ -107,6 +108,7 @@
 
         private void IsDriveFloppyA(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.ProductId, Is.Empty);
@@ -186,6 +188,7 @@
 
         private void IsDriveFloppyB(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.ProductId, Is.Empty);
@@ -237,6 +240,7 @@
         private void IsDrivePhys0(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
@@ -340,6 +344,10 @@
         private void IsDriveBoot(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive0"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(32256));
@@ -407,6 +415,7 @@
 
         private void IsDriveCdRom(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Disk.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.ProductId, Is.EqualTo("NECVMWar VMware IDE CDR10"));
             Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("1.00"));
@@ -451,6 +460,9 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
+            Assert.That(vinfo.Disk, Is.Null);
+            Assert.That(vinfo.Partition, Is.Null);
+            Assert.That(vinfo.FileSystem, Is.Null);
         }
 
         [Test]
@@ -463,6 +475,9 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
+            Assert.That(vinfo.Disk, Is.Null);
+            Assert.That(vinfo.Partition, Is.Null);
+            Assert.That(vinfo.FileSystem, Is.Null);
         }
 
         [Test]

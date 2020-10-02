@@ -24,6 +24,8 @@
         public static readonly int IOCTL_DISK_GET_PARTITION_INFO_EX = CtlCode(DeviceType.Disk, 0x012, DeviceControlMethod.Buffered, DeviceControlAccess.Any);
         public static readonly int IOCTL_DISK_UPDATE_PROPERTIES = CtlCode(DeviceType.Disk, 0x050, DeviceControlMethod.Buffered, DeviceControlAccess.Any);
 
+        public static readonly int IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS = CtlCode(DeviceType.Volume, 0, DeviceControlMethod.Buffered, DeviceControlAccess.Any);
+
         [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern bool DeviceIoControl(SafeHandle hDevice, int dwIoControlCode,
             SafeAllocHandle lpInBuffer, int nInBufferSize, SafeAllocHandle lpOutBuffer, int nOutBufferSize,

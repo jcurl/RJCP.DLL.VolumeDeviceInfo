@@ -78,6 +78,7 @@
             AddAlignment(m_Alignment, path, pathNode["StorageAlignment"]);
             AddItem(m_SeekPenalty, path, pathNode["SeekPenalty"]);
             AddPartitionInfo(m_PartitionInfo, path, pathNode["PartitionInformation"]);
+            AddDiskExtents(m_Extents, path, pathNode["DiskExtents"]);
         }
 
         private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
@@ -318,6 +319,34 @@
             }
         }
 
+        private void AddDiskExtents(IDictionary<string, ResultOrError<DiskExtent[]>> dictionary, string path, XmlElement node)
+        {
+            if (node == null) return;
+            if (dictionary.ContainsKey(path)) return;
+
+            // Because this is a complex type, The XML will always return the default value.
+            ResultOrError<DiskExtent[]> result = GetResultOrError<DiskExtent[]>(node);
+            if (result != null) {
+                dictionary.Add(path, result);
+                return;
+            }
+
+            // There may be zero or more disk extents.
+            XmlNodeList extentNodes = node.SelectNodes("DiskExtent");
+            List<DiskExtent> extents = new List<DiskExtent>();
+            foreach (XmlElement extentNode in extentNodes) {
+                string offset = extentNode["Offset"].Attributes["result"].Value;
+                string length = extentNode["Length"].Attributes["result"].Value;
+                extents.Add(new DiskExtent() {
+                    Device = extentNode["Device"].Attributes["result"].Value,
+                    StartingOffset = long.Parse(offset, CultureInfo.InvariantCulture),
+                    ExtentLength = long.Parse(length, CultureInfo.InvariantCulture),
+                });
+            }
+
+            dictionary.Add(path, new ResultOrError<DiskExtent[]>(extents.ToArray()));
+        }
+
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
@@ -546,6 +575,14 @@
         {
             SafeTestHandle handle = CheckHandle(hDevice);
             return GetResultOrThrow(m_PartitionInfo, handle.PathName);
+        }
+
+        private readonly Dictionary<string, ResultOrError<DiskExtent[]>> m_Extents = new Dictionary<string, ResultOrError<DiskExtent[]>>();
+
+        public DiskExtent[] GetDiskExtents(SafeHandle hDevice)
+        {
+            SafeTestHandle handle = CheckHandle(hDevice);
+            return GetResultOrThrow(m_Extents, handle.PathName);
         }
 
         private readonly int m_LogicalDrives;

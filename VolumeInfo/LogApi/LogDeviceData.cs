@@ -95,6 +95,7 @@
                     QueryDiskGeometry(pathNode, vinfo, hDevice);
                     QueryDiskAlignment(pathNode, vinfo, hDevice);
                     QueryPartition(pathNode, vinfo, hDevice);
+                    QueryDiskExtents(pathNode, vinfo, hDevice);
                     QueryApi(pathNode, "MediaPresent", vinfo, () => { return vinfo.GetMediaPresent(hDevice); });
                     QueryApi(pathNode, "DiskReadOnly", vinfo, () => { return vinfo.IsReadOnly(hDevice); });
                     QueryApi(pathNode, "SeekPenalty", vinfo, () => { return vinfo.IncursSeekPenalty(hDevice); });
@@ -201,6 +202,22 @@
                 WriteApiResult(partNode, "GptType", gptInfo.Type.ToString());
                 WriteApiResult(partNode, "GptName", gptInfo.Name);
                 break;
+            }
+        }
+
+        private void QueryDiskExtents(XmlElement pathNode, IOSVolumeDeviceInfo vinfo, SafeHandle hDevice)
+        {
+            DiskExtent[] extents = QueryApi(pathNode, "DiskExtents", vinfo, () => {
+                return vinfo.GetDiskExtents(hDevice);
+            }, out XmlElement extNode);
+
+            if (extents == null) return;
+
+            foreach (DiskExtent extent in extents) {
+                XmlElement entry = WriteApiResult(extNode, "DiskExtent", string.Empty);
+                WriteApiResult(entry, "Device", extent.Device);
+                WriteApiResult(entry, "Offset", extent.StartingOffset);
+                WriteApiResult(entry, "Length", extent.ExtentLength);
             }
         }
 

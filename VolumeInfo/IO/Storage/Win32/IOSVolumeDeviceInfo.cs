@@ -41,6 +41,8 @@
 
         PartitionInformation GetPartitionInfo(SafeHandle hDevice);
 
+        DiskExtent[] GetDiskExtents(SafeHandle hDevice);
+
         int GetLogicalDrives();
 
         int GetLastWin32Error();

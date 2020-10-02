@@ -406,6 +406,35 @@
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1168:Empty arrays and collections should be returned instead of null",
+            Justification = "P/Invoke, null indicates an error")]
+        public DiskExtent[] GetDiskExtents(SafeHandle hDevice)
+        {
+            SafeDiskExtentHandle diskPtr = null;
+            try {
+                diskPtr = new SafeDiskExtentHandle();
+                bool success = DeviceIoControl(hDevice, IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
+                    IntPtr.Zero, 0, diskPtr, diskPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
+                if (!success || bytesReturns == 0) {
+                    m_Win32Error = Marshal.GetLastWin32Error();
+                    return null;
+                }
+
+                DISK_EXTENT[] diskExtents = diskPtr.ToStructure();
+                DiskExtent[] extents = new DiskExtent[diskExtents.Length];
+                for (int i = 0; i < diskExtents.Length; i++) {
+                    extents[i] = new DiskExtent() {
+                        Device = string.Format("\\\\.\\PhysicalDrive{0}", diskExtents[i].DeviceNumber),
+                        StartingOffset = diskExtents[i].StartingOffset,
+                        ExtentLength = diskExtents[i].ExtentLength
+                    };
+                }
+                return extents;
+            } finally {
+                if (diskPtr != null) diskPtr.Close();
+            }
+        }
+
         public int GetLogicalDrives()
         {
             return Kernel32.GetLogicalDrives();

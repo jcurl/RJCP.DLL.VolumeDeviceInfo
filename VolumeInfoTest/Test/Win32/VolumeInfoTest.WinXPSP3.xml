@@ -68,6 +68,7 @@
     </DiskGeometry>
     <StorageAlignment error="1" />
     <PartitionInformation error="1" />
+    <DiskExtents error="1" />
     <MediaPresent result="False" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -129,6 +130,7 @@
     <DiskGeometry error="21" />
     <StorageAlignment error="1" />
     <PartitionInformation error="1" />
+    <DiskExtents error="1" />
     <MediaPresent result="False" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="Unknown" error="1" />
@@ -224,6 +226,13 @@
       <MbrBootable result="True" />
       <MbrOffset result="63" />
     </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="32256" />
+        <Length result="42935929344" />
+      </DiskExtent>
+    </DiskExtents>
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -293,6 +302,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="False" />
     <SeekPenalty result="Unknown" error="1" />
@@ -393,6 +403,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="Unknown" error="19" />
@@ -462,6 +473,7 @@
       <MbrBootable result="False" />
       <MbrOffset result="0" />
     </PartitionInformation>
+    <DiskExtents error="1" />
     <MediaPresent result="True" />
     <DiskReadOnly result="True" />
     <SeekPenalty result="Unknown" error="19" />

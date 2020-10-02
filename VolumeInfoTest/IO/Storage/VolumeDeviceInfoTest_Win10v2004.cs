@@ -5,11 +5,14 @@
     using NUnit.Framework;
 
     [TestFixture]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "Correct case in the circumstances")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase",
+        Justification = "Correct case in the circumstances")]
     public class VolumeDeviceInfoTest_Win10v2004
     {
-        private static readonly string Win10Sim = Path.Combine(TestContext.CurrentContext.TestDirectory, "Test", "Win32", "VolumeInfoTest.Win10v2004.xml");
-        private static readonly string Win10SimNoMedia = Path.Combine(TestContext.CurrentContext.TestDirectory, "Test", "Win32", "VolumeInfoTest.Win10v2004.MediaNotPresent.xml");
+        private static readonly string Win10Sim = Path.Combine(TestContext.CurrentContext.TestDirectory,
+            "Test", "Win32", "VolumeInfoTest.Win10v2004.xml");
+        private static readonly string Win10SimNoMedia = Path.Combine(TestContext.CurrentContext.TestDirectory,
+            "Test", "Win32", "VolumeInfoTest.Win10v2004.MediaNotPresent.xml");
 
         // The Physical Drive containing C: and the hidden partition
         private const string Phys0 = @"\\.\PhysicalDrive0";
@@ -154,6 +157,7 @@
         private void IsDriveFloppyTeac(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Disk.VendorId, Is.EqualTo("TEAC    "));
             Assert.That(vinfo.Disk.ProductId, Is.EqualTo("FD-05PUB        "));
             Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("3000"));
@@ -279,6 +283,7 @@
         private void IsDrivePhys0(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
+            Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
@@ -371,6 +376,10 @@
         private void IsDriveSamsung(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive0"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(3));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(407896064));
@@ -419,6 +428,10 @@
         private void IsDriveSamsungHiddenPart(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive0"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(1048576));
@@ -467,6 +480,10 @@
         private void IsDrivePhys1(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive1(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive1"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
@@ -558,6 +575,10 @@
         private void IsDriveSdCard(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive1(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive1"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(16777216));
@@ -605,6 +626,10 @@
         private void IsDrivePhys2(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive2(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive2"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
@@ -696,6 +721,10 @@
         private void IsDriveGlide(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive2(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive2"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
             Assert.That(vinfo.Partition.Number, Is.EqualTo(1));
             Assert.That(vinfo.Partition.Offset, Is.EqualTo(1048576));
@@ -724,7 +753,8 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
-            IsDriveHNoCard(vinfo);
+            Assert.That(vinfo.Disk.Extents, Is.Null);
+            IsDrivePhys3(vinfo);
         }
 
         [Test]
@@ -737,10 +767,16 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
-            IsDriveHNoCard(vinfo);
+            IsDrivePhys3(vinfo);
         }
 
-        private void IsDriveHNoCard(VolumeDeviceInfo vinfo)
+        private void IsDrivePhys3(VolumeDeviceInfo vinfo)
+        {
+            IsPhysicalDrive3(vinfo);
+            Assert.That(vinfo.Disk.Extents, Is.Null);
+        }
+
+        private void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.Disk.VendorId, Is.EqualTo("DELL    "));
             Assert.That(vinfo.Disk.ProductId, Is.EqualTo("USB   HS-CF Card"));
@@ -763,6 +799,15 @@
             Assert.That(vinfo.Partition, Is.Null);
         }
 
+        private void IsDriveHNoCard(VolumeDeviceInfo vinfo)
+        {
+            IsPhysicalDrive3(vinfo);
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(0));
+        }
+
         [Test]
         public void DriveHNoCard()
         {
@@ -773,6 +818,10 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(0));
             IsDriveHNoCard(vinfo);
         }
 
@@ -786,6 +835,10 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(0));
             IsDriveHNoCard(vinfo);
         }
 
@@ -799,6 +852,10 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(0));
             IsDriveHNoCard(vinfo);
         }
 
@@ -812,6 +869,10 @@
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(0));
             IsDriveHNoCard(vinfo);
         }
 
@@ -990,6 +1051,7 @@
 
         private void IsImDiskRamDisk(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Disk.Extents, Is.Null);                                      // No volume support
             Assert.That(vinfo.Disk.VendorId, Is.Empty);                                    // Unsupported
             Assert.That(vinfo.Disk.ProductId, Is.Empty);                                   // Unsupported
             Assert.That(vinfo.Disk.ProductRevision, Is.Empty);                             // Unsupported
@@ -1115,6 +1177,10 @@
 
         private void IsDriveCruzer(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
             Assert.That(vinfo.Disk.VendorId, Is.EqualTo("SanDisk "));
             Assert.That(vinfo.Disk.ProductId, Is.EqualTo("U3 Cruzer Micro "));
             Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("8.02"));

@@ -44,6 +44,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\Storage\DriveType.cs" />
     <Compile Include="IO\Storage\EFIPartitionAttributes.cs" />
+    <Compile Include="IO\Storage\DiskExtent.cs" />
     <Compile Include="IO\Storage\Win32\DiskFreeSpace.cs" />
     <Compile Include="IO\Storage\Win32\GptPartition.cs" />
     <Compile Include="IO\Storage\Win32\MbrPartition.cs" />
@@ -77,9 +78,11 @@
     <Compile Include="Native\Win32\Kernel32+SECURITY_IMPERSONATION_LEVEL.cs" />
     <Compile Include="Native\Win32\Kernel32.cs" />
     <Compile Include="Native\Win32\SafeAllocHandle.cs" />
+    <Compile Include="Native\Win32\SafeDiskExtentHandle.cs" />
     <Compile Include="Native\Win32\Win32ErrorCode.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlAccess.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DeviceControlMethod.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DISK_EXTENT.cs" />
     <Compile Include="Native\Win32\WinIoCtl+DISK_GEOMETRY.cs" />
     <Compile Include="Native\Win32\WinIoCtl+PARTITION_INFORMATION_EX.cs" />
     <Compile Include="Native\Win32\WinIoCtl+STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR.cs" />

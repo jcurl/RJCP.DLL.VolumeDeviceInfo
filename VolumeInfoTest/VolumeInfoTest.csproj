@@ -47,6 +47,7 @@
     <Compile Include="IO\Storage\VolumeDeviceInfoSim.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win10v2004.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win2k3r2.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win7SP1.cs" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_WinXpSP3.cs" />
     <Compile Include="IO\Storage\Win32\OSVolumeDeviceInfoSim.cs" />
@@ -69,6 +70,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Test\Win32\VolumeInfoTest.Win10v2004.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Test\Win32\VolumeInfoTest.Win2k3r2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Test\Win32\VolumeInfoTest.Win7SP1.xml">
