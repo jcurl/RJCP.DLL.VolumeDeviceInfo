@@ -89,17 +89,19 @@
                                 Console.WriteLine("      Length        : {0:F1} GB", extent.ExtentLength / 1024.0 / 1024.0 / 1024.0);
                             }
                         }
-                        Console.WriteLine("    Vendor          : {0}", info.Disk.VendorId);
-                        Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.ProductId, info.Disk.ProductRevision);
-                        Console.WriteLine("    SerialNumber    : {0}", info.Disk.SerialNumber);
-                        Console.WriteLine("    Bus Type        : {0}", info.Disk.BusType.ToDescription(true));
-                        Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.ScsiDeviceType.ToDescription(), info.Disk.ScsiDeviceModifier);
-                        Console.WriteLine("    Command Queueing: {0}", info.Disk.HasCommandQueueing);
+                        if (info.Disk.Device != null) {
+                            Console.WriteLine("    Vendor          : {0}", info.Disk.Device.VendorId);
+                            Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.Device.ProductId, info.Disk.Device.ProductRevision);
+                            Console.WriteLine("    SerialNumber    : {0}", info.Disk.Device.SerialNumber);
+                            Console.WriteLine("    Bus Type        : {0}", info.Disk.Device.BusType.ToDescription(true));
+                            Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.Device.ScsiDeviceType.ToDescription(), info.Disk.Device.ScsiDeviceModifier);
+                            Console.WriteLine("    Command Queueing: {0}", info.Disk.Device.HasCommandQueueing);
+                            Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Device.Guid, info.Disk.Device.GuidFlags);
+                            Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.Device.DeviceType, info.Disk.Device.DeviceNumber);
+                        }
                         Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
                         Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
                         Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
-                        Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Guid, info.Disk.GuidFlags);
-                        Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.DeviceType, info.Disk.DeviceNumber);
                         Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
                         if (info.Disk.Geometry != null) {
                             Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",

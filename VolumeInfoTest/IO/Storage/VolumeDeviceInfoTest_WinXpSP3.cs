@@ -110,20 +110,10 @@
         {
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
-            Assert.That(vinfo.Disk.VendorId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductRevision, Is.Empty);
-            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Unknown));
+            Assert.That(vinfo.Disk.Device, Is.Null);
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.Unknown));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
-            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Unknown));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.IsReadOnly, Is.False);
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.F3_1Pt44_512));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(80));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(2));
@@ -190,20 +180,10 @@
         {
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
-            Assert.That(vinfo.Disk.VendorId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductRevision, Is.Empty);
-            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Unknown));
+            Assert.That(vinfo.Disk.Device, Is.Null);
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.Unknown));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.False);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
-            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Unknown));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(-1));
+            Assert.That(vinfo.Disk.IsReadOnly, Is.True);
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.Unknown));
             Assert.That(vinfo.Disk.Geometry, Is.Null);
             Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
@@ -253,20 +233,21 @@
 
         private void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Disk.VendorId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("VMware Virtual IDE Hard Drive"));
-            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("00000001"));
-            Assert.That(vinfo.Disk.SerialNumber, Is.EqualTo("3030303030303030303"));
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Ata));
+            Assert.That(vinfo.Disk.Device.VendorId, Is.Empty);
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("VMware Virtual IDE Hard Drive"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("00000001"));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.EqualTo("3030303030303030303"));
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Ata));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
+            Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
-            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.IsReadOnly, Is.False);
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(5221));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
@@ -416,24 +397,21 @@
         private void IsDriveCdRom(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.Disk.Extents, Is.Null);
-            Assert.That(vinfo.Disk.VendorId, Is.Empty);
-            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("NECVMWar VMware IDE CDR10"));
-            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("1.00"));
-            Assert.That(vinfo.Disk.SerialNumber, Is.EqualTo("3031303030303030303"));
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Atapi));
+            Assert.That(vinfo.Disk.Device.VendorId, Is.Empty);
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("NECVMWar VMware IDE CDR10"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.00"));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.EqualTo("3031303030303030303"));
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Atapi));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
+            Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.CdRom));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.False);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
-            Assert.That(vinfo.FileSystem.Label, Is.EqualTo("winxpsp3_090429"));
-            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("1686-338B"));
-            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("CDFS"));
-            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x00080005));
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
-            Assert.That(vinfo.Disk.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.CdRom));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.IsReadOnly, Is.True);
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.RemovableMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(904));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(64));
@@ -448,6 +426,10 @@
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(11));
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(vinfo.FileSystem.Label, Is.EqualTo("winxpsp3_090429"));
+            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("1686-338B"));
+            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("CDFS"));
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x00080005));
         }
 
         [Test]

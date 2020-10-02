@@ -24,6 +24,10 @@
         private const string Phys2 = @"\\.\PhysicalDrive2";
         private const string Phys2S = @"\\.\PhysicalDrive2\";
 
+        // The Physical Drive containing the two partitions for a single volume F:
+        private const string Phys3 = @"\\.\PhysicalDrive3";
+        private const string Phys3S = @"\\.\PhysicalDrive3\";
+
         // The boot partition C:
         private const string C = @"C:";
         private const string CS = @"C:\";
@@ -37,6 +41,13 @@
         private const string EV = @"\\?\Volume{78d41c0e-348a-49e2-b7de-b92956381bd3}";
         private const string EVS = @"\\?\Volume{78d41c0e-348a-49e2-b7de-b92956381bd3}\";
         private const string ED = @"\Device\HarddiskDmVolumes\Xxx-d02058760efDg0\Volume1";
+
+        // Multipartition F:
+        private const string F = @"F:";
+        private const string FS = @"F:\";
+        private const string FV = @"\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}";
+        private const string FVS = @"\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\";
+        private const string FD = @"\Device\HarddiskDmVolumes\Xxx-d02058760efDg0\Volume2";
 
         [Test]
         public void PhysicalDrive0()
@@ -82,21 +93,21 @@
 
         public void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Disk.VendorId, Is.EqualTo("VMware, "));
-            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("VMware Virtual S"));
-            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("1.0 "));
-            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("VMware Virtual S"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.0 "));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.True);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.True);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
-            Assert.That(vinfo.Disk.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(1468));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
@@ -227,21 +238,21 @@
 
         public void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Disk.VendorId, Is.EqualTo("VMware, "));
-            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("VMware Virtual S"));
-            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("1.0 "));
-            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("VMware Virtual S"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.0 "));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.True);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.True);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
-            Assert.That(vinfo.Disk.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(1468));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
@@ -295,21 +306,21 @@
 
         public void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Disk.VendorId, Is.EqualTo("VMware, "));
-            Assert.That(vinfo.Disk.ProductId, Is.EqualTo("VMware Virtual S"));
-            Assert.That(vinfo.Disk.ProductRevision, Is.EqualTo("1.0 "));
-            Assert.That(vinfo.Disk.SerialNumber, Is.Empty);
-            Assert.That(vinfo.Disk.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("VMware Virtual S"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.0 "));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.True);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(2));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
-            Assert.That(vinfo.Disk.HasCommandQueueing, Is.True);
-            Assert.That(vinfo.Disk.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
-            Assert.That(vinfo.Disk.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.DeviceNumber, Is.EqualTo(2));
             Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(1468));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
@@ -390,6 +401,147 @@
             Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(10732171264));
             Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(10675417088));
             Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(10675417088));
+        }
+
+        [Test]
+        public void PhysicalDrive3()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"\\.\PhysicalDrive3");
+            Assert.That(vinfo.Path, Is.EqualTo(Phys3));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(Phys3S));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys3));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Physical drive
+            Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Physical drive
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            Assert.That(vinfo.Disk.Extents, Is.Null);
+            IsDrivePhys3(vinfo);
+        }
+
+        [Test]
+        public void PhysicalDrive3S()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"\\.\PhysicalDrive3\");
+            Assert.That(vinfo.Path, Is.EqualTo(Phys3S));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(Phys3S));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys3));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Physical drive
+            Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Physical drive
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            Assert.That(vinfo.Disk.Extents, Is.Null);
+            IsDrivePhys3(vinfo);
+        }
+
+        private void IsDrivePhys3(VolumeDeviceInfo vinfo)
+        {
+            IsPhysicalDrive3(vinfo);
+            Assert.That(vinfo.Disk.Extents, Is.Null);
+            Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
+            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Length, Is.EqualTo(16106127360));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(vinfo.FileSystem, Is.Null);
+        }
+
+        public void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
+            Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("VMware Virtual S"));
+            Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.0 "));
+            Assert.That(vinfo.Disk.Device.SerialNumber, Is.Empty);
+            Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Scsi));
+            Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.True);
+            Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
+            Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
+            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
+            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(3));
+            Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
+            Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
+            Assert.That(vinfo.Disk.IsReadOnly, Is.False);
+            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
+            Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(1958));
+            Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
+            Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
+            Assert.That(vinfo.Disk.Geometry.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.Disk.Geometry.BytesPerPhysicalSector, Is.EqualTo(512));
+            Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
+        }
+
+        [Test]
+        public void DriveF()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"F:");
+            Assert.That(vinfo.Path, Is.EqualTo(F));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(FS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(FV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(FD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(F));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            IsMultiPartDrive(vinfo);
+        }
+
+        [Test]
+        public void DriveFS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"F:\");
+            Assert.That(vinfo.Path, Is.EqualTo(FS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(FS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(FV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(FD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(F));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            IsMultiPartDrive(vinfo);
+        }
+
+        [Test]
+        public void DriveFV()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}");
+            Assert.That(vinfo.Path, Is.EqualTo(FV));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(FVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(FV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(FD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(F));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            IsMultiPartDrive(vinfo);
+        }
+
+        [Test]
+        public void DriveFVS()
+        {
+            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(Win2k3r2Sim, @"\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\");
+            Assert.That(vinfo.Path, Is.EqualTo(FVS));
+            Assert.That(vinfo.Volume.Path, Is.EqualTo(FVS));
+            Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(FV));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(FD));
+            Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(F));
+            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
+            IsMultiPartDrive(vinfo);
+        }
+
+        private void IsMultiPartDrive(VolumeDeviceInfo vinfo)
+        {
+            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a mirrored volume
+            Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(32256));
+            Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(4294967296));
+            Assert.That(vinfo.Disk.Extents[1].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
+            Assert.That(vinfo.Disk.Extents[1].StartingOffset, Is.EqualTo(8589966848));
+            Assert.That(vinfo.Disk.Extents[1].ExtentLength, Is.EqualTo(7514095616));
+            Assert.That(vinfo.Partition, Is.Null); // This is a multipartition, no single partition. Need to get from the physical drive
+            Assert.That(vinfo.FileSystem.Label, Is.EqualTo("Simple"));
+            Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("54D5-9860"));
+            Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));
+            Assert.That((int)vinfo.FileSystem.Flags, Is.EqualTo(0x700FF));
+            Assert.That(vinfo.FileSystem.BytesPerSector, Is.EqualTo(512));
+            Assert.That(vinfo.FileSystem.SectorsPerCluster, Is.EqualTo(8));
+            Assert.That(vinfo.FileSystem.TotalBytes, Is.EqualTo(11809058816));
+            Assert.That(vinfo.FileSystem.TotalFreeBytes, Is.EqualTo(11784658944));
+            Assert.That(vinfo.FileSystem.UserFreeBytes, Is.EqualTo(11784658944));
         }
     }
 }

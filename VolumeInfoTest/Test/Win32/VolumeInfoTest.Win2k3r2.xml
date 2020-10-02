@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VolumeInfoTest>
-  <!-- 0x00014 = 00 0000 0000 0000 0000 0001 0100
+  <!-- 0x00014 = 00 0000 0000 0000 0000 0011 0100
                  ZY XWVU TSRQ PONM LKJI HGFE DCBA
-       Drives C, E -->
-  <GetLogicalDrives result="20" />
+       Drives C, E, F -->
+  <GetLogicalDrives result="52" />
   <Path path="C:">
     <FileAttributes result="16" />
     <VolumePathName result="C:\" />
@@ -386,6 +386,166 @@
     <SeekPenalty result="Unknown" error="87" />
   </Path>
   <Path path="\\.\PhysicalDrive1\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="31" />
+    <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
+    <DriveType result="3" />
+    <CreateFileFromDevice error="31" throws="True" />
+  </Path>
+  <Path path="F:">
+    <FileAttributes result="22" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice result="\Device\HarddiskDmVolumes\Xxx-d02058760efDg0\Volume2" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation result="">
+      <Label result="Simple" />
+      <SerialNumber result="54D5-9860" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="11809058816" />
+      <TotalBytesFree result="11784658944" />
+      <UserBytesFree result="11784658944" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="F:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="F:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\" />
+    <VolumeInformation result="">
+      <Label result="Simple" />
+      <SerialNumber result="54D5-9860" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="11809058816" />
+      <TotalBytesFree result="11784658944" />
+      <UserBytesFree result="11784658944" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="False" error="1" />
+    <StorageDeviceProperty error="1" />
+    <StorageDeviceNumber error="1" />
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="1958" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment error="1" />
+    <PartitionInformation error="1" />
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive3" />
+        <Offset result="32256" />
+        <Length result="4294967296" />
+      </DiskExtent>
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive3" />
+        <Offset result="8589966848" />
+        <Length result="7514095616" />
+      </DiskExtent>
+    </DiskExtents>
+    <MediaPresent result="False" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="Unknown" error="1" />
+  </Path>
+  <Path path="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{273d5d74-ead4-4847-8846-941c99522a66}\" />
+    <VolumeInformation result="">
+      <Label result="Simple" />
+      <SerialNumber result="54D5-9860" />
+      <FileSystem result="NTFS" />
+      <Flags result="459007" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="11809058816" />
+      <TotalBytesFree result="11784658944" />
+      <UserBytesFree result="11784658944" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\PhysicalDrive3">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="VMware, " />
+      <DeviceSerialNumber result="" />
+      <ProductId result="VMware Virtual S" />
+      <ProductRevision result="1.0 " />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="1" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="3" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx error="1" />
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="1958" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment error="87" />
+    <PartitionInformation result="">
+      <Style result="0" />
+      <Number result="0" />
+      <Offset result="0" />
+      <Length result="16106127360" />
+      <MbrType result="0" />
+      <MbrBootable result="False" />
+      <MbrOffset result="0" />
+    </PartitionInformation>
+    <DiskExtents error="1" />
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="Unknown" error="87" />
+  </Path>
+  <Path path="\\.\PhysicalDrive3\">
     <FileAttributes result="-1" />
     <VolumePathName error="123" />
     <QueryDosDevice error="161" />

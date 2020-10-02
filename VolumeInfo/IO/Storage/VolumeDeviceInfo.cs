@@ -424,25 +424,10 @@
         }
 
         /// <summary>
-        /// All properties relevant for the disk.
+        /// Properties relevant for the physical drive
         /// </summary>
-        public interface IDiskInfo
+        public interface IDeviceInfo
         {
-            /// <summary>
-            /// Gets the disk extents for this volume.
-            /// </summary>
-            /// <value>An array of the disk extents for this volume.</value>
-            /// <remarks>
-            /// If the device doesn't support disk extents (e.g. a floppy disk), then this parameter will be
-            /// <see langword="null"/>. Typically on Windows, if this is a basic disk, there is only one extent, and
-            /// this provides the physical drive device name. The <see cref="DiskExtent.StartingOffset"/> and
-            /// <see cref="DiskExtent.ExtentLength"/> are equal to the partition parameters
-            /// <see cref="IPartitionInfo.Offset"/> and <see cref="IPartitionInfo.Length"/> respectively (but for
-            /// multi-disk/partition volumes, the <see cref="VolumeDeviceInfo.Partition"/> is probably not available and
-            /// is <see langword="null"/>.
-            /// </remarks>
-            DiskExtent[] Extents { get; }
-
             /// <summary>
             /// Gets the vendor identifier for the device.
             /// </summary>
@@ -468,20 +453,6 @@
             string SerialNumber { get; }
 
             /// <summary>
-            /// Gets if media was present at the time the device was queried on instantiation.
-            /// </summary>
-            /// <value><see langword="true"/> if was present; otherwise, <see langword="false"/>.</value>
-            bool IsMediaPresent { get; }
-
-            /// <summary>
-            /// Gets a value indicating if the device is of removable media.
-            /// </summary>
-            /// <value>
-            /// Returns <see langword="true"/> if the device is removable; otherwise, <see langword="false"/>.
-            /// </value>
-            bool IsRemovableMedia { get; }
-
-            /// <summary>
             /// Gets a value indicating if the device supports command queueing.
             /// </summary>
             /// <value>
@@ -491,20 +462,16 @@
             bool HasCommandQueueing { get; }
 
             /// <summary>
-            /// Gets a value indicating whether the disk will incur a seek penalty.
+            /// Gets the SCSI device type for the device.
             /// </summary>
-            /// <value>
-            /// Is <see cref="BoolUnknown.True"/> if the disk will incur a seek penalty (such as a mechanical HDD), or
-            /// <see cref="BoolUnknown.False"/> if not (such as an SSD). If this value cannot be determined, then
-            /// <see cref="BoolUnknown.Unknown"/> is returned.
-            /// </value>
-            BoolUnknown HasSeekPenalty { get; }
+            /// <value>The SCSI device type for the device.</value>
+            ScsiDeviceType ScsiDeviceType { get; }
 
             /// <summary>
-            /// Gets a value indicating whether the disk is read-only.
+            /// Gets the SCSI device modifier for the SCSI device type.
             /// </summary>
-            /// <value><see langword="true"/> if the disk is read only; otherwise, <see langword="false"/>.</value>
-            bool IsReadOnly { get; }
+            /// <value>The SCSI device modifier for the SCSI device type.</value>
+            int ScsiDeviceModifier { get; }
 
             /// <summary>
             /// Gets the type of the bus the device is attached to.
@@ -529,18 +496,6 @@
             int DeviceNumber { get; }
 
             /// <summary>
-            /// Gets the SCSI device type for the device.
-            /// </summary>
-            /// <value>The SCSI device type for the device.</value>
-            ScsiDeviceType ScsiDeviceType { get; }
-
-            /// <summary>
-            /// Gets the SCSI device modifier for the SCSI device type.
-            /// </summary>
-            /// <value>The SCSI device modifier for the SCSI device type.</value>
-            int ScsiDeviceModifier { get; }
-
-            /// <summary>
             /// Gets the source of the device unique identifier.
             /// </summary>
             /// <value>The source of the device unique identifier.</value>
@@ -551,6 +506,90 @@
             /// </summary>
             /// <value>The device unique identifier.</value>
             Guid Guid { get; }
+        }
+
+        private class DeviceInfo : IDeviceInfo
+        {
+            private readonly VolumeData m_Data;
+
+            public DeviceInfo(VolumeData data) { m_Data = data; }
+
+            public string VendorId { get { return m_Data.DeviceQuery?.VendorId ?? string.Empty; } }
+
+            public string ProductId { get { return m_Data.DeviceQuery?.ProductId ?? string.Empty; } }
+
+            public string ProductRevision { get { return m_Data.DeviceQuery?.ProductRevision ?? string.Empty; } }
+
+            public string SerialNumber { get { return m_Data.DeviceQuery?.DeviceSerialNumber ?? string.Empty; } }
+
+            public BusType BusType { get { return m_Data.DeviceQuery == null ? BusType.Unknown : m_Data.DeviceQuery.BusType; } }
+
+            public bool HasCommandQueueing { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.CommandQueueing; } }
+
+            public DeviceType DeviceType { get { return m_Data.DeviceNumber == null ? DeviceType.Unknown : m_Data.DeviceNumber.DeviceType; } }
+
+            public int DeviceNumber { get { return m_Data.DeviceNumber == null ? -1 : m_Data.DeviceNumber.DeviceNumber; } }
+
+            public ScsiDeviceType ScsiDeviceType { get { return m_Data.DeviceQuery == null ? ScsiDeviceType.Unknown : m_Data.DeviceQuery.ScsiDeviceType; } }
+
+            public int ScsiDeviceModifier { get { return m_Data.DeviceQuery == null ? 0 : m_Data.DeviceQuery.ScsiDeviceModifier; } }
+
+            public DeviceGuidFlags GuidFlags { get { return m_Data.DeviceNumber == null ? DeviceGuidFlags.None : m_Data.DeviceNumber.DeviceGuidFlags; } }
+
+            public Guid Guid { get { return m_Data.DeviceNumber == null ? Guid.Empty : m_Data.DeviceNumber.DeviceGuid; } }
+        }
+
+        /// <summary>
+        /// All properties relevant for the disk.
+        /// </summary>
+        public interface IDiskInfo
+        {
+            IDeviceInfo Device { get; }
+
+            /// <summary>
+            /// Gets the disk extents for this volume.
+            /// </summary>
+            /// <value>An array of the disk extents for this volume.</value>
+            /// <remarks>
+            /// If the device doesn't support disk extents (e.g. a floppy disk), then this parameter will be
+            /// <see langword="null"/>. Typically on Windows, if this is a basic disk, there is only one extent, and
+            /// this provides the physical drive device name. The <see cref="DiskExtent.StartingOffset"/> and
+            /// <see cref="DiskExtent.ExtentLength"/> are equal to the partition parameters
+            /// <see cref="IPartitionInfo.Offset"/> and <see cref="IPartitionInfo.Length"/> respectively (but for
+            /// multi-disk/partition volumes, the <see cref="VolumeDeviceInfo.Partition"/> is probably not available and
+            /// is <see langword="null"/>.
+            /// </remarks>
+            DiskExtent[] Extents { get; }
+
+            /// <summary>
+            /// Gets a value indicating if the device is of removable media.
+            /// </summary>
+            /// <value>
+            /// Returns <see langword="true"/> if the device is removable; otherwise, <see langword="false"/>.
+            /// </value>
+            bool IsRemovableMedia { get; }
+
+            /// <summary>
+            /// Gets if media was present at the time the device was queried on instantiation.
+            /// </summary>
+            /// <value><see langword="true"/> if was present; otherwise, <see langword="false"/>.</value>
+            bool IsMediaPresent { get; }
+
+            /// <summary>
+            /// Gets a value indicating whether the disk will incur a seek penalty.
+            /// </summary>
+            /// <value>
+            /// Is <see cref="BoolUnknown.True"/> if the disk will incur a seek penalty (such as a mechanical HDD), or
+            /// <see cref="BoolUnknown.False"/> if not (such as an SSD). If this value cannot be determined, then
+            /// <see cref="BoolUnknown.Unknown"/> is returned.
+            /// </value>
+            BoolUnknown HasSeekPenalty { get; }
+
+            /// <summary>
+            /// Gets a value indicating whether the disk is read-only.
+            /// </summary>
+            /// <value><see langword="true"/> if the disk is read only; otherwise, <see langword="false"/>.</value>
+            bool IsReadOnly { get; }
 
             /// <summary>
             /// Gets the type of the disk media, if it's removable, fixed or a Floppy disk.
@@ -578,17 +617,12 @@
             {
                 m_Data = data;
                 if (!IsRemovableMedia || IsMediaPresent) Geometry = new GeometryInfo(data);
+                if (m_Data.DeviceQuery != null) Device = new DeviceInfo(data);
             }
 
+            public IDeviceInfo Device { get; set; }
+
             public DiskExtent[] Extents { get { return m_Data.Extents; } }
-
-            public string VendorId { get { return m_Data.DeviceQuery?.VendorId ?? string.Empty; } }
-
-            public string ProductId { get { return m_Data.DeviceQuery?.ProductId ?? string.Empty; } }
-
-            public string ProductRevision { get { return m_Data.DeviceQuery?.ProductRevision ?? string.Empty; } }
-
-            public string SerialNumber { get { return m_Data.DeviceQuery?.DeviceSerialNumber ?? string.Empty; } }
 
             public bool IsMediaPresent { get { return m_Data.MediaPresent; } }
 
@@ -611,25 +645,9 @@
                 }
             }
 
-            public bool HasCommandQueueing { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.CommandQueueing; } }
-
             public BoolUnknown HasSeekPenalty { get { return m_Data.HasSeekPenalty; } }
 
             public bool IsReadOnly { get { return m_Data.DiskReadOnly; } }
-
-            public BusType BusType { get { return m_Data.DeviceQuery == null ? BusType.Unknown : m_Data.DeviceQuery.BusType; } }
-
-            public DeviceType DeviceType { get { return m_Data.DeviceNumber == null ? DeviceType.Unknown : m_Data.DeviceNumber.DeviceType; } }
-
-            public int DeviceNumber { get { return m_Data.DeviceNumber == null ? -1 : m_Data.DeviceNumber.DeviceNumber; } }
-
-            public ScsiDeviceType ScsiDeviceType { get { return m_Data.DeviceQuery == null ? ScsiDeviceType.Unknown : m_Data.DeviceQuery.ScsiDeviceType; } }
-
-            public int ScsiDeviceModifier { get { return m_Data.DeviceQuery == null ? 0 : m_Data.DeviceQuery.ScsiDeviceModifier; } }
-
-            public DeviceGuidFlags GuidFlags { get { return m_Data.DeviceNumber == null ? DeviceGuidFlags.None : m_Data.DeviceNumber.DeviceGuidFlags; } }
-
-            public Guid Guid { get { return m_Data.DeviceNumber == null ? Guid.Empty : m_Data.DeviceNumber.DeviceGuid; } }
 
             public MediaType MediaType { get { return m_Data.DiskGeometry == null ? MediaType.Unknown : m_Data.DiskGeometry.MediaType; } }
 
