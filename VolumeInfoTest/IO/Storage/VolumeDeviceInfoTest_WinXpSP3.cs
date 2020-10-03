@@ -61,7 +61,7 @@
         [Test]
         public void DriveA()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"A:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"A:");
             Assert.That(vinfo.Path, Is.EqualTo(A));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
@@ -73,7 +73,7 @@
         [Test]
         public void DriveAS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"A:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"A:\");
             Assert.That(vinfo.Path, Is.EqualTo(AS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(AS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
@@ -85,7 +85,7 @@
         [Test]
         public void DriveAV()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}");
             Assert.That(vinfo.Path, Is.EqualTo(AV));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
@@ -97,7 +97,7 @@
         [Test]
         public void DriveAVS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{5619d5dc-ffd3-11ea-8e38-000c29553b8c}\");
             Assert.That(vinfo.Path, Is.EqualTo(AVS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(AVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(AV));
@@ -131,7 +131,7 @@
         [Test]
         public void DriveB()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"B:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"B:");
             Assert.That(vinfo.Path, Is.EqualTo(B));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(BS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(BV));
@@ -143,7 +143,7 @@
         [Test]
         public void DriveBS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"B:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"B:\");
             Assert.That(vinfo.Path, Is.EqualTo(BS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(BS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(BV));
@@ -155,7 +155,7 @@
         [Test]
         public void DriveBV()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}");
             Assert.That(vinfo.Path, Is.EqualTo(BV));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(BVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(BV));
@@ -167,7 +167,7 @@
         [Test]
         public void DriveBVS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{1833df12-ffe0-11ea-8e39-000c29553b8c}\");
             Assert.That(vinfo.Path, Is.EqualTo(BVS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(BVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(BV));
@@ -194,7 +194,7 @@
         [Test]
         public void PhysicalDrive0()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\.\PhysicalDrive0");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\.\PhysicalDrive0");
             Assert.That(vinfo.Path, Is.EqualTo(Phys0));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(Phys0S));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
@@ -207,7 +207,7 @@
         [Test]
         public void PhysicalDrive0S()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\.\PhysicalDrive0\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\.\PhysicalDrive0\");
             Assert.That(vinfo.Path, Is.EqualTo(Phys0S));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(Phys0S));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
@@ -260,7 +260,7 @@
         [Test]
         public void DriveC()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"C:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"C:");
             Assert.That(vinfo.Path, Is.EqualTo(C));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -273,7 +273,7 @@
         [Test]
         public void DriveCS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"C:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"C:\");
             Assert.That(vinfo.Path, Is.EqualTo(CS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -286,7 +286,7 @@
         [Test]
         public void DriveCV()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}");
             Assert.That(vinfo.Path, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -299,7 +299,7 @@
         [Test]
         public void DriveCVS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{77f8a1bc-e9e9-11ea-95c7-806d6172696f}\");
             Assert.That(vinfo.Path, Is.EqualTo(CVS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -312,7 +312,7 @@
         [Test]
         public void DriveCFolder()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"C:\Documents and Settings\User\My Documents");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"C:\Documents and Settings\User\My Documents");
             Assert.That(vinfo.Path, Is.EqualTo(@"C:\Documents and Settings\User\My Documents"));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -345,7 +345,7 @@
         [Test]
         public void DriveD()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"D:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"D:");
             Assert.That(vinfo.Path, Is.EqualTo(D));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -358,7 +358,7 @@
         [Test]
         public void DriveDS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"D:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"D:\");
             Assert.That(vinfo.Path, Is.EqualTo(DS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -371,7 +371,7 @@
         [Test]
         public void DriveDV()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}");
             Assert.That(vinfo.Path, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -384,7 +384,7 @@
         [Test]
         public void DriveDVS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"\\?\Volume{77f8a1ba-e9e9-11ea-95c7-806d6172696f}\");
             Assert.That(vinfo.Path, Is.EqualTo(DVS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DVS));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -435,7 +435,7 @@
         [Test]
         public void NetM()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"M:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"M:");
             Assert.That(vinfo.Path, Is.EqualTo(M));
             Assert.That(vinfo.Volume.Path, Is.Empty);        // Not a local mount
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
@@ -450,7 +450,7 @@
         [Test]
         public void NetMS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"M:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"M:\");
             Assert.That(vinfo.Path, Is.EqualTo(MS));
             Assert.That(vinfo.Volume.Path, Is.Empty);        // Not a local mount
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
@@ -465,7 +465,7 @@
         [Test]
         public void SubstN()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"N:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"N:");
             Assert.That(vinfo.Path, Is.EqualTo(N));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CS));  // Drive N: is mapped to C:
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -478,7 +478,7 @@
         [Test]
         public void SubstNS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"N:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"N:\");
             Assert.That(vinfo.Path, Is.EqualTo(NS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(CS));  // Drive N: is mapped to C:
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
@@ -491,7 +491,7 @@
         [Test]
         public void SubstO()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"O:");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"O:");
             Assert.That(vinfo.Path, Is.EqualTo(O));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DS));  // Drive O: is mapped to D:\I386
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -504,7 +504,7 @@
         [Test]
         public void SubstOS()
         {
-            VolumeDeviceInfo vinfo = new VolumeDeviceInfoSim(WinXPSim, @"O:\");
+            VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"O:\");
             Assert.That(vinfo.Path, Is.EqualTo(OS));
             Assert.That(vinfo.Volume.Path, Is.EqualTo(DS));  // Drive O: is mapped to D:\I386
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
@@ -518,7 +518,7 @@
         public void UnmappedDriveZ()
         {
             Assert.That(() => {
-                _ = new VolumeDeviceInfoSim(WinXPSim, @"Z:");
+                _ = new Win32.VolumeDeviceInfoWin32Sim(WinXPSim, @"Z:");
             }, Throws.TypeOf<FileNotFoundException>());
         }
     }

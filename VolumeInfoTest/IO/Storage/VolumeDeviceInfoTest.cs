@@ -9,7 +9,7 @@
         public void BootPartition()
         {
             // Checks that in general we can query the volume information.
-            VolumeDeviceInfo volumeInfo = new VolumeDeviceInfo(@"\\.\BootPartition");
+            VolumeDeviceInfo volumeInfo = VolumeDeviceInfo.Create(@"\\.\BootPartition");
             Assert.That(volumeInfo.Path, Is.EqualTo(@"\\.\BootPartition"));
             Assert.That(volumeInfo.Volume.DriveLetter, Is.Not.Null.Or.Empty);
             Assert.That(volumeInfo.Volume.DevicePath, Is.Not.Null.Or.Empty);

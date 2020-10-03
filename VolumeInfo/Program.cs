@@ -37,7 +37,7 @@
 
                 try {
                     Console.WriteLine("Device Path: {0}", device);
-                    VolumeDeviceInfo info = new VolumeDeviceInfo(device);
+                    VolumeDeviceInfo info = VolumeDeviceInfo.Create(device);
                     if (options.LogApi) Capture(info);
 
                     Console.WriteLine("  Volume");

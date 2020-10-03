@@ -24,6 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,6 +63,7 @@
     <Compile Include="IO\Storage\Win32\StorageAccessAlignment.cs" />
     <Compile Include="IO\Storage\Win32\StorageDeviceNumber.cs" />
     <Compile Include="IO\Storage\Win32\IOSVolumeDeviceInfo.cs" />
+    <Compile Include="IO\Storage\Win32\VolumeDeviceInfoWin32.cs" />
     <Compile Include="IO\Storage\Win32\VolumeInfo.cs" />
     <Compile Include="LogApi\LogDeviceData.cs" />
     <Compile Include="Native\Platform.cs" />
