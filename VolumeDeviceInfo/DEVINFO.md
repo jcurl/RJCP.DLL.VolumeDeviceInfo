@@ -24,6 +24,8 @@ Table of Contents
   * 3.10 USB Thumb Drives
   * 3.11 Windows Server 2003 R2 SP2 Spanning Volume
   * 3.12 Windows Server 2003 R2 SP2 with Mirrored Volume
+  * 3.13 Windows ReFS File System with Windows 10 v2004
+  * 3.14 Experimental: Windows Btrfs File System with Windows 10 v2004
 
 ## 1.0 Introduction
 
@@ -1151,3 +1153,118 @@ Device Path: E:\
 
 We can now see that two physical drives are used, and they're both of the same
 offset and length.
+
+### 3.13 Windows ReFS File System with Windows 10 v2004
+
+A quick overview of how the ReFS filesystem is reported on Windows 10:
+
+```text
+Device Path: E:\
+  Volume
+    Drive Type      : Fixed
+    Volume Path     : E:\
+    Volume Device   : \\?\Volume{6ba1874e-0072-4554-a054-9f83d01164e0}
+    Volume Drive    : E:
+    NT DOS Device   : \Device\HarddiskVolume6
+  Partition
+    Partition Style : GuidPartitionTable
+    Part Number     : 2
+    Part Offset     : 01000000
+    Part Length     : 10,0 GB
+    GPT Attributes  : None
+    GPT Name        : Basic data partition
+    GPT Type        : ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+    GPT Id          : 6ba1874e-0072-4554-a054-9f83d01164e0
+  File System
+    Label           : ReFS
+    Serial Number   : EC23-936A
+    Flags           : CaseSensitiveSearch, CasePreservedNames, UnicodeOnDisk,
+                      PersistentAcls, SupportsSparseFiles, SupportsReparsePoints,
+                      ReturnsCleanupResultInfo, NamedStreams, SupportsOpenByFileId,
+                      SupportsUsnJournal, SupportsIntegrityStreams,
+                      SupportsBlockRefCounting, SupportsSparseVdl, SupportsGhosting
+    File System     : ReFS
+    Bytes Per Sector: 512
+    Sectors Per Clus: 8
+    User Free       : 8,9 GB
+    Total Free      : 8,9 GB
+    Capacity        : 9,9 GB
+  Device
+    Extent: \\.\PhysicalDrive1
+      Offset        : 01000000
+      Length        : 10,0 GB
+    Vendor          :
+    Product         : VMware Virtual SATA Hard Drive; Revision 00000001
+    SerialNumber    : 02000000000000000001
+    Bus Type        : Serial AT Attachment (SATA)
+    SCSI Device Type: Direct Access Device; SCSI Modifier: 0
+    Command Queueing: True
+    Device GUID:    : dd792752-8065-f007-853d-4d68b2de9045 (Page83DeviceGuid)
+    Removable Media : False
+    Media Present   : True
+    Disk Read Only  : False
+    Cyl/Trk/Sec/Byte: 1305/255/63/512 (10,0 GB)
+    Bytes/Sector    : Physical 512; Logical 512
+    Seek Penalty    : Unknown
+  ```
+
+### 3.14 Experimental: Windows Btrfs File System with Windows 10 v2004
+
+I tried installing BTRFS on a Windows 10 v2004 Enterprise (Secure Boot must be
+disabled for it to install properly, and the driver is somewhat experimental),
+but we can see how Windows responds with this tool. The version tested here is
+v1.7.4.
+
+```text
+Device Path: F:
+  Volume
+    Drive Type      : Fixed
+    Volume Path     : F:\
+    Volume Device   : \\?\Volume{8e4e907a-7424-0d28-5c95-53777a124a6f}
+    Volume Drive    : F:
+    NT DOS Device   : \Device\Btrfs{7a904e8e-2474-280d-5c95-53777a124a6f}
+  Partition
+    Partition Style : GuidPartitionTable
+    Part Number     : 2
+    Part Offset     : 01000000
+    Part Length     : 10.0 GB
+    GPT Attributes  : GptBasicDataAttributeNoDriveLetter
+    GPT Name        : Basic data partition
+    GPT Type        : ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+    GPT Id          : 649e42c4-caa5-4932-9271-5b9339019dec
+  File System
+    Label           :
+    Serial Number   : 7A12-4A6F
+    Flags           : CaseSensitiveSearch, CasePreservedNames, UnicodeOnDisk,
+                      PersistentAcls, SupportsSparseFiles, SupportsReparsePoints,
+                      SupportsPosixUnlinkRename, SupportsObjectIds, NamedStreams,
+                      SupportsHardLinks, SupportsExtendedAttributes,
+                      SupportsOpenByFileId, SupportsBlockRefCounting
+    File System     : Btrfs
+    Bytes Per Sector: 512
+    Sectors Per Clus: 8
+    User Free       : 10.0 GB
+    Total Free      : 10.0 GB
+    Capacity        : 10.0 GB
+  Device
+    Extent: \\.\PhysicalDrive1
+      Offset        : 01000000
+      Length        : 10.0 GB
+    Vendor          :
+    Product         : VMware Virtual SATA Hard Drive; Revision 00000001
+    SerialNumber    : 02000000000000000001
+    Bus Type        : Serial AT Attachment (SATA)
+    SCSI Device Type: Direct Access Device; SCSI Modifier: 0
+    Command Queueing: True
+    Device GUID:    : dd792752-8065-f007-853d-4d68b2de9045 (Page83DeviceGuid)
+    Removable Media : False
+    Media Present   : True
+    Disk Read Only  : False
+    Cyl/Trk/Sec/Byte: 162/255/63/4096 (9,9 GB)
+    Bytes/Sector    : Physical 512; Logical 4096
+    Seek Penalty    : Unknown
+  ```
+
+So it appears that the logical block size is 4096, which is different to the
+reports for all other software. I suspect this is because there might be
+confusion between the logical disk geometry, and the cluster size for BTRFS.
