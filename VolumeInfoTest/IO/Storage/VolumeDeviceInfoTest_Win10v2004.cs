@@ -156,7 +156,6 @@
 
         private void IsDriveFloppyTeac(VolumeDeviceInfo vinfo)
         {
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("TEAC    "));
@@ -176,8 +175,8 @@
         private void IsDriveFloppyA(VolumeDeviceInfo vinfo)
         {
             IsDriveFloppyTeac(vinfo);
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Floppy));
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.F3_1Pt44_512));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(80));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(2));
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(18));
@@ -263,7 +262,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDrivePhys0(vinfo);
         }
 
@@ -276,7 +274,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys0));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDrivePhys0(vinfo);
         }
 
@@ -297,10 +294,10 @@
 
         private void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Device.VendorId, Is.Empty);
             Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("SAMSUNG MZFLV512HCJH-000MV"));
             Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("BXV75M0Q"));
@@ -330,7 +327,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -343,7 +339,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -356,7 +351,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -369,7 +363,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -408,7 +401,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Vol1V));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not mounted
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not mounted
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsungHiddenPart(vinfo);
         }
 
@@ -421,7 +413,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Vol1V));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not mounted
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not mounted
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsungHiddenPart(vinfo);
         }
 
@@ -460,7 +451,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys1));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDrivePhys1(vinfo);
         }
 
@@ -473,7 +463,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys1));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDrivePhys1(vinfo);
         }
 
@@ -496,6 +485,7 @@
 
         private void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("Generic-"));
             Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("SD Card         "));
             Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.00"));
@@ -511,7 +501,6 @@
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.RemovableMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(7783));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
@@ -529,7 +518,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -542,7 +530,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -555,7 +542,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -568,7 +554,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(DD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(D));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -606,7 +591,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys2));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDrivePhys2(vinfo);
         }
 
@@ -619,7 +603,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys2));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDrivePhys2(vinfo);
         }
 
@@ -642,6 +625,7 @@
 
         private void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("SanDisk"));
             Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("Cruzer Glide 3.0"));
             Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("1.00"));
@@ -657,7 +641,6 @@
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.RemovableMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(7664));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
@@ -675,7 +658,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(EV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ED));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(E));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveGlide(vinfo);
         }
 
@@ -688,7 +670,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(EV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ED));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(E));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveGlide(vinfo);
         }
 
@@ -701,7 +682,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(EV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ED));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(E));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveGlide(vinfo);
         }
 
@@ -714,7 +694,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(EV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ED));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(E));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveGlide(vinfo);
         }
 
@@ -752,7 +731,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys3));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents, Is.Null);
             IsDrivePhys3(vinfo);
         }
@@ -766,7 +744,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(Phys3));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);     // Not a volume
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);       // Not a volume
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDrivePhys3(vinfo);
         }
 
@@ -778,6 +755,7 @@
 
         private void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("DELL    "));
             Assert.That(vinfo.Disk.Device.ProductId, Is.EqualTo("USB   HS-CF Card"));
             Assert.That(vinfo.Disk.Device.ProductRevision, Is.EqualTo("7.12"));
@@ -792,7 +770,6 @@
             Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(3));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.Unknown));
             Assert.That(vinfo.Disk.Geometry, Is.Null);
             Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.FileSystem, Is.Null);
@@ -817,7 +794,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(HV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
@@ -834,7 +810,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(HV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
@@ -851,7 +826,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(HV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
@@ -868,7 +842,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(HV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(HD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(H));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(0));
@@ -881,11 +854,11 @@
         {
             VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(Win10Sim, @"M:");
             Assert.That(vinfo.Path, Is.EqualTo(M));
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Remote));
             Assert.That(vinfo.Volume.Path, Is.Empty);        // Not a local mount
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
             Assert.That(vinfo.Disk, Is.Null);
             Assert.That(vinfo.Partition, Is.Null);
             Assert.That(vinfo.FileSystem, Is.Null);
@@ -896,11 +869,11 @@
         {
             VolumeDeviceInfo vinfo = new Win32.VolumeDeviceInfoWin32Sim(Win10Sim, @"M:\");
             Assert.That(vinfo.Path, Is.EqualTo(MS));
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Remote));
             Assert.That(vinfo.Volume.Path, Is.Empty);        // Not a local mount
             Assert.That(vinfo.Volume.DevicePath, Is.Empty);  // Not a local mount
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(MD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(M));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Remote));
             Assert.That(vinfo.Disk, Is.Null);
             Assert.That(vinfo.Partition, Is.Null);
             Assert.That(vinfo.FileSystem, Is.Null);
@@ -915,7 +888,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ND));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(N));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -928,7 +900,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ND));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(N));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -941,7 +912,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -954,7 +924,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -967,7 +936,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -980,7 +948,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(PD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(P));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -993,7 +960,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(PD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(P));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -1006,7 +972,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(RV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(RD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(R));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsImDiskRamDisk(vinfo);
         }
 
@@ -1019,7 +984,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(RV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(RD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(R));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsImDiskRamDisk(vinfo);
         }
 
@@ -1032,7 +996,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(RV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);// GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);        // GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsImDiskRamDisk(vinfo);
         }
 
@@ -1045,18 +1008,17 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(RV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.Empty);// GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
             Assert.That(vinfo.Volume.DriveLetter, Is.Empty);        // GetVolumePathName, GetVolumeNameForVolumeMountPoint fail
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsImDiskRamDisk(vinfo);
         }
 
         private void IsImDiskRamDisk(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Extents, Is.Null);                                             // No volume support
             Assert.That(vinfo.Disk.Device, Is.Null);                                              // Unsupported
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.FixedMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(130));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(128));
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
@@ -1095,7 +1057,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -1108,7 +1069,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 
@@ -1121,7 +1081,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(EV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(ED));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(E));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveGlide(vinfo);
         }
 
@@ -1134,7 +1093,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -1147,7 +1105,6 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(DV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(OD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(O));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveSdCard(vinfo);
         }
 
@@ -1160,12 +1117,12 @@
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(FV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(FD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(F));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Removable));
             IsDriveCruzer(vinfo);
         }
 
         private void IsDriveCruzer(VolumeDeviceInfo vinfo)
         {
+            Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Removable));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
@@ -1185,7 +1142,6 @@
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
-            Assert.That(vinfo.Disk.MediaType, Is.EqualTo(MediaType.RemovableMedia));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(492));
             Assert.That(vinfo.Disk.Geometry.TracksPerCylinder, Is.EqualTo(255));
             Assert.That(vinfo.Disk.Geometry.SectorsPerTrack, Is.EqualTo(63));
@@ -1218,8 +1174,8 @@
             Assert.That(vinfo.Volume.Path, Is.EqualTo(@"\\.\HarddiskVolume3\"));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
+            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
-            Assert.That(vinfo.Volume.DriveType, Is.EqualTo(DriveType.Fixed));
             IsDriveSamsung(vinfo);
         }
 

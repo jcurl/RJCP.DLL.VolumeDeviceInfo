@@ -1,6 +1,6 @@
-﻿namespace VolumeInfo.IO.Storage
+﻿namespace VolumeInfo.IO.Storage.Win32
 {
-    public enum MediaType
+    internal enum MediaType
     {
         /// <summary>
         /// Format is unknown.

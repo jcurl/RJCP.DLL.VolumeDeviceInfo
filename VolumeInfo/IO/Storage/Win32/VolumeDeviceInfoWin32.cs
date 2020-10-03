@@ -128,32 +128,7 @@
             Path = pathName;
             ResolveDevicePathNames(pathName);
             GetDeviceInformation();
-
-            Volume = new VolumePathInfo(m_VolumeData);
-            if (m_VolumeData.VolumeDevicePath != null) {
-                Disk = new DiskInfo(m_VolumeData);
-
-                // It's possible that drivers return file system and partition information, even when no media is present.
-                // In this case, the data is useless, and it's better that we don't present the information at all.
-                if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
-                    if (m_VolumeData.VolumeQuery != null)
-                        FileSystem = new FileSystemInfo(m_VolumeData);
-                    if (m_VolumeData.PartitionInfo != null) {
-                        // If there is no partition information, the property "Partition" is null.
-                        switch (m_VolumeData.PartitionInfo.Style) {
-                        case PartitionStyle.GuidPartitionTable:
-                            Partition = new GptPartitionInfo(m_VolumeData);
-                            break;
-                        case PartitionStyle.MasterBootRecord:
-                            Partition = new MbrPartitionInfo(m_VolumeData);
-                            break;
-                        default:
-                            Partition = new PartitionInfo(m_VolumeData);
-                            break;
-                        }
-                    }
-                }
-            }
+            InitializeProperties();
         }
 
         private class VolumePathInfo : IVolumeInfo
@@ -169,32 +144,6 @@
             public string DriveLetter { get { return m_Data.VolumeDrive ?? string.Empty; } }
 
             public string DosDevicePath { get { return m_Data.VolumeDosDevicePath ?? string.Empty; } }
-
-            public DriveType DriveType
-            {
-                get
-                {
-                    switch (m_Data.DriveType) {
-                    case 0: // DRIVE_UNKNOWN:
-                    case 1: // DRIVE_NO_ROOT_DIR:
-                        return DriveType.Unknown;
-                    case 2: // DRIVE_REMOVABLE
-                        if (m_Data.IsFloppy) return DriveType.Floppy;
-                        if (m_Data.VolumeDosDevicePath != null && m_Data.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
-                            return DriveType.Floppy;
-                        return DriveType.Removable;
-                    case 3: // DRIVE_FIXED
-                        return DriveType.Fixed;
-                    case 4: // DRIVE_REMOTE
-                        return DriveType.Remote;
-                    case 5: // DRIVE_CDROM
-                        return DriveType.CdRom;
-                    case 6: // DRIVE_RAMDISK
-                        return DriveType.RamDisk;
-                    }
-                    return DriveType.Unknown;
-                }
-            }
         }
 
         private class FileSystemInfo : IFileSystemInfo
@@ -309,8 +258,6 @@
             public BoolUnknown HasSeekPenalty { get { return m_Data.HasSeekPenalty; } }
 
             public bool IsReadOnly { get { return m_Data.DiskReadOnly; } }
-
-            public MediaType MediaType { get { return m_Data.DiskGeometry == null ? MediaType.Unknown : m_Data.DiskGeometry.MediaType; } }
 
             public IGeometryInfo Geometry { get; set; }
         }
@@ -558,6 +505,60 @@
                     }
                 }
             }
+        }
+
+        private void InitializeProperties()
+        {
+            Volume = new VolumePathInfo(m_VolumeData);
+            if (m_VolumeData.VolumeDevicePath != null) {
+                Disk = new DiskInfo(m_VolumeData);
+
+                // It's possible that drivers return file system and partition information, even when no media is present.
+                // In this case, the data is useless, and it's better that we don't present the information at all.
+                if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
+                    if (m_VolumeData.VolumeQuery != null)
+                        FileSystem = new FileSystemInfo(m_VolumeData);
+                    if (m_VolumeData.PartitionInfo != null) {
+                        // If there is no partition information, the property "Partition" is null.
+                        switch (m_VolumeData.PartitionInfo.Style) {
+                        case PartitionStyle.GuidPartitionTable:
+                            Partition = new GptPartitionInfo(m_VolumeData);
+                            break;
+                        case PartitionStyle.MasterBootRecord:
+                            Partition = new MbrPartitionInfo(m_VolumeData);
+                            break;
+                        default:
+                            Partition = new PartitionInfo(m_VolumeData);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            DriveType = GetDriveType();
+        }
+
+        private DriveType GetDriveType()
+        {
+            switch (m_VolumeData.DriveType) {
+            case 0: // DRIVE_UNKNOWN:
+            case 1: // DRIVE_NO_ROOT_DIR:
+                return DriveType.Unknown;
+            case 2: // DRIVE_REMOVABLE
+                if (m_VolumeData.IsFloppy) return DriveType.Floppy;
+                if (m_VolumeData.VolumeDosDevicePath != null && m_VolumeData.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
+                    return DriveType.Floppy;
+                return DriveType.Removable;
+            case 3: // DRIVE_FIXED
+                return DriveType.Fixed;
+            case 4: // DRIVE_REMOTE
+                return DriveType.Remote;
+            case 5: // DRIVE_CDROM
+                return DriveType.CdRom;
+            case 6: // DRIVE_RAMDISK
+                return DriveType.RamDisk;
+            }
+            return DriveType.Unknown;
         }
     }
 }

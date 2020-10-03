@@ -1,7 +1,7 @@
 ﻿namespace VolumeInfo.Native.Win32
 {
     using System.Runtime.InteropServices;
-    using IO.Storage;
+    using IO.Storage.Win32;
 
     internal partial class WinIoCtl
     {

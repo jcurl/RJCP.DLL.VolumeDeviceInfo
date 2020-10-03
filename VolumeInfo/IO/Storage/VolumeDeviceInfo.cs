@@ -29,6 +29,14 @@
         public string Path { get; protected set; }
 
         /// <summary>
+        /// Gets the type of the drive.
+        /// </summary>
+        /// <value>
+        /// The type of the drive.
+        /// </value>
+        public DriveType DriveType { get; protected set; }
+
+        /// <summary>
         /// All properties relevant for Volume information.
         /// </summary>
         public interface IVolumeInfo
@@ -59,14 +67,6 @@
             /// </summary>
             /// <value>The NT path, volume dos device path.</value>
             string DosDevicePath { get; }
-
-            /// <summary>
-            /// Gets the type of the drive.
-            /// </summary>
-            /// <value>
-            /// The type of the drive.
-            /// </value>
-            DriveType DriveType { get; }
         }
 
         /// <summary>
@@ -340,12 +340,6 @@
             /// </summary>
             /// <value><see langword="true"/> if the disk is read only; otherwise, <see langword="false"/>.</value>
             bool IsReadOnly { get; }
-
-            /// <summary>
-            /// Gets the type of the disk media, if it's removable, fixed or a Floppy disk.
-            /// </summary>
-            /// <value>The type of the disk media.</value>
-            MediaType MediaType { get; }
 
             /// <summary>
             /// Gets information about the geometry of the disk.

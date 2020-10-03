@@ -41,11 +41,11 @@
                     if (options.LogApi) Capture(info);
 
                     Console.WriteLine("  Volume");
+                    Console.WriteLine("    Drive Type      : {0}", info.DriveType);
                     Console.WriteLine("    Volume Path     : {0}", info.Volume.Path);
                     Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
                     Console.WriteLine("    Volume Drive    : {0}", info.Volume.DriveLetter);
                     Console.WriteLine("    NT DOS Device   : {0}", info.Volume.DosDevicePath);
-                    Console.WriteLine("    Drive Type      : {0}", info.Volume.DriveType);
                     if (info.Partition != null) {
                         Console.WriteLine("  Partition");
                         Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
@@ -102,7 +102,6 @@
                         Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
                         Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
                         Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
-                        Console.WriteLine("    Media Type      : {0}", info.Disk.MediaType);
                         if (info.Disk.Geometry != null) {
                             Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
                                 info.Disk.Geometry.Cylinders, info.Disk.Geometry.TracksPerCylinder,
