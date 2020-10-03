@@ -3,7 +3,7 @@
 You can contribute by
 
 * Testing on your machine with any exotic hardware you have. Such devices might
-  be an Iomega ZIP drive (if they still exist), or other actual SCSI devices. 
+  be an Iomega ZIP drive (if they still exist), or other actual SCSI devices.
 * Reviewing the code and offering bugfixes.
 * Updating the documentation within the code.
 

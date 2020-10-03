@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VolumeInfo")]
-[assembly: AssemblyDescription("A Test Application retrieving and providing the user information about Volumes")]
+[assembly: AssemblyTitle("VolumeDeviceInfo")]
+[assembly: AssemblyDescription("A Library to obtain volume/disk/partition/filesystem related information for WIndows")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("VolumeDeviceInfo")]
@@ -19,7 +20,11 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bc805d36-7847-4a44-9b23-8c3c573f9099")]
+[assembly: Guid("d967a527-4aaa-4543-9cc8-51cf89e35758")]
+
+// Required for Unit Testing and Logging
+[assembly: InternalsVisibleTo("RJCP.IO.VolumeDeviceInfoTest")]
+[assembly: InternalsVisibleTo("VolumeInfo")]
 
 // Version information for an assembly consists of the following four values:
 //

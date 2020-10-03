@@ -1,4 +1,4 @@
-﻿namespace VolumeInfo.LogApi
+﻿namespace RJCP.LogApi
 {
     using System;
     using System.Globalization;

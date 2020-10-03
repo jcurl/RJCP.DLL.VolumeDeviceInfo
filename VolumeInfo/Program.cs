@@ -1,12 +1,9 @@
-﻿namespace VolumeInfo
+﻿namespace RJCP
 {
     using System;
     using System.Collections.Generic;
     using IO.Storage;
 
-    /// <summary>
-    /// The main entry point.
-    /// </summary>
     public static class Program
     {
         private class Options
