@@ -261,22 +261,6 @@
             BusType BusType { get; }
 
             /// <summary>
-            /// Gets the Device Type where the volume is found.
-            /// </summary>
-            /// <value>The type of the device.</value>
-            DeviceType DeviceType { get; }
-
-            /// <summary>
-            /// Gets the device number assigned in the system for this volume.
-            /// </summary>
-            /// <value>The device number.</value>
-            /// <remarks>
-            /// This value is unique in the system for the given <see cref="DeviceType"/>. THe Device Number remains
-            /// constant until the device is removed, or the system is restarted.
-            /// </remarks>
-            int DeviceNumber { get; }
-
-            /// <summary>
             /// Gets the source of the device unique identifier.
             /// </summary>
             /// <value>The source of the device unique identifier.</value>

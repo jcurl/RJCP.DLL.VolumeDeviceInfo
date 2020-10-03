@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using IO.Storage;
 
     internal static partial class WinIoCtl
     {

@@ -97,7 +97,6 @@
                             Console.WriteLine("    SCSI Device Type: {0}; SCSI Modifier: {1}", info.Disk.Device.ScsiDeviceType.ToDescription(), info.Disk.Device.ScsiDeviceModifier);
                             Console.WriteLine("    Command Queueing: {0}", info.Disk.Device.HasCommandQueueing);
                             Console.WriteLine("    Device GUID:    : {0} ({1})", info.Disk.Device.Guid, info.Disk.Device.GuidFlags);
-                            Console.WriteLine("    Device Number   : {0} #{1}", info.Disk.Device.DeviceType, info.Disk.Device.DeviceNumber);
                         }
                         Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
                         Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);

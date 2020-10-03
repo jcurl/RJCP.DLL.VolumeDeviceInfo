@@ -1,6 +1,7 @@
 ﻿namespace VolumeInfo.IO.Storage.Win32
 {
     using System;
+    using static Native.Win32.WinIoCtl;
 
     internal class StorageDeviceNumber
     {

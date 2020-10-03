@@ -120,8 +120,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
@@ -423,8 +421,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.CdRom));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.False);
             Assert.That(vinfo.Disk.IsReadOnly, Is.True);
@@ -496,8 +492,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.CdRom));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.False);
             Assert.That(vinfo.Disk.IsReadOnly, Is.True);
@@ -558,8 +552,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);

@@ -6,6 +6,7 @@
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Xml;
+    using static Native.Win32.WinIoCtl;
 
     internal class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
     {

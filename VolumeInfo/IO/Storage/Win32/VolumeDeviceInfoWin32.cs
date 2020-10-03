@@ -206,10 +206,6 @@
 
             public bool HasCommandQueueing { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.CommandQueueing; } }
 
-            public DeviceType DeviceType { get { return m_Data.DeviceNumber == null ? DeviceType.Unknown : m_Data.DeviceNumber.DeviceType; } }
-
-            public int DeviceNumber { get { return m_Data.DeviceNumber == null ? -1 : m_Data.DeviceNumber.DeviceNumber; } }
-
             public ScsiDeviceType ScsiDeviceType { get { return m_Data.DeviceQuery == null ? ScsiDeviceType.Unknown : m_Data.DeviceQuery.ScsiDeviceType; } }
 
             public int ScsiDeviceModifier { get { return m_Data.DeviceQuery == null ? 0 : m_Data.DeviceQuery.ScsiDeviceModifier; } }

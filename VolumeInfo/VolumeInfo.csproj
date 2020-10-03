@@ -55,7 +55,7 @@
     <Compile Include="IO\Storage\Win32\MediaType.cs" />
     <Compile Include="IO\Storage\BoolUnknown.cs" />
     <Compile Include="IO\Storage\DeviceGuidFlags.cs" />
-    <Compile Include="IO\Storage\DeviceType.cs" />
+    <Compile Include="Native\Win32\WinIoCtl+DeviceType.cs" />
     <Compile Include="IO\Storage\Win32\PartitionInformation.cs" />
     <Compile Include="IO\Storage\PartitionStyle.cs" />
     <Compile Include="IO\Storage\Win32\DiskGeometry.cs" />

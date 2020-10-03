@@ -102,8 +102,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
@@ -228,6 +226,8 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
+            Justification = "Test Case must keep them separate as they're physically different devices")]
         public void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
@@ -241,8 +241,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(1));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
@@ -294,6 +292,8 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
+            Justification = "Test Case must keep them separate as they're physically different devices")]
         public void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
@@ -307,8 +307,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(2));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
@@ -442,8 +440,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(3));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);

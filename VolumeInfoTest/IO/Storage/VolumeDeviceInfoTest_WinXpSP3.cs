@@ -240,8 +240,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
             Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.Disk));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.False);
@@ -395,8 +393,6 @@
             Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
             Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
-            Assert.That(vinfo.Disk.Device.DeviceType, Is.EqualTo(DeviceType.CdRom));
-            Assert.That(vinfo.Disk.Device.DeviceNumber, Is.EqualTo(0));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
             Assert.That(vinfo.Disk.IsMediaPresent, Is.True);
             Assert.That(vinfo.Disk.IsReadOnly, Is.True);
