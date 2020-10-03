@@ -8,7 +8,7 @@
     using IO.Storage;
     using IO.Storage.Win32;
 
-    public class LogDeviceData
+    internal class LogDeviceData
     {
         private const string RootNode = "VolumeInfoTest";
         private const string PathNode = "Path";

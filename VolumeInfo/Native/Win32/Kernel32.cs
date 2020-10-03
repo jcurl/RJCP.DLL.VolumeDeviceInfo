@@ -28,8 +28,7 @@ namespace VolumeInfo.Native.Win32
         /// </summary>
         /// <param name="hObject">A valid handle to an open object.</param>
         /// <returns>
-        /// If the function succeeds, the return value is nonzero.
-        /// If the function fails, the return value is zero.To get extended error information, call <see cref="GetLastError"/>.
+        /// If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.
         /// </returns>
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("kernel32.dll", SetLastError = true)]

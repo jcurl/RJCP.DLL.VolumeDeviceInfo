@@ -7,6 +7,12 @@
     /// </summary>
     public abstract class VolumeDeviceInfo
     {
+        /// <summary>
+        /// Instantiates a new instance of a <see cref="VolumeDeviceInfo"/> object for the path given.
+        /// </summary>
+        /// <param name="path">The path to query and get disk/partition/volume/file system information for.</param>
+        /// <returns>A <see cref="VolumeDeviceInfo"/> object relevant for the current running Operating System.</returns>
+        /// <exception cref="PlatformNotSupportedException">This Operating System is not supported.</exception>
         public static VolumeDeviceInfo Create(string path)
         {
             if (Native.Platform.IsWinNT()) return new Win32.VolumeDeviceInfoWin32(path);
@@ -199,7 +205,7 @@
             /// </summary>
             /// <value>The disk physical bytes per physical sector.</value>
             /// <remarks>
-            /// If this value cannot be determined, then it is the same as the <see cref="DiskBytesPerSector"/>.
+            /// If this value cannot be determined, then it is the same as the <see cref="BytesPerSector"/>.
             /// </remarks>
             int BytesPerPhysicalSector { get; }
         }
@@ -278,6 +284,10 @@
         /// </summary>
         public interface IDiskInfo
         {
+            /// <summary>
+            /// Gets information about the device controlling the disk.
+            /// </summary>
+            /// <value>Disk Device information, such as Vendor, Product, etc.</value>
             IDeviceInfo Device { get; }
 
             /// <summary>
@@ -422,7 +432,7 @@
             int Type { get; }
 
             /// <summary>
-            /// Gets or sets a value indicating whether this <see cref="MbrPartition"/> is bootable.
+            /// Gets or sets a value indicating whether this <see cref="PartitionStyle.MasterBootRecord"/> is bootable.
             /// </summary>
             /// <value><see langword="true"/> if bootable; otherwise, <see langword="false"/>.</value>
             bool Bootable { get; }

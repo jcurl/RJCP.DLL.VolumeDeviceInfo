@@ -79,7 +79,7 @@
         /// The parameter <paramref name="pathName"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="ArgumentException">The parameter <paramref name="pathName"/> is empty.</exception>
-        /// <exception cref="FileNotFoundException">The path is not recognized in the system.</exception>
+        /// <exception cref="System.IO.FileNotFoundException">The path is not recognized in the system.</exception>
         /// <remarks>
         /// This is a Windows only implementation that calls the Operating System direct to get information about the
         /// drive, including IOCTLs, from the path given.

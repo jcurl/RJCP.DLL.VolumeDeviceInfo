@@ -3,33 +3,123 @@
     using System;
     using Native.Win32;
 
+    /// <summary>
+    /// The bus type which the physical disk is attached with.
+    /// </summary>
     public enum BusType
     {
+        /// <summary>
+        /// The bus type is not known.
+        /// </summary>
         Unknown = 0x00,
+
+        /// <summary>
+        /// The device is attached using the SCSI protocol.
+        /// </summary>
         Scsi = 0x1,
+
+        /// <summary>
+        /// The device is attached using the ATAPI bus.
+        /// </summary>
         Atapi = 0x2,
+
+        /// <summary>
+        /// The device is attached using the ATA bus.
+        /// </summary>
         Ata = 0x3,
+
+        /// <summary>
+        /// The device is attached using Firewire (IEEE1394).
+        /// </summary>
         Ieee1394 = 0x4,
+
+        /// <summary>
+        /// The device is attached using Serial Storage Architecture.
+        /// </summary>
         Ssa = 0x5,
+
+        /// <summary>
+        /// The device is attached using a Fibre channel.
+        /// </summary>
         Fibre = 0x6,
+
+        /// <summary>
+        /// The device is attached via USB.
+        /// </summary>
         Usb = 0x7,
+
+        /// <summary>
+        /// The device is attached via a RAID controller.
+        /// </summary>
         RAID = 0x8,
+
+        /// <summary>
+        /// The device is attached using ISCSI.
+        /// </summary>
         iScsi = 0x9,
+
+        /// <summary>
+        /// The device is attached using Serial attached SCSI.
+        /// </summary>
         Sas = 0xA,
+
+        /// <summary>
+        /// The device is attached using Serial ATA.
+        /// </summary>
         Sata = 0xB,
+
+        /// <summary>
+        /// The device is a Secure Digital device.
+        /// </summary>
         Sd = 0xC,
+
+        /// <summary>
+        /// The device is a Multimedia Card.
+        /// </summary>
         Mmc = 0xD,
+
+        /// <summary>
+        /// This is a Virtual Device (e.g. VHD).
+        /// </summary>
         Virtual = 0xE,
+
+        /// <summary>
+        /// The file backed virtual device.
+        /// </summary>
         FileBackedVirtual = 0xF,
+
+        /// <summary>
+        /// The device is using the Spaces driver.
+        /// </summary>
         Spaces = 0x10,
+
+        /// <summary>
+        /// The device is a Non-Volatile Memory device, usually attached directly.
+        /// </summary>
         Nvme = 0x11,
+
+        /// <summary>
+        /// The device is a Storage Class Memory.
+        /// </summary>
         SCM = 0x12,
+
+        /// <summary>
+        /// The device is a Universal Flash Storage device.
+        /// </summary>
         Ufs = 0x13,
     }
 
 
+    /// <summary>
+    /// Extensions for the <see cref="BusType"/>.
+    /// </summary>
     public static class BusTypeExt
     {
+        /// <summary>
+        /// Converts the <see cref="BusType"/> enumeration to a more meaningful (printable) short description.
+        /// </summary>
+        /// <param name="busType">Type of the bus.</param>
+        /// <returns>A short description of the device</returns>
         public static string ToDescription(this BusType busType)
         {
             switch (busType) {
@@ -60,6 +150,14 @@
             }
         }
 
+        /// <summary>
+        /// Converts the <see cref="BusType"/> enumeration to a more meaningful (printable), possible long, description.
+        /// </summary>
+        /// <param name="busType">Type of the bus.</param>
+        /// <param name="extended">
+        /// If set to <see langword="true"/>, provide a longer, more meaningful description.
+        /// </param>
+        /// <returns>A description of the device</returns>
         public static string ToDescription(this BusType busType, bool extended)
         {
             if (!extended) {
