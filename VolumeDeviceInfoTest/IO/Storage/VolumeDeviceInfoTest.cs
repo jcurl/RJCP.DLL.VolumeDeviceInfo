@@ -20,5 +20,26 @@
             Assert.That(volumeInfo.FileSystem.Serial, Is.Not.Null);
             Assert.That(volumeInfo.FileSystem.Name, Is.Not.Null);
         }
+
+        [Test]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure.", Justification = "Specific Test")]
+        public void ObjectEquality()
+        {
+            VolumeDeviceInfo bootPart = VolumeDeviceInfo.Create(@"\\.\BootPartition");
+            VolumeDeviceInfo bootDrive = VolumeDeviceInfo.Create(bootPart.Volume.DevicePath);
+
+            // Object Equality
+            Assert.That(bootPart, Is.EqualTo(bootDrive));
+            Assert.That(bootDrive, Is.EqualTo(bootPart));
+            Assert.That(bootPart.Equals(bootDrive));
+            Assert.That(bootDrive.Equals(bootPart));
+            Assert.That(bootPart.ToString(), Is.EqualTo(bootDrive.ToString()));
+            Assert.That(bootPart.GetHashCode(), Is.EqualTo(bootDrive.GetHashCode()));
+
+            // Reference Equality
+            Assert.That(bootPart != bootDrive);
+            Assert.That(bootDrive != bootPart);
+            Assert.That(ReferenceEquals(bootPart, bootDrive), Is.False);
+        }
     }
 }

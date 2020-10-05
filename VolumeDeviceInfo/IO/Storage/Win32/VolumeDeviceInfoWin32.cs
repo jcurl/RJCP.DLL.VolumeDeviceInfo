@@ -556,5 +556,25 @@
             }
             return DriveType.Unknown;
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return m_VolumeData.VolumeDevicePath;
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            return m_VolumeData.VolumeDevicePath.GetHashCode();
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is VolumeDeviceInfoWin32 rObj)) return false;
+            return m_VolumeData.VolumeDevicePath.Equals(rObj.m_VolumeData.VolumeDevicePath, StringComparison.Ordinal);
+        }
     }
 }
