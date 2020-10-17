@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>RJCP.IO.VolumeDeviceInfo</id>
+        <version></version>
+        <authors>Jason Curl</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Get Volume Device Information, as easy as VolumeInfo and FileInfo.</description>
+        <language>en-US</language>
+    </metadata>
+    <files>
+        <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.dll" target="lib\net40" />
+        <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.pdb" target="lib\net40" />
+        <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.xml" target="lib\net40" />
+        <file src="RJCP.IO.VolumeDeviceInfo.csproj" target="src" />
+        <file src="**.cs" target="src" />
+        <file src="..\*.md" target="doc" />
+    </files>
+</package>
