@@ -94,23 +94,25 @@
                 return;
             }
 
-            string removableMedia = node["RemovableMedia"].Attributes["result"].Value;
-            string cmdQueuing = node["CommandQueueing"].Attributes["result"].Value;
-            string scsiDevType = node["ScsiDeviceType"].Attributes["result"].Value;
-            string scsiDevMod = node["ScsiModifier"].Attributes["result"].Value;
-            string busType = node["BusType"].Attributes["result"].Value;
-            VolumeDeviceQuery devQuery = new VolumeDeviceQuery() {
-                VendorId = node["VendorId"].Attributes["result"].Value,
-                DeviceSerialNumber = node["DeviceSerialNumber"].Attributes["result"].Value,
-                ProductId = node["ProductId"].Attributes["result"].Value,
-                ProductRevision = node["ProductRevision"].Attributes["result"].Value,
-                RemovableMedia = bool.Parse(removableMedia),
-                CommandQueueing = bool.Parse(cmdQueuing),
-                ScsiDeviceType = (ScsiDeviceType)int.Parse(scsiDevType, CultureInfo.InvariantCulture),
-                ScsiDeviceModifier = int.Parse(scsiDevMod, CultureInfo.InvariantCulture),
-                BusType = (BusType)int.Parse(busType, CultureInfo.InvariantCulture)
-            };
-            dictionary.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
+            unchecked {
+                string removableMedia = node["RemovableMedia"].Attributes["result"].Value;
+                string cmdQueuing = node["CommandQueueing"].Attributes["result"].Value;
+                string scsiDevType = node["ScsiDeviceType"].Attributes["result"].Value;
+                string scsiDevMod = node["ScsiModifier"].Attributes["result"].Value;
+                string busType = node["BusType"].Attributes["result"].Value;
+                VolumeDeviceQuery devQuery = new VolumeDeviceQuery() {
+                    VendorId = node["VendorId"].Attributes["result"].Value,
+                    DeviceSerialNumber = node["DeviceSerialNumber"].Attributes["result"].Value,
+                    ProductId = node["ProductId"].Attributes["result"].Value,
+                    ProductRevision = node["ProductRevision"].Attributes["result"].Value,
+                    RemovableMedia = bool.Parse(removableMedia),
+                    CommandQueueing = bool.Parse(cmdQueuing),
+                    ScsiDeviceType = (ScsiDeviceType)int.Parse(scsiDevType, CultureInfo.InvariantCulture),
+                    ScsiDeviceModifier = int.Parse(scsiDevMod, CultureInfo.InvariantCulture),
+                    BusType = (BusType)int.Parse(busType, CultureInfo.InvariantCulture)
+                };
+                dictionary.Add(path, new ResultOrError<VolumeDeviceQuery>(devQuery));
+            }
         }
 
         private void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
@@ -125,14 +127,16 @@
                 return;
             }
 
-            string flags = node["Flags"].Attributes["result"].Value;
-            VolumeInfo volInfo = new VolumeInfo() {
-                VolumeLabel = node["Label"].Attributes["result"].Value,
-                VolumeSerial = node["SerialNumber"].Attributes["result"].Value,
-                FileSystem = node["FileSystem"].Attributes["result"].Value,
-                Flags = (FileSystemFlags)int.Parse(flags, CultureInfo.InvariantCulture)
-            };
-            dictionary.Add(path, new ResultOrError<VolumeInfo>(volInfo));
+            unchecked {
+                string flags = node["Flags"].Attributes["result"].Value;
+                VolumeInfo volInfo = new VolumeInfo() {
+                    VolumeLabel = node["Label"].Attributes["result"].Value,
+                    VolumeSerial = node["SerialNumber"].Attributes["result"].Value,
+                    FileSystem = node["FileSystem"].Attributes["result"].Value,
+                    Flags = (FileSystemFlags)int.Parse(flags, CultureInfo.InvariantCulture)
+                };
+                dictionary.Add(path, new ResultOrError<VolumeInfo>(volInfo));
+            }
         }
 
         private void AddDiskFreeSpace(IDictionary<string, ResultOrError<DiskFreeSpace>> dictionary, string path, XmlElement node)
@@ -147,19 +151,21 @@
                 return;
             }
 
-            string sectorsPerCluster = node["SectorsPerCluster"].Attributes["result"].Value;
-            string bytesPerSector = node["BytesPerSector"].Attributes["result"].Value;
-            string totalBytes = node["TotalBytes"].Attributes["result"].Value;
-            string totalBytesFree = node["TotalBytesFree"].Attributes["result"].Value;
-            string userBytesFree = node["UserBytesFree"].Attributes["result"].Value;
-            DiskFreeSpace freeInfo = new DiskFreeSpace() {
-                SectorsPerCluster = int.Parse(sectorsPerCluster, CultureInfo.InvariantCulture),
-                BytesPerSector = int.Parse(bytesPerSector, CultureInfo.InvariantCulture),
-                TotalBytes = long.Parse(totalBytes, CultureInfo.InvariantCulture),
-                TotalBytesFree = long.Parse(totalBytesFree, CultureInfo.InvariantCulture),
-                UserBytesFree = long.Parse(userBytesFree, CultureInfo.InvariantCulture),
-            };
-            dictionary.Add(path, new ResultOrError<DiskFreeSpace>(freeInfo));
+            unchecked {
+                string sectorsPerCluster = node["SectorsPerCluster"].Attributes["result"].Value;
+                string bytesPerSector = node["BytesPerSector"].Attributes["result"].Value;
+                string totalBytes = node["TotalBytes"].Attributes["result"].Value;
+                string totalBytesFree = node["TotalBytesFree"].Attributes["result"].Value;
+                string userBytesFree = node["UserBytesFree"].Attributes["result"].Value;
+                DiskFreeSpace freeInfo = new DiskFreeSpace() {
+                    SectorsPerCluster = int.Parse(sectorsPerCluster, CultureInfo.InvariantCulture),
+                    BytesPerSector = int.Parse(bytesPerSector, CultureInfo.InvariantCulture),
+                    TotalBytes = long.Parse(totalBytes, CultureInfo.InvariantCulture),
+                    TotalBytesFree = long.Parse(totalBytesFree, CultureInfo.InvariantCulture),
+                    UserBytesFree = long.Parse(userBytesFree, CultureInfo.InvariantCulture),
+                };
+                dictionary.Add(path, new ResultOrError<DiskFreeSpace>(freeInfo));
+            }
         }
 
         private void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
@@ -174,15 +180,17 @@
                 return;
             }
 
-            string deviceType = node["DeviceType"].Attributes["result"].Value;
-            string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
-            string devicePartition = node["DevicePartition"].Attributes["result"].Value;
-            StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
-                DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
-                DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
-                PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
-            };
-            dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+            unchecked {
+                string deviceType = node["DeviceType"].Attributes["result"].Value;
+                string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
+                string devicePartition = node["DevicePartition"].Attributes["result"].Value;
+                StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                    DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
+                    DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
+                    PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
+                };
+                dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+            }
         }
 
         private void AddDeviceNumberEx(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
@@ -197,18 +205,20 @@
                 return;
             }
 
-            string deviceType = node["DeviceType"].Attributes["result"].Value;
-            string deviceGuidFlags = node["DeviceGuidFlags"].Attributes["result"].Value;
-            string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
-            string devicePartition = node["DevicePartition"].Attributes["result"].Value;
-            StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
-                DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
-                DeviceGuidFlags = (DeviceGuidFlags)int.Parse(deviceGuidFlags, CultureInfo.InvariantCulture),
-                DeviceGuid = new Guid(node["DeviceGuid"].Attributes["result"].Value),
-                DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
-                PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
-            };
-            dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+            unchecked {
+                string deviceType = node["DeviceType"].Attributes["result"].Value;
+                string deviceGuidFlags = node["DeviceGuidFlags"].Attributes["result"].Value;
+                string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
+                string devicePartition = node["DevicePartition"].Attributes["result"].Value;
+                StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                    DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
+                    DeviceGuidFlags = (DeviceGuidFlags)int.Parse(deviceGuidFlags, CultureInfo.InvariantCulture),
+                    DeviceGuid = new Guid(node["DeviceGuid"].Attributes["result"].Value),
+                    DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
+                    PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
+                };
+                dictionary.Add(path, new ResultOrError<StorageDeviceNumber>(storageDevNum));
+            }
         }
 
         private void AddGeometry(IDictionary<string, ResultOrError<DiskGeometry>> dictionary, string path, XmlElement node)
@@ -223,19 +233,21 @@
                 return;
             }
 
-            string mediaType = node["MediaType"].Attributes["result"].Value;
-            string cylinders = node["Cylinders"].Attributes["result"].Value;
-            string tracks = node["TracksPerCylinder"].Attributes["result"].Value;
-            string sectors = node["SectorsPerTrack"].Attributes["result"].Value;
-            string bytes = node["BytesPerSector"].Attributes["result"].Value;
-            DiskGeometry diskGeo = new DiskGeometry() {
-                MediaType = (MediaType)int.Parse(mediaType, CultureInfo.InvariantCulture),
-                Cylinders = int.Parse(cylinders, CultureInfo.InvariantCulture),
-                TracksPerCylinder = int.Parse(tracks, CultureInfo.InvariantCulture),
-                SectorsPerTrack = int.Parse(sectors, CultureInfo.InvariantCulture),
-                BytesPerSector = int.Parse(bytes, CultureInfo.InvariantCulture),
-            };
-            dictionary.Add(path, new ResultOrError<DiskGeometry>(diskGeo));
+            unchecked {
+                string mediaType = node["MediaType"].Attributes["result"].Value;
+                string cylinders = node["Cylinders"].Attributes["result"].Value;
+                string tracks = node["TracksPerCylinder"].Attributes["result"].Value;
+                string sectors = node["SectorsPerTrack"].Attributes["result"].Value;
+                string bytes = node["BytesPerSector"].Attributes["result"].Value;
+                DiskGeometry diskGeo = new DiskGeometry() {
+                    MediaType = (MediaType)int.Parse(mediaType, CultureInfo.InvariantCulture),
+                    Cylinders = int.Parse(cylinders, CultureInfo.InvariantCulture),
+                    TracksPerCylinder = int.Parse(tracks, CultureInfo.InvariantCulture),
+                    SectorsPerTrack = int.Parse(sectors, CultureInfo.InvariantCulture),
+                    BytesPerSector = int.Parse(bytes, CultureInfo.InvariantCulture),
+                };
+                dictionary.Add(path, new ResultOrError<DiskGeometry>(diskGeo));
+            }
         }
 
         private void AddAlignment(IDictionary<string, ResultOrError<StorageAccessAlignment>> dictionary, string path, XmlElement node)
@@ -250,19 +262,21 @@
                 return;
             }
 
-            string bytesPerCacheLine = node["BytesPerCacheLine"].Attributes["result"].Value;
-            string bytesOffsetForCacheAlignment = node["BytesOffsetForCacheAlignment"].Attributes["result"].Value;
-            string bytesPerLogicalSector = node["BytesPerLogicalSector"].Attributes["result"].Value;
-            string bytesPerPhysicalSector = node["BytesPerPhysicalSector"].Attributes["result"].Value;
-            string bytesOffsetForSectorAlignment = node["BytesOffsetForSectorAlignment"].Attributes["result"].Value;
-            StorageAccessAlignment diskAlignment = new StorageAccessAlignment() {
-                BytesPerCacheLine = int.Parse(bytesPerCacheLine, CultureInfo.InvariantCulture),
-                BytesOffsetForCacheAlignment = int.Parse(bytesOffsetForCacheAlignment, CultureInfo.InvariantCulture),
-                BytesPerLogicalSector = int.Parse(bytesPerLogicalSector, CultureInfo.InvariantCulture),
-                BytesPerPhysicalSector = int.Parse(bytesPerPhysicalSector, CultureInfo.InvariantCulture),
-                BytesOffsetForSectorAlignment = int.Parse(bytesOffsetForSectorAlignment, CultureInfo.InvariantCulture),
-            };
-            dictionary.Add(path, new ResultOrError<StorageAccessAlignment>(diskAlignment));
+            unchecked {
+                string bytesPerCacheLine = node["BytesPerCacheLine"].Attributes["result"].Value;
+                string bytesOffsetForCacheAlignment = node["BytesOffsetForCacheAlignment"].Attributes["result"].Value;
+                string bytesPerLogicalSector = node["BytesPerLogicalSector"].Attributes["result"].Value;
+                string bytesPerPhysicalSector = node["BytesPerPhysicalSector"].Attributes["result"].Value;
+                string bytesOffsetForSectorAlignment = node["BytesOffsetForSectorAlignment"].Attributes["result"].Value;
+                StorageAccessAlignment diskAlignment = new StorageAccessAlignment() {
+                    BytesPerCacheLine = int.Parse(bytesPerCacheLine, CultureInfo.InvariantCulture),
+                    BytesOffsetForCacheAlignment = int.Parse(bytesOffsetForCacheAlignment, CultureInfo.InvariantCulture),
+                    BytesPerLogicalSector = int.Parse(bytesPerLogicalSector, CultureInfo.InvariantCulture),
+                    BytesPerPhysicalSector = int.Parse(bytesPerPhysicalSector, CultureInfo.InvariantCulture),
+                    BytesOffsetForSectorAlignment = int.Parse(bytesOffsetForSectorAlignment, CultureInfo.InvariantCulture),
+                };
+                dictionary.Add(path, new ResultOrError<StorageAccessAlignment>(diskAlignment));
+            }
         }
 
         private void AddPartitionInfo(IDictionary<string, ResultOrError<PartitionInformation>> dictionary, string path, XmlElement node)
@@ -277,46 +291,48 @@
                 return;
             }
 
-            string style = node["Style"].Attributes["result"].Value;
-            string number = node["Number"].Attributes["result"].Value;
-            string offset = node["Offset"].Attributes["result"].Value;
-            string length = node["Length"].Attributes["result"].Value;
-            PartitionStyle partStyle = (PartitionStyle)int.Parse(style, CultureInfo.InvariantCulture);
-            int partNumber = int.Parse(number, CultureInfo.InvariantCulture);
-            long partOffset = long.Parse(offset, CultureInfo.InvariantCulture);
-            long partLength = long.Parse(length, CultureInfo.InvariantCulture);
-            switch (partStyle) {
-            case PartitionStyle.MasterBootRecord:
-                dictionary.Add(path, new ResultOrError<PartitionInformation>(
-                    new MbrPartition() {
-                        Number = partNumber,
-                        Offset = partOffset,
-                        Length = partLength,
-                        Bootable = bool.Parse(node["MbrBootable"].Attributes["result"].Value),
-                        HiddenSectors = int.Parse(node["MbrOffset"].Attributes["result"].Value),
-                        Type = int.Parse(node["MbrType"].Attributes["result"].Value)
-                    }));
-                break;
-            case PartitionStyle.GuidPartitionTable:
-                dictionary.Add(path, new ResultOrError<PartitionInformation>(
-                    new GptPartition() {
-                        Number = partNumber,
-                        Offset = partOffset,
-                        Length = partLength,
-                        Type = new Guid(node["GptType"].Attributes["result"].Value),
-                        Id = new Guid(node["GptId"].Attributes["result"].Value),
-                        Name = node["GptName"].Attributes["result"].Value,
-                        Attributes = (EFIPartitionAttributes)long.Parse(node["GptAttributes"].Attributes["result"].Value, CultureInfo.InvariantCulture)
-                    }));
-                break;
-            default:
-                dictionary.Add(path, new ResultOrError<PartitionInformation>(
-                    new PartitionInformation(partStyle) {
-                        Number = partNumber,
-                        Offset = partOffset,
-                        Length = partLength
-                    }));
-                break;
+            unchecked {
+                string style = node["Style"].Attributes["result"].Value;
+                string number = node["Number"].Attributes["result"].Value;
+                string offset = node["Offset"].Attributes["result"].Value;
+                string length = node["Length"].Attributes["result"].Value;
+                PartitionStyle partStyle = (PartitionStyle)int.Parse(style, CultureInfo.InvariantCulture);
+                int partNumber = int.Parse(number, CultureInfo.InvariantCulture);
+                long partOffset = long.Parse(offset, CultureInfo.InvariantCulture);
+                long partLength = long.Parse(length, CultureInfo.InvariantCulture);
+                switch (partStyle) {
+                case PartitionStyle.MasterBootRecord:
+                    dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                        new MbrPartition() {
+                            Number = partNumber,
+                            Offset = partOffset,
+                            Length = partLength,
+                            Bootable = bool.Parse(node["MbrBootable"].Attributes["result"].Value),
+                            HiddenSectors = int.Parse(node["MbrOffset"].Attributes["result"].Value),
+                            Type = int.Parse(node["MbrType"].Attributes["result"].Value)
+                        }));
+                    break;
+                case PartitionStyle.GuidPartitionTable:
+                    dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                        new GptPartition() {
+                            Number = partNumber,
+                            Offset = partOffset,
+                            Length = partLength,
+                            Type = new Guid(node["GptType"].Attributes["result"].Value),
+                            Id = new Guid(node["GptId"].Attributes["result"].Value),
+                            Name = node["GptName"].Attributes["result"].Value,
+                            Attributes = (EFIPartitionAttributes)long.Parse(node["GptAttributes"].Attributes["result"].Value, CultureInfo.InvariantCulture)
+                        }));
+                    break;
+                default:
+                    dictionary.Add(path, new ResultOrError<PartitionInformation>(
+                        new PartitionInformation(partStyle) {
+                            Number = partNumber,
+                            Offset = partOffset,
+                            Length = partLength
+                        }));
+                    break;
+                }
             }
         }
 
@@ -332,20 +348,22 @@
                 return;
             }
 
-            // There may be zero or more disk extents.
-            XmlNodeList extentNodes = node.SelectNodes("DiskExtent");
-            List<DiskExtent> extents = new List<DiskExtent>();
-            foreach (XmlElement extentNode in extentNodes) {
-                string offset = extentNode["Offset"].Attributes["result"].Value;
-                string length = extentNode["Length"].Attributes["result"].Value;
-                extents.Add(new DiskExtent() {
-                    Device = extentNode["Device"].Attributes["result"].Value,
-                    StartingOffset = long.Parse(offset, CultureInfo.InvariantCulture),
-                    ExtentLength = long.Parse(length, CultureInfo.InvariantCulture),
-                });
-            }
+            unchecked {
+                // There may be zero or more disk extents.
+                XmlNodeList extentNodes = node.SelectNodes("DiskExtent");
+                List<DiskExtent> extents = new List<DiskExtent>();
+                foreach (XmlElement extentNode in extentNodes) {
+                    string offset = extentNode["Offset"].Attributes["result"].Value;
+                    string length = extentNode["Length"].Attributes["result"].Value;
+                    extents.Add(new DiskExtent() {
+                        Device = extentNode["Device"].Attributes["result"].Value,
+                        StartingOffset = long.Parse(offset, CultureInfo.InvariantCulture),
+                        ExtentLength = long.Parse(length, CultureInfo.InvariantCulture),
+                    });
+                }
 
-            dictionary.Add(path, new ResultOrError<DiskExtent[]>(extents.ToArray()));
+                dictionary.Add(path, new ResultOrError<DiskExtent[]>(extents.ToArray()));
+            }
         }
 
         private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
@@ -374,23 +392,25 @@
                 }
             }
 
-            if (nodeResult != null) {
-                if (typeof(BoolUnknown).IsAssignableFrom(typeof(T))) {
-                    BoolUnknown buResult = (BoolUnknown)Enum.Parse(typeof(BoolUnknown), nodeResult, true);
-                    return new ResultOrError<T>((T)Convert.ChangeType(buResult, typeof(T)), errorCode);
-                } else if (typeof(int).IsAssignableFrom(typeof(T))) {
-                    int iResult = int.Parse(nodeResult, CultureInfo.InvariantCulture);
-                    return new ResultOrError<T>((T)Convert.ChangeType(iResult, typeof(T)), errorCode);
-                } else if (typeof(bool).IsAssignableFrom(typeof(T))) {
-                    bool bResult = bool.Parse(nodeResult);
-                    return new ResultOrError<T>((T)Convert.ChangeType(bResult, typeof(T)), errorCode);
-                } else if (typeof(string).IsAssignableFrom(typeof(T))) {
-                    return new ResultOrError<T>((T)Convert.ChangeType(nodeResult, typeof(T)), errorCode);
+            unchecked {
+                if (nodeResult != null) {
+                    if (typeof(BoolUnknown).IsAssignableFrom(typeof(T))) {
+                        BoolUnknown buResult = (BoolUnknown)Enum.Parse(typeof(BoolUnknown), nodeResult, true);
+                        return new ResultOrError<T>((T)Convert.ChangeType(buResult, typeof(T)), errorCode);
+                    } else if (typeof(int).IsAssignableFrom(typeof(T))) {
+                        int iResult = int.Parse(nodeResult, CultureInfo.InvariantCulture);
+                        return new ResultOrError<T>((T)Convert.ChangeType(iResult, typeof(T)), errorCode);
+                    } else if (typeof(bool).IsAssignableFrom(typeof(T))) {
+                        bool bResult = bool.Parse(nodeResult);
+                        return new ResultOrError<T>((T)Convert.ChangeType(bResult, typeof(T)), errorCode);
+                    } else if (typeof(string).IsAssignableFrom(typeof(T))) {
+                        return new ResultOrError<T>((T)Convert.ChangeType(nodeResult, typeof(T)), errorCode);
+                    } else {
+                        return null;
+                    }
                 } else {
-                    return null;
+                    return new ResultOrError<T>(errorCode, false);
                 }
-            } else {
-                return new ResultOrError<T>(errorCode, false);
             }
         }
 
