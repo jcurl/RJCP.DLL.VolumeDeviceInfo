@@ -12,7 +12,7 @@
         <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.dll" target="lib\net40" />
         <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.pdb" target="lib\net40" />
         <file src="bin\build\net40\RJCP.IO.VolumeDeviceInfo.xml" target="lib\net40" />
-        <file src="RJCP.IO.VolumeDeviceInfo.csproj" target="src" />
+        <file src="RJCP.IO.VolumeDeviceInfo.csproj" target="src" exclude="obj\**\*.*" />
         <file src="**.cs" target="src" />
         <file src="..\*.md" target="doc" />
     </files>
