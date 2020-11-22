@@ -6,7 +6,7 @@
     /// Enhanced Firmware Interface partition attributes for GUID Partition Tables.
     /// </summary>
     [Flags]
-    public enum EFIPartitionAttributes : ulong
+    public enum EFIPartitionAttributes : long
     {
         /// <summary>
         /// There are no attributes set.
@@ -29,7 +29,7 @@
         /// <summary>
         /// The partition should not be mounted with a drive letter by default.
         /// </summary>
-        GptBasicDataAttributeNoDriveLetter = 0x8000000000000000,
+        GptBasicDataAttributeNoDriveLetter = unchecked((long)0x8000000000000000),
 
         /// <summary>
         /// The partition should be hidden (on Windows, this partition is ignored by the mount manager and will not
