@@ -16,3 +16,4 @@ using System.Diagnostics.CodeAnalysis;
 
 // General Code
 [assembly: SuppressMessage("Minor Code Smell", "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes", Justification = "P/Invoke code")]
+[assembly: SuppressMessage("Major Code Smell", "S4070:Non-flags enums should not be marked with \"FlagsAttribute\"", Justification = "Useless warning")]
