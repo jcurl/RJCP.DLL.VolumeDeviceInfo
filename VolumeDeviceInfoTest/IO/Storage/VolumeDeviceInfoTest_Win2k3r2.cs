@@ -89,7 +89,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        public void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
+        private void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -228,7 +228,7 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
             Justification = "Test Case must keep them separate as they're physically different devices")]
-        public void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
+        private void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -294,7 +294,7 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
             Justification = "Test Case must keep them separate as they're physically different devices")]
-        public void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
+        private void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -427,7 +427,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        public void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
+        private void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));

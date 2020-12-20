@@ -80,7 +80,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="$(SolutionDir)\packages\NUnit.Analyzers.0.1.0-dev-00216\analyzers\dotnet\cs\nunit.analyzers.dll" />
+    <Analyzer Include="$(SolutionDir)\packages\NUnit.Analyzers.0.6.0\analyzers\dotnet\cs\nunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
