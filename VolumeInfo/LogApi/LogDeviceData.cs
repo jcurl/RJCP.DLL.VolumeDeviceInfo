@@ -275,8 +275,8 @@
             return QueryApi(parent, elementName, vinfo, false, method, out node);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S3241:Methods should not return values that are never used",
-            Justification = "Similar code patterns")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S3241:Methods should not return values that are never used", Justification = "Keep code patterns")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "False positive, removing S3241 shows the warning")]
         private T QueryApi<T>(XmlElement parent, string elementName, IOSVolumeDeviceInfo vinfo, bool errorIfFalse, Func<T> method)
         {
             return QueryApi(parent, elementName, vinfo, errorIfFalse, method, out _);

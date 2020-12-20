@@ -5,8 +5,6 @@
     using NUnit.Framework;
 
     [TestFixture]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase",
-        Justification = "Correct case in the circumstances")]
     public class VolumeDeviceInfoTest_Win7SP1
     {
         private static readonly string Win7Sim = Path.Combine(TestContext.CurrentContext.TestDirectory,
