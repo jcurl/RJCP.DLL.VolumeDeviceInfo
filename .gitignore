@@ -1,5 +1,9 @@
-/packages
-.vs/
+/.vs/
+/packages/
 bin/
 obj/
-*.csproj.user
+TestResults/
+*~
+*.user
+*.userprefs
+*.suo

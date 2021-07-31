@@ -27,7 +27,8 @@ devices to gather information about, such as:
 ```cmd
 VolumeInfo C:\
 ```
-```
+
+```text
 Device Path: C:\
   Volume
     Volume Path     : C:\
@@ -86,7 +87,8 @@ Use the SysInternals WinObj tool to determine what Physical Drives you have, and
 ```cmd
 VolumeInfo \\.\PhysicalDrive0
 ```
-```
+
+```text
 Device Path: \\.\PhysicalDrive0
   Volume
     Volume Path     : \\.\PhysicalDrive0\

@@ -174,7 +174,7 @@ such as a remote network drive, or if the volume spans multiple partitions.
 More information about the partition can be obtained depending on the `Style`.
 
 | Style              | Type to cast to for more information |
-|--------------------|--------------------------------------|
+| ------------------ | ------------------------------------ |
 | MasterBootRecord   | IMbrPartition                        |
 | GuidPartitionTable | IGptPartition                        |
 | Raw                | no type cast                         |
@@ -289,7 +289,7 @@ creating a new `VolumeDeviceInfo` object.
 Summary Table of Information Provided:
 
 | Type            | Media? | DriveType       | Disk    | Disk.Device | Disk.Extents | Disk.Geometry | Partition | File System |
-|-----------------|--------|-----------------|---------|-------------|--------------|---------------|-----------|-------------|
+| --------------- | ------ | --------------- | ------- | ----------- | ------------ | ------------- | --------- | ----------- |
 | Basic Disk      | TRUE   | Fixed/Removable | Present | Present     | 1 entry      | Present       | Present   | Present     |
 | Physical Drive  | TRUE   | Fixed/Removable | Present | Present     | null         | Present       | Present   | null        |
 | USB Floppy      | FALSE  | Floppy          | Present | Present     | null         | null          | null      | null        |
@@ -315,9 +315,9 @@ See the following sections for more specific information in addition.
 A basic disk is a file system on a single partition on a single hard disk. It is
 the most common case provided.
 
-* Because the volume resides on one disk, disk infrmation is present, device
+* Because the volume resides on one disk, disk information is present, device
   information can usually be obtained, along with the geometry information.
-* There is only a single extent, the offset/legnth are the same as given in the
+* There is only a single extent, the offset/length are the same as given in the
   partition table. One can use the `Device` to get the physical device the
   volume is mounted on, which upon query, should result in the same device and
   geometry information.

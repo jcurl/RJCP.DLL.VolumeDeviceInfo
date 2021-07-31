@@ -224,8 +224,6 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
-            Justification = "Test Case must keep them separate as they're physically different devices")]
         private void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
@@ -290,8 +288,6 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4144:Methods should not have identical implementations",
-            Justification = "Test Case must keep them separate as they're physically different devices")]
         private void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));

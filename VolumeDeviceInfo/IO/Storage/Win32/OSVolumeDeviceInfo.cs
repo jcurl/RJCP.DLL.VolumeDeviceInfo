@@ -406,8 +406,6 @@
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1168:Empty arrays and collections should be returned instead of null",
-            Justification = "P/Invoke, null indicates an error")]
         public DiskExtent[] GetDiskExtents(SafeHandle hDevice)
         {
             SafeDiskExtentHandle diskPtr = null;

@@ -1,56 +1,64 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC805D36-7847-4A44-9B23-8C3C573F9099}</ProjectGuid>
+    <TargetFrameworks>net40;netcoreapp3.1</TargetFrameworks>
     <OutputType>Exe</OutputType>
-    <RootNamespace>VolumeInfo</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Configurations>Debug;Release</Configurations>
+    <NeutralLanguage>en-US</NeutralLanguage>
+
     <AssemblyName>VolumeInfo</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <AssemblyTitle>VolumeInfo</AssemblyTitle>
+    <Product>RJCP.IO.VolumeDeviceInfo</Product>
+    <RootNamespace>VolumeInfo</RootNamespace>
+
+    <Authors>Jason Curl</Authors>
+    <Copyright>(C) 2020-2021, Jason Curl</Copyright>
+    <Company></Company>
+    
+    <Description>A Test Application retrieving and providing the user information about Volumes.</Description>
+    <Version>1.0.0</Version>
+
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>Default</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
+    <ProjectReference Include="..\VolumeDeviceInfo\RJCP.IO.VolumeDeviceInfo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="LogApi\LogDeviceData.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\VolumeDeviceInfo\RJCP.IO.VolumeDeviceInfo.csproj">
-      <Project>{d967a527-4aaa-4543-9cc8-51cf89e35758}</Project>
-      <Name>RJCP.IO.VolumeDeviceInfo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="README.md">
+    <Content Include="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
