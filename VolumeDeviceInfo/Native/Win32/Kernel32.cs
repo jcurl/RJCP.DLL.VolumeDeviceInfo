@@ -34,24 +34,24 @@ namespace RJCP.Native.Win32
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool CloseHandle(IntPtr hObject);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern SafeObjectHandle CreateFile(string fileName, ACCESS_MASK access, FileShare share,
             IntPtr securityAttributes, CreationDisposition creationDisposition, CreateFileFlags flagsAndAttributes,
             SafeObjectHandle templateFile);
 
-        [DllImport("kernel32.dll", SetLastError = true)]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern uint QueryDosDevice(string deviceName, StringBuilder targetPath, int bufferLength);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern FileAttributes GetFileAttributes(string fileName);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool GetVolumePathName(string fileName, StringBuilder volumePathName, int bufferLength);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool GetVolumeNameForVolumeMountPoint(string volumeMountPoint, StringBuilder volumeName, int bufferLength);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool GetVolumeInformation(string rootPathName, StringBuilder volumeName, int volumeNameSize,
             out uint volumeSerialNumber, out uint maxComponentLength, out FileSystemFlags fileSystemFlags,
             StringBuilder fileSystemNameBuffer, int fileSystemNameSize);
@@ -62,15 +62,15 @@ namespace RJCP.Native.Win32
         [DllImport("kernel32.dll")]
         public static extern ErrorModes SetErrorMode(ErrorModes uMode);
 
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool GetDiskFreeSpace(string lpRootPathName,
             out int lpSectorsPerCluster, out int lpBytesPerSector, out int lpNumberOfFreeClusters, out int lpTotalNumberOfClusters);
 
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern bool GetDiskFreeSpaceEx(string lpDirectoryName,
             out ulong lpFreeBytesAvailable, out ulong lpTotalNumberOfBytes, out ulong lpTotalNumberOfFreeBytes);
 
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         public static extern int GetDriveType(string lpRootPathName);
     }
 }
