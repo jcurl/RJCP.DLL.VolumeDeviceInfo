@@ -51,7 +51,7 @@
             }
         }
 
-        private int LoadGetLogicalDrives(XmlElement pathNode)
+        private static int LoadGetLogicalDrives(XmlElement pathNode)
         {
             if (pathNode == null) return 0;
             string nodeResult = pathNode.Attributes["result"]?.Value;
@@ -82,7 +82,7 @@
             AddDiskExtents(m_Extents, path, pathNode["DiskExtents"]);
         }
 
-        private void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
+        private static void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -115,7 +115,7 @@
             }
         }
 
-        private void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
+        private static void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -139,7 +139,7 @@
             }
         }
 
-        private void AddDiskFreeSpace(IDictionary<string, ResultOrError<DiskFreeSpace>> dictionary, string path, XmlElement node)
+        private static void AddDiskFreeSpace(IDictionary<string, ResultOrError<DiskFreeSpace>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -168,7 +168,7 @@
             }
         }
 
-        private void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
+        private static void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -193,7 +193,7 @@
             }
         }
 
-        private void AddDeviceNumberEx(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
+        private static void AddDeviceNumberEx(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -221,7 +221,7 @@
             }
         }
 
-        private void AddGeometry(IDictionary<string, ResultOrError<DiskGeometry>> dictionary, string path, XmlElement node)
+        private static void AddGeometry(IDictionary<string, ResultOrError<DiskGeometry>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -250,7 +250,7 @@
             }
         }
 
-        private void AddAlignment(IDictionary<string, ResultOrError<StorageAccessAlignment>> dictionary, string path, XmlElement node)
+        private static void AddAlignment(IDictionary<string, ResultOrError<StorageAccessAlignment>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -279,7 +279,7 @@
             }
         }
 
-        private void AddPartitionInfo(IDictionary<string, ResultOrError<PartitionInformation>> dictionary, string path, XmlElement node)
+        private static void AddPartitionInfo(IDictionary<string, ResultOrError<PartitionInformation>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -336,7 +336,7 @@
             }
         }
 
-        private void AddDiskExtents(IDictionary<string, ResultOrError<DiskExtent[]>> dictionary, string path, XmlElement node)
+        private static void AddDiskExtents(IDictionary<string, ResultOrError<DiskExtent[]>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -366,7 +366,7 @@
             }
         }
 
-        private void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
+        private static void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
         {
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
@@ -378,7 +378,7 @@
             dictionary.Add(path, result);
         }
 
-        private ResultOrError<T> GetResultOrError<T>(XmlElement node)
+        private static ResultOrError<T> GetResultOrError<T>(XmlElement node)
         {
             string nodeResult = node.Attributes["result"]?.Value;
             string errorCodeStr = node.Attributes["error"]?.Value;

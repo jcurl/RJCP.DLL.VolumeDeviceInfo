@@ -455,7 +455,7 @@ namespace RJCP.Native.Win32
             public bool Equals(ACCESS_MASK other) => Value == other.Value;
 
             /// <inheritdoc/>
-            public override bool Equals(object obj) => obj is ACCESS_MASK && Equals((ACCESS_MASK)obj);
+            public override bool Equals(object obj) => obj is ACCESS_MASK mASK && Equals(mASK);
 
             /// <inheritdoc/>
             public int CompareTo(object obj) => Value.CompareTo(obj);

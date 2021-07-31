@@ -73,7 +73,7 @@
             IsDrivePhys0(vinfo);
         }
 
-        private void IsDrivePhys0(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys0(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -87,7 +87,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -159,7 +159,7 @@
             IsBootDrive(vinfo);
         }
 
-        private void IsBootDrive(VolumeDeviceInfo vinfo)
+        private static void IsBootDrive(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
@@ -210,7 +210,7 @@
             IsDrivePhys1(vinfo);
         }
 
-        private void IsDrivePhys1(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys1(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive1(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -224,7 +224,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -274,7 +274,7 @@
             IsDrivePhys2(vinfo);
         }
 
-        private void IsDrivePhys2(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys2(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive2(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -288,7 +288,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive2(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -360,7 +360,7 @@
             IsMirrorDrive(vinfo);
         }
 
-        private void IsMirrorDrive(VolumeDeviceInfo vinfo)
+        private static void IsMirrorDrive(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a mirrored volume
@@ -407,7 +407,7 @@
             IsDrivePhys3(vinfo);
         }
 
-        private void IsDrivePhys3(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys3(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive3(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -421,7 +421,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive3(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("VMware, "));
@@ -493,7 +493,7 @@
             IsMultiPartDrive(vinfo);
         }
 
-        private void IsMultiPartDrive(VolumeDeviceInfo vinfo)
+        private static void IsMultiPartDrive(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a spanning volume

@@ -12,7 +12,7 @@
             handle = Marshal.AllocHGlobal(SizeOf);
         }
 
-        public int SizeOf { get { return 1024; } }
+        public static int SizeOf { get { return 1024; } }
 
         public DISK_EXTENT[] ToStructure()
         {

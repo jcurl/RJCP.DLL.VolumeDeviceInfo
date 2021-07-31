@@ -412,7 +412,7 @@
             try {
                 diskPtr = new SafeDiskExtentHandle();
                 bool success = DeviceIoControl(hDevice, IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS,
-                    IntPtr.Zero, 0, diskPtr, diskPtr.SizeOf, out uint bytesReturns, IntPtr.Zero);
+                    IntPtr.Zero, 0, diskPtr, SafeDiskExtentHandle.SizeOf, out uint bytesReturns, IntPtr.Zero);
                 if (!success || bytesReturns == 0) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     return null;

@@ -91,7 +91,7 @@
             IsDrivePhys0(vinfo);
         }
 
-        private void IsDrivePhys0(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys0(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -105,7 +105,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive0(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.Empty);
@@ -177,7 +177,7 @@
             IsBootDrive(vinfo);
         }
 
-        private void IsBootDrive(VolumeDeviceInfo vinfo)
+        private static void IsBootDrive(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
@@ -226,7 +226,7 @@
             IsHarddiskVolume1(vinfo);
         }
 
-        private void IsHarddiskVolume1(VolumeDeviceInfo vinfo)
+        private static void IsHarddiskVolume1(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
@@ -299,7 +299,7 @@
             IsHarddiskVolume3(vinfo);
         }
 
-        private void IsHarddiskVolume3(VolumeDeviceInfo vinfo)
+        private static void IsHarddiskVolume3(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
@@ -340,7 +340,7 @@
             IsHarddiskVolume4(vinfo);
         }
 
-        private void IsHarddiskVolume4(VolumeDeviceInfo vinfo)
+        private static void IsHarddiskVolume4(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
@@ -405,7 +405,7 @@
             IsCdRom(vinfo);
         }
 
-        private void IsCdRom(VolumeDeviceInfo vinfo)
+        private static void IsCdRom(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.CdRom));
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -476,7 +476,7 @@
             IsVirtCdRom(vinfo);
         }
 
-        private void IsVirtCdRom(VolumeDeviceInfo vinfo)
+        private static void IsVirtCdRom(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.CdRom));
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -523,7 +523,7 @@
             IsDrivePhys1(vinfo);
         }
 
-        private void IsDrivePhys1(VolumeDeviceInfo vinfo)
+        private static void IsDrivePhys1(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive1(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
@@ -537,7 +537,7 @@
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
-        private void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
+        private static void IsPhysicalDrive1(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
             Assert.That(vinfo.Disk.Device.VendorId, Is.EqualTo("WD      "));
@@ -609,7 +609,7 @@
             IsExtDrive(vinfo);
         }
 
-        private void IsExtDrive(VolumeDeviceInfo vinfo)
+        private static void IsExtDrive(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive1(vinfo);
             Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
