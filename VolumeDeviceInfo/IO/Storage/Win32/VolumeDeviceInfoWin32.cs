@@ -121,9 +121,6 @@
             if (pathName == null) throw new ArgumentNullException(nameof(pathName));
             if (string.IsNullOrEmpty(pathName)) throw new ArgumentException("Path is empty", nameof(pathName));
 
-            if (!Native.Platform.IsWinNT())
-                throw new PlatformNotSupportedException();
-
             m_OS = os;
             Path = pathName;
             ResolveDevicePathNames(pathName);
@@ -334,8 +331,7 @@
                         volumePath = string.Format("\\\\.\\GLOBALROOT{0}\\", volumeDosDevice);
                     } else {
                         // A device that isn't a volume, i.e. a physical drive like '\\.\PhysicalDrive0'.
-                        volumePath = string.Format("{0}\\",
-                            pathName.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar));
+                        volumePath = WindowsPathAppendDir(WindowsPathTrimDir(pathName));
                     }
                 }
 
@@ -362,13 +358,12 @@
                         break;
                     }
                 }
-                if (volumeDevice[volumeDevice.Length - 1] == System.IO.Path.DirectorySeparatorChar) {
-                    volumeDevicePath = volumeDevice.Remove(volumeDevice.Length - 1, 1);
-                    volumeDevicePathSlash = volumeDevice;
+                if (WindowsPathEndsWithDir(volumeDevice)) {
+                    volumeDevicePath = WindowsPathTrimDir(volumeDevice);
                 } else {
                     volumeDevicePath = volumeDevice;
-                    volumeDevicePathSlash = string.Format("{0}{1}", volumeDevice, System.IO.Path.DirectorySeparatorChar);
                 }
+                volumeDevicePathSlash = WindowsPathAppendDir(volumeDevicePath);
 
                 m_VolumeData.VolumePath = volumePath;
                 m_VolumeData.VolumeDevicePath = volumeDevicePath;
@@ -427,7 +422,7 @@
         {
             int pathLen = path.Length;
             if (pathLen < 2 || pathLen > 3) return false;
-            if (pathLen == 3 && path[2] != System.IO.Path.DirectorySeparatorChar) return false;
+            if (pathLen == 3 && path[2] != WinDirectorySeparatorChar) return false;
 
             return ((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':';
         }
@@ -441,9 +436,7 @@
         private void GetDeviceInformation()
         {
             if (m_VolumeData.VolumeDevicePath == null && IsDriveLetter(m_VolumeData.VolumeDrive)) {
-                string drive = string.Format("{0}{1}",
-                    m_VolumeData.VolumeDrive.TrimEnd(new[] { System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar }),
-                    System.IO.Path.DirectorySeparatorChar);
+                string drive = WindowsPathAppendDir(WindowsPathTrimDir(m_VolumeData.VolumeDrive));
                 m_VolumeData.DriveType = m_OS.GetDriveType(drive);
                 return;
             }
@@ -555,6 +548,30 @@
                 return DriveType.RamDisk;
             }
             return DriveType.Unknown;
+        }
+
+        // Must define these explicitly, instad of using System.IO.Path, as on Linux, the values would
+        // differ and thus behave differently when running unit tests.
+        private const char WinDirectorySeparatorChar = '\\';
+        private const char WinAltDirectorySeparatorChar = '/';
+
+        private static string WindowsPathTrimDir(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return path;
+            return path.TrimEnd(WinDirectorySeparatorChar, WinAltDirectorySeparatorChar);
+        }
+
+        private static bool WindowsPathEndsWithDir(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return false;
+
+            char endChar = path[path.Length - 1];
+            return endChar == WinDirectorySeparatorChar || endChar == WinAltDirectorySeparatorChar;
+        }
+
+        private static string WindowsPathAppendDir(string path)
+        {
+            return $"{path}{WinDirectorySeparatorChar}";
         }
 
         /// <inheritdoc/>

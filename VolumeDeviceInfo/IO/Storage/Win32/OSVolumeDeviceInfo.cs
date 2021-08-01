@@ -9,6 +9,12 @@
 
     internal class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
     {
+        internal OSVolumeDeviceInfo()
+        {
+            if (!Native.Platform.IsWinNT())
+                throw new PlatformNotSupportedException();
+        }
+
         private readonly StringBuilder m_StringBuffer = new StringBuilder(1024);
 
         public System.IO.FileAttributes GetFileAttributes(string pathName)

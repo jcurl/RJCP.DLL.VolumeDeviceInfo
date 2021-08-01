@@ -6,6 +6,7 @@
     public class VolumeDeviceInfoTest
     {
         [Test]
+        [Platform("Win")]
         public void BootPartition()
         {
             // Checks that in general we can query the volume information.
@@ -22,6 +23,7 @@
         }
 
         [Test]
+        [Platform("Win")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure.", Justification = "Specific Test")]
         public void ObjectEquality()
         {
