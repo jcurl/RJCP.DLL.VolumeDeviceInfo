@@ -51,6 +51,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="RJCP.MSBuildTasks" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LogApi\LogDeviceData.cs" />
     <Compile Include="Program.cs" />
