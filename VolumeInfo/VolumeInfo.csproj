@@ -17,7 +17,7 @@
     <Authors>Jason Curl</Authors>
     <Copyright>(C) 2020-2021, Jason Curl</Copyright>
     <Company></Company>
-    
+
     <Description>A Test Application retrieving and providing the user information about Volumes.</Description>
     <Version>1.0.0</Version>
 
@@ -31,6 +31,10 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
 
     <RevisionControl>git</RevisionControl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(SignAssembly)' == 'true'">
+    <DefineConstants>$(DefineConstants);SIGN</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
@@ -60,7 +64,7 @@
 
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LogApi\LogDeviceData.cs" />
+    <Compile Include="LogApi\LogDeviceData.cs" Condition="'$(SignAssembly)' != 'true'"/>
     <Compile Include="Program.cs" />
   </ItemGroup>
 

@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 
 [assembly: CLSCompliant(true)]
 
+#if !SIGN
 // Required for Unit Testing and Logging
 [assembly: InternalsVisibleTo("RJCP.IO.VolumeDeviceInfoTest")]
 [assembly: InternalsVisibleTo("VolumeInfo")]
+#endif

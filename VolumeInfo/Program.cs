@@ -8,7 +8,9 @@
     {
         private class Options
         {
+#if !SIGN
             public bool LogApi { get; set; }
+#endif
 
             public bool ParseOption(string arg)
             {
@@ -16,11 +18,13 @@
                 if (arg.Length < 2) return false;
                 if (arg[0] != '-') return false;
 
+#if !SIGN
                 string option = arg.Substring(1);
                 if (option.Equals("l", StringComparison.Ordinal) || option.Equals("log", StringComparison.OrdinalIgnoreCase)) {
                     LogApi = true;
                     return true;
                 }
+#endif
 
                 return true;
             }
@@ -38,7 +42,9 @@
                 try {
                     Console.WriteLine("Device Path: {0}", device);
                     VolumeDeviceInfo info = VolumeDeviceInfo.Create(device);
+#if !SIGN
                     if (options.LogApi) Capture(info);
+#endif
 
                     Console.WriteLine("  Volume");
                     Console.WriteLine("    Drive Type      : {0}", info.DriveType);
@@ -113,7 +119,9 @@
                         Console.WriteLine("    Seek Penalty    : {0}", info.Disk.HasSeekPenalty);
                     }
                 } catch (Exception ex) {
+#if !SIGN
                     if (options.LogApi) Capture(device);
+#endif
                     Console.WriteLine("  Error: {0}", ex.Message);
                 }
                 Console.WriteLine("");
@@ -122,6 +130,7 @@
             return 0;
         }
 
+#if !SIGN
         static void Capture(VolumeDeviceInfo info)
         {
             CaptureItem(info.Path);
@@ -151,5 +160,6 @@
             Console.WriteLine("  Logged: {0}", path);
             LogApi.LogDeviceData.Capture(path);
         }
+#endif
     }
 }
