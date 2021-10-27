@@ -72,6 +72,11 @@
         SupportsPosixUnlinkRename = 0x00000400,
 
         /// <summary>
+        /// The file system supports Bypass IO, introduced in Windows 11, SDK 22000.
+        /// </summary>
+        SupportsBypassIO = 0x00000800,
+
+        /// <summary>
         /// The file system is compressed, for example, a DoubleSpace volume.
         /// </summary>
         VolumeIsCompressed = 0x00008000,

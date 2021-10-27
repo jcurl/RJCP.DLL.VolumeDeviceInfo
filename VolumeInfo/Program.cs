@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using IO.Storage;
 
     public static class Program
@@ -78,7 +79,7 @@
                         Console.WriteLine("  File System");
                         Console.WriteLine("    Label           : {0}", info.FileSystem.Label);
                         Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
-                        Console.WriteLine("    Flags           : {0}", info.FileSystem.Flags);
+                        Console.WriteLine("    Flags           : {0}", GetFileSystemFlags(info.FileSystem.Flags));
                         Console.WriteLine("    File System     : {0}", info.FileSystem.Name);
                         Console.WriteLine("    Bytes Per Sector: {0}", info.FileSystem.BytesPerSector);
                         Console.WriteLine("    Sectors Per Clus: {0}", info.FileSystem.SectorsPerCluster);
@@ -161,5 +162,30 @@
             LogApi.LogDeviceData.Capture(path);
         }
 #endif
+
+        static string GetFileSystemFlags(FileSystemFlags flags)
+        {
+            // If the Operating System returns a flag that is not known by this software, taking "flags.ToString()" just
+            // returns a number. This routine will iterate through the enum and append the unknown flag at the end.
+
+            int unknownFlags = (int)flags;
+            StringBuilder sb = new StringBuilder();
+
+            foreach (FileSystemFlags flag in Enum.GetValues(typeof(FileSystemFlags))) {
+                if (flags.HasFlag(flag)) {
+                    if (sb.Length != 0) sb.Append(", ");
+                    sb.Append(flag);
+
+                    unknownFlags &= (~(int)flag);
+                }
+            }
+
+            if (unknownFlags != 0) {
+                if (sb.Length != 0) sb.Append(", ");
+                sb.Append($"0x{unknownFlags:X}");
+            }
+
+            return sb.ToString();
+        }
     }
 }

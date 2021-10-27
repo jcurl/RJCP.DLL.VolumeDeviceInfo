@@ -109,7 +109,6 @@
         Ufs = 0x13,
     }
 
-
     /// <summary>
     /// Extensions for the <see cref="BusType"/>.
     /// </summary>
