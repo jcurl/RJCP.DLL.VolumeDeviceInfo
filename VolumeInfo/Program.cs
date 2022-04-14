@@ -7,7 +7,7 @@
 
     public static class Program
     {
-        private class Options
+        private sealed class Options
         {
 #if !SIGN
             public bool LogApi { get; set; }

@@ -10,7 +10,7 @@
     {
         private readonly IOSVolumeDeviceInfo m_OS;
 
-        private class VolumeData
+        private sealed class VolumeData
         {
             public string VolumePath;
             public string VolumeDrive;
@@ -128,7 +128,7 @@
             InitializeProperties();
         }
 
-        private class VolumePathInfo : IVolumeInfo
+        private sealed class VolumePathInfo : IVolumeInfo
         {
             private readonly VolumeData m_Data;
 
@@ -143,7 +143,7 @@
             public string DosDevicePath { get { return m_Data.VolumeDosDevicePath ?? string.Empty; } }
         }
 
-        private class FileSystemInfo : IFileSystemInfo
+        private sealed class FileSystemInfo : IFileSystemInfo
         {
             private readonly VolumeData m_Data;
 
@@ -168,7 +168,7 @@
             public long TotalBytes { get { return m_Data.FreeSpace?.TotalBytes ?? 0; } }
         }
 
-        private class GeometryInfo : IGeometryInfo
+        private sealed class GeometryInfo : IGeometryInfo
         {
             private readonly VolumeData m_Data;
 
@@ -185,7 +185,7 @@
             public int BytesPerPhysicalSector { get { return m_Data.Alignment == null ? BytesPerSector : m_Data.Alignment.BytesPerPhysicalSector; } }
         }
 
-        private class DeviceInfo : IDeviceInfo
+        private sealed class DeviceInfo : IDeviceInfo
         {
             private readonly VolumeData m_Data;
 
@@ -212,7 +212,7 @@
             public Guid Guid { get { return m_Data.DeviceNumber == null ? Guid.Empty : m_Data.DeviceNumber.DeviceGuid; } }
         }
 
-        private class DiskInfo : IDiskInfo
+        private sealed class DiskInfo : IDiskInfo
         {
             private readonly VolumeData m_Data;
 
@@ -270,7 +270,7 @@
             public long Length { get { return m_Data.PartitionInfo.Length; } }
         }
 
-        private class GptPartitionInfo : PartitionInfo, IGptPartition
+        private sealed class GptPartitionInfo : PartitionInfo, IGptPartition
         {
             private readonly GptPartition m_Gpt;
 
@@ -288,7 +288,7 @@
             public EFIPartitionAttributes Attributes { get { return m_Gpt == null ? EFIPartitionAttributes.None : m_Gpt.Attributes; } }
         }
 
-        private class MbrPartitionInfo : PartitionInfo, IMbrPartition
+        private sealed class MbrPartitionInfo : PartitionInfo, IMbrPartition
         {
             private readonly MbrPartition m_Mbr;
 
