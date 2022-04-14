@@ -17,7 +17,7 @@ namespace RJCP.Native.Win32
         /// Quite well described here:
         /// http://blogs.msdn.com/b/openspecification/archive/2010/04/01/about-the-access-mask-structure.aspx.
         /// </remarks>
-        public partial struct ACCESS_MASK : IComparable, IComparable<ACCESS_MASK>, IEquatable<ACCESS_MASK>, IFormattable
+        public struct ACCESS_MASK : IEquatable<ACCESS_MASK>, IFormattable
         {
             /// <summary>
             /// Bits 28-31.
@@ -455,13 +455,11 @@ namespace RJCP.Native.Win32
             public bool Equals(ACCESS_MASK other) => Value == other.Value;
 
             /// <inheritdoc/>
-            public override bool Equals(object obj) => obj is ACCESS_MASK mASK && Equals(mASK);
+            public override bool Equals(object obj) => obj is ACCESS_MASK mask && Equals(mask);
 
-            /// <inheritdoc/>
-            public int CompareTo(object obj) => Value.CompareTo(obj);
+            public static bool operator ==(ACCESS_MASK left, ACCESS_MASK right) => left.Value == right.Value;
 
-            /// <inheritdoc/>
-            public int CompareTo(ACCESS_MASK other) => Value.CompareTo(other.Value);
+            public static bool operator !=(ACCESS_MASK left, ACCESS_MASK right) => left.Value != right.Value;
 
             /// <inheritdoc/>
             public override string ToString() => Value.ToString();
