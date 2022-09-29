@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VolumeInfoTest>
+  <!-- 0x2F03D = 00 0000 0000 0000 0000 0000 0100
+                 ZY XWVU TSRQ PONM LKJI HGFE DCBA
+       Drives C -->
+  <GetLogicalDrives result="4" />
+  <Path path="c:">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume3" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187731456" />
+      <UserBytesFree result="437187731456" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="c:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="c:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F688-02DE" />
+      <FileSystem result="NTFS" />
+      <Flags result="65482495" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187723264" />
+      <UserBytesFree result="437187723264" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="C:">
+    <FileAttributes result="16" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice result="\Device\HarddiskVolume3" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187723264" />
+      <UserBytesFree result="437187723264" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="5" throws="True" />
+  </Path>
+  <Path path="C:\">
+    <FileAttributes result="22" />
+    <VolumePathName result="C:\" />
+    <QueryDosDevice error="6" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F688-02DE" />
+      <FileSystem result="NTFS" />
+      <Flags result="65482495" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187723264" />
+      <UserBytesFree result="437187723264" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="3" />
+      <Offset result="122683392" />
+      <Length result="511390515200" />
+      <GptAttributes result="0" />
+      <GptId result="16ae967d-e57e-4ad5-90ea-16e21a37b1e5" />
+      <GptType result="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7" />
+      <GptName result="Basic data partition" />
+    </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="122683392" />
+        <Length result="511390515200" />
+      </DiskExtent>
+    </DiskExtents>
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="False" />
+  </Path>
+  <Path path="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F688-02DE" />
+      <FileSystem result="NTFS" />
+      <Flags result="65482495" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187723264" />
+      <UserBytesFree result="437187723264" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+  <Path path="\\.\PhysicalDrive0">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="0" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="0" />
+      <Offset result="0" />
+      <Length result="512110190592" />
+      <GptAttributes result="0" />
+      <GptId result="1180bb72-6dd1-4481-b0f3-9e0e1f1b61d0" />
+      <GptType result="00000000-0000-0000-0000-000000000000" />
+      <GptName result="" />
+    </PartitionInformation>
+    <DiskExtents error="1" />
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="False" />
+  </Path>
+  <Path path="\\.\PhysicalDrive0\">
+    <FileAttributes result="-1" />
+    <VolumePathName error="123" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="31" />
+    <VolumeInformation error="31" />
+    <DiskFreeSpace error="31" />
+    <DriveType result="3" />
+    <CreateFileFromDevice error="31" throws="True" />
+  </Path>
+  <Path path="\\.\HarddiskVolume3">
+    <FileAttributes result="-1" />
+    <VolumePathName result="\\.\HarddiskVolume3\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint error="123" />
+    <VolumeInformation error="123" />
+    <DiskFreeSpace error="1" />
+    <DriveType result="1" />
+    <CreateFileFromDevice result="" />
+    <DiskUpdateProperties result="True" />
+    <StorageDeviceProperty result="">
+      <VendorId result="" />
+      <DeviceSerialNumber result="0025_3844_61B5_6586." />
+      <ProductId result="SAMSUNG MZFLV512HCJH-000MV" />
+      <ProductRevision result="BXV75M0Q" />
+      <RemovableMedia result="False" />
+      <CommandQueueing result="True" />
+      <ScsiDeviceType result="0" />
+      <ScsiModifier result="0" />
+      <BusType result="17" />
+    </StorageDeviceProperty>
+    <StorageDeviceNumber result="">
+      <DeviceType result="7" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumber>
+    <StorageDeviceNumberEx result="">
+      <DeviceType result="7" />
+      <DeviceGuidFlags result="4" />
+      <DeviceGuid result="ba408eac-457b-e82e-f5ea-f5764f6a8c94" />
+      <DeviceNumber result="0" />
+      <DevicePartition result="3" />
+    </StorageDeviceNumberEx>
+    <DiskGeometry result="">
+      <MediaType result="12" />
+      <Cylinders result="62260" />
+      <TracksPerCylinder result="255" />
+      <SectorsPerTrack result="63" />
+      <BytesPerSector result="512" />
+    </DiskGeometry>
+    <StorageAlignment result="">
+      <BytesPerCacheLine result="0" />
+      <BytesOffsetForCacheAlignment result="0" />
+      <BytesPerLogicalSector result="512" />
+      <BytesPerPhysicalSector result="4096" />
+      <BytesOffsetForSectorAlignment result="0" />
+    </StorageAlignment>
+    <PartitionInformation result="">
+      <Style result="1" />
+      <Number result="3" />
+      <Offset result="122683392" />
+      <Length result="511390515200" />
+      <GptAttributes result="0" />
+      <GptId result="16ae967d-e57e-4ad5-90ea-16e21a37b1e5" />
+      <GptType result="ebd0a0a2-b9e5-4433-87c0-68b6b72699c7" />
+      <GptName result="Basic data partition" />
+    </PartitionInformation>
+    <DiskExtents result="">
+      <DiskExtent result="">
+        <Device result="\\.\PhysicalDrive0" />
+        <Offset result="122683392" />
+        <Length result="511390515200" />
+      </DiskExtent>
+    </DiskExtents>
+    <MediaPresent result="True" />
+    <DiskReadOnly result="False" />
+    <SeekPenalty result="False" />
+  </Path>
+  <Path path="\\.\HarddiskVolume3\">
+    <FileAttributes result="22" />
+    <VolumePathName result="\\.\HarddiskVolume3\" />
+    <QueryDosDevice error="161" />
+    <VolumeNameForVolumeMountPoint result="\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}\" />
+    <VolumeInformation result="">
+      <Label result="" />
+      <SerialNumber result="F688-02DE" />
+      <FileSystem result="NTFS" />
+      <Flags result="65482495" />
+    </VolumeInformation>
+    <DiskFreeSpace result="">
+      <SectorsPerCluster result="8" />
+      <BytesPerSector result="512" />
+      <TotalBytes result="511390511104" />
+      <TotalBytesFree result="437187719168" />
+      <UserBytesFree result="437187719168" />
+    </DiskFreeSpace>
+    <DriveType result="3" />
+    <CreateFileFromDevice error="3" throws="True" />
+  </Path>
+</VolumeInfoTest>

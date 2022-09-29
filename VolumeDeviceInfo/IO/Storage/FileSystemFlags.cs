@@ -77,6 +77,16 @@
         SupportsBypassIO = 0x00000800,
 
         /// <summary>
+        /// The file system supports snapshots of streams, introduced in Windows 11, SDK 22621.
+        /// </summary>
+        SupportsStreamSnapshot = 0x00001000,
+
+        /// <summary>
+        /// The file system supports case sensitive directory names, introduced in Windows 11, SDK 22621.
+        /// </summary>
+        SupportsCaseSensitiveDirs = 0x00002000,
+
+        /// <summary>
         /// The file system is compressed, for example, a DoubleSpace volume.
         /// </summary>
         VolumeIsCompressed = 0x00008000,

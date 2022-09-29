@@ -1160,7 +1160,6 @@
             Assert.That(vinfo.Volume.Path, Is.EqualTo(@"\\.\HarddiskVolume3\"));
             Assert.That(vinfo.Volume.DevicePath, Is.EqualTo(CV));
             Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
-            Assert.That(vinfo.Volume.DosDevicePath, Is.EqualTo(CD));
             Assert.That(vinfo.Volume.DriveLetter, Is.EqualTo(C));
             IsDriveSamsung(vinfo);
         }
