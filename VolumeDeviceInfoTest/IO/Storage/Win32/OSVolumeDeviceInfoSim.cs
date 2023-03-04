@@ -371,10 +371,8 @@
             if (node == null) return;
             if (dictionary.ContainsKey(path)) return;
 
-            ResultOrError<T> result = GetResultOrError<T>(node);
-            if (result == null)
-                throw new ArgumentException("Complex types not supported", nameof(dictionary));
-
+            ResultOrError<T> result = GetResultOrError<T>(node)
+                ?? throw new ArgumentException("Complex types not supported", nameof(dictionary));
             dictionary.Add(path, result);
         }
 
