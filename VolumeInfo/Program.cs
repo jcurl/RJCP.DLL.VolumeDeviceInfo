@@ -148,7 +148,7 @@
         static void Capture(string path)
         {
             if (string.IsNullOrEmpty(path)) return;
-            string noslash = path.TrimEnd(new[] { System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar });
+            string noslash = path.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
             CaptureItem(noslash);
             CaptureItem(noslash + System.IO.Path.DirectorySeparatorChar);
         }
