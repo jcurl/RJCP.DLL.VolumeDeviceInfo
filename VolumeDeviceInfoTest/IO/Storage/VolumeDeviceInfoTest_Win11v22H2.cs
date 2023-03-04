@@ -14,10 +14,6 @@
         private const string Phys0 = @"\\.\PhysicalDrive0";
         private const string Phys0S = @"\\.\PhysicalDrive0\";
 
-        private const string Vol3 = @"\\.\HarddiskVolume3";
-        private const string Vol3S = @"\\.\HarddiskVolume3\";
-        private const string Vol3V = @"\\?\Volume{16ae967d-e57e-4ad5-90ea-16e21a37b1e5}";
-
         // The boot partition
         private const string C = @"C:";
         private const string CS = @"C:\";
