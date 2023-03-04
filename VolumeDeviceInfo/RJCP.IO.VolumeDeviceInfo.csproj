@@ -14,7 +14,7 @@
     <RootNamespace>RJCP</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2020-2021, Jason Curl</Copyright>
+    <Copyright>(C) 2020-2023, Jason Curl</Copyright>
     <Company></Company>
     <PackageId>RJCP.IO.VolumeDeviceInfo</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -63,6 +63,7 @@
     <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.2">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <ProjectReference Include="..\..\environment\Environment\RJCP.Environment.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,7 +91,6 @@
     <Compile Include="IO\Storage\Win32\VolumeDeviceInfoWin32.cs" />
     <Compile Include="IO\Storage\Win32\VolumeDeviceQuery.cs" />
     <Compile Include="IO\Storage\Win32\VolumeInfo.cs" />
-    <Compile Include="Native\Platform.cs" />
     <Compile Include="Native\Win32\Kernel32.cs" />
     <Compile Include="Native\Win32\Kernel32+ACCESS_MASK.cs" />
     <Compile Include="Native\Win32\Kernel32+CreateFileFlags.cs" />

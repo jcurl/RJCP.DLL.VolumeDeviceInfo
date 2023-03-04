@@ -1,6 +1,7 @@
 ﻿namespace RJCP.IO.Storage
 {
     using System;
+    using RJCP.Core.Environment;
 
     /// <summary>
     /// Gather additional information about Disks, Volumes and File systems for a given path.
@@ -15,7 +16,7 @@
         /// <exception cref="PlatformNotSupportedException">This Operating System is not supported.</exception>
         public static VolumeDeviceInfo Create(string path)
         {
-            if (Native.Platform.IsWinNT()) return new Win32.VolumeDeviceInfoWin32(path);
+            if (Platform.IsWinNT()) return new Win32.VolumeDeviceInfoWin32(path);
             throw new PlatformNotSupportedException();
         }
 
