@@ -60,7 +60,7 @@
 
   <ItemGroup>
     <Compile Include="IO\Storage\VolumeDeviceInfoTest.cs" />
-    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win11v22H2.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win11v22H2.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win10v2004.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win2k3r2.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win7SP1.cs" Condition="'$(SignAssembly)' != 'true'" />
