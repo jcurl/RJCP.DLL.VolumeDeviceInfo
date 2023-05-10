@@ -162,7 +162,7 @@
         private static void IsBootDrive(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
-            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents, Has.Length.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive0"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
             Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
@@ -363,7 +363,7 @@
         private static void IsMirrorDrive(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
-            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a mirrored volume
+            Assert.That(vinfo.Disk.Extents, Has.Length.EqualTo(2));   // This is a mirrored volume
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive2"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(28672));
             Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(10732175360));
@@ -496,7 +496,7 @@
         private static void IsMultiPartDrive(VolumeDeviceInfo vinfo)
         {
             Assert.That(vinfo.DriveType, Is.EqualTo(DriveType.Fixed));
-            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(2));   // This is a spanning volume
+            Assert.That(vinfo.Disk.Extents, Has.Length.EqualTo(2));   // This is a spanning volume
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive3"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(32256));
             Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(4294967296));

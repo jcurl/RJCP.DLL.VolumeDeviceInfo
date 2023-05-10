@@ -135,7 +135,7 @@
         private static void IsDriveSamsung(VolumeDeviceInfo vinfo)
         {
             IsPhysicalDrive0(vinfo);
-            Assert.That(vinfo.Disk.Extents.Length, Is.EqualTo(1));
+            Assert.That(vinfo.Disk.Extents, Has.Length.EqualTo(1));
             Assert.That(vinfo.Disk.Extents[0].Device, Is.EqualTo(@"\\.\PhysicalDrive0"));
             Assert.That(vinfo.Disk.Extents[0].StartingOffset, Is.EqualTo(vinfo.Partition.Offset));
             Assert.That(vinfo.Disk.Extents[0].ExtentLength, Is.EqualTo(vinfo.Partition.Length));
