@@ -49,7 +49,9 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <RevisionControlStrict>true</RevisionControlStrict>
+    <!-- No official release yet -->
+    <RevisionControlStrict>false</RevisionControlStrict>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
