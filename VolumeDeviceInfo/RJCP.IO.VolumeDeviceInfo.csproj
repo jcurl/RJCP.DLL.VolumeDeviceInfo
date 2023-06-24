@@ -19,6 +19,7 @@
     <PackageId>RJCP.IO.VolumeDeviceInfo</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jcurl/RJCP.DLL.VolumeDeviceInfo</PackageProjectUrl>
 
     <Description>Get Volume Device Information, as easy as VolumeInfo and FileInfo.</Description>
