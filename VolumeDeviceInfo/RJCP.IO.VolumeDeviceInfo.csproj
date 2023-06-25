@@ -69,6 +69,12 @@
     <ProjectReference Include="..\..\environment\Environment\RJCP.Environment.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(SignAssembly)' != 'true'">
+    <InternalsVisibleTo Include="RJCP.IO.VolumeDeviceInfoTest" />
+    <InternalsVisibleTo Include="RJCP.IO.VolumeDeviceInfoTest40" />
+    <InternalsVisibleTo Include="VolumeInfo" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IO\Storage\BoolUnknown.cs" />
