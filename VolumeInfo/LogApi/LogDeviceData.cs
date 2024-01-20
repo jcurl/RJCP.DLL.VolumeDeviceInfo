@@ -297,8 +297,6 @@
             } else if (result is int iResult) {
                 node = WriteApiResult(parent, elementName, iResult);
             } else if (result is bool bResult) {
-                // S2583: False positive. bResult can be either true or false, so can errorIfFalse. Manually verified
-                //        that it works.
                 if (!bResult && errorIfFalse) {
                     node = WriteApiResult(parent, elementName, bResult, vinfo.GetLastWin32Error());
                 } else {
