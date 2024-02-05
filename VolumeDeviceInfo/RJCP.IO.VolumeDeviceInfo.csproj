@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net40;net60</TargetFrameworks>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -14,24 +12,21 @@
     <RootNamespace>RJCP</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2020-2023, Jason Curl</Copyright>
+    <Copyright>(C) 2020-2024, Jason Curl</Copyright>
     <Company></Company>
     <PackageId>RJCP.IO.VolumeDeviceInfo</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jcurl/RJCP.DLL.VolumeDeviceInfo</PackageProjectUrl>
-
     <Description>Get Volume Device Information, as easy as VolumeInfo and FileInfo.</Description>
     <Version>0.8.0</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>Default</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
-
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultItems>false</EnableDefaultItems>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <RevisionControl>git</RevisionControl>
@@ -42,12 +37,12 @@
     <DefineConstants>$(DefineConstants);SIGN</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <!-- No official release yet -->
@@ -55,7 +50,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net4'))">
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,5 +131,4 @@
     <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-
 </Project>

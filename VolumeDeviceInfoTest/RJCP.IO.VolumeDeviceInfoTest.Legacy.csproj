@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Project>
   <!-- Implicit top import required explicitly to change build output path -->
   <PropertyGroup>
@@ -23,30 +22,24 @@
     <RootNamespace>RJCP</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2020-2023, Jason Curl</Copyright>
+    <Copyright>(C) 2020-2024, Jason Curl</Copyright>
     <Company></Company>
     <Description>Test Library for VolumeDeviceInfo using NUnit 3.x.</Description>
     <Version>1.0.0</Version>
 
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>Default</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
-
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
 
-  <!--<PropertyGroup Condition="'$(SignAssembly)' == 'true'">
-    <DefineConstants>$(DefineConstants);SIGN</DefineConstants>
-  </PropertyGroup>-->
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
   </PropertyGroup>
