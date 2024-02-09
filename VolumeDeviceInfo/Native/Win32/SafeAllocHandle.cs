@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Security;
 
     internal abstract class SafeAllocHandle : SafeHandle
     {
@@ -93,7 +92,6 @@
 
         public override bool IsInvalid { get { return handle == IntPtr.Zero; } }
 
-        [SecurityCritical]
         protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero) {

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Security;
     using static WinIoCtl;
 
     internal class SafeDiskExtentHandle : SafeAllocHandle
@@ -37,7 +36,6 @@
 
         public override bool IsInvalid { get { return handle == IntPtr.Zero; } }
 
-        [SecurityCritical]
         protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero) {
