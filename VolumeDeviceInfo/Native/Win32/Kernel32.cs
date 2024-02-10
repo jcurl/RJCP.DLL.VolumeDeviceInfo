@@ -9,11 +9,13 @@
 namespace RJCP.Native.Win32
 {
     using System;
-    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Text;
     using IO.Storage;
+#if NETFRAMEWORK
+    using System.Runtime.ConstrainedExecution;
+#endif
 
     [SuppressUnmanagedCodeSecurity]
     internal static partial class Kernel32
@@ -30,7 +32,9 @@ namespace RJCP.Native.Win32
         /// <returns>
         /// If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.
         /// </returns>
+#if NETFRAMEWORK
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+#endif
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool CloseHandle(IntPtr hObject);
 

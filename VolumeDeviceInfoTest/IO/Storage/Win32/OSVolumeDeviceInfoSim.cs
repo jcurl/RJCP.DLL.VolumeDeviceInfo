@@ -7,6 +7,9 @@
     using System.Runtime.InteropServices;
     using System.Xml;
     using static Native.Win32.WinIoCtl;
+#if NETFRAMEWORK
+    using System.Runtime.ConstrainedExecution;
+#endif
 
     internal class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
     {
@@ -466,6 +469,9 @@
                 get { return handle.Equals(new IntPtr(-1)) || handle == IntPtr.Zero; }
             }
 
+#if NETFRAMEWORK
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+#endif
             protected override bool ReleaseHandle()
             {
                 return true;

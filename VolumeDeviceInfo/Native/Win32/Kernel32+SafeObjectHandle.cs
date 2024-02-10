@@ -2,6 +2,9 @@
 {
     using System;
     using System.Runtime.InteropServices;
+#if NETFRAMEWORK
+    using System.Runtime.ConstrainedExecution;
+#endif
 
     /// <content>
     /// Contains the <see cref="SafeObjectHandle"/> nested type.
@@ -49,6 +52,9 @@
             }
 
             /// <inheritdoc />
+#if NETFRAMEWORK
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+#endif
             protected override bool ReleaseHandle()
             {
                 return CloseHandle(handle);

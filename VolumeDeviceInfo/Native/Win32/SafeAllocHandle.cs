@@ -2,6 +2,9 @@
 {
     using System;
     using System.Runtime.InteropServices;
+#if NETFRAMEWORK
+    using System.Runtime.ConstrainedExecution;
+#endif
 
     internal abstract class SafeAllocHandle : SafeHandle
     {
@@ -92,6 +95,9 @@
 
         public override bool IsInvalid { get { return handle == IntPtr.Zero; } }
 
+#if NETFRAMEWORK
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+#endif
         protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero) {

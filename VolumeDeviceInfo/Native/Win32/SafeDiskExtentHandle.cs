@@ -3,6 +3,9 @@
     using System;
     using System.Runtime.InteropServices;
     using static WinIoCtl;
+#if NETFRAMEWORK
+    using System.Runtime.ConstrainedExecution;
+#endif
 
     internal class SafeDiskExtentHandle : SafeAllocHandle
     {
@@ -36,20 +39,13 @@
 
         public override bool IsInvalid { get { return handle == IntPtr.Zero; } }
 
+#if NETFRAMEWORK
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+#endif
         protected override bool ReleaseHandle()
         {
-            if (handle != IntPtr.Zero) {
-                try {
-                    // The finally part can't be interrupted by Thread.Abort
-                } finally {
-                    Marshal.FreeHGlobal(handle);
-                    handle = IntPtr.Zero;
-                }
-
-                return true;
-            }
-
-            return false;
+            Marshal.FreeHGlobal(handle);
+            return true;
         }
     }
 }
