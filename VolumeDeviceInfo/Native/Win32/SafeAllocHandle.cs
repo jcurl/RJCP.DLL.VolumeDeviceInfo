@@ -2,15 +2,18 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 #if NETFRAMEWORK
     using System.Runtime.ConstrainedExecution;
 #endif
 
+    [SupportedOSPlatform("windows")]
     internal abstract class SafeAllocHandle : SafeHandle
     {
         protected SafeAllocHandle() : base(IntPtr.Zero, true) { }
     }
 
+    [SupportedOSPlatform("windows")]
     internal class SafeAllocHandle<T> : SafeAllocHandle where T : struct
     {
         private readonly bool withObj;

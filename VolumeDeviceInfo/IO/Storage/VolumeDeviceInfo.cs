@@ -1,6 +1,7 @@
 ﻿namespace RJCP.IO.Storage
 {
     using System;
+    using System.Runtime.Versioning;
     using RJCP.Core.Environment;
 
     /// <summary>
@@ -14,6 +15,7 @@
         /// <param name="path">The path to query and get disk/partition/volume/file system information for.</param>
         /// <returns>A <see cref="VolumeDeviceInfo"/> object relevant for the current running Operating System.</returns>
         /// <exception cref="PlatformNotSupportedException">This Operating System is not supported.</exception>
+        [SupportedOSPlatform("windows")]
         public static VolumeDeviceInfo Create(string path)
         {
             if (Platform.IsWinNT()) return new Win32.VolumeDeviceInfoWin32(path);

@@ -2,7 +2,9 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 
+    [SupportedOSPlatform("windows")]
     internal static partial class WinIoCtl
     {
         public static int CtlCode(DeviceType type, int function, DeviceControlMethod method, DeviceControlAccess access)

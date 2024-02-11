@@ -2,11 +2,13 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using static WinIoCtl;
 #if NETFRAMEWORK
     using System.Runtime.ConstrainedExecution;
 #endif
 
+    [SupportedOSPlatform("windows")]
     internal class SafeDiskExtentHandle : SafeAllocHandle
     {
         public SafeDiskExtentHandle()

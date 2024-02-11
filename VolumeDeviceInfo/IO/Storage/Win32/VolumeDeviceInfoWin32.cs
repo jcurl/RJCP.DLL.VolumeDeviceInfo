@@ -2,6 +2,7 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
 
     /// <summary>
     /// Retrieve Volume Device Information on a Win32 Operating System.
@@ -98,6 +99,7 @@
         /// drive is returned as one would expect.
         /// </para>
         /// </remarks>
+        [SupportedOSPlatform("windows")]
         public VolumeDeviceInfoWin32(string pathName) : this(new OSVolumeDeviceInfo(), pathName) { }
 
         /// <summary>
@@ -106,7 +108,6 @@
         /// </summary>
         /// <param name="os">The object that simulates the OS calls.</param>
         /// <param name="pathName">Path to the volume that should be queried.</param>
-        /// <exception cref="PlatformNotSupportedException">This software only supports Windows NT.</exception>
         /// <exception cref="ArgumentNullException">
         /// The parameter <paramref name="pathName"/> is <see langword="null"/>.
         /// </exception>

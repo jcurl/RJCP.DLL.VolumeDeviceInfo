@@ -1,5 +1,6 @@
 ﻿namespace RJCP.IO.Storage
 {
+    using System.Runtime.Versioning;
     using NUnit.Framework;
 
     [TestFixture]
@@ -7,6 +8,7 @@
     {
         [Test]
         [Platform("Win")]
+        [SupportedOSPlatform("windows")]
         public void BootPartition()
         {
             // Checks that in general we can query the volume information.
@@ -24,6 +26,7 @@
 
         [Test]
         [Platform("Win")]
+        [SupportedOSPlatform("windows")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure.", Justification = "Specific Test")]
         public void ObjectEquality()
         {

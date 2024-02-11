@@ -10,6 +10,7 @@ namespace RJCP.Native.Win32
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Text;
     using IO.Storage;
@@ -18,6 +19,7 @@ namespace RJCP.Native.Win32
 #endif
 
     [SuppressUnmanagedCodeSecurity]
+    [SupportedOSPlatform("windows")]
     internal static partial class Kernel32
     {
         /// <summary>

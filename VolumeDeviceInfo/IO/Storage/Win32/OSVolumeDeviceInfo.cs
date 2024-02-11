@@ -2,12 +2,14 @@
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Text;
     using Native.Win32;
     using RJCP.Core.Environment;
     using static Native.Win32.Kernel32;
     using static Native.Win32.WinIoCtl;
 
+    [SupportedOSPlatform("windows")]
     internal class OSVolumeDeviceInfo : IOSVolumeDeviceInfo
     {
         internal OSVolumeDeviceInfo()
