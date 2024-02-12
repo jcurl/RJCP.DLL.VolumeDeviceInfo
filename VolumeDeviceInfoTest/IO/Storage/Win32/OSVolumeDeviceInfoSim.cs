@@ -495,7 +495,7 @@
 
         private static SafeTestHandle CheckHandle(SafeHandle hDevice)
         {
-            if (hDevice == null) throw new ArgumentNullException(nameof(hDevice));
+            ThrowHelper.ThrowIfNull(hDevice);
             if (hDevice.IsInvalid || hDevice.IsClosed) throw new ArgumentException("Handle is invalid or closed");
             if (!(hDevice is SafeTestHandle handle)) throw new ArgumentException("Handle is the wrong type");
             return handle;

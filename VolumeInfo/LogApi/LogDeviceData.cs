@@ -16,7 +16,7 @@
 
         public static void Capture(string devicePath)
         {
-            if (devicePath == null) throw new ArgumentNullException(nameof(devicePath));
+            ThrowHelper.ThrowIfNull(devicePath);
 
             LogDeviceData data = new LogDeviceData();
             data.QueryDeviceParameters(devicePath);

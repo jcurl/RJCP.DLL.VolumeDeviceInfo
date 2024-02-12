@@ -118,8 +118,8 @@
         /// </remarks>
         internal VolumeDeviceInfoWin32(IOSVolumeDeviceInfo os, string pathName)
         {
-            if (os == null) throw new ArgumentNullException(nameof(os));
-            if (pathName == null) throw new ArgumentNullException(nameof(pathName));
+            ThrowHelper.ThrowIfNull(os);
+            ThrowHelper.ThrowIfNull(pathName);
             if (string.IsNullOrEmpty(pathName)) throw new ArgumentException("Path is empty", nameof(pathName));
 
             m_OS = os;

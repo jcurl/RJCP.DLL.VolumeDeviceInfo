@@ -55,11 +55,11 @@
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
-    <ProjectReference Include="..\..\environment\SysCompat\RJCP.Core.SysCompat.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="RJCP.MSBuildTasks" Version="0.2.4" PrivateAssets="all" />
+    <ProjectReference Include="..\..\environment\SysCompat\RJCP.Core.SysCompat.csproj" />
     <ProjectReference Include="..\..\environment\Environment\RJCP.Environment.csproj" />
   </ItemGroup>
 

@@ -15,7 +15,7 @@
 
             public bool ParseOption(string arg)
             {
-                if (arg == null) throw new ArgumentNullException(nameof(arg));
+                ThrowHelper.ThrowIfNull(arg);
                 if (arg.Length < 2) return false;
                 if (arg[0] != '-') return false;
 
