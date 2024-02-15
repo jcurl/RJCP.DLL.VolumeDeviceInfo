@@ -18,7 +18,7 @@
         {
             ThrowHelper.ThrowIfNull(devicePath);
 
-            LogDeviceData data = new LogDeviceData();
+            LogDeviceData data = new();
             data.QueryDeviceParameters(devicePath);
             data.Save();
         }
@@ -40,12 +40,12 @@
 
         private static XmlDocument LoadXmlDocument(string fileName)
         {
-            XmlDocument xmlDoc = new XmlDocument {
+            XmlDocument xmlDoc = new() {
                 XmlResolver = null
             };
             xmlDoc.Load(fileName);
 
-            if (xmlDoc.SelectSingleNode($"/{RootNode}") == null) {
+            if (xmlDoc.SelectSingleNode($"/{RootNode}") is null) {
                 return NewXmlDocument();
             }
             return xmlDoc;
@@ -53,7 +53,7 @@
 
         private static XmlDocument NewXmlDocument()
         {
-            XmlDocument xmlDoc = new XmlDocument {
+            XmlDocument xmlDoc = new() {
                 XmlResolver = null
             };
 
@@ -87,7 +87,7 @@
             QueryApi(pathNode, "DriveType", vinfo, () => { return vinfo.GetDriveType(devicePath); });
 
             using (SafeHandle hDevice = QueryApi(pathNode, "CreateFileFromDevice", vinfo, () => { return vinfo.CreateFileFromDevice(devicePath); })) {
-                if (hDevice != null && !hDevice.IsInvalid) {
+                if (hDevice is not null && !hDevice.IsInvalid) {
                     QueryApi(pathNode, "DiskUpdateProperties", vinfo, true, () => { return vinfo.RefreshVolume(hDevice); });
                     QueryStorageProperty(pathNode, vinfo, hDevice);
                     QueryDeviceNumber(pathNode, vinfo, hDevice);
@@ -110,7 +110,7 @@
                 return vinfo.GetStorageDeviceProperty(hDevice);
             }, out XmlElement storageNode);
 
-            if (query == null) return;
+            if (query is null) return;
             WriteApiResult(storageNode, "VendorId", query.VendorId);
             WriteApiResult(storageNode, "DeviceSerialNumber", query.DeviceSerialNumber);
             WriteApiResult(storageNode, "ProductId", query.ProductId);
@@ -128,7 +128,7 @@
                 return vinfo.GetDeviceNumber(hDevice);
             }, out XmlElement deviceNode);
 
-            if (device == null) return;
+            if (device is null) return;
             WriteApiResult(deviceNode, "DeviceType", (int)device.DeviceType);
             WriteApiResult(deviceNode, "DeviceNumber", device.DeviceNumber);
             WriteApiResult(deviceNode, "DevicePartition", device.PartitionNumber);
@@ -140,7 +140,7 @@
                 return vinfo.GetDeviceNumberEx(hDevice);
             }, out XmlElement deviceNode);
 
-            if (device == null) return;
+            if (device is null) return;
             WriteApiResult(deviceNode, "DeviceType", (int)device.DeviceType);
             WriteApiResult(deviceNode, "DeviceGuidFlags", (int)device.DeviceGuidFlags);
             WriteApiResult(deviceNode, "DeviceGuid", device.DeviceGuid.ToString());
@@ -154,7 +154,7 @@
                 return vinfo.GetDiskGeometry(hDevice);
             }, out XmlElement geoNode);
 
-            if (diskGeo == null) return;
+            if (diskGeo is null) return;
             WriteApiResult(geoNode, "MediaType", (int)diskGeo.MediaType);
             WriteApiResult(geoNode, "Cylinders", diskGeo.Cylinders);
             WriteApiResult(geoNode, "TracksPerCylinder", diskGeo.TracksPerCylinder);
@@ -168,7 +168,7 @@
                 return vinfo.GetAlignment(hDevice);
             }, out XmlElement alignNode);
 
-            if (diskAlignment == null) return;
+            if (diskAlignment is null) return;
             WriteApiResult(alignNode, "BytesPerCacheLine", diskAlignment.BytesPerCacheLine);
             WriteApiResult(alignNode, "BytesOffsetForCacheAlignment", diskAlignment.BytesOffsetForCacheAlignment);
             WriteApiResult(alignNode, "BytesPerLogicalSector", diskAlignment.BytesPerLogicalSector);
@@ -182,7 +182,7 @@
                 return vinfo.GetPartitionInfo(hDevice);
             }, out XmlElement partNode);
 
-            if (partInfo == null) return;
+            if (partInfo is null) return;
             WriteApiResult(partNode, "Style", (int)partInfo.Style);
             WriteApiResult(partNode, "Number", partInfo.Number);
             WriteApiResult(partNode, "Offset", partInfo.Offset);
@@ -211,7 +211,7 @@
                 return vinfo.GetDiskExtents(hDevice);
             }, out XmlElement extNode);
 
-            if (extents == null) return;
+            if (extents is null) return;
 
             foreach (DiskExtent extent in extents) {
                 XmlElement entry = WriteApiResult(extNode, "DiskExtent", string.Empty);
@@ -227,7 +227,7 @@
                 return vinfo.GetVolumeInformation(pathName);
             }, out XmlElement volumeInfoNode);
 
-            if (info == null) return;
+            if (info is null) return;
             WriteApiResult(volumeInfoNode, "Label", info.VolumeLabel);
             WriteApiResult(volumeInfoNode, "SerialNumber", info.VolumeSerial);
             WriteApiResult(volumeInfoNode, "FileSystem", info.FileSystem);
@@ -240,7 +240,7 @@
                 return vinfo.GetDiskFreeSpace(pathName);
             }, out XmlElement spaceInfo);
 
-            if (space == null) return;
+            if (space is null) return;
             WriteApiResult(spaceInfo, "SectorsPerCluster", space.SectorsPerCluster);
             WriteApiResult(spaceInfo, "BytesPerSector", space.BytesPerSector);
             WriteApiResult(spaceInfo, "TotalBytes", space.TotalBytes);
@@ -252,7 +252,7 @@
         {
             string pathElementAttrQuery = $"/{RootNode}/{PathNode}[@{PathAttr}='{devicePath}']";
             XmlNodeList pathNodes = m_Document.SelectNodes(pathElementAttrQuery);
-            if (pathNodes != null) {
+            if (pathNodes is not null) {
                 foreach (XmlNode node in pathNodes) {
                     node.ParentNode.RemoveChild(node);
                 }
@@ -348,7 +348,7 @@
         {
             XmlElement node = m_Document.CreateElement(elementName);
 
-            if (result != null) {
+            if (result is not null) {
                 XmlAttribute attr = m_Document.CreateAttribute("result");
                 attr.Value = result;
                 node.Attributes.Append(attr);
@@ -367,7 +367,7 @@
                 node.Attributes.Append(throwsAttr);
             }
 
-            if (parent != null) parent.AppendChild(node);
+            if (parent is not null) parent.AppendChild(node);
             return node;
         }
     }

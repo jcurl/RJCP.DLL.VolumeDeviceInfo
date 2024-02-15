@@ -30,7 +30,7 @@
 
         public SafeAllocHandle(object obj)
         {
-            if (obj != null) {
+            if (obj is not null) {
                 SizeOf = Marshal.SizeOf(obj);
 
                 try {

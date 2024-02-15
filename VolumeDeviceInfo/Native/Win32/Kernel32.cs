@@ -25,7 +25,7 @@ namespace RJCP.Native.Win32
         /// <summary>
         /// Constant for invalid handle value.
         /// </summary>
-        public static readonly IntPtr INVALID_HANDLE_VALUE = new IntPtr(-1);
+        public static readonly IntPtr INVALID_HANDLE_VALUE = new(-1);
 
         /// <summary>
         /// Closes an open object handle.

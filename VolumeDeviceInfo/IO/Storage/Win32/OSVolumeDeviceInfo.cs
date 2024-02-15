@@ -18,7 +18,7 @@
                 throw new PlatformNotSupportedException();
         }
 
-        private readonly StringBuilder m_StringBuffer = new StringBuilder(1024);
+        private readonly StringBuilder m_StringBuffer = new(1024);
 
         public System.IO.FileAttributes GetFileAttributes(string pathName)
         {
@@ -64,7 +64,7 @@
                 SafeObjectHandle hDevice = CreateFile(pathName, 0,
                     FileShare.FILE_SHARE_READ | FileShare.FILE_SHARE_WRITE, IntPtr.Zero, CreationDisposition.OPEN_EXISTING,
                     0, SafeObjectHandle.Null);
-                if (hDevice == null || hDevice.IsInvalid) {
+                if (hDevice is null || hDevice.IsInvalid) {
                     m_Win32Error = Marshal.GetLastWin32Error();
                     int e = Marshal.GetHRForLastWin32Error();
                     Marshal.ThrowExceptionForHR(e, INVALID_HANDLE_VALUE);
@@ -86,20 +86,20 @@
 
         public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
         {
-            VolumeDeviceQuery volumeDeviceQuery = new VolumeDeviceQuery();
+            VolumeDeviceQuery volumeDeviceQuery = new();
 
             SafeAllocHandle<STORAGE_PROPERTY_QUERY> storagePropertyQueryPtr = null;
             SafeAllocHandle<STORAGE_DESCRIPTOR_HEADER> storageDescriptorHeaderPtr = null;
             SafeAllocHandle<STORAGE_DEVICE_DESCRIPTOR> storageDeviceDescriptorPtr = null;
             try {
-                STORAGE_PROPERTY_QUERY storagePropertyQuery = new STORAGE_PROPERTY_QUERY {
+                STORAGE_PROPERTY_QUERY storagePropertyQuery = new() {
                     PropertyId = (uint)STORAGE_PROPERTY_ID.StorageDeviceProperty,
                     QueryType = (uint)STORAGE_QUERY_TYPE.PropertyStandardQuery
                 };
                 storagePropertyQueryPtr = new SafeAllocHandle<STORAGE_PROPERTY_QUERY>(storagePropertyQuery);
 
                 // Get the necessary output buffer size
-                STORAGE_DESCRIPTOR_HEADER storageDescriptorHeader = new STORAGE_DESCRIPTOR_HEADER {
+                STORAGE_DESCRIPTOR_HEADER storageDescriptorHeader = new() {
                     Version = 0,
                     Size = 0
                 };
@@ -141,9 +141,9 @@
                 volumeDeviceQuery.ScsiDeviceModifier = storageDeviceDescriptor.DeviceTypeModifier;
                 volumeDeviceQuery.BusType = (BusType)storageDeviceDescriptor.BusType;
             } finally {
-                if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
-                if (storageDescriptorHeaderPtr != null) storageDescriptorHeaderPtr.Close();
-                if (storageDeviceDescriptorPtr != null) storageDeviceDescriptorPtr.Close();
+                if (storagePropertyQueryPtr is not null) storagePropertyQueryPtr.Close();
+                if (storageDescriptorHeaderPtr is not null) storageDescriptorHeaderPtr.Close();
+                if (storageDeviceDescriptorPtr is not null) storageDeviceDescriptorPtr.Close();
             }
 
             return volumeDeviceQuery;
@@ -151,8 +151,8 @@
 
         public VolumeInfo GetVolumeInformation(string devicePathName)
         {
-            StringBuilder volumeName = new StringBuilder(256);
-            StringBuilder fileSystem = new StringBuilder(256);
+            StringBuilder volumeName = new(256);
+            StringBuilder fileSystem = new(256);
 
             ErrorModes mode = SetErrorMode(ErrorModes.SEM_FAILCRITICALERRORS);
             try {
@@ -177,7 +177,7 @@
 
         public DiskFreeSpace GetDiskFreeSpace(string devicePathName)
         {
-            DiskFreeSpace space = new DiskFreeSpace() {
+            DiskFreeSpace space = new() {
                 SectorsPerCluster = 0,
                 BytesPerSector = 0,
                 UserBytesFree = 0,
@@ -229,7 +229,7 @@
 
         public StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice)
         {
-            StorageDeviceNumber deviceNumber = new StorageDeviceNumber();
+            StorageDeviceNumber deviceNumber = new();
             SafeAllocHandle<STORAGE_DEVICE_NUMBER> storageDeviceNumberPtr = null;
             try {
                 storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER>();
@@ -244,14 +244,14 @@
                 deviceNumber.DeviceNumber = storageDeviceNumber.DeviceNumber;
                 deviceNumber.PartitionNumber = storageDeviceNumber.PartitionNumber;
             } finally {
-                if (storageDeviceNumberPtr != null) storageDeviceNumberPtr.Close();
+                if (storageDeviceNumberPtr is not null) storageDeviceNumberPtr.Close();
             }
             return deviceNumber;
         }
 
         public StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice)
         {
-            StorageDeviceNumber deviceNumber = new StorageDeviceNumber();
+            StorageDeviceNumber deviceNumber = new();
             SafeAllocHandle<STORAGE_DEVICE_NUMBER_EX> storageDeviceNumberPtr = null;
             try {
                 storageDeviceNumberPtr = new SafeAllocHandle<STORAGE_DEVICE_NUMBER_EX>();
@@ -268,14 +268,14 @@
                 deviceNumber.DeviceGuid = new Guid(storageDeviceNumber.DeviceGuid);
                 deviceNumber.PartitionNumber = storageDeviceNumber.PartitionNumber;
             } finally {
-                if (storageDeviceNumberPtr != null) storageDeviceNumberPtr.Close();
+                if (storageDeviceNumberPtr is not null) storageDeviceNumberPtr.Close();
             }
             return deviceNumber;
         }
 
         public DiskGeometry GetDiskGeometry(SafeHandle hDevice)
         {
-            DiskGeometry geometry = new DiskGeometry();
+            DiskGeometry geometry = new();
             SafeAllocHandle<DISK_GEOMETRY> diskGeoPtr = null;
             try {
                 diskGeoPtr = new SafeAllocHandle<DISK_GEOMETRY>();
@@ -292,19 +292,19 @@
                 geometry.SectorsPerTrack = diskGeo.SectorsPerTrack;
                 geometry.BytesPerSector = diskGeo.BytesPerSector;
             } finally {
-                if (diskGeoPtr != null) diskGeoPtr.Close();
+                if (diskGeoPtr is not null) diskGeoPtr.Close();
             }
             return geometry;
         }
 
         public StorageAccessAlignment GetAlignment(SafeHandle hDevice)
         {
-            StorageAccessAlignment alignment = new StorageAccessAlignment();
+            StorageAccessAlignment alignment = new();
 
             SafeAllocHandle<STORAGE_PROPERTY_QUERY> storagePropertyQueryPtr = null;
             SafeAllocHandle<STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR> storageAlignmentPtr = null;
             try {
-                STORAGE_PROPERTY_QUERY storagePropertyQuery = new STORAGE_PROPERTY_QUERY {
+                STORAGE_PROPERTY_QUERY storagePropertyQuery = new() {
                     PropertyId = (uint)STORAGE_PROPERTY_ID.StorageAccessAlignmentProperty,
                     QueryType = (uint)STORAGE_QUERY_TYPE.PropertyStandardQuery
                 };
@@ -327,8 +327,8 @@
                 alignment.BytesPerPhysicalSector = (int)storageAlignment.BytesPerPhysicalSector;
                 alignment.BytesOffsetForSectorAlignment = (int)storageAlignment.BytesOffsetForSectorAlignment;
             } finally {
-                if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
-                if (storageAlignmentPtr != null) storageAlignmentPtr.Close();
+                if (storagePropertyQueryPtr is not null) storagePropertyQueryPtr.Close();
+                if (storageAlignmentPtr is not null) storageAlignmentPtr.Close();
             }
 
             return alignment;
@@ -339,7 +339,7 @@
             SafeAllocHandle<STORAGE_PROPERTY_QUERY> storagePropertyQueryPtr = null;
             SafeAllocHandle<STORAGE_DEVICE_SEEK_PENALTY> storageSeekPenaltyPtr = null;
             try {
-                STORAGE_PROPERTY_QUERY storagePropertyQuery = new STORAGE_PROPERTY_QUERY {
+                STORAGE_PROPERTY_QUERY storagePropertyQuery = new() {
                     PropertyId = (uint)STORAGE_PROPERTY_ID.StorageDeviceSeekPenaltyProperty,
                     QueryType = (uint)STORAGE_QUERY_TYPE.PropertyStandardQuery
                 };
@@ -358,8 +358,8 @@
                 STORAGE_DEVICE_SEEK_PENALTY storageSeekPenalty = storageSeekPenaltyPtr.ToStructure();
                 return storageSeekPenalty.IncursSeekPenalty ? BoolUnknown.True : BoolUnknown.False;
             } finally {
-                if (storagePropertyQueryPtr != null) storagePropertyQueryPtr.Close();
-                if (storageSeekPenaltyPtr != null) storageSeekPenaltyPtr.Close();
+                if (storagePropertyQueryPtr is not null) storagePropertyQueryPtr.Close();
+                if (storageSeekPenaltyPtr is not null) storageSeekPenaltyPtr.Close();
             }
         }
 
@@ -411,7 +411,7 @@
                     };
                 }
             } finally {
-                if (partitionInfoPtr != null) partitionInfoPtr.Close();
+                if (partitionInfoPtr is not null) partitionInfoPtr.Close();
             }
         }
 
@@ -438,7 +438,7 @@
                 }
                 return extents;
             } finally {
-                if (diskPtr != null) diskPtr.Close();
+                if (diskPtr is not null) diskPtr.Close();
             }
         }
 

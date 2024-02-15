@@ -410,7 +410,7 @@ namespace RJCP.Native.Win32
             /// Converts an <see cref="int"/> into an <see cref="ACCESS_MASK"/>.
             /// </summary>
             /// <param name="value">The value of the ACCESS_MASK.</param>
-            public static implicit operator ACCESS_MASK(int value) => new ACCESS_MASK((uint)value);
+            public static implicit operator ACCESS_MASK(int value) => new((uint)value);
 
             /// <summary>
             /// Converts an <see cref="ACCESS_MASK"/> into an <see cref="int"/>.
@@ -422,7 +422,7 @@ namespace RJCP.Native.Win32
             /// Converts an <see cref="uint"/> into an <see cref="ACCESS_MASK"/>.
             /// </summary>
             /// <param name="value">The value of the ACCESS_MASK.</param>
-            public static implicit operator ACCESS_MASK(uint value) => new ACCESS_MASK(value);
+            public static implicit operator ACCESS_MASK(uint value) => new(value);
 
             /// <summary>
             /// Converts an <see cref="ACCESS_MASK"/> into an <see cref="uint"/>.
@@ -434,19 +434,19 @@ namespace RJCP.Native.Win32
             /// Converts a <see cref="StandardRight"/> to an <see cref="ACCESS_MASK"/>.
             /// </summary>
             /// <param name="value">The value for the <see cref="ACCESS_MASK"/>.</param>
-            public static implicit operator ACCESS_MASK(StandardRight value) => new ACCESS_MASK((uint)value);
+            public static implicit operator ACCESS_MASK(StandardRight value) => new((uint)value);
 
             /// <summary>
             /// Converts a <see cref="GenericRight"/> to an <see cref="ACCESS_MASK"/>.
             /// </summary>
             /// <param name="value">The value for the <see cref="ACCESS_MASK"/>.</param>
-            public static implicit operator ACCESS_MASK(GenericRight value) => new ACCESS_MASK((uint)value);
+            public static implicit operator ACCESS_MASK(GenericRight value) => new((uint)value);
 
             /// <summary>
             /// Converts a <see cref="SpecificRight"/> to an <see cref="ACCESS_MASK"/>.
             /// </summary>
             /// <param name="value">The value for the <see cref="ACCESS_MASK"/>.</param>
-            public static implicit operator ACCESS_MASK(SpecificRight value) => new ACCESS_MASK((uint)value);
+            public static implicit operator ACCESS_MASK(SpecificRight value) => new((uint)value);
 
             /// <inheritdoc/>
             public override int GetHashCode() => AsInt32;

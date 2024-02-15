@@ -36,7 +36,7 @@
                 get
                 {
                     // Floppy disk doesn't support MediaPresent, so we need to do an alternative check
-                    if (DiskGeometry != null) {
+                    if (DiskGeometry is not null) {
                         switch (DiskGeometry.MediaType) {
                         case MediaType.F5_1pt2_512:
                         case MediaType.F3_1Pt44_512:
@@ -69,7 +69,7 @@
             }
         }
 
-        private readonly VolumeData m_VolumeData = new VolumeData();
+        private readonly VolumeData m_VolumeData = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VolumeDeviceInfo"/> class.
@@ -175,15 +175,15 @@
 
             public GeometryInfo(VolumeData data) { m_Data = data; }
 
-            public long Cylinders { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.Cylinders; } }
+            public long Cylinders { get { return m_Data.DiskGeometry is null ? -1 : m_Data.DiskGeometry.Cylinders; } }
 
-            public int TracksPerCylinder { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.TracksPerCylinder; } }
+            public int TracksPerCylinder { get { return m_Data.DiskGeometry is null ? -1 : m_Data.DiskGeometry.TracksPerCylinder; } }
 
-            public int SectorsPerTrack { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.SectorsPerTrack; } }
+            public int SectorsPerTrack { get { return m_Data.DiskGeometry is null ? -1 : m_Data.DiskGeometry.SectorsPerTrack; } }
 
-            public int BytesPerSector { get { return m_Data.DiskGeometry == null ? -1 : m_Data.DiskGeometry.BytesPerSector; } }
+            public int BytesPerSector { get { return m_Data.DiskGeometry is null ? -1 : m_Data.DiskGeometry.BytesPerSector; } }
 
-            public int BytesPerPhysicalSector { get { return m_Data.Alignment == null ? BytesPerSector : m_Data.Alignment.BytesPerPhysicalSector; } }
+            public int BytesPerPhysicalSector { get { return m_Data.Alignment is null ? BytesPerSector : m_Data.Alignment.BytesPerPhysicalSector; } }
         }
 
         private sealed class DeviceInfo : IDeviceInfo
@@ -200,17 +200,17 @@
 
             public string SerialNumber { get { return m_Data.DeviceQuery?.DeviceSerialNumber ?? string.Empty; } }
 
-            public BusType BusType { get { return m_Data.DeviceQuery == null ? BusType.Unknown : m_Data.DeviceQuery.BusType; } }
+            public BusType BusType { get { return m_Data.DeviceQuery is null ? BusType.Unknown : m_Data.DeviceQuery.BusType; } }
 
-            public bool HasCommandQueueing { get { return m_Data.DeviceQuery != null && m_Data.DeviceQuery.CommandQueueing; } }
+            public bool HasCommandQueueing { get { return m_Data.DeviceQuery is not null && m_Data.DeviceQuery.CommandQueueing; } }
 
-            public ScsiDeviceType ScsiDeviceType { get { return m_Data.DeviceQuery == null ? ScsiDeviceType.Unknown : m_Data.DeviceQuery.ScsiDeviceType; } }
+            public ScsiDeviceType ScsiDeviceType { get { return m_Data.DeviceQuery is null ? ScsiDeviceType.Unknown : m_Data.DeviceQuery.ScsiDeviceType; } }
 
-            public int ScsiDeviceModifier { get { return m_Data.DeviceQuery == null ? 0 : m_Data.DeviceQuery.ScsiDeviceModifier; } }
+            public int ScsiDeviceModifier { get { return m_Data.DeviceQuery is null ? 0 : m_Data.DeviceQuery.ScsiDeviceModifier; } }
 
-            public DeviceGuidFlags GuidFlags { get { return m_Data.DeviceNumber == null ? DeviceGuidFlags.None : m_Data.DeviceNumber.DeviceGuidFlags; } }
+            public DeviceGuidFlags GuidFlags { get { return m_Data.DeviceNumber is null ? DeviceGuidFlags.None : m_Data.DeviceNumber.DeviceGuidFlags; } }
 
-            public Guid Guid { get { return m_Data.DeviceNumber == null ? Guid.Empty : m_Data.DeviceNumber.DeviceGuid; } }
+            public Guid Guid { get { return m_Data.DeviceNumber is null ? Guid.Empty : m_Data.DeviceNumber.DeviceGuid; } }
         }
 
         private sealed class DiskInfo : IDiskInfo
@@ -221,7 +221,7 @@
             {
                 m_Data = data;
                 if (!IsRemovableMedia || IsMediaPresent) Geometry = new GeometryInfo(data);
-                if (m_Data.DeviceQuery != null) Device = new DeviceInfo(data);
+                if (m_Data.DeviceQuery is not null) Device = new DeviceInfo(data);
             }
 
             public IDeviceInfo Device { get; set; }
@@ -235,14 +235,14 @@
                 get
                 {
                     // Floppy drives don't return device queries, so need to get this information some other way.
-                    if (m_Data.DeviceQuery != null) return m_Data.DeviceQuery.RemovableMedia;
+                    if (m_Data.DeviceQuery is not null) return m_Data.DeviceQuery.RemovableMedia;
                     if (m_Data.IsFloppy) return true;
-                    if (m_Data.DiskGeometry != null) return m_Data.DiskGeometry.MediaType == MediaType.RemovableMedia;
+                    if (m_Data.DiskGeometry is not null) return m_Data.DiskGeometry.MediaType == MediaType.RemovableMedia;
 
                     // Pretty much everything has failed, and we're probably a floppy disk drive with no disk inserted.
                     // It is possible that other Device Drivers get here too, in which case we don't know what to do, so
                     // use the "magic" NT path to really determine if this is a floppy disk.
-                    if (m_Data.VolumeDosDevicePath != null && m_Data.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
+                    if (m_Data.VolumeDosDevicePath is not null && m_Data.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
                         return true;
 
                     return false;
@@ -280,13 +280,13 @@
                 m_Gpt = data.PartitionInfo as GptPartition;
             }
 
-            public Guid Type { get { return m_Gpt == null ? Guid.Empty : m_Gpt.Type; } }
+            public Guid Type { get { return m_Gpt is null ? Guid.Empty : m_Gpt.Type; } }
 
-            public Guid Id { get { return m_Gpt == null ? Guid.Empty : m_Gpt.Id; } }
+            public Guid Id { get { return m_Gpt is null ? Guid.Empty : m_Gpt.Id; } }
 
             public string Name { get { return m_Gpt?.Name ?? string.Empty; } }
 
-            public EFIPartitionAttributes Attributes { get { return m_Gpt == null ? EFIPartitionAttributes.None : m_Gpt.Attributes; } }
+            public EFIPartitionAttributes Attributes { get { return m_Gpt is null ? EFIPartitionAttributes.None : m_Gpt.Attributes; } }
         }
 
         private sealed class MbrPartitionInfo : PartitionInfo, IMbrPartition
@@ -298,11 +298,11 @@
                 m_Mbr = data.PartitionInfo as MbrPartition;
             }
 
-            public int Type { get { return m_Mbr == null ? -1 : m_Mbr.Type; } }
+            public int Type { get { return m_Mbr is null ? -1 : m_Mbr.Type; } }
 
-            public bool Bootable { get { return m_Mbr != null && m_Mbr.Bootable; } }
+            public bool Bootable { get { return m_Mbr is not null && m_Mbr.Bootable; } }
 
-            public long MbrSectorsOffset { get { return m_Mbr == null ? 0 : m_Mbr.HiddenSectors; } }
+            public long MbrSectorsOffset { get { return m_Mbr is null ? 0 : m_Mbr.HiddenSectors; } }
         }
 
         private void ResolveDevicePathNames(string pathName)
@@ -322,12 +322,12 @@
 
                 // Finds the volume (win32 device path, or drive letter) with a trailing slash, for the path given.
                 volumePath = m_OS.GetVolumePathName(pathName);
-                if (volumePath == null) {
+                if (volumePath is null) {
                     // GetVolumePath fails on drives that don't exist, or may fail on SUBST'd drives (e.g. Win10). If it
                     // is a SUBST'd drive, get the new path and loop again.
                     if (ParseDosDevice(pathName, ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
 
-                    if (volumeDosDevice != null) {
+                    if (volumeDosDevice is not null) {
                         // A drive letter that doesn't support GetVolumeNameForVolumeMountPoint, isn't subst'd.
                         volumePath = string.Format("\\\\.\\GLOBALROOT{0}\\", volumeDosDevice);
                     } else {
@@ -344,7 +344,7 @@
                 // Win32 function GetVolumeNameForVolumeMountPoint adds a trailing slash, which needs to be removed for
                 // some API, like the IOCTL.
                 string volumeDevice = m_OS.GetVolumeNameForVolumeMountPoint(volumePath);
-                if (volumeDevice == null) {
+                if (volumeDevice is null) {
                     // There is no mount point for the drive given. It could be a SUBST'd drive with a path, in which
                     // case we take just the drive letter, get the new path from the SUBST'd drive and loop again.
                     if (ParseDosDevice(volumePath.Substring(0, 3), ref volumeDosDevice, ref volumeDrive, ref pathName)) continue;
@@ -369,7 +369,7 @@
                 m_VolumeData.VolumePath = volumePath;
                 m_VolumeData.VolumeDevicePath = volumeDevicePath;
                 m_VolumeData.VolumeDevicePathSlash = volumeDevicePathSlash;
-                if (volumeDosDevice == null && IsDriveLetter(volumePath)) {
+                if (volumeDosDevice is null && IsDriveLetter(volumePath)) {
                     volumeDrive = volumePath.Substring(0, 2);
                     volumeDosDevice = m_OS.QueryDosDevice(volumePath.Substring(0, 2));
                 }
@@ -381,14 +381,14 @@
             // loop.
             if (loop == 0) throw new InvalidOperationException("Operation took too long to complete");
 
-            if (volumeDosDevice == null && volumeDevicePathSlash == null) {
+            if (volumeDosDevice is null && volumeDevicePathSlash is null) {
                 // We couldn't map the drive letter to a DOS device, and didn't find a mount. The drive probably doesn't
                 // exist.
                 throw new System.IO.FileNotFoundException("Path can't be resolved to a volume");
             }
 
             // In case a Win32 device was given, we now do a reverse lookup.
-            if (volumeDrive == null)
+            if (volumeDrive is null)
                 ResolveDriveLetter(volumeDevicePathSlash, ref volumeDrive, ref volumeDosDevice);
 
             m_VolumeData.VolumeDrive = volumeDrive ?? string.Empty;
@@ -400,8 +400,8 @@
             if (IsDriveLetter(path)) {
                 string drive = path.Substring(0, 2);
                 string dosDevice = m_OS.QueryDosDevice(drive);
-                if (dosDevice != null) {
-                    if (volumeDosDevice == null) {
+                if (dosDevice is not null) {
+                    if (volumeDosDevice is null) {
                         volumeDrive = drive;
                         volumeDosDevice = dosDevice;
                     }
@@ -422,7 +422,7 @@
         private static bool IsDriveLetter(string path)
         {
             int pathLen = path.Length;
-            if (pathLen < 2 || pathLen > 3) return false;
+            if (pathLen is < 2 or > 3) return false;
             if (pathLen == 3 && path[2] != WinDirectorySeparatorChar) return false;
 
             return ((path[0] >= 'a' && path[0] <= 'z') || (path[0] >= 'A' && path[0] <= 'Z')) && path[1] == ':';
@@ -430,13 +430,13 @@
 
         private static bool IsWin32Device(string path)
         {
-            if (path == null) return false;
+            if (path is null) return false;
             return path.StartsWith(@"\\.\") || path.StartsWith(@"\\?\");
         }
 
         private void GetDeviceInformation()
         {
-            if (m_VolumeData.VolumeDevicePath == null && IsDriveLetter(m_VolumeData.VolumeDrive)) {
+            if (m_VolumeData.VolumeDevicePath is null && IsDriveLetter(m_VolumeData.VolumeDrive)) {
                 string drive = WindowsPathAppendDir(WindowsPathTrimDir(m_VolumeData.VolumeDrive));
                 m_VolumeData.DriveType = m_OS.GetDriveType(drive);
                 return;
@@ -460,7 +460,7 @@
                 if ((int)attr == -1) m_VolumeData.MediaPresent = m_OS.GetMediaPresent(hDevice);
                 m_VolumeData.HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);
                 m_VolumeData.DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
-                if (m_VolumeData.DeviceNumber == null) m_VolumeData.DeviceNumber = m_OS.GetDeviceNumber(hDevice);
+                if (m_VolumeData.DeviceNumber is null) m_VolumeData.DeviceNumber = m_OS.GetDeviceNumber(hDevice);
                 m_VolumeData.PartitionInfo = m_OS.GetPartitionInfo(hDevice);
                 m_VolumeData.DiskGeometry = m_OS.GetDiskGeometry(hDevice);
                 m_VolumeData.Alignment = m_OS.GetAlignment(hDevice);
@@ -481,13 +481,13 @@
                 if ((drives & (1 << drive)) != 0) {
                     drivePath[0] = (char)('A' + (char)drive);
 
-                    string dosVolume = new string(drivePath);
+                    string dosVolume = new(drivePath);
                     string dosDevice = m_OS.QueryDosDevice(dosVolume);
-                    if (dosDevice != null && !dosDevice.StartsWith(@"\??\")) {
+                    if (dosDevice is not null && !dosDevice.StartsWith(@"\??\")) {
                         driveFullPath[0] = (char)('A' + (char)drive);
-                        string dosVolumeFull = new string(driveFullPath);
+                        string dosVolumeFull = new(driveFullPath);
                         string volume = m_OS.GetVolumeNameForVolumeMountPoint(dosVolumeFull);
-                        if (volume != null && volume.Equals(volumeDevicePath)) {
+                        if (volume is not null && volume.Equals(volumeDevicePath)) {
                             volumeDrive = dosVolume;
                             volumeDosDevice = dosDevice;
                             return;
@@ -500,15 +500,15 @@
         private void InitializeProperties()
         {
             Volume = new VolumePathInfo(m_VolumeData);
-            if (m_VolumeData.VolumeDevicePath != null) {
+            if (m_VolumeData.VolumeDevicePath is not null) {
                 Disk = new DiskInfo(m_VolumeData);
 
                 // It's possible that drivers return file system and partition information, even when no media is present.
                 // In this case, the data is useless, and it's better that we don't present the information at all.
                 if (!Disk.IsRemovableMedia || Disk.IsMediaPresent) {
-                    if (m_VolumeData.VolumeQuery != null)
+                    if (m_VolumeData.VolumeQuery is not null)
                         FileSystem = new FileSystemInfo(m_VolumeData);
-                    if (m_VolumeData.PartitionInfo != null) {
+                    if (m_VolumeData.PartitionInfo is not null) {
                         // If there is no partition information, the property "Partition" is null.
                         switch (m_VolumeData.PartitionInfo.Style) {
                         case PartitionStyle.GuidPartitionTable:
@@ -536,7 +536,7 @@
                 return DriveType.Unknown;
             case 2: // DRIVE_REMOVABLE
                 if (m_VolumeData.IsFloppy) return DriveType.Floppy;
-                if (m_VolumeData.VolumeDosDevicePath != null && m_VolumeData.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
+                if (m_VolumeData.VolumeDosDevicePath is not null && m_VolumeData.VolumeDosDevicePath.StartsWith(@"\Device\Floppy"))
                     return DriveType.Floppy;
                 return DriveType.Removable;
             case 3: // DRIVE_FIXED
@@ -567,7 +567,7 @@
             if (string.IsNullOrEmpty(path)) return false;
 
             char endChar = path[path.Length - 1];
-            return endChar == WinDirectorySeparatorChar || endChar == WinAltDirectorySeparatorChar;
+            return endChar is WinDirectorySeparatorChar or WinAltDirectorySeparatorChar;
         }
 
         private static string WindowsPathAppendDir(string path)
@@ -590,8 +590,8 @@
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
-            if (!(obj is VolumeDeviceInfoWin32 rObj)) return false;
+            if (obj is null) return false;
+            if (obj is not VolumeDeviceInfoWin32 rObj) return false;
             return m_VolumeData.VolumeDevicePath.Equals(rObj.m_VolumeData.VolumeDevicePath, StringComparison.Ordinal);
         }
     }

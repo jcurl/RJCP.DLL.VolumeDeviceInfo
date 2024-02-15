@@ -42,7 +42,7 @@
 
         public OSVolumeDeviceInfoSim(string fileName)
         {
-            XmlDocument xmlDoc = new XmlDocument {
+            XmlDocument xmlDoc = new() {
                 XmlResolver = null
             };
             xmlDoc.Load(fileName);
@@ -56,7 +56,7 @@
 
         private static int LoadGetLogicalDrives(XmlElement pathNode)
         {
-            if (pathNode == null) return 0;
+            if (pathNode is null) return 0;
             string nodeResult = pathNode.Attributes["result"]?.Value;
             return int.Parse(nodeResult, CultureInfo.InvariantCulture);
         }
@@ -87,12 +87,12 @@
 
         private static void AddStorageDevice(IDictionary<string, ResultOrError<VolumeDeviceQuery>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<VolumeDeviceQuery> result = GetResultOrError<VolumeDeviceQuery>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -103,7 +103,7 @@
                 string scsiDevType = node["ScsiDeviceType"].Attributes["result"].Value;
                 string scsiDevMod = node["ScsiModifier"].Attributes["result"].Value;
                 string busType = node["BusType"].Attributes["result"].Value;
-                VolumeDeviceQuery devQuery = new VolumeDeviceQuery() {
+                VolumeDeviceQuery devQuery = new() {
                     VendorId = node["VendorId"].Attributes["result"].Value,
                     DeviceSerialNumber = node["DeviceSerialNumber"].Attributes["result"].Value,
                     ProductId = node["ProductId"].Attributes["result"].Value,
@@ -120,19 +120,19 @@
 
         private static void AddVolumeInfo(IDictionary<string, ResultOrError<VolumeInfo>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<VolumeInfo> result = GetResultOrError<VolumeInfo>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
 
             unchecked {
                 string flags = node["Flags"].Attributes["result"].Value;
-                VolumeInfo volInfo = new VolumeInfo() {
+                VolumeInfo volInfo = new() {
                     VolumeLabel = node["Label"].Attributes["result"].Value,
                     VolumeSerial = node["SerialNumber"].Attributes["result"].Value,
                     FileSystem = node["FileSystem"].Attributes["result"].Value,
@@ -144,12 +144,12 @@
 
         private static void AddDiskFreeSpace(IDictionary<string, ResultOrError<DiskFreeSpace>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<DiskFreeSpace> result = GetResultOrError<DiskFreeSpace>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -160,7 +160,7 @@
                 string totalBytes = node["TotalBytes"].Attributes["result"].Value;
                 string totalBytesFree = node["TotalBytesFree"].Attributes["result"].Value;
                 string userBytesFree = node["UserBytesFree"].Attributes["result"].Value;
-                DiskFreeSpace freeInfo = new DiskFreeSpace() {
+                DiskFreeSpace freeInfo = new() {
                     SectorsPerCluster = int.Parse(sectorsPerCluster, CultureInfo.InvariantCulture),
                     BytesPerSector = int.Parse(bytesPerSector, CultureInfo.InvariantCulture),
                     TotalBytes = long.Parse(totalBytes, CultureInfo.InvariantCulture),
@@ -173,12 +173,12 @@
 
         private static void AddDeviceNumber(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<StorageDeviceNumber> result = GetResultOrError<StorageDeviceNumber>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -187,7 +187,7 @@
                 string deviceType = node["DeviceType"].Attributes["result"].Value;
                 string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
                 string devicePartition = node["DevicePartition"].Attributes["result"].Value;
-                StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                StorageDeviceNumber storageDevNum = new() {
                     DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
                     DeviceNumber = int.Parse(deviceNumber, CultureInfo.InvariantCulture),
                     PartitionNumber = int.Parse(devicePartition, CultureInfo.InvariantCulture),
@@ -198,12 +198,12 @@
 
         private static void AddDeviceNumberEx(IDictionary<string, ResultOrError<StorageDeviceNumber>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<StorageDeviceNumber> result = GetResultOrError<StorageDeviceNumber>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -213,7 +213,7 @@
                 string deviceGuidFlags = node["DeviceGuidFlags"].Attributes["result"].Value;
                 string deviceNumber = node["DeviceNumber"].Attributes["result"].Value;
                 string devicePartition = node["DevicePartition"].Attributes["result"].Value;
-                StorageDeviceNumber storageDevNum = new StorageDeviceNumber() {
+                StorageDeviceNumber storageDevNum = new() {
                     DeviceType = (DeviceType)int.Parse(deviceType, CultureInfo.InvariantCulture),
                     DeviceGuidFlags = (DeviceGuidFlags)int.Parse(deviceGuidFlags, CultureInfo.InvariantCulture),
                     DeviceGuid = new Guid(node["DeviceGuid"].Attributes["result"].Value),
@@ -226,12 +226,12 @@
 
         private static void AddGeometry(IDictionary<string, ResultOrError<DiskGeometry>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<DiskGeometry> result = GetResultOrError<DiskGeometry>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -242,7 +242,7 @@
                 string tracks = node["TracksPerCylinder"].Attributes["result"].Value;
                 string sectors = node["SectorsPerTrack"].Attributes["result"].Value;
                 string bytes = node["BytesPerSector"].Attributes["result"].Value;
-                DiskGeometry diskGeo = new DiskGeometry() {
+                DiskGeometry diskGeo = new() {
                     MediaType = (MediaType)int.Parse(mediaType, CultureInfo.InvariantCulture),
                     Cylinders = int.Parse(cylinders, CultureInfo.InvariantCulture),
                     TracksPerCylinder = int.Parse(tracks, CultureInfo.InvariantCulture),
@@ -255,12 +255,12 @@
 
         private static void AddAlignment(IDictionary<string, ResultOrError<StorageAccessAlignment>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<StorageAccessAlignment> result = GetResultOrError<StorageAccessAlignment>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -271,7 +271,7 @@
                 string bytesPerLogicalSector = node["BytesPerLogicalSector"].Attributes["result"].Value;
                 string bytesPerPhysicalSector = node["BytesPerPhysicalSector"].Attributes["result"].Value;
                 string bytesOffsetForSectorAlignment = node["BytesOffsetForSectorAlignment"].Attributes["result"].Value;
-                StorageAccessAlignment diskAlignment = new StorageAccessAlignment() {
+                StorageAccessAlignment diskAlignment = new() {
                     BytesPerCacheLine = int.Parse(bytesPerCacheLine, CultureInfo.InvariantCulture),
                     BytesOffsetForCacheAlignment = int.Parse(bytesOffsetForCacheAlignment, CultureInfo.InvariantCulture),
                     BytesPerLogicalSector = int.Parse(bytesPerLogicalSector, CultureInfo.InvariantCulture),
@@ -284,12 +284,12 @@
 
         private static void AddPartitionInfo(IDictionary<string, ResultOrError<PartitionInformation>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<PartitionInformation> result = GetResultOrError<PartitionInformation>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -341,12 +341,12 @@
 
         private static void AddDiskExtents(IDictionary<string, ResultOrError<DiskExtent[]>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             // Because this is a complex type, The XML will always return the default value.
             ResultOrError<DiskExtent[]> result = GetResultOrError<DiskExtent[]>(node);
-            if (result != null) {
+            if (result is not null) {
                 dictionary.Add(path, result);
                 return;
             }
@@ -354,7 +354,7 @@
             unchecked {
                 // There may be zero or more disk extents.
                 XmlNodeList extentNodes = node.SelectNodes("DiskExtent");
-                List<DiskExtent> extents = new List<DiskExtent>();
+                List<DiskExtent> extents = new();
                 foreach (XmlElement extentNode in extentNodes) {
                     string offset = extentNode["Offset"].Attributes["result"].Value;
                     string length = extentNode["Length"].Attributes["result"].Value;
@@ -371,7 +371,7 @@
 
         private static void AddItem<T>(IDictionary<string, ResultOrError<T>> dictionary, string path, XmlElement node)
         {
-            if (node == null) return;
+            if (node is null) return;
             if (dictionary.ContainsKey(path)) return;
 
             ResultOrError<T> result = GetResultOrError<T>(node)
@@ -385,16 +385,16 @@
             string errorCodeStr = node.Attributes["error"]?.Value;
             string throwsStr = node.Attributes["throws"]?.Value;
             int errorCode = 0;
-            if (errorCodeStr != null) {
+            if (errorCodeStr is not null) {
                 errorCode = int.Parse(errorCodeStr, CultureInfo.InvariantCulture);
-                if (throwsStr != null) {
+                if (throwsStr is not null) {
                     bool throws = bool.Parse(throwsStr);
                     return new ResultOrError<T>(errorCode, throws);
                 }
             }
 
             unchecked {
-                if (nodeResult != null) {
+                if (nodeResult is not null) {
                     if (typeof(BoolUnknown).IsAssignableFrom(typeof(T))) {
                         BoolUnknown buResult = (BoolUnknown)Enum.Parse(typeof(BoolUnknown), nodeResult, true);
                         return new ResultOrError<T>((T)Convert.ChangeType(buResult, typeof(T)), errorCode);
@@ -426,28 +426,28 @@
             return result.Result;
         }
 
-        private readonly Dictionary<string, ResultOrError<int>> m_FileAttributes = new Dictionary<string, ResultOrError<int>>();
+        private readonly Dictionary<string, ResultOrError<int>> m_FileAttributes = new();
 
         public FileAttributes GetFileAttributes(string pathName)
         {
             return (FileAttributes)GetResultOrThrow(m_FileAttributes, pathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<string>> m_VolumePathName = new Dictionary<string, ResultOrError<string>>();
+        private readonly Dictionary<string, ResultOrError<string>> m_VolumePathName = new();
 
         public string GetVolumePathName(string pathName)
         {
             return GetResultOrThrow(m_VolumePathName, pathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<string>> m_QueryDosDevice = new Dictionary<string, ResultOrError<string>>();
+        private readonly Dictionary<string, ResultOrError<string>> m_QueryDosDevice = new();
 
         public string QueryDosDevice(string dosDevice)
         {
             return GetResultOrThrow(m_QueryDosDevice, dosDevice);
         }
 
-        private readonly Dictionary<string, ResultOrError<string>> m_VolumeMountPoint = new Dictionary<string, ResultOrError<string>>();
+        private readonly Dictionary<string, ResultOrError<string>> m_VolumeMountPoint = new();
 
         public string GetVolumeNameForVolumeMountPoint(string pathName)
         {
@@ -480,14 +480,14 @@
             public string PathName { get; set; }
         }
 
-        private readonly Dictionary<string, ResultOrError<string>> m_CreateFileFromDevice = new Dictionary<string, ResultOrError<string>>();
+        private readonly Dictionary<string, ResultOrError<string>> m_CreateFileFromDevice = new();
 
         public SafeHandle CreateFileFromDevice(string pathName)
         {
             string result = GetResultOrThrow(m_CreateFileFromDevice, pathName);
-            if (result == null) return null;
+            if (result is null) return null;
 
-            SafeTestHandle handle = new SafeTestHandle(new IntPtr(1)) {
+            SafeTestHandle handle = new(new IntPtr(1)) {
                 PathName = pathName
             };
             return handle;
@@ -497,11 +497,11 @@
         {
             ThrowHelper.ThrowIfNull(hDevice);
             if (hDevice.IsInvalid || hDevice.IsClosed) throw new ArgumentException("Handle is invalid or closed");
-            if (!(hDevice is SafeTestHandle handle)) throw new ArgumentException("Handle is the wrong type");
+            if (hDevice is not SafeTestHandle handle) throw new ArgumentException("Handle is the wrong type");
             return handle;
         }
 
-        private readonly Dictionary<string, ResultOrError<bool>> m_DiskUpdateProperties = new Dictionary<string, ResultOrError<bool>>();
+        private readonly Dictionary<string, ResultOrError<bool>> m_DiskUpdateProperties = new();
 
         public bool RefreshVolume(SafeHandle hDevice)
         {
@@ -509,7 +509,7 @@
             return GetResultOrThrow(m_DiskUpdateProperties, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<VolumeDeviceQuery>> m_StorageProperties = new Dictionary<string, ResultOrError<VolumeDeviceQuery>>();
+        private readonly Dictionary<string, ResultOrError<VolumeDeviceQuery>> m_StorageProperties = new();
 
         public VolumeDeviceQuery GetStorageDeviceProperty(SafeHandle hDevice)
         {
@@ -517,28 +517,28 @@
             return GetResultOrThrow(m_StorageProperties, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<VolumeInfo>> m_VolumeInfo = new Dictionary<string, ResultOrError<VolumeInfo>>();
+        private readonly Dictionary<string, ResultOrError<VolumeInfo>> m_VolumeInfo = new();
 
         public VolumeInfo GetVolumeInformation(string devicePathName)
         {
             return GetResultOrThrow(m_VolumeInfo, devicePathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<DiskFreeSpace>> m_DiskFree = new Dictionary<string, ResultOrError<DiskFreeSpace>>();
+        private readonly Dictionary<string, ResultOrError<DiskFreeSpace>> m_DiskFree = new();
 
         public DiskFreeSpace GetDiskFreeSpace(string devicePathName)
         {
             return GetResultOrThrow(m_DiskFree, devicePathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<int>> m_DriveType = new Dictionary<string, ResultOrError<int>>();
+        private readonly Dictionary<string, ResultOrError<int>> m_DriveType = new();
 
         public int GetDriveType(string devicePathName)
         {
             return GetResultOrThrow(m_DriveType, devicePathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new Dictionary<string, ResultOrError<bool>>();
+        private readonly Dictionary<string, ResultOrError<bool>> m_MediaPresent = new();
 
         public bool GetMediaPresent(SafeHandle hDevice)
         {
@@ -546,7 +546,7 @@
             return GetResultOrThrow(m_MediaPresent, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumber = new Dictionary<string, ResultOrError<StorageDeviceNumber>>();
+        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumber = new();
 
         public StorageDeviceNumber GetDeviceNumber(SafeHandle hDevice)
         {
@@ -554,7 +554,7 @@
             return GetResultOrThrow(m_DeviceNumber, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumberEx = new Dictionary<string, ResultOrError<StorageDeviceNumber>>();
+        private readonly Dictionary<string, ResultOrError<StorageDeviceNumber>> m_DeviceNumberEx = new();
 
         public StorageDeviceNumber GetDeviceNumberEx(SafeHandle hDevice)
         {
@@ -562,7 +562,7 @@
             return GetResultOrThrow(m_DeviceNumberEx, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<DiskGeometry>> m_Geometry = new Dictionary<string, ResultOrError<DiskGeometry>>();
+        private readonly Dictionary<string, ResultOrError<DiskGeometry>> m_Geometry = new();
 
         public DiskGeometry GetDiskGeometry(SafeHandle hDevice)
         {
@@ -570,7 +570,7 @@
             return GetResultOrThrow(m_Geometry, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<StorageAccessAlignment>> m_Alignment = new Dictionary<string, ResultOrError<StorageAccessAlignment>>();
+        private readonly Dictionary<string, ResultOrError<StorageAccessAlignment>> m_Alignment = new();
 
         public StorageAccessAlignment GetAlignment(SafeHandle hDevice)
         {
@@ -578,7 +578,7 @@
             return GetResultOrThrow(m_Alignment, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<BoolUnknown>> m_SeekPenalty = new Dictionary<string, ResultOrError<BoolUnknown>>();
+        private readonly Dictionary<string, ResultOrError<BoolUnknown>> m_SeekPenalty = new();
 
         public BoolUnknown IncursSeekPenalty(SafeHandle hDevice)
         {
@@ -586,7 +586,7 @@
             return GetResultOrThrow(m_SeekPenalty, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<bool>> m_ReadOnly = new Dictionary<string, ResultOrError<bool>>();
+        private readonly Dictionary<string, ResultOrError<bool>> m_ReadOnly = new();
 
         public bool IsReadOnly(SafeHandle hDevice)
         {
@@ -594,7 +594,7 @@
             return GetResultOrThrow(m_ReadOnly, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<PartitionInformation>> m_PartitionInfo = new Dictionary<string, ResultOrError<PartitionInformation>>();
+        private readonly Dictionary<string, ResultOrError<PartitionInformation>> m_PartitionInfo = new();
 
         public PartitionInformation GetPartitionInfo(SafeHandle hDevice)
         {
@@ -602,7 +602,7 @@
             return GetResultOrThrow(m_PartitionInfo, handle.PathName);
         }
 
-        private readonly Dictionary<string, ResultOrError<DiskExtent[]>> m_Extents = new Dictionary<string, ResultOrError<DiskExtent[]>>();
+        private readonly Dictionary<string, ResultOrError<DiskExtent[]>> m_Extents = new();
 
         public DiskExtent[] GetDiskExtents(SafeHandle hDevice)
         {

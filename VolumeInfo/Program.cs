@@ -31,11 +31,11 @@
             }
         }
 
-        private static readonly HashSet<string> s_Paths = new HashSet<string>();
+        private static readonly HashSet<string> s_Paths = new();
 
         static int Main(string[] args)
         {
-            Options options = new Options();
+            Options options = new();
 
             foreach (string device in args) {
                 if (options.ParseOption(device)) continue;
@@ -53,7 +53,7 @@
                     Console.WriteLine("    Volume Device   : {0}", info.Volume.DevicePath);
                     Console.WriteLine("    Volume Drive    : {0}", info.Volume.DriveLetter);
                     Console.WriteLine("    NT DOS Device   : {0}", info.Volume.DosDevicePath);
-                    if (info.Partition != null) {
+                    if (info.Partition is not null) {
                         Console.WriteLine("  Partition");
                         Console.WriteLine("    Partition Style : {0}", info.Partition.Style);
                         Console.WriteLine("    Part Number     : {0}", info.Partition.Number);
@@ -75,7 +75,7 @@
                             break;
                         }
                     }
-                    if (info.FileSystem != null) {
+                    if (info.FileSystem is not null) {
                         Console.WriteLine("  File System");
                         Console.WriteLine("    Label           : {0}", info.FileSystem.Label);
                         Console.WriteLine("    Serial Number   : {0}", info.FileSystem.Serial);
@@ -87,16 +87,16 @@
                         Console.WriteLine("    Total Free      : {0:F1} GB", info.FileSystem.TotalFreeBytes / 1024.0 / 1024.0 / 1024.0);
                         Console.WriteLine("    Capacity        : {0:F1} GB", info.FileSystem.TotalBytes / 1024.0 / 1024.0 / 1024.0);
                     }
-                    if (info.Disk != null) {
+                    if (info.Disk is not null) {
                         Console.WriteLine("  Device");
-                        if (info.Disk.Extents != null) {
+                        if (info.Disk.Extents is not null) {
                             foreach (DiskExtent extent in info.Disk.Extents) {
                                 Console.WriteLine("    Extent: {0}", extent.Device);
                                 Console.WriteLine("      Offset        : {0:X8}", extent.StartingOffset);
                                 Console.WriteLine("      Length        : {0:F1} GB", extent.ExtentLength / 1024.0 / 1024.0 / 1024.0);
                             }
                         }
-                        if (info.Disk.Device != null) {
+                        if (info.Disk.Device is not null) {
                             Console.WriteLine("    Vendor          : {0}", info.Disk.Device.VendorId);
                             Console.WriteLine("    Product         : {0}; Revision {1}", info.Disk.Device.ProductId, info.Disk.Device.ProductRevision);
                             Console.WriteLine("    SerialNumber    : {0}", info.Disk.Device.SerialNumber);
@@ -108,7 +108,7 @@
                         Console.WriteLine("    Removable Media : {0}", info.Disk.IsRemovableMedia);
                         Console.WriteLine("    Media Present   : {0}", info.Disk.IsMediaPresent);
                         Console.WriteLine("    Disk Read Only  : {0}", info.Disk.IsReadOnly);
-                        if (info.Disk.Geometry != null) {
+                        if (info.Disk.Geometry is not null) {
                             Console.WriteLine("    Cyl/Trk/Sec/Byte: {0}/{1}/{2}/{3} ({4:F1} GB)",
                                 info.Disk.Geometry.Cylinders, info.Disk.Geometry.TracksPerCylinder,
                                 info.Disk.Geometry.SectorsPerTrack, info.Disk.Geometry.BytesPerSector,
@@ -138,7 +138,7 @@
             Capture(info.Path);
             Capture(info.Volume.Path);
             Capture(info.Volume.DevicePath);
-            if (info.Disk?.Extents != null) {
+            if (info.Disk?.Extents is not null) {
                 foreach (DiskExtent extent in info.Disk.Extents) {
                     Capture(extent.Device);
                 }
@@ -169,7 +169,7 @@
             // returns a number. This routine will iterate through the enum and append the unknown flag at the end.
 
             int unknownFlags = (int)flags;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             foreach (FileSystemFlags flag in Enum.GetValues(typeof(FileSystemFlags))) {
                 if (flags.HasFlag(flag)) {
