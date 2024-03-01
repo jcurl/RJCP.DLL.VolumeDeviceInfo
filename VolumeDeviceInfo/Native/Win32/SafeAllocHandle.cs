@@ -45,7 +45,7 @@
 
         public SafeAllocHandle(int size)
         {
-            if (size <= 0) throw new ArgumentOutOfRangeException(nameof(size), "Must be a positive value");
+            ThrowHelper.ThrowIfNegativeOrZero(size);
             SizeOf = size;
 
             try {
