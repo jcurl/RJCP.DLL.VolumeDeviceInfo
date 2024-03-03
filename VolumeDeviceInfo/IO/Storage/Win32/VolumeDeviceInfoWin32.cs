@@ -459,7 +459,7 @@
                 if ((int)attr == -1) m_VolumeData.MediaPresent = m_OS.GetMediaPresent(hDevice);
                 m_VolumeData.HasSeekPenalty = m_OS.IncursSeekPenalty(hDevice);
                 m_VolumeData.DeviceNumber = m_OS.GetDeviceNumberEx(hDevice);
-                if (m_VolumeData.DeviceNumber is null) m_VolumeData.DeviceNumber = m_OS.GetDeviceNumber(hDevice);
+                m_VolumeData.DeviceNumber ??= m_OS.GetDeviceNumber(hDevice);
                 m_VolumeData.PartitionInfo = m_OS.GetPartitionInfo(hDevice);
                 m_VolumeData.DiskGeometry = m_OS.GetDiskGeometry(hDevice);
                 m_VolumeData.Alignment = m_OS.GetAlignment(hDevice);
