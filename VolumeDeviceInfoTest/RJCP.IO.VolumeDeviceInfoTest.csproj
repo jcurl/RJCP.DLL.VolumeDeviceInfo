@@ -59,7 +59,7 @@
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win10v2004.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win2k3r2.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win7SP1.cs" Condition="'$(SignAssembly)' != 'true'" />
-    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win8RT.cs" />
+    <Compile Include="IO\Storage\VolumeDeviceInfoTest_Win8RT.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\VolumeDeviceInfoTest_WinXpSP3.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\Win32\OSVolumeDeviceInfoSim.cs" Condition="'$(SignAssembly)' != 'true'" />
     <Compile Include="IO\Storage\Win32\VolumeDeviceInfoWin32Sim.cs" Condition="'$(SignAssembly)' != 'true'" />
