@@ -7,7 +7,7 @@
     public class VolumeDeviceInfoTest
     {
         [Test]
-        [Platform("Win")]
+        [Platform("Win32NT")]
         [SupportedOSPlatform("windows")]
         public void BootPartition()
         {
@@ -25,7 +25,7 @@
         }
 
         [Test]
-        [Platform("Win")]
+        [Platform("Win32NT")]
         [SupportedOSPlatform("windows")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure.", Justification = "Specific Test")]
         public void ObjectEquality()
