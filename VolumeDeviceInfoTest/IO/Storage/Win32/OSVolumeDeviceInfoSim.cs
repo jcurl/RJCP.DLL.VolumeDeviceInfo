@@ -7,8 +7,10 @@
     using System.Runtime.InteropServices;
     using System.Xml;
     using static Native.Win32.WinIoCtl;
+
 #if NETFRAMEWORK
     using System.Runtime.ConstrainedExecution;
+    using Enum = RJCP.Core.EnumExt;
 #endif
 
     internal class OSVolumeDeviceInfoSim : IOSVolumeDeviceInfo
@@ -396,7 +398,7 @@
             unchecked {
                 if (nodeResult is not null) {
                     if (typeof(BoolUnknown).IsAssignableFrom(typeof(T))) {
-                        BoolUnknown buResult = (BoolUnknown)Enum.Parse(typeof(BoolUnknown), nodeResult, true);
+                        BoolUnknown buResult = Enum.Parse<BoolUnknown>(nodeResult, true);
                         return new ResultOrError<T>((T)Convert.ChangeType(buResult, typeof(T)), errorCode);
                     } else if (typeof(int).IsAssignableFrom(typeof(T))) {
                         int iResult = int.Parse(nodeResult, CultureInfo.InvariantCulture);

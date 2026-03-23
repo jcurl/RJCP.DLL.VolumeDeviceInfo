@@ -218,12 +218,12 @@
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
-            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
-            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Number, Is.Zero);
+            Assert.That(vinfo.Partition.Offset, Is.Zero);
             Assert.That(vinfo.Partition.Length, Is.EqualTo(42949672960));
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.Zero);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.Zero);
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
@@ -237,7 +237,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Ata));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
             Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
@@ -390,7 +390,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Atapi));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));  // Windows XP doesn't support GUIDs
             Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("00000000-0000-0000-0000-000000000000"));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
@@ -403,12 +403,12 @@
             Assert.That(vinfo.Disk.Geometry.BytesPerPhysicalSector, Is.EqualTo(vinfo.Disk.Geometry.BytesPerSector)); // Not supported on WinXP
             Assert.That(vinfo.Disk.HasSeekPenalty, Is.EqualTo(BoolUnknown.Unknown));
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
-            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
-            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Number, Is.Zero);
+            Assert.That(vinfo.Partition.Offset, Is.Zero);
             Assert.That(vinfo.Partition.Length, Is.EqualTo(3794823168));
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(11));
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.Zero);
             Assert.That(vinfo.FileSystem.Label, Is.EqualTo("winxpsp3_090429"));
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("1686-338B"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("CDFS"));

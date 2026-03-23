@@ -96,12 +96,12 @@
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
-            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
-            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Number, Is.Zero);
+            Assert.That(vinfo.Partition.Offset, Is.Zero);
             Assert.That(vinfo.Partition.Length, Is.EqualTo(320072933376));
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.Zero);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.Zero);
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
@@ -115,7 +115,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Sata));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);
@@ -416,7 +416,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Atapi));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
@@ -487,7 +487,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Scsi));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.CdRomDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.True);
@@ -528,12 +528,12 @@
             IsPhysicalDrive1(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.MasterBootRecord));
-            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
-            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Number, Is.Zero);
+            Assert.That(vinfo.Partition.Offset, Is.Zero);
             Assert.That(vinfo.Partition.Length, Is.EqualTo(320072933376));
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Type, Is.Zero);
             Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).Bootable, Is.False);
-            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.EqualTo(0));
+            Assert.That(((VolumeDeviceInfo.IMbrPartition)vinfo.Partition).MbrSectorsOffset, Is.Zero);
             Assert.That(vinfo.FileSystem, Is.Null);
         }
 
@@ -547,7 +547,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Usb));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.False);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.None));
             Assert.That(vinfo.Disk.Device.Guid, Is.EqualTo(Guid.Empty));
             Assert.That(vinfo.Disk.IsRemovableMedia, Is.False);

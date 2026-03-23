@@ -3,6 +3,8 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using RJCP.Core;
+
 #if NETFRAMEWORK
     using System.Runtime.ConstrainedExecution;
 #endif
@@ -20,7 +22,7 @@
 
         public SafeAllocHandle()
         {
-            SizeOf = Marshal.SizeOf(typeof(T));
+            SizeOf = MarshalExt.SizeOf<T>();
             try {
                 // The finally part can't be interrupted by Thread.Abort
             } finally {
@@ -64,7 +66,7 @@
             if (!success) throw new InvalidOperationException();
 
             try {
-                return (T)Marshal.PtrToStructure(handle, typeof(T));
+                return MarshalExt.PtrToStructure<T>(handle);
             } finally {
                 DangerousRelease();
             }
@@ -107,7 +109,7 @@
                 try {
                     // The finally part can't be interrupted by Thread.Abort
                 } finally {
-                    if (withObj) Marshal.DestroyStructure(handle, typeof(T));
+                    if (withObj) MarshalExt.DestroyStructure<T>(handle);
                     Marshal.FreeHGlobal(handle);
                     handle = IntPtr.Zero;
                 }

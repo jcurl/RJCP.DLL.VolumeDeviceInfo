@@ -50,8 +50,8 @@
             IsPhysicalDrive0(vinfo);
             Assert.That(vinfo.Disk.Extents, Is.Null);
             Assert.That(vinfo.Partition.Style, Is.EqualTo(PartitionStyle.GuidPartitionTable));
-            Assert.That(vinfo.Partition.Number, Is.EqualTo(0));
-            Assert.That(vinfo.Partition.Offset, Is.EqualTo(0));
+            Assert.That(vinfo.Partition.Number, Is.Zero);
+            Assert.That(vinfo.Partition.Offset, Is.Zero);
             Assert.That(vinfo.Partition.Length, Is.EqualTo(512110190592));
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Type, Is.EqualTo(Guid.Empty));
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Id.ToString(), Is.EqualTo("1180bb72-6dd1-4481-b0f3-9e0e1f1b61d0"));
@@ -73,7 +73,7 @@
             Assert.That(vinfo.Disk.Device.BusType, Is.EqualTo(BusType.Nvme));
             Assert.That(vinfo.Disk.Device.HasCommandQueueing, Is.True);
             Assert.That(vinfo.Disk.Device.ScsiDeviceType, Is.EqualTo(ScsiDeviceType.DirectAccessDevice));
-            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.EqualTo(0));
+            Assert.That(vinfo.Disk.Device.ScsiDeviceModifier, Is.Zero);
             Assert.That(vinfo.Disk.Device.GuidFlags, Is.EqualTo(DeviceGuidFlags.Page83DeviceGuid));
             Assert.That(vinfo.Disk.Device.Guid.ToString(), Is.EqualTo("ba408eac-457b-e82e-f5ea-f5764f6a8c94"));
             Assert.That(vinfo.Disk.Geometry.Cylinders, Is.EqualTo(62260));
@@ -146,7 +146,7 @@
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Type.ToString(), Is.EqualTo("ebd0a0a2-b9e5-4433-87c0-68b6b72699c7"));
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Id.ToString(), Is.EqualTo("16ae967d-e57e-4ad5-90ea-16e21a37b1e5"));
             Assert.That(((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Name, Is.EqualTo("Basic data partition"));
-            Assert.That((int)((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Attributes, Is.EqualTo(0));
+            Assert.That((int)((VolumeDeviceInfo.IGptPartition)vinfo.Partition).Attributes, Is.Zero);
             Assert.That(vinfo.FileSystem.Label, Is.EqualTo(string.Empty));
             Assert.That(vinfo.FileSystem.Serial, Is.EqualTo("F688-02DE"));
             Assert.That(vinfo.FileSystem.Name, Is.EqualTo("NTFS"));

@@ -3,7 +3,9 @@
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using RJCP.Core;
     using static WinIoCtl;
+
 #if NETFRAMEWORK
     using System.Runtime.ConstrainedExecution;
 #endif
@@ -27,10 +29,10 @@
             try {
                 int length = Marshal.ReadInt32(handle);
                 DISK_EXTENT[] extents = new DISK_EXTENT[length];
-                int arrayElem = Marshal.SizeOf(typeof(DISK_EXTENT));
+                int arrayElem = MarshalExt.SizeOf<DISK_EXTENT>();
                 IntPtr arrayStart = handle + 8;
                 for (int i = 0; i < length; i++) {
-                    extents[i] = (DISK_EXTENT)Marshal.PtrToStructure(arrayStart, typeof(DISK_EXTENT));
+                    extents[i] = MarshalExt.PtrToStructure<DISK_EXTENT>(arrayStart);
                     arrayStart += arrayElem;
                 }
                 return extents;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0;net10.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release</Configurations>
@@ -12,7 +12,7 @@
     <RootNamespace>RJCP</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2020-2024, Jason Curl</Copyright>
+    <Copyright>(C) 2020-2026, Jason Curl</Copyright>
     <Company></Company>
     <Description>Test Library for VolumeDeviceInfo using NUnit 3.x.</Description>
     <Version>1.0.0</Version>

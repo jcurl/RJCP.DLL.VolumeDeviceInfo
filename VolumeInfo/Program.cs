@@ -5,6 +5,10 @@
     using System.Text;
     using IO.Storage;
 
+#if NETFRAMEWORK
+    using Enum = RJCP.Core.EnumExt;
+#endif
+
     public static class Program
     {
         private sealed class Options
@@ -171,7 +175,7 @@
             int unknownFlags = (int)flags;
             StringBuilder sb = new();
 
-            foreach (FileSystemFlags flag in Enum.GetValues(typeof(FileSystemFlags))) {
+            foreach (FileSystemFlags flag in Enum.GetValues<FileSystemFlags>()) {
                 if (flags.HasFlag(flag)) {
                     if (sb.Length != 0) sb.Append(", ");
                     sb.Append(flag);
